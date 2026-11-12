@@ -1,1 +1,3 @@
 splits/*.txt -text
+e5/*.json -text
+e5/*.csv -text

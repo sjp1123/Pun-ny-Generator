@@ -60,6 +60,11 @@ python -X utf8 -m pytest tests -q
 `build_cache.py --model pythia-1.4b --device cuda`. E2b는 `--dataset e2b`(위치 약 1.4만 개)라 GPU 권장.
 사전 등록 확인 검정(prereg-v1)을 GPU에서 돌리는 순서는 [docs/GPU_RUN.md](docs/GPU_RUN.md)에 있다.
 
+E5 생성 파이프라인(설계 [docs/E5_DESIGN.md](docs/E5_DESIGN.md), 사전 등록 초안 [PREREG_E5.md](PREREG_E5.md))은
+`experiments/e5_*.py`(쌍 표본 → 생성 → A 채점 → 고르기·자동 지표 → LLM 판정 → 새로움 → 사람 평가),
+공용 코드 `src/e5.py`(프롬프트·규칙 검사)와 `src/e5_gen.py`(생성기), 고정 표본 `e5/samples.json`이다.
+GPU 실행 순서도 [docs/GPU_RUN.md](docs/GPU_RUN.md)에 있다.
+
 ## 설계 문서와 다르게 구현한 점 (이유)
 
 1. **후보 순위는 단순 음소 편집 거리로.** 설계는 자질 거리(M2) 정규화 순위였지만, 다시 재보니

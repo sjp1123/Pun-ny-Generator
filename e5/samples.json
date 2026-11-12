@@ -1,0 +1,1483 @@
+{
+ "seed": 20261112,
+ "source": {
+  "top_n": 20000,
+  "cos_max": 0.3,
+  "d_unit": [
+   1,
+   2
+  ],
+  "d_unit_norm_max": 0.4,
+  "n_pairs": 63758,
+  "wordnet": "3.0",
+  "w2v": "GoogleNews-vectors-negative300 (상위 100만 단어)"
+ },
+ "pilot": [
+  {
+   "pair_id": "e5p000",
+   "w_p": "packet",
+   "w_a": "pageant",
+   "d_unit": 2.0,
+   "d_unit_norm": 0.333,
+   "cos": 0.0607,
+   "pos_p": "noun",
+   "gloss_p": "a collection of things wrapped or boxed together",
+   "pos_a": "noun",
+   "gloss_a": "an elaborate representation of scenes from history etc; usually involves a parade with rich costumes",
+   "link_words": [
+    "carton",
+    "wrapper",
+    "jar",
+    "bag",
+    "tray"
+   ]
+  },
+  {
+   "pair_id": "e5p001",
+   "w_p": "prince",
+   "w_a": "fringe",
+   "d_unit": 2.0,
+   "d_unit_norm": 0.4,
+   "cos": 0.0429,
+   "pos_p": "noun",
+   "gloss_p": "a male member of a royal family other than the sovereign (especially the son of a sovereign)",
+   "pos_a": "noun",
+   "gloss_a": "the outside boundary or surface of something",
+   "link_words": [
+    "monarch",
+    "royal",
+    "king",
+    "duchess",
+    "throne"
+   ]
+  },
+  {
+   "pair_id": "e5p002",
+   "w_p": "kitty",
+   "w_a": "quits",
+   "d_unit": 2.0,
+   "d_unit_norm": 0.4,
+   "cos": 0.1108,
+   "pos_p": "noun",
+   "gloss_p": "the combined stakes of the betters",
+   "pos_a": "adjective",
+   "gloss_a": "on equal terms by payment or requital",
+   "link_words": [
+    "cat",
+    "doggy",
+    "pet",
+    "feline",
+    "pup"
+   ]
+  },
+  {
+   "pair_id": "e5p003",
+   "w_p": "chubby",
+   "w_a": "debris",
+   "d_unit": 2.0,
+   "d_unit_norm": 0.4,
+   "cos": 0.0364,
+   "pos_p": "adjective",
+   "gloss_p": "sufficiently fat so as to have a pleasing fullness of figure",
+   "pos_a": "noun",
+   "gloss_a": "the remains of something that has been destroyed or broken up",
+   "link_words": [
+    "skinny",
+    "blond",
+    "smiley",
+    "cute",
+    "plump"
+   ]
+  },
+  {
+   "pair_id": "e5p004",
+   "w_p": "feelings",
+   "w_a": "filling",
+   "d_unit": 2.0,
+   "d_unit_norm": 0.333,
+   "cos": 0.1038,
+   "pos_p": "noun",
+   "gloss_p": "emotional or moral sensitivity (especially in relation to personal principles or dignity)",
+   "pos_a": "noun",
+   "gloss_a": "any material that fills a space or container",
+   "link_words": [
+    "bitterness",
+    "resentment",
+    "anger",
+    "emotion",
+    "grief"
+   ]
+  },
+  {
+   "pair_id": "e5p005",
+   "w_p": "fad",
+   "w_a": "rad",
+   "d_unit": 1.0,
+   "d_unit_norm": 0.333,
+   "cos": 0.2206,
+   "pos_p": "noun",
+   "gloss_p": "an interest followed with exaggerated zeal",
+   "pos_a": "noun",
+   "gloss_a": "a unit of absorbed ionizing radiation equal to 100 ergs per gram of irradiated material",
+   "link_words": [
+    "craze",
+    "vogue",
+    "phenomenon",
+    "trend",
+    "mania"
+   ]
+  },
+  {
+   "pair_id": "e5p006",
+   "w_p": "panda",
+   "w_a": "handed",
+   "d_unit": 2.0,
+   "d_unit_norm": 0.333,
+   "cos": 0.0704,
+   "pos_p": "noun",
+   "gloss_p": "large black-and-white herbivorous mammal of bamboo forests of China and Tibet; in some classifications considered a member of the bear family or of a separate family Ailuropodidae",
+   "pos_a": "adjective",
+   "gloss_a": "having or involving the use of hands",
+   "link_words": [
+    "cub",
+    "rhino",
+    "elephant",
+    "tiger",
+    "gorilla"
+   ]
+  },
+  {
+   "pair_id": "e5p007",
+   "w_p": "vicious",
+   "w_a": "mission",
+   "d_unit": 2.0,
+   "d_unit_norm": 0.4,
+   "cos": -0.0028,
+   "pos_p": "adjective",
+   "gloss_p": "(of persons or their actions) able or disposed to inflict pain or suffering",
+   "pos_a": "noun",
+   "gloss_a": "an organization of missionaries in a foreign land sent to carry on religious work",
+   "link_words": [
+    "savage",
+    "brutal",
+    "ferocious",
+    "nasty",
+    "venomous"
+   ]
+  },
+  {
+   "pair_id": "e5p008",
+   "w_p": "reception",
+   "w_a": "exception",
+   "d_unit": 2.0,
+   "d_unit_norm": 0.25,
+   "cos": 0.0284,
+   "pos_p": "noun",
+   "gloss_p": "the manner in which something is greeted",
+   "pos_a": "noun",
+   "gloss_a": "a deliberate act of omission",
+   "link_words": [
+    "ceremony",
+    "banquet",
+    "luncheon",
+    "dinner",
+    "gala"
+   ]
+  },
+  {
+   "pair_id": "e5p009",
+   "w_p": "virgin",
+   "w_a": "verge",
+   "d_unit": 2.0,
+   "d_unit_norm": 0.4,
+   "cos": 0.0608,
+   "pos_p": "noun",
+   "gloss_p": "a person who has never had sex",
+   "pos_a": "noun",
+   "gloss_a": "a region marking a boundary",
+   "link_words": [
+    "horny",
+    "babe",
+    "chastity",
+    "goddess",
+    "gal"
+   ]
+  }
+ ],
+ "main": [
+  {
+   "pair_id": "e5p010",
+   "w_p": "heist",
+   "w_a": "highlight",
+   "d_unit": 2.0,
+   "d_unit_norm": 0.4,
+   "cos": 0.0477,
+   "pos_p": "noun",
+   "gloss_p": "the act of stealing",
+   "pos_a": "noun",
+   "gloss_a": "the most interesting or memorable part",
+   "link_words": [
+    "robbery",
+    "robber",
+    "thief",
+    "theft",
+    "bandit"
+   ]
+  },
+  {
+   "pair_id": "e5p011",
+   "w_p": "wandering",
+   "w_a": "wanting",
+   "d_unit": 2.0,
+   "d_unit_norm": 0.286,
+   "cos": 0.1732,
+   "pos_p": "noun",
+   "gloss_p": "travelling about without any clear destination",
+   "pos_a": "adjective",
+   "gloss_a": "nonexistent",
+   "link_words": [
+    "walking",
+    "roam",
+    "stroll",
+    "wanderer",
+    "crawling"
+   ]
+  },
+  {
+   "pair_id": "e5p012",
+   "w_p": "sea",
+   "w_a": "seed",
+   "d_unit": 1.0,
+   "d_unit_norm": 0.333,
+   "cos": 0.0335,
+   "pos_p": "noun",
+   "gloss_p": "a division of an ocean or a large body of salt water partially enclosed by land",
+   "pos_a": "noun",
+   "gloss_a": "a small hard fruit",
+   "link_words": [
+    "ocean",
+    "waters",
+    "oceanic",
+    "coastal",
+    "lagoon"
+   ]
+  },
+  {
+   "pair_id": "e5p013",
+   "w_p": "tested",
+   "w_a": "festive",
+   "d_unit": 2.0,
+   "d_unit_norm": 0.333,
+   "cos": -0.0159,
+   "pos_p": "adjective",
+   "gloss_p": "tested and proved useful or correct",
+   "pos_a": "adjective",
+   "gloss_a": "offering fun and gaiety",
+   "link_words": [
+    "testing",
+    "validated",
+    "developed",
+    "demonstrated",
+    "detected"
+   ]
+  },
+  {
+   "pair_id": "e5p014",
+   "w_p": "sinking",
+   "w_a": "drinking",
+   "d_unit": 2.0,
+   "d_unit_norm": 0.286,
+   "cos": 0.1148,
+   "pos_p": "noun",
+   "gloss_p": "a descent as through liquid (especially through water)",
+   "pos_a": "noun",
+   "gloss_a": "the act of consuming liquids",
+   "link_words": [
+    "falling",
+    "plunge",
+    "jumping",
+    "collapse",
+    "slipping"
+   ]
+  },
+  {
+   "pair_id": "e5p015",
+   "w_p": "stunt",
+   "w_a": "touched",
+   "d_unit": 2.0,
+   "d_unit_norm": 0.4,
+   "cos": 0.0392,
+   "pos_p": "noun",
+   "gloss_p": "a difficult or unusual or dangerous feat; usually done to gain attention",
+   "pos_a": "adjective",
+   "gloss_a": "having come into contact",
+   "link_words": [
+    "gimmick",
+    "daredevil",
+    "skit",
+    "prank",
+    "ploy"
+   ]
+  },
+  {
+   "pair_id": "e5p016",
+   "w_p": "save",
+   "w_a": "sage",
+   "d_unit": 1.0,
+   "d_unit_norm": 0.333,
+   "cos": 0.0317,
+   "pos_p": "noun",
+   "gloss_p": "(sports) the act of preventing the opposition from scoring",
+   "pos_a": "noun",
+   "gloss_a": "a mentor in spiritual and philosophical topics who is renowned for profound wisdom",
+   "link_words": [
+    "conserve",
+    "preserve",
+    "avert",
+    "earn",
+    "wasted"
+   ]
+  },
+  {
+   "pair_id": "e5p017",
+   "w_p": "scanner",
+   "w_a": "skinny",
+   "d_unit": 2.0,
+   "d_unit_norm": 0.4,
+   "cos": 0.0676,
+   "pos_p": "noun",
+   "gloss_p": "someone who scans verse to determine the number and prosodic value of the syllables",
+   "pos_a": "noun",
+   "gloss_a": "confidential information about a topic or person",
+   "link_words": [
+    "scanning",
+    "detector",
+    "imaging",
+    "printer",
+    "fingerprint"
+   ]
+  },
+  {
+   "pair_id": "e5p018",
+   "w_p": "fist",
+   "w_a": "frost",
+   "d_unit": 2.0,
+   "d_unit_norm": 0.4,
+   "cos": 0.0185,
+   "pos_p": "noun",
+   "gloss_p": "a hand with the fingers clenched in the palm (as for hitting)",
+   "pos_a": "noun",
+   "gloss_a": "ice crystals forming a white deposit (especially on objects outside)",
+   "link_words": [
+    "chest",
+    "forearm",
+    "forehead",
+    "jaw",
+    "chin"
+   ]
+  },
+  {
+   "pair_id": "e5p019",
+   "w_p": "fighting",
+   "w_a": "piping",
+   "d_unit": 2.0,
+   "d_unit_norm": 0.4,
+   "cos": -0.0444,
+   "pos_p": "noun",
+   "gloss_p": "the act of fighting; any contest or struggle",
+   "pos_a": "noun",
+   "gloss_a": "a thin strip of covered cord used to edge hems",
+   "link_words": [
+    "battle",
+    "struggle",
+    "combat",
+    "fighter",
+    "sparring"
+   ]
+  },
+  {
+   "pair_id": "e5p020",
+   "w_p": "slowing",
+   "w_a": "searching",
+   "d_unit": 2.0,
+   "d_unit_norm": 0.4,
+   "cos": 0.1189,
+   "pos_p": "noun",
+   "gloss_p": "a decrease in rate of change",
+   "pos_a": "adjective",
+   "gloss_a": "diligent and thorough in inquiry or investigation",
+   "link_words": [
+    "slowdown",
+    "sluggish",
+    "weakening",
+    "stalling",
+    "softening"
+   ]
+  },
+  {
+   "pair_id": "e5p021",
+   "w_p": "rig",
+   "w_a": "rich",
+   "d_unit": 1.0,
+   "d_unit_norm": 0.333,
+   "cos": 0.1307,
+   "pos_p": "noun",
+   "gloss_p": "gear (including necessary machinery) for a particular enterprise",
+   "pos_a": "noun",
+   "gloss_a": "people who have possessions and wealth (considered as a group)",
+   "link_words": [
+    "drilling",
+    "crane",
+    "vessel",
+    "barge",
+    "offshore"
+   ]
+  },
+  {
+   "pair_id": "e5p022",
+   "w_p": "lower",
+   "w_a": "loaf",
+   "d_unit": 1.0,
+   "d_unit_norm": 0.333,
+   "cos": 0.0999,
+   "pos_p": "noun",
+   "gloss_p": "the lower of two berths",
+   "pos_a": "noun",
+   "gloss_a": "a shaped mass of baked bread that is usually sliced before eating",
+   "link_words": [
+    "higher",
+    "reduced",
+    "high",
+    "greater",
+    "increased"
+   ]
+  },
+  {
+   "pair_id": "e5p023",
+   "w_p": "whip",
+   "w_a": "worship",
+   "d_unit": 2.0,
+   "d_unit_norm": 0.4,
+   "cos": 0.0365,
+   "pos_p": "noun",
+   "gloss_p": "an instrument with a handle and a flexible lash that is used for whipping",
+   "pos_a": "noun",
+   "gloss_a": "the activity of worshipping",
+   "link_words": [
+    "lash",
+    "chop",
+    "smacking",
+    "summon",
+    "crank"
+   ]
+  },
+  {
+   "pair_id": "e5p024",
+   "w_p": "flaming",
+   "w_a": "filming",
+   "d_unit": 2.0,
+   "d_unit_norm": 0.333,
+   "cos": 0.0357,
+   "pos_p": "noun",
+   "gloss_p": "the process of combustion of inflammable materials producing heat and light and (often) smoke",
+   "pos_a": "noun",
+   "gloss_a": "the act of making a film",
+   "link_words": [
+    "burning",
+    "blazing",
+    "fiery",
+    "molten",
+    "lit"
+   ]
+  },
+  {
+   "pair_id": "e5p025",
+   "w_p": "trigger",
+   "w_a": "trim",
+   "d_unit": 2.0,
+   "d_unit_norm": 0.4,
+   "cos": 0.0834,
+   "pos_p": "noun",
+   "gloss_p": "lever that activates the firing mechanism of a gun",
+   "pos_a": "noun",
+   "gloss_a": "a state of arrangement or appearance",
+   "link_words": [
+    "prompt",
+    "provoke",
+    "spark",
+    "induce",
+    "cause"
+   ]
+  },
+  {
+   "pair_id": "e5p026",
+   "w_p": "skater",
+   "w_a": "skirt",
+   "d_unit": 2.0,
+   "d_unit_norm": 0.4,
+   "cos": 0.1646,
+   "pos_p": "noun",
+   "gloss_p": "someone who skates",
+   "pos_a": "noun",
+   "gloss_a": "cloth covering that forms the part of a garment below the waist",
+   "link_words": [
+    "skating",
+    "gymnast",
+    "skier",
+    "athlete",
+    "swimmer"
+   ]
+  },
+  {
+   "pair_id": "e5p027",
+   "w_p": "deserved",
+   "w_a": "lizard",
+   "d_unit": 2.0,
+   "d_unit_norm": 0.333,
+   "cos": -0.0023,
+   "pos_p": "adjective",
+   "gloss_p": "properly deserved",
+   "pos_a": "noun",
+   "gloss_a": "relatively long-bodied reptile with usually two pairs of legs and a tapering tail",
+   "link_words": [
+    "worthy",
+    "earned",
+    "unlucky",
+    "consolation",
+    "kudos"
+   ]
+  },
+  {
+   "pair_id": "e5p028",
+   "w_p": "tale",
+   "w_a": "teal",
+   "d_unit": 1.0,
+   "d_unit_norm": 0.333,
+   "cos": 0.062,
+   "pos_p": "noun",
+   "gloss_p": "a message that tells the particulars of an act or occurrence or course of events; presented in writing or drama or cinema or as a radio or television program",
+   "pos_a": "noun",
+   "gloss_a": "a blue-green color or pigment",
+   "link_words": [
+    "fable",
+    "story",
+    "parable",
+    "allegory",
+    "narrative"
+   ]
+  },
+  {
+   "pair_id": "e5p029",
+   "w_p": "place",
+   "w_a": "plain",
+   "d_unit": 1.0,
+   "d_unit_norm": 0.25,
+   "cos": 0.0921,
+   "pos_p": "noun",
+   "gloss_p": "a point located with respect to surface features of some region",
+   "pos_a": "noun",
+   "gloss_a": "extensive tract of level open land",
+   "link_words": [
+    "spot",
+    "finish",
+    "spots",
+    "round",
+    "precedence"
+   ]
+  },
+  {
+   "pair_id": "e5p030",
+   "w_p": "senator",
+   "w_a": "sanity",
+   "d_unit": 2.0,
+   "d_unit_norm": 0.333,
+   "cos": 0.1233,
+   "pos_p": "noun",
+   "gloss_p": "a member of a senate",
+   "pos_a": "noun",
+   "gloss_a": "normal or sound powers of mind",
+   "link_words": [
+    "congressman",
+    "lawmaker",
+    "legislator",
+    "governor",
+    "politician"
+   ]
+  },
+  {
+   "pair_id": "e5p031",
+   "w_p": "sap",
+   "w_a": "strap",
+   "d_unit": 2.0,
+   "d_unit_norm": 0.4,
+   "cos": 0.0714,
+   "pos_p": "noun",
+   "gloss_p": "a watery solution of sugars, salts, and minerals that circulates through the vascular system of a plant",
+   "pos_a": "noun",
+   "gloss_a": "an elongated leather strip (or a strip of similar material) for binding things together or holding something in position",
+   "link_words": [
+    "erode",
+    "weaken",
+    "syrup",
+    "suck",
+    "diminish"
+   ]
+  },
+  {
+   "pair_id": "e5p032",
+   "w_p": "changer",
+   "w_a": "chains",
+   "d_unit": 2.0,
+   "d_unit_norm": 0.4,
+   "cos": 0.0373,
+   "pos_p": "noun",
+   "gloss_p": "a person who changes something",
+   "pos_a": "noun",
+   "gloss_a": "metal shackles; for hands or legs",
+   "link_words": [
+    "boon",
+    "saver",
+    "pivotal",
+    "savior",
+    "catalyst"
+   ]
+  },
+  {
+   "pair_id": "e5p033",
+   "w_p": "dissent",
+   "w_a": "ascent",
+   "d_unit": 2.0,
+   "d_unit_norm": 0.333,
+   "cos": 0.1107,
+   "pos_p": "noun",
+   "gloss_p": "(law) the difference of one judge's opinion from that of the majority",
+   "pos_a": "noun",
+   "gloss_a": "an upward slope or grade (as in a road)",
+   "link_words": [
+    "discontent",
+    "opposition",
+    "revolt",
+    "rebellion",
+    "repression"
+   ]
+  },
+  {
+   "pair_id": "e5p034",
+   "w_p": "peat",
+   "w_a": "peel",
+   "d_unit": 1.0,
+   "d_unit_norm": 0.333,
+   "cos": 0.1389,
+   "pos_p": "noun",
+   "gloss_p": "partially carbonized vegetable matter saturated with water; can be used as a fuel when dried",
+   "pos_a": "noun",
+   "gloss_a": "the rind of a fruit or vegetable",
+   "link_words": [
+    "crown",
+    "championship",
+    "title",
+    "biomass",
+    "playoff"
+   ]
+  },
+  {
+   "pair_id": "e5p035",
+   "w_p": "treble",
+   "w_a": "wrestle",
+   "d_unit": 2.0,
+   "d_unit_norm": 0.333,
+   "cos": 0.0403,
+   "pos_p": "noun",
+   "gloss_p": "the pitch range of the highest female voice",
+   "pos_a": "noun",
+   "gloss_a": "the act of engaging in close hand-to-hand combat",
+   "link_words": [
+    "silverware",
+    "quadruple",
+    "premiership",
+    "double",
+    "successive"
+   ]
+  },
+  {
+   "pair_id": "e5p036",
+   "w_p": "setting",
+   "w_a": "dating",
+   "d_unit": 2.0,
+   "d_unit_norm": 0.4,
+   "cos": 0.1491,
+   "pos_p": "noun",
+   "gloss_p": "the context and environment in which something is set",
+   "pos_a": "noun",
+   "gloss_a": "use of chemical analysis to estimate the age of geological specimens",
+   "link_words": [
+    "breaking",
+    "putting",
+    "locking",
+    "keeping",
+    "turning"
+   ]
+  },
+  {
+   "pair_id": "e5p037",
+   "w_p": "betting",
+   "w_a": "backing",
+   "d_unit": 2.0,
+   "d_unit_norm": 0.4,
+   "cos": 0.1706,
+   "pos_p": "adjective",
+   "gloss_p": "preoccupied with the pursuit of pleasure and especially games of chance",
+   "pos_a": "noun",
+   "gloss_a": "the act of providing approval and support",
+   "link_words": [
+    "wager",
+    "gambling",
+    "odds",
+    "gambler",
+    "poker"
+   ]
+  },
+  {
+   "pair_id": "e5p038",
+   "w_p": "hearty",
+   "w_a": "party",
+   "d_unit": 1.0,
+   "d_unit_norm": 0.2,
+   "cos": 0.1494,
+   "pos_p": "adjective",
+   "gloss_p": "showing warm and heartfelt friendliness",
+   "pos_a": "noun",
+   "gloss_a": "an organization to gain political power",
+   "link_words": [
+    "tasty",
+    "delicious",
+    "cheery",
+    "meaty",
+    "yummy"
+   ]
+  },
+  {
+   "pair_id": "e5p039",
+   "w_p": "packer",
+   "w_a": "pattern",
+   "d_unit": 2.0,
+   "d_unit_norm": 0.4,
+   "cos": 0.0727,
+   "pos_p": "noun",
+   "gloss_p": "a workman employed to pack things into containers",
+   "pos_a": "noun",
+   "gloss_a": "a perceptual structure",
+   "link_words": [
+    "pallet",
+    "grower",
+    "shipper",
+    "farmer",
+    "bale"
+   ]
+  },
+  {
+   "pair_id": "e5p040",
+   "w_p": "interview",
+   "w_a": "interval",
+   "d_unit": 2.0,
+   "d_unit_norm": 0.286,
+   "cos": -0.0196,
+   "pos_p": "noun",
+   "gloss_p": "the questioning of a person (or a conversation in which information is elicited); often conducted by journalists",
+   "pos_a": "noun",
+   "gloss_a": "a definite length of time marked off by two instants",
+   "link_words": [
+    "excerpt",
+    "spoke",
+    "speaking",
+    "reporter",
+    "statement"
+   ]
+  },
+  {
+   "pair_id": "e5p041",
+   "w_p": "scaling",
+   "w_a": "sibling",
+   "d_unit": 2.0,
+   "d_unit_norm": 0.333,
+   "cos": 0.0692,
+   "pos_p": "noun",
+   "gloss_p": "the act of arranging in a graduated series",
+   "pos_a": "noun",
+   "gloss_a": "a person's brother or sister",
+   "link_words": [
+    "cutting",
+    "trimming",
+    "climbing",
+    "pulling",
+    "reducing"
+   ]
+  },
+  {
+   "pair_id": "e5p042",
+   "w_p": "pair",
+   "w_a": "bare",
+   "d_unit": 1.0,
+   "d_unit_norm": 0.333,
+   "cos": 0.1508,
+   "pos_p": "noun",
+   "gloss_p": "a set of two similar things considered as a unit",
+   "pos_a": "verb",
+   "gloss_a": "lay bare",
+   "link_words": [
+    "trio",
+    "couple",
+    "duo",
+    "string",
+    "slew"
+   ]
+  },
+  {
+   "pair_id": "e5p043",
+   "w_p": "dependent",
+   "w_a": "descendant",
+   "d_unit": 1.0,
+   "d_unit_norm": 0.111,
+   "cos": 0.0513,
+   "pos_p": "noun",
+   "gloss_p": "a person who relies on another person for support (especially financial support)",
+   "pos_a": "noun",
+   "gloss_a": "a person considered as descended from some ancestor or race",
+   "link_words": [
+    "reliant",
+    "rely",
+    "dependence",
+    "reliance",
+    "dependency"
+   ]
+  },
+  {
+   "pair_id": "e5p044",
+   "w_p": "eater",
+   "w_a": "utter",
+   "d_unit": 1.0,
+   "d_unit_norm": 0.333,
+   "cos": 0.1599,
+   "pos_p": "noun",
+   "gloss_p": "someone who consumes food for nourishment",
+   "pos_a": "verb",
+   "gloss_a": "articulate; either verbally or with a cry, shout, or noise",
+   "link_words": [
+    "eating",
+    "eats",
+    "vegetarian",
+    "dieter",
+    "yogi"
+   ]
+  },
+  {
+   "pair_id": "e5p045",
+   "w_p": "total",
+   "w_a": "settle",
+   "d_unit": 2.0,
+   "d_unit_norm": 0.4,
+   "cos": 0.1105,
+   "pos_p": "noun",
+   "gloss_p": "the whole amount",
+   "pos_a": "noun",
+   "gloss_a": "a long wooden bench with a back",
+   "link_words": [
+    "whopping",
+    "cumulative",
+    "combined",
+    "staggering",
+    "million"
+   ]
+  },
+  {
+   "pair_id": "e5p046",
+   "w_p": "offshore",
+   "w_a": "fore",
+   "d_unit": 2.0,
+   "d_unit_norm": 0.4,
+   "cos": 0.1204,
+   "pos_p": "adjective",
+   "gloss_p": "(of winds) coming from the land",
+   "pos_a": "noun",
+   "gloss_a": "front part of a vessel or aircraft",
+   "link_words": [
+    "oil",
+    "drilling",
+    "coast",
+    "rig",
+    "coastline"
+   ]
+  },
+  {
+   "pair_id": "e5p047",
+   "w_p": "dressed",
+   "w_a": "dent",
+   "d_unit": 2.0,
+   "d_unit_norm": 0.4,
+   "cos": -0.025,
+   "pos_p": "adjective",
+   "gloss_p": "dressed or clothed especially in fine attire; often used in combination",
+   "pos_a": "noun",
+   "gloss_a": "an appreciable consequence (especially a lessening)",
+   "link_words": [
+    "clad",
+    "wearing",
+    "attire",
+    "garb",
+    "clothed"
+   ]
+  },
+  {
+   "pair_id": "e5p048",
+   "w_p": "portrait",
+   "w_a": "shortcut",
+   "d_unit": 2.0,
+   "d_unit_norm": 0.286,
+   "cos": 0.0268,
+   "pos_p": "noun",
+   "gloss_p": "a word picture of a person's appearance and character",
+   "pos_a": "noun",
+   "gloss_a": "a route shorter than the usual one",
+   "link_words": [
+    "photograph",
+    "picture",
+    "painting",
+    "depiction",
+    "watercolor"
+   ]
+  },
+  {
+   "pair_id": "e5p049",
+   "w_p": "master",
+   "w_a": "laughter",
+   "d_unit": 2.0,
+   "d_unit_norm": 0.4,
+   "cos": 0.0692,
+   "pos_p": "noun",
+   "gloss_p": "an artist of consummate skill",
+   "pos_a": "noun",
+   "gloss_a": "the sound of laughing",
+   "link_words": [
+    "genius",
+    "maestro",
+    "cunning",
+    "renowned",
+    "architect"
+   ]
+  }
+ ],
+ "tom_swifty": [
+  {
+   "pair_id": "e5p050",
+   "w_p": "coop",
+   "w_a": "cap",
+   "d_unit": 1.0,
+   "d_unit_norm": 0.333,
+   "cos": 0.1298,
+   "pos_p": "noun",
+   "gloss_p": "a farm building for housing poultry",
+   "pos_a": "noun",
+   "gloss_a": "a tight-fitting headdress",
+   "link_words": [
+    "nest",
+    "squirrel",
+    "cage",
+    "hen",
+    "house"
+   ]
+  },
+  {
+   "pair_id": "e5p051",
+   "w_p": "sit",
+   "w_a": "kit",
+   "d_unit": 1.0,
+   "d_unit_norm": 0.333,
+   "cos": 0.0014,
+   "pos_p": "verb",
+   "gloss_p": "be seated",
+   "pos_a": "noun",
+   "gloss_a": "a case for containing a set of articles",
+   "link_words": [
+    "stand",
+    "stare",
+    "seated",
+    "let",
+    "wait"
+   ]
+  },
+  {
+   "pair_id": "e5p052",
+   "w_p": "single",
+   "w_a": "simple",
+   "d_unit": 2.0,
+   "d_unit_norm": 0.333,
+   "cos": 0.2238,
+   "pos_p": "noun",
+   "gloss_p": "a base hit on which the batter stops safely at first base",
+   "pos_a": "noun",
+   "gloss_a": "any herbaceous plant having medicinal properties",
+   "link_words": [
+    "double",
+    "triple",
+    "solo",
+    "lone",
+    "entire"
+   ]
+  },
+  {
+   "pair_id": "e5p053",
+   "w_p": "bring",
+   "w_a": "briefing",
+   "d_unit": 2.0,
+   "d_unit_norm": 0.333,
+   "cos": -0.045,
+   "pos_p": "verb",
+   "gloss_p": "take something or somebody with oneself somewhere",
+   "pos_a": "noun",
+   "gloss_a": "detailed instructions, as for a military operation",
+   "link_words": [
+    "come",
+    "add",
+    "create",
+    "provide",
+    "deliver"
+   ]
+  },
+  {
+   "pair_id": "e5p054",
+   "w_p": "counting",
+   "w_a": "cling",
+   "d_unit": 2.0,
+   "d_unit_norm": 0.4,
+   "cos": 0.1472,
+   "pos_p": "noun",
+   "gloss_p": "the act of counting; reciting numbers in ascending order",
+   "pos_a": "noun",
+   "gloss_a": "fruit (especially peach) whose flesh adheres strongly to the pit",
+   "link_words": [
+    "voting",
+    "tally",
+    "guessing",
+    "collecting",
+    "projecting"
+   ]
+  },
+  {
+   "pair_id": "e5p055",
+   "w_p": "robbery",
+   "w_a": "rubber",
+   "d_unit": 2.0,
+   "d_unit_norm": 0.4,
+   "cos": -0.0222,
+   "pos_p": "noun",
+   "gloss_p": "larceny by threat of violence",
+   "pos_a": "noun",
+   "gloss_a": "an elastic material obtained from the latex sap of trees (especially trees of the genera Hevea and Ficus) that can be vulcanized and finished into a variety of products",
+   "link_words": [
+    "burglary",
+    "heist",
+    "stabbing",
+    "theft",
+    "murder"
+   ]
+  },
+  {
+   "pair_id": "e5p056",
+   "w_p": "kitchen",
+   "w_a": "canon",
+   "d_unit": 2.0,
+   "d_unit_norm": 0.4,
+   "cos": 0.0831,
+   "pos_p": "noun",
+   "gloss_p": "a room equipped for preparing meals",
+   "pos_a": "noun",
+   "gloss_a": "a rule or especially body of rules or principles generally established as valid and fundamental in a field or art or philosophy",
+   "link_words": [
+    "bathroom",
+    "stove",
+    "dishwasher",
+    "downstairs",
+    "cooking"
+   ]
+  },
+  {
+   "pair_id": "e5p057",
+   "w_p": "raining",
+   "w_a": "mating",
+   "d_unit": 2.0,
+   "d_unit_norm": 0.4,
+   "cos": 0.0752,
+   "pos_p": "adjective",
+   "gloss_p": "falling in drops or as if falling like rain",
+   "pos_a": "noun",
+   "gloss_a": "the act of pairing a male and female for reproductive purposes",
+   "link_words": [
+    "windy",
+    "overcast",
+    "humid",
+    "wet",
+    "drizzle"
+   ]
+  },
+  {
+   "pair_id": "e5p058",
+   "w_p": "futile",
+   "w_a": "brutal",
+   "d_unit": 2.0,
+   "d_unit_norm": 0.333,
+   "cos": 0.2412,
+   "pos_p": "adjective",
+   "gloss_p": "producing no result or effect",
+   "pos_a": "adjective",
+   "gloss_a": "(of persons or their actions) able or disposed to inflict pain or suffering",
+   "link_words": [
+    "fruitless",
+    "pointless",
+    "vain",
+    "useless",
+    "unsuccessful"
+   ]
+  },
+  {
+   "pair_id": "e5p059",
+   "w_p": "era",
+   "w_a": "error",
+   "d_unit": 1.0,
+   "d_unit_norm": 0.333,
+   "cos": 0.0002,
+   "pos_p": "noun",
+   "gloss_p": "a period marked by distinctive character or reckoned from a fixed point or event",
+   "pos_a": "noun",
+   "gloss_a": "a wrong action attributable to bad judgment or ignorance or inattention",
+   "link_words": [
+    "epoch",
+    "heyday",
+    "advent",
+    "millennium",
+    "nineties"
+   ]
+  }
+ ],
+ "human": [
+  {
+   "id": "het_46",
+   "text": "What kind of flooring do alligator hunters use? Reptiles!",
+   "pun_word": "Reptiles",
+   "w_p": "reptiles",
+   "w_a": "tile",
+   "format": "riddle"
+  },
+  {
+   "id": "het_119",
+   "text": "In the dark? Follow the son.",
+   "pun_word": "son",
+   "w_p": "son",
+   "w_a": "sun",
+   "format": "riddle"
+  },
+  {
+   "id": "het_138",
+   "text": "Have you ever read the Rime of the Ancient Gardener? It was written by Samuel Taylor Foliage.",
+   "pun_word": "Foliage",
+   "w_p": "foliage",
+   "w_a": "coleridge",
+   "format": "riddle"
+  },
+  {
+   "id": "het_428",
+   "text": "Is that pure rump roast? Nothing butt.",
+   "pun_word": "butt",
+   "w_p": "butt",
+   "w_a": "but",
+   "format": "riddle"
+  },
+  {
+   "id": "het_567",
+   "text": "Did you hear about the nervous preacher? He had sweaty psalms.",
+   "pun_word": "psalms",
+   "w_p": "psalms",
+   "w_a": "palm",
+   "format": "riddle"
+  },
+  {
+   "id": "het_586",
+   "text": "Why did the dairy churn? The less said, the butter ...",
+   "pun_word": "butter",
+   "w_p": "butter",
+   "w_a": "better",
+   "format": "riddle"
+  },
+  {
+   "id": "het_676",
+   "text": "What is the best store to be in during an earthquake? A stationery store.",
+   "pun_word": "stationery",
+   "w_p": "stationery",
+   "w_a": "stationary",
+   "format": "riddle"
+  },
+  {
+   "id": "het_834",
+   "text": "What did the grape say when it got stepped on? Nothing - but it let out a little whine.",
+   "pun_word": "whine",
+   "w_p": "whine",
+   "w_a": "wine",
+   "format": "riddle"
+  },
+  {
+   "id": "het_953",
+   "text": "Why was the orange sad? He had peelings for the apple.",
+   "pun_word": "peelings",
+   "w_p": "peelings",
+   "w_a": "feeling",
+   "format": "riddle"
+  },
+  {
+   "id": "het_973",
+   "text": "He doesn't talk much does he? He's just a little horse.",
+   "pun_word": "horse",
+   "w_p": "horse",
+   "w_a": "hoarse",
+   "format": "riddle"
+  },
+  {
+   "id": "het_1090",
+   "text": "What do you call Peruvian Rorschach tests? Inca Blots.",
+   "pun_word": "Inca",
+   "w_p": "inca",
+   "w_a": "ink",
+   "format": "riddle"
+  },
+  {
+   "id": "het_1254",
+   "text": "Did you hear about the film editor at Hollywood who had a part-time job at a pizza parlor? He used to ask customers whether they wanted one splice or two.",
+   "pun_word": "splice",
+   "w_p": "splice",
+   "w_a": "slice",
+   "format": "riddle"
+  },
+  {
+   "id": "het_1283",
+   "text": "Why did the pig quit running the marathon? He had a problem with his hamstring.",
+   "pun_word": "hamstring",
+   "w_p": "hamstring",
+   "w_a": "ham",
+   "format": "riddle"
+  },
+  {
+   "id": "het_1298",
+   "text": "Anxious about the future? Psalms read every Sunday.",
+   "pun_word": "Psalms",
+   "w_p": "psalms",
+   "w_a": "palm",
+   "format": "riddle"
+  },
+  {
+   "id": "het_1382",
+   "text": "What is a duck's favorite game to play? Billiards.",
+   "pun_word": "Billiards",
+   "w_p": "billiards",
+   "w_a": "bill",
+   "format": "riddle"
+  },
+  {
+   "id": "het_1463",
+   "text": "Why was six afraid of seven? Because seven eight nine.",
+   "pun_word": "eight",
+   "w_p": "eight",
+   "w_a": "eat",
+   "format": "riddle"
+  },
+  {
+   "id": "het_1466",
+   "text": "How do bunnies that don't have a car commute to work? The Rabbit Transit.",
+   "pun_word": "Rabbit",
+   "w_p": "rabbit",
+   "w_a": "rapid",
+   "format": "riddle"
+  },
+  {
+   "id": "het_1492",
+   "text": "Need soul repair ? Walk right in.",
+   "pun_word": "soul",
+   "w_p": "soul",
+   "w_a": "sole",
+   "format": "riddle"
+  },
+  {
+   "id": "het_1505",
+   "text": "Sweet potatoes? I yam impressed!",
+   "pun_word": "yam",
+   "w_p": "yam",
+   "w_a": "be",
+   "format": "riddle"
+  },
+  {
+   "id": "het_1597",
+   "text": "Did you hear about my friend who hired out vampires and poison, and my other friend who ate children? Could say the first one was the lessor of two evils.",
+   "pun_word": "lessor",
+   "w_p": "lessor",
+   "w_a": "lesser",
+   "format": "riddle"
+  },
+  {
+   "id": "het_65",
+   "text": "By yourself you're in the right. In a group you're in the throng.",
+   "pun_word": "throng",
+   "w_p": "throng",
+   "w_a": "wrong",
+   "format": "oneliner"
+  },
+  {
+   "id": "het_77",
+   "text": "Children can do some knotty things with string.",
+   "pun_word": "knotty",
+   "w_p": "knotty",
+   "w_a": "naughty",
+   "format": "oneliner"
+  },
+  {
+   "id": "het_144",
+   "text": "A drummer can cymbalize the enthusiasm of a band.",
+   "pun_word": "cymbalize",
+   "w_p": "cymbalize",
+   "w_a": "symbolize",
+   "format": "oneliner"
+  },
+  {
+   "id": "het_159",
+   "text": "The workers at that inn are very unfriendly. They create a hostel environment.",
+   "pun_word": "hostel",
+   "w_p": "hostel",
+   "w_a": "hostile",
+   "format": "oneliner"
+  },
+  {
+   "id": "het_194",
+   "text": "Truckers like houses with long haulways.",
+   "pun_word": "haulways",
+   "w_p": "haulways",
+   "w_a": "hallway",
+   "format": "oneliner"
+  },
+  {
+   "id": "het_235",
+   "text": "The thief broke into the music store and stole the lute.",
+   "pun_word": "lute",
+   "w_p": "lute",
+   "w_a": "loot",
+   "format": "oneliner"
+  },
+  {
+   "id": "het_322",
+   "text": "The man leaned on the printer cartridge because he wanted to tone up his abs.",
+   "pun_word": "tone",
+   "w_p": "tone",
+   "w_a": "toner",
+   "format": "oneliner"
+  },
+  {
+   "id": "het_445",
+   "text": "The nudist defended himself by citing his Constitutional right to bare arms.",
+   "pun_word": "bare",
+   "w_p": "bare",
+   "w_a": "bear",
+   "format": "oneliner"
+  },
+  {
+   "id": "het_517",
+   "text": "Take a God look at yourself.",
+   "pun_word": "God",
+   "w_p": "god",
+   "w_a": "good",
+   "format": "oneliner"
+  },
+  {
+   "id": "het_611",
+   "text": "Shopaholics never die, they just sale away.",
+   "pun_word": "sale",
+   "w_p": "sale",
+   "w_a": "sail",
+   "format": "oneliner"
+  },
+  {
+   "id": "het_654",
+   "text": "Exposure to the Son may prevent burning",
+   "pun_word": "Son",
+   "w_p": "son",
+   "w_a": "sun",
+   "format": "oneliner"
+  },
+  {
+   "id": "het_814",
+   "text": "I choked on my dessert and decided to sue, so I hired an attorney who specializes in tortes.",
+   "pun_word": "tortes",
+   "w_p": "tortes",
+   "w_a": "tort",
+   "format": "oneliner"
+  },
+  {
+   "id": "het_820",
+   "text": "Before the revolution, Russia was in a Tsary state.",
+   "pun_word": "Tsary",
+   "w_p": "tsary",
+   "w_a": "sorry",
+   "format": "oneliner"
+  },
+  {
+   "id": "het_885",
+   "text": "Sign on a broken perfume bottle, ''Out of odor''.",
+   "pun_word": "odor",
+   "w_p": "odor",
+   "w_a": "order",
+   "format": "oneliner"
+  },
+  {
+   "id": "het_1020",
+   "text": "I had such a bad cold, I thought I was coffin to death.",
+   "pun_word": "coffin",
+   "w_p": "coffin",
+   "w_a": "cough",
+   "format": "oneliner"
+  },
+  {
+   "id": "het_1184",
+   "text": "When walking through a pig barn be careful how you maneuver.",
+   "pun_word": "maneuver",
+   "w_p": "maneuver",
+   "w_a": "manure",
+   "format": "oneliner"
+  },
+  {
+   "id": "het_1322",
+   "text": "An explosion at the meat packing plant caused quite a meatier shower.",
+   "pun_word": "meatier",
+   "w_p": "meatier",
+   "w_a": "meteor",
+   "format": "oneliner"
+  },
+  {
+   "id": "het_1583",
+   "text": "The optician fell into the lens grinding machine and made a spectacle of himself.",
+   "pun_word": "spectacle",
+   "w_p": "spectacle",
+   "w_a": "spectacles",
+   "format": "oneliner"
+  },
+  {
+   "id": "het_1638",
+   "text": "Mothers everywhere want their children to give peas a chance.",
+   "pun_word": "peas",
+   "w_p": "peas",
+   "w_a": "peace",
+   "format": "oneliner"
+  },
+  {
+   "id": "het_1768",
+   "text": "Herb gardeners who work extra get thyme and a half.",
+   "pun_word": "thyme",
+   "w_p": "thyme",
+   "w_a": "time",
+   "format": "oneliner"
+  }
+ ]
+}
