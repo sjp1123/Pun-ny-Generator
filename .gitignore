@@ -1,0 +1,6 @@
+# 내려받은 원본 데이터와 큰 캐시는 저장소에 넣지 않는다
+data/
+cache/
+*.log
+__pycache__/
+.pytest_cache/

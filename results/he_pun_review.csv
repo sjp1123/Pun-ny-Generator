@@ -1,0 +1,34 @@
+row,sent,pair,z,verdict,semeval_id,semeval_pair,alter_match,partner_row
+0,"' ' be still my hart ' ' she murmured , thinking how magnificent and stag - like he was .",hart-heart,-0.9171868709366537,ok,het_40,hart-heart,True,1
+3,"' ' i ' ve been listening to the brandenburg concertos , ' ' tom barked .",barked-bached,-0.9171868709366537,ok,het_64,barked-bach,False,2
+4,"' ' i ' ve stuck a pin through my nose , ' ' said tom punctually .",punctually-puncture,-0.3272481942364793,ok,het_22,punctually-puncture,True,5
+27,a china doll was marked in tiny letters : ' maid in usa ' .,maid-made,1.0131302234119108,ok,het_16,maid-made,True,26
+29,a music store was robbed . the thief made away with the lute .,lute-loot,2.1453928827606634,ok,het_38,lute-loot,True,28
+35,after burning a batch of cookies a baker felt very crummy .,crummy-crumb,2.1536263568074476,ok,het_55,crummy-crumb,True,34
+50,by yourself you ' re in the right . in a group you ' re in the throng .,throng-wrong,0.03700638029578536,ok,het_65,throng-wrong,True,51
+57,cows make noise only when they ' re in the mood .,mood-moo,1.1985509942299992,ok,het_51,mood-moo,True,56
+61,diets are for people who are thick and tired of it all .,thick-sick,1.8508979290910528,ok,het_25,thick-sick,True,60
+67,fashion is something that goes in one era and out the other .,era-ear,-0.02428061361391276,ok,het_45,era-ear,True,66
+72,follow your knows .,knows-noses,1.0083133321011837,ok,het_15,knows-nose,False,73
+83,"he threw jello at his wife , who had him arrested for carrying a congealed weapon .",congealed-concealed,0.7703397136291187,ok,het_39,congealed-concealed,True,82
+87,his wife left him saying she was going home to mutter .,mutter-mother,1.9453928827606635,ok,het_42,mutter-mother,True,86
+91,"i ' ve been to a film festival in the south of france , said tom cannily .",cannily-cannes,-0.11718687093665361,ok,het_36,cannily-cannes,True,90
+92,"i deny everything , said tom knowingly .",knowingly-no,0.7144562300129369,ok,het_17,knowingly-no,True,93
+100,"let ' s all play an a , a c sharp , and an e , cried tom ' s band with one accord .",accord-chord,-0.029320246669859773,ok,het_33,accord-chord,True,101
+112,"she wanted the large estate quite badly but , she dared not mansion it to her frugal husband .",mansion-mention,1.8624010704263618,ok,het_62,mansion-mention,True,113
+128,the boating store had its best sail ever .,sail-sale,2.9505157216775943,ok,het_56,sail-sale,True,129
+133,the cobbler was asked how many shoes he had soled by a well,soled-selld,0.8229407346988886,ok,het_28,soled-sell,False,132
+137,"the doctors had to remove a bone from my arm , said tom humorlessly .",humorlessly-humerus,1.1490100247739086,ok,het_35,humorlessly-humerus,True,136
+143,the key to changing your performance ability is by tuning out criticism and staying musically octave .,octave-active,0.949782501550356,ok,het_19,octave-active,True,142
+151,the ultimate liquid measure is the supreme quart .,quart-court,2.0660761944877737,ok,het_47,quart-court,True,150
+154,the young pine sapling was admonished by his father . apparently he ' d been knotty .,knotty-naughty,2.078118576929107,ok,het_34,knotty-naughty,True,155
+156,"they won ' t stay at friendly hotels , because they ' re hostel people .",hostel-hostile,0.8108078251186643,ok,het_31,hostel-hostile,True,157
+167,we welcome you with open psalms .,psalms-arms,2.319636247369548,ok,het_24,psalms-arm,False,166
+168,what kind of flooring do alligator hunters use ? reptiles !,reptiles-tiles,2.2947793862445707,ok,het_46,reptiles-tile,False,169
+171,"when asked by a health department official to describe the mess he saw on the slaughterhouse floor , the usda inspector replied , ' ' it was just offal . ' '",offal-awful,0.65088664246241,ok,het_54,offal-awful,True,170
+173,when asked to picture the perfect modern defensive weapon the claymore springs to mine .,mine-mind,-0.08614084990840035,ok,het_58,mine-mind,True,172
+175,when his clothes dryer broke he was lint another one .,lint-lend,2.0612593031770468,ok,het_49,lint-lend,True,174
+176,when it got stuck in the mud my car had to be toad .,toad-tow,0.9151354978450609,ok,het_59,toad-tow,True,177
+181,"when my camera fell in the toffee i was making , i got a very candied picture .",candied-candid,2.7918023862665247,ok,het_60,candied-candid,True,180
+183,when the glassblower inhaled he got a pane in the stomach .,pane-pain,1.7901305206469451,ok,het_66,pane-pain,True,182
+186,yesterday a cow saved my life - it was bovine intervention .,bovine-divine,1.2495625933040868,ok,het_43,bovine-divine,True,187

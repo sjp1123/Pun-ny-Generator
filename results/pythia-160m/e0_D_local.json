@@ -1,0 +1,18 @@
+{
+  "model": "pythia-160m",
+  "gamma": 0.75,
+  "count_olmo": {
+    "n_seen": 469,
+    "n_unseen": 605,
+    "median_logD_seen": -0.00013077732397448472,
+    "median_logD_unseen": -0.00015295823234851014,
+    "mannwhitney_p": 0.031487381338778535
+  },
+  "count_pile": {
+    "n_seen": 50,
+    "n_unseen": 1024,
+    "median_logD_seen": -0.0004410601248494572,
+    "median_logD_unseen": -0.00013409233685024446,
+    "mannwhitney_p": 0.38117872780522
+  }
+}
