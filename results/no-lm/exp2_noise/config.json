@@ -1,0 +1,21 @@
+{
+  "alpha": 0.01,
+  "ties": "0.5승 (승 2회·무승부 양방향 1회, α×2)",
+  "reps": 200,
+  "n_workers": 1059,
+  "n_judgments": 141050,
+  "model": "no-lm",
+  "experiment": "exp2_noise",
+  "seed": 20261112,
+  "bootstrap_B": 5000,
+  "git": {
+    "commit": "ac5c553494c17082f20d1439b093e9b05c629c1d",
+    "dirty": true
+  },
+  "argv": [
+    "experiments/v1_exp2_noise.py",
+    "--reps",
+    "200"
+  ],
+  "lemma_tool": "spaCy 3.8.18 + en_core_web_sm 3.8.0 (단어 하나씩, 문맥 없이)"
+}

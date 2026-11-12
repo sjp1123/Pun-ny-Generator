@@ -1,0 +1,27 @@
+{
+  "split": "dev (구현 확인)",
+  "params": {
+    "gamma": 1.5,
+    "kao_mu": 0.18652387975811877,
+    "kao_sd": 0.25982786334527525,
+    "kao_r": 2.0,
+    "fit_split": "dev",
+    "dev_n": 213,
+    "dev_excluded": [
+      "het_145"
+    ]
+  },
+  "n": 213,
+  "model": "pythia-160m",
+  "experiment": "exp1C_delta",
+  "seed": 20261112,
+  "bootstrap_B": 5000,
+  "git": {
+    "commit": "ac5c553494c17082f20d1439b093e9b05c629c1d",
+    "dirty": false
+  },
+  "argv": [
+    "experiments/v1_exp1_delta.py"
+  ],
+  "lemma_tool": "spaCy 3.8.18 + en_core_web_sm 3.8.0 (단어 하나씩, 문맥 없이)"
+}

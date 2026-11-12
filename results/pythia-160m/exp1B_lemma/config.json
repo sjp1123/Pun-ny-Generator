@@ -1,0 +1,18 @@
+{
+  "split": "dev",
+  "gamma": 1.5,
+  "dist": "d_unit",
+  "restrict": "C",
+  "model": "pythia-160m",
+  "experiment": "exp1B_lemma",
+  "seed": 20261112,
+  "bootstrap_B": 5000,
+  "git": {
+    "commit": "ac5c553494c17082f20d1439b093e9b05c629c1d",
+    "dirty": false
+  },
+  "argv": [
+    "experiments/v1_exp1_lemma.py"
+  ],
+  "lemma_tool": "spaCy 3.8.18 + en_core_web_sm 3.8.0 (단어 하나씩, 문맥 없이)"
+}

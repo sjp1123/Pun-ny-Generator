@@ -52,8 +52,10 @@ def rho_max():
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--model", default=MAIN_MODEL)
+    ap.add_argument("--split", default="test", choices=["test", "dev"],
+                    help="dev는 태그 전 시험 실행용(판정에 쓰지 않음)")
     a = ap.parse_args()
-    status = "확인 검정" if a.model == MAIN_MODEL else "참고용(주 모델 아님)"
+    status = "확인 검정" if a.model == MAIN_MODEL and a.split == "test" else "참고용(주 모델 아님 또는 dev 시험 실행)"
     left = ("semeval_K100_left",)
 
     # ---- dev에서 모수 고정
@@ -64,7 +66,7 @@ def main():
     P["bins_phon_mono"] = fit_bins(Dp.listener("global", "C"), monotone=True)[0]
 
     # ---- test
-    T = Data(a.model, "test", extra_lm=left)
+    T = Data(a.model, a.split, extra_lm=left)
     res = dict(status=status, params=P, n_test=len(T.keys), excluded_same_lemma=T.excluded,
                split_sha256=dict(dev=split_sha("dev"), test=split_sha("test")))
     g = T.listener("global", "C")
@@ -88,7 +90,7 @@ def main():
     rm = rho_max()
     res["rho_max_test"] = rm
 
-    U = Data(a.model, "test", cand_set="C_union")
+    U = Data(a.model, a.split, cand_set="C_union")
     gu = U.listener("global", "C")
     res["H4"] = paired_acc(dict(gamma=hits(gu.metrics(("gamma", P["gamma_union"]))["rank"]),
                                 gamma0=hits(gu.metrics(("gamma", 0.0))["rank"])),
@@ -112,12 +114,13 @@ def main():
                            p=float(mannwhitneyu(v[seen][~np.isnan(v[seen])], v[~seen][~np.isnan(v[~seen])]).pvalue))
         res["E0_pile"] = e0
 
-    R = RunDir(a.model, "confirm", dict(status=status, prereg_tag="prereg-v1", split="test (숨은 단어 한 단어)",
+    R = RunDir(a.model, "confirm" if a.split == "test" else "confirm_dryrun_dev",
+               dict(status=status, prereg_tag="prereg-v1", split=f"{a.split} (숨은 단어 한 단어)",
                                         bootstrap_B=B_BOOT, params=P))
     R.metrics(res)
     yn = lambda b: "지지" if b else "지지 안 됨"
     L = [f"# 사전 등록 확인 검정 — {a.model} ({status})", "",
-         f"test n = {len(T.keys)} (표제어 같아 제외 {len(T.excluded)}), γ = {P['gamma']}, γ(C_union) = {P['gamma_union']}, "
+         f"{a.split} n = {len(T.keys)} (표제어 같아 제외 {len(T.excluded)}), γ = {P['gamma']}, γ(C_union) = {P['gamma_union']}, "
          f"Kao r = {P['kao_r']}, 구간 가중치(C_phon, 단조) = {', '.join(f'{x:.2f}' for x in P['bins_phon_mono'])}", "",
          "| 가설 | 수치 (95% CI) | 판정 |", "|---|---|---|",
          f"| H1a | 전체−LM {ci(res['H1a']['full_minus_lm']['diff'], *res['H1a']['full_minus_lm']['ci'])}; "
