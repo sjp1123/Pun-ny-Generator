@@ -104,6 +104,32 @@ class LMScorer:
         return res
 
 
+    @torch.inference_mode()
+    def continuation(self, prefix: str, conts: list[str], batch_size: int = 128):
+        """접두부 뒤에 이어지는 cont 토큰들의 로그 확률 합(접두부 확률은 빼고)과 마지막 로짓.
+
+        반환: ([(로그 확률, 토큰 수)], 접두부 다음 토큰의 로그 확률 벡터)
+        """
+        pre = [self.bos] + self.ids(prefix)
+        out = self.model(input_ids=torch.tensor([pre], device=self.device), use_cache=True)
+        last = out.logits[:, -1:]
+        sufs = [self.ids(c) for c in conts]
+        res = [None] * len(conts)
+        idx = [i for i, s in enumerate(sufs) if s and pre + s == [self.bos] + self.ids(prefix + conts[i])]
+        for b in range(0, len(idx), batch_size):
+            chunk = idx[b : b + batch_size]
+            past = _repeat_cache(out.past_key_values, len(chunk))
+            lps = self._batch_logprobs([sufs[i] for i in chunk], past=past, prev_logits=last)
+            for i, lp in zip(chunk, lps):
+                res[i] = (lp, len(sufs[i]))
+        rest = [i for i in range(len(conts)) if res[i] is None]
+        if rest:  # 따로 토큰화하면 달라지는 경우: 통째로 채점하고 접두부 확률을 뺀다
+            pre_lp = self.score_texts([prefix])[0][0] if prefix else 0.0
+            for i, (lp, n) in zip(rest, self.score_texts([prefix + conts[i] for i in rest])):
+                res[i] = (lp - pre_lp, n - (len(pre) - 1))
+        return res, F.log_softmax(last[0, 0].float(), -1).cpu()
+
+
 def _repeat_cache(cache, n):
     import copy
     c = copy.deepcopy(cache)
