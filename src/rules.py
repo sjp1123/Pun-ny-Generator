@@ -245,7 +245,8 @@ def git_state() -> dict:
             return subprocess.run(["git", *a], cwd=ROOT, capture_output=True, text=True).stdout.strip()
         except OSError:
             return ""
-    return dict(commit=run("rev-parse", "HEAD"), dirty=bool(run("status", "--porcelain")))
+    # dirty: 추적 중인 파일이 커밋과 다를 때만 (새 결과 파일 같은 추적 안 된 파일은 세지 않음)
+    return dict(commit=run("rev-parse", "HEAD"), dirty=bool(run("status", "--porcelain", "--untracked-files=no")))
 
 
 class RunDir:
