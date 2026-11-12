@@ -1,0 +1,36 @@
+{
+  "status": "참고용(주 모델 아님 또는 dev 시험 실행)",
+  "prereg_tag": "prereg-v1",
+  "split": "test (숨은 단어 한 단어)",
+  "bootstrap_B": 5000,
+  "params": {
+    "gamma": 1.5,
+    "kao_mu": 0.18652387975811877,
+    "kao_sd": 0.25982786334527525,
+    "kao_r": 2.0,
+    "fit_split": "dev",
+    "dev_n": 213,
+    "dev_excluded": [
+      "het_145"
+    ],
+    "gamma_union": 2.25,
+    "bins_phon_mono": [
+      0.527010439408975,
+      2.778222775041639,
+      5.311280399550081
+    ]
+  },
+  "model": "pythia-160m",
+  "experiment": "confirm",
+  "seed": 20261112,
+  "git": {
+    "commit": "075cea4c96f102b815c9e0e1920d6a00d7b6791e",
+    "dirty": false
+  },
+  "argv": [
+    "experiments/v1_confirm.py",
+    "--model",
+    "pythia-160m"
+  ],
+  "lemma_tool": "spaCy 3.8.18 + en_core_web_sm 3.8.0 (단어 하나씩, 문맥 없이)"
+}
