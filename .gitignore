@@ -4,3 +4,4 @@ cache/
 *.log
 __pycache__/
 .pytest_cache/
+gpu_bundle.zip

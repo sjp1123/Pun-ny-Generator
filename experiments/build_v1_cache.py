@@ -2,7 +2,7 @@
 
 실험 3: 기존 후보(C_phon)에 왼쪽 문맥 점수 ctx="left" — log P_LM(T | x_{1:i-1}) (후보 토큰만, 앞 공백 포함)
 실험 4-B: C_LM = 왼쪽 문맥에서 첫 토큰 로그 확률로 어휘를 줄 세운 상위 100개 + w_p (+ w_a 강제)
-          → 후보표 candidates_semevalLM_K100.parquet, 점수 ctx = global, left
+          → 후보표 candidates_semevalLM_K100_<model>.parquet, 점수 ctx = global, left
 
 사용: python -X utf8 experiments/build_v1_cache.py --model pythia-160m --dataset semeval he
 """
@@ -23,6 +23,7 @@ from data import CACHE, load_he_annotation, match_case, semeval_items
 from g2p import prons
 from lmscore import CacheWriter, LMScorer, Progress, set_threads, split_at
 from phon import normalize, pair_distance
+from v1_common import cand_path
 
 K_LM = 100
 
@@ -99,7 +100,7 @@ def main():
         wl = CacheWriter(CACHE / "lm" / args.model / f"{ds}_K100_left")
         lm_dir = CACHE / "lm" / args.model / f"{ds}LM_K100"
         wg = CacheWriter(lm_dir) if ds == "semeval" else None
-        ct_path = CACHE / f"candidates_{ds}LM_K100.parquet"
+        ct_path = cand_path(f"{ds}LM_K100", args.model)
         ct_parts = [pd.read_parquet(ct_path)] if ct_path.exists() else []
         if wg is not None:  # 후보표에 없는 항목은 점수가 있어도 다시 만든다
             wg.done &= set(ct_parts[0].key) if ct_parts else set()

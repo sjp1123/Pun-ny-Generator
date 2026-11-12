@@ -108,3 +108,8 @@ E1·E3를 계산했다. 그 결과(H1b가 strict에서 미지지, lemma 최댓�
 ## 7. 변경 기록
 
 (태그 `prereg-v1` 이후의 변경만 여기에 날짜와 이유를 덧붙인다.)
+
+- **2026-11-12, 1.4B 실행 전 (버그 수정, 분석 규칙 변경 없음).** C_LM 후보표는 그 모델의 다음 토큰 분포로 뽑는데,
+  파일 하나(`cache/candidates_semevalLM_K100.parquet`)를 모든 모델이 같이 쓰고 있었다. 같은 PC에서 1.4B를 돌리면
+  160M 후보와 1.4B 후보가 섞여 H4(C_union)가 오염된다. 경로를 모델별(`candidates_semevalLM_K100_<model>.parquet`)로
+  나눴다. 160M dev 시험 실행(`confirm_dryrun_dev`)의 수치는 수정 전과 완전히 같다. 1.4B는 이 수정 전에 실행한 적이 없다.

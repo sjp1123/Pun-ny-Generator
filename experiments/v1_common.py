@@ -39,9 +39,15 @@ CAND_SETS = {"C_phon": ("semeval_K100",), "C_LM": ("semevalLM_K100",), "C_union"
 CAND_COLS = ["key", "cand", "rank", "d", "d_norm", "d_unit", "d_unit_norm", "zipf", "in_C", "is_wp", "is_wa"]
 
 
-def candidate_set(name: str) -> pd.DataFrame:
+def cand_path(table: str, model: str):
+    """후보표 경로. 발음 후보(semeval_K100)는 모델과 무관하고, C_LM 후보는 그 모델의 다음 토큰 분포로
+    뽑으므로 모델마다 따로 둔다(한 파일을 여러 모델이 같이 쓰면 후보가 섞인다)."""
+    return CACHE / (f"candidates_{table}_{model}.parquet" if "LM_" in table else f"candidates_{table}.parquet")
+
+
+def candidate_set(name: str, model: str) -> pd.DataFrame:
     """후보 집합. C_union은 두 표를 합치고 in_C는 어느 쪽이든 원래 후보였으면 참."""
-    parts = [pd.read_parquet(CACHE / f"candidates_{n}.parquet")[CAND_COLS] for n in CAND_SETS[name]]
+    parts = [pd.read_parquet(cand_path(n, model))[CAND_COLS] for n in CAND_SETS[name]]
     df = pd.concat(parts, ignore_index=True)
     inC = df.groupby(["key", "cand"]).in_C.any()
     df = df.drop_duplicates(["key", "cand"]).copy()
@@ -54,7 +60,7 @@ class Data:
 
     def __init__(self, model: str, split: str | None, cand_set="C_phon", extra_lm=()):
         self.items = items(split)
-        cand = candidate_set(cand_set)
+        cand = candidate_set(cand_set, model)
         if cand_set != "C_phon":
             extra_lm = tuple(extra_lm) + ("semevalLM_K100",)
         cand = add_lemma_cols(cand[cand.key.isin(self.items)])

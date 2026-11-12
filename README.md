@@ -58,6 +58,7 @@ python -X utf8 -m pytest tests -q
 
 주 결과(확인 검정 H1a~c)는 `--model pythia-1.4b`로 다시 돌린다. GPU(16GB, fp16)에서
 `build_cache.py --model pythia-1.4b --device cuda`. E2b는 `--dataset e2b`(위치 약 1.4만 개)라 GPU 권장.
+사전 등록 확인 검정(prereg-v1)을 GPU에서 돌리는 순서는 [docs/GPU_RUN.md](docs/GPU_RUN.md)에 있다.
 
 ## 설계 문서와 다르게 구현한 점 (이유)
 
