@@ -1,0 +1,18 @@
+{
+  "gamma_fit": "SemEval dev, 후보 C, 전역",
+  "threshold_fit": "He pun vs retrieved_aw_alter, 유든 J",
+  "model": "pythia-1.4b",
+  "experiment": "e5_gate",
+  "seed": 20261112,
+  "bootstrap_B": 5000,
+  "git": {
+    "commit": "b5184f83acdc337dfef0db1e9c9afe80392b79fa",
+    "dirty": false
+  },
+  "argv": [
+    "experiments/e5_gate.py",
+    "--model",
+    "pythia-1.4b"
+  ],
+  "lemma_tool": "spaCy 3.8.18 + en_core_web_sm 3.8.0 (단어 하나씩, 문맥 없이)"
+}

@@ -1,0 +1,21 @@
+{
+  "stage": "pilot",
+  "gen": "olmo-2-1124-7b-instruct",
+  "model": "pythia-1.4b",
+  "step": "select",
+  "n_cells": 20,
+  "seed": 20261112,
+  "git": {
+    "commit": "b5184f83acdc337dfef0db1e9c9afe80392b79fa",
+    "dirty": false
+  },
+  "argv": [
+    "experiments/e5_select.py",
+    "--stage",
+    "pilot",
+    "--gen",
+    "olmo-2-1124-7b-instruct",
+    "--model",
+    "pythia-1.4b"
+  ]
+}

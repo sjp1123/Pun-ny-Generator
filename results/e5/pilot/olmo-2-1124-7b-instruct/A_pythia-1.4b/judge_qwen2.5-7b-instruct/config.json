@@ -1,0 +1,33 @@
+{
+  "stage": "pilot",
+  "gen": "olmo-2-1124-7b-instruct",
+  "model": "pythia-1.4b",
+  "judge": {
+    "backend": "hf",
+    "model": "Qwen/Qwen2.5-7B-Instruct",
+    "dtype": "bfloat16",
+    "device": "cuda",
+    "revision": null,
+    "transformers": "5.22.2",
+    "torch": "2.15.0+cu132"
+  },
+  "temperature": 0.0,
+  "seed": 20261112,
+  "git": {
+    "commit": "b5184f83acdc337dfef0db1e9c9afe80392b79fa",
+    "dirty": false
+  },
+  "argv": [
+    "experiments/e5_judge.py",
+    "--stage",
+    "pilot",
+    "--gen",
+    "olmo-2-1124-7b-instruct",
+    "--model",
+    "pythia-1.4b",
+    "--backend",
+    "hf",
+    "--judge",
+    "Qwen/Qwen2.5-7B-Instruct"
+  ]
+}

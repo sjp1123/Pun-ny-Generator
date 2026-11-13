@@ -1,0 +1,47 @@
+{
+  "B0": {
+    "n": 20,
+    "success": 0.1,
+    "works": 0.95,
+    "bt_mean": null
+  },
+  "B1": {
+    "n": 20,
+    "success": 0.35,
+    "works": 0.95,
+    "bt_mean": -1.1534904369894627
+  },
+  "H": {
+    "n": 20,
+    "success": 0.0,
+    "works": 1.0,
+    "bt_mean": 0.6419387212706005
+  },
+  "P1": {
+    "n": 20,
+    "success": 0.05,
+    "works": 1.0,
+    "bt_mean": 0.02308537978038099
+  },
+  "P2": {
+    "n": 20,
+    "success": 0.05,
+    "works": 0.95,
+    "bt_mean": 0.36114075117190764
+  },
+  "P3": {
+    "n": 20,
+    "success": 0.1,
+    "works": 0.95,
+    "bt_mean": 0.76676095128077
+  },
+  "P4": {
+    "n": 15,
+    "success": 0.0,
+    "works": 1.0,
+    "bt_mean": 0.4683285055242175
+  },
+  "_position_bias_first_wins": 0.7666666666666667,
+  "_unparsed_pairs": 0.0,
+  "_spearman_A_score_vs_judge_success": 0.11327381183437323
+}

@@ -1,0 +1,178 @@
+{
+  "candidates": {
+    "n_cells": 20,
+    "n_cand": 124,
+    "cand_per_cell": 6.2,
+    "rule_pass": 0.45161290322580644,
+    "reasons": {
+      "has_wa": 49,
+      "no_wp": 32,
+      "format": 27
+    },
+    "gate_pass_all": 0.008064516129032258,
+    "gate_pass_rule_ok": 0.0,
+    "distinct2": 0.8839876513343915,
+    "template_rate": 0.2577777777777778
+  },
+  "B1": {
+    "n": 20,
+    "rule_pass": 0.3,
+    "reasons": {
+      "has_wa": 12,
+      "no_wp": 4,
+      "too_long": 1
+    }
+  },
+  "B0": {
+    "n": 20,
+    "rule_pass": 0.65,
+    "reasons": {
+      "no_wp": 3,
+      "malformed": 2,
+      "has_wa": 2
+    }
+  },
+  "by_condition": {
+    "B0": {
+      "-": {
+        "n": 20,
+        "rule_pass": 0.65,
+        "gate_pass": 0.05,
+        "scored": 0.7
+      },
+      "all": {
+        "n": 20,
+        "rule_pass": 0.65,
+        "gate_pass": 0.05,
+        "scored": 0.7
+      }
+    },
+    "B1": {
+      "oneliner": {
+        "n": 10,
+        "rule_pass": 0.3,
+        "gate_pass": 0.0,
+        "scored": 0.8
+      },
+      "riddle": {
+        "n": 10,
+        "rule_pass": 0.3,
+        "gate_pass": 0.1,
+        "scored": 0.8
+      },
+      "all": {
+        "n": 20,
+        "rule_pass": 0.3,
+        "gate_pass": 0.05,
+        "scored": 0.8
+      }
+    },
+    "H": {
+      "oneliner": {
+        "n": 10,
+        "rule_pass": 1.0,
+        "gate_pass": 0.5,
+        "scored": 0.9
+      },
+      "riddle": {
+        "n": 10,
+        "rule_pass": 1.0,
+        "gate_pass": 0.5,
+        "scored": 1.0
+      },
+      "all": {
+        "n": 20,
+        "rule_pass": 1.0,
+        "gate_pass": 0.5,
+        "scored": 0.95
+      }
+    },
+    "P1": {
+      "oneliner": {
+        "n": 10,
+        "rule_pass": 0.4,
+        "gate_pass": 0.0,
+        "scored": 0.8
+      },
+      "riddle": {
+        "n": 10,
+        "rule_pass": 0.7,
+        "gate_pass": 0.0,
+        "scored": 0.7
+      },
+      "all": {
+        "n": 20,
+        "rule_pass": 0.55,
+        "gate_pass": 0.0,
+        "scored": 0.75
+      }
+    },
+    "P2": {
+      "oneliner": {
+        "n": 10,
+        "rule_pass": 0.4,
+        "gate_pass": 0.0,
+        "scored": 0.8
+      },
+      "riddle": {
+        "n": 10,
+        "rule_pass": 0.7,
+        "gate_pass": 0.0,
+        "scored": 0.7
+      },
+      "all": {
+        "n": 20,
+        "rule_pass": 0.55,
+        "gate_pass": 0.0,
+        "scored": 0.75
+      }
+    },
+    "P3": {
+      "oneliner": {
+        "n": 10,
+        "rule_pass": 0.4,
+        "gate_pass": 0.0,
+        "scored": 0.6
+      },
+      "riddle": {
+        "n": 10,
+        "rule_pass": 0.7,
+        "gate_pass": 0.0,
+        "scored": 0.7
+      },
+      "all": {
+        "n": 20,
+        "rule_pass": 0.55,
+        "gate_pass": 0.0,
+        "scored": 0.65
+      }
+    },
+    "P4": {
+      "oneliner": {
+        "n": 8,
+        "rule_pass": 0.5,
+        "gate_pass": 0.0,
+        "scored": 1.0
+      },
+      "riddle": {
+        "n": 7,
+        "rule_pass": 1.0,
+        "gate_pass": 0.0,
+        "scored": 1.0
+      },
+      "all": {
+        "n": 15,
+        "rule_pass": 0.7333333333333333,
+        "gate_pass": 0.0,
+        "scored": 1.0
+      }
+    }
+  },
+  "P2_gate_fail": 1.0,
+  "same_pick": {
+    "P1=P2": 0.5,
+    "P2=P3": 0.3,
+    "P2=P4": 0.35,
+    "P1=P3": 0.3
+  }
+}
