@@ -65,8 +65,10 @@ def select(stage, C, cand, X, picks) -> pd.DataFrame:
         b1 = cand[(cand.cell == c["cell"]) & (cand.source == "B1")]
         if len(b1):
             rows.append(dict(base, condition="B1", cand_id=b1.cand_id.iloc[0]))
-        if c["cell"] in hum:
-            rows.append(dict(base, condition="H", cand_id=f"H#{hum[c['cell']]['id']}"))
+        if c["cell"] in hum:  # w_p·w_a는 칸의 쌍이 아니라 그 사람 말장난 자신의 것 (성공 판정·평가지 정답에 쓰인다)
+            h = hum[c["cell"]]
+            rows.append(dict(base, condition="H", cand_id=f"H#{h['id']}", w_p=h["w_p"], w_a=h["w_a"],
+                             pool=None, n_pool=None, n_cand=None))
     for r in cand[cand.source == "B0"].itertuples():
         rows.append(dict(stage=stage, cell=None, pair_id=None, format=None, w_p=r.w_p, w_a=r.w_a, condition="B0",
                          cand_id=r.cand_id))

@@ -40,8 +40,10 @@ def prompt_pair(a, b):
 
 
 class Calls:
-    def __init__(self, gen, path):
-        self.gen, self.path, self.rec = gen, path, {}
+    """판정 호출 기록. 기록에 없는 호출이 처음 나올 때만 판정 모델을 올린다(다 기록돼 있으면 GPU 없이 다시 계산)."""
+
+    def __init__(self, make_gen, path):
+        self.make_gen, self._gen, self.path, self.rec = make_gen, None, path, {}
         if path.exists():
             for line in path.read_text(encoding="utf-8").splitlines():
                 r = json.loads(line)
@@ -49,7 +51,9 @@ class Calls:
 
     def ask(self, cid, prompt):
         if cid not in self.rec:
-            raw = self.gen.chat(prompt, seed=stable_seed("judge", cid), temperature=0.0, max_new_tokens=60,
+            if self._gen is None:
+                self._gen = self.make_gen()
+            raw = self._gen.chat(prompt, seed=stable_seed("judge", cid), temperature=0.0, max_new_tokens=60,
                                 system=JUDGE_SYSTEM)
             r = dict(call_id=cid, prompt=prompt, raw=raw, parsed=extract_json(raw))
             self.rec[cid] = r
@@ -78,9 +82,8 @@ def main():
     adir = stage_dir(a.stage) / a.gen / f"A_{a.model}"
     out = adir / f"judge_{tag_of(a.judge)}"
     S = pd.read_csv(adir / "selections.csv")
-    gen = Generator(a.backend, a.judge, a.device, think=None if a.think is None else a.think == "true")
-    write_config(out, dict(stage=a.stage, gen=a.gen, model=a.model, judge=gen.info, temperature=0.0))
-    calls = Calls(gen, out / "calls.jsonl")
+    make_gen = lambda: Generator(a.backend, a.judge, a.device, think=None if a.think is None else a.think == "true")
+    calls = Calls(make_gen, out / "calls.jsonl")
 
     # ---- 성공
     U = S.dropna(subset=["text"]).drop_duplicates("cand_id")
@@ -135,6 +138,12 @@ def main():
     m2 = M.dropna(subset=["score"])
     res["_spearman_A_score_vs_judge_success"] = float(spearmanr(m2.score, m2.success.astype(float)).statistic) if len(m2) > 2 else None
     dump(out / "metrics.json", res)
+    # 판정기 정보: 이번에 모델을 올렸으면 그 정보, 모두 기록에서 읽었으면 기록을 만든 실행의 정보
+    old = out / "config.json"
+    info = calls._gen.info if calls._gen is not None else (
+        json.loads(old.read_text(encoding="utf-8")).get("judge") if old.exists() else dict(backend=a.backend, model=a.judge))
+    write_config(out, dict(stage=a.stage, gen=a.gen, model=a.model, judge=info, temperature=0.0,
+                           calls_from_cache=calls._gen is None))
     L = [f"# E5 LLM 판정 (탐색) — 판정기 {a.judge}", "", "| 조건 | n | 성공(w_a 맞힘) | 성립 yes | 웃김 BT 평균 |", "|---|---|---|---|---|"]
     for cond in ["B0", "B1", "P1", "P2", "P3", "P4", "H"]:
         if cond in res:

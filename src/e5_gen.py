@@ -16,6 +16,19 @@ def tag_of(model: str) -> str:
     return re.sub(r"[^a-z0-9.]+", "-", model.split("/")[-1].lower()).strip("-")
 
 
+def hf_revision(name: str, model=None) -> str | None:
+    """Hugging Face 가중치 커밋 해시. transformers 5에서는 config._commit_hash가 비어 있어서 내려받은 스냅샷 폴더 이름으로 찾는다."""
+    rev = getattr(getattr(model, "config", None), "_commit_hash", None)
+    if rev:
+        return rev
+    try:
+        from pathlib import Path
+        from huggingface_hub import snapshot_download
+        return Path(snapshot_download(name, local_files_only=True)).name
+    except Exception:
+        return None
+
+
 class Generator:
     def __init__(self, backend: str, model: str, device: str | None = None, dtype: str = "bfloat16",
                  host: str = "http://localhost:11434", think: bool | None = None):
@@ -28,8 +41,7 @@ class Generator:
             self.device = device or ("cuda" if torch.cuda.is_available() else "cpu")
             self.tok = AutoTokenizer.from_pretrained(model)
             self.model = AutoModelForCausalLM.from_pretrained(model, dtype=getattr(torch, dtype)).to(self.device).eval()
-            self.info.update(dtype=dtype, device=self.device,
-                             revision=getattr(self.model.config, "_commit_hash", None),
+            self.info.update(dtype=dtype, device=self.device, revision=hf_revision(model, self.model),
                              transformers=__import__("transformers").__version__, torch=torch.__version__)
         elif backend == "ollama":
             import requests

@@ -48,6 +48,22 @@ def test_longest_match():
     assert longest_match("the cat zzz".split(), lambda q: None)[1] is True
 
 
+def test_select_human_rows_use_own_pair():
+    """H 행의 w_p·w_a는 붙은 칸의 쌍이 아니라 사람 말장난 자신의 것이어야 한다(성공 판정·평가지 정답)."""
+    import pandas as pd
+    from e5_select import select
+    C = cells("pilot")[:2]
+    cand = pd.DataFrame([dict(cand_id=f"{c['cell']}#{k}", source="P", cell=c["cell"], rule_ok=True, start=0)
+                         for c in C for k in range(2)])
+    X = pd.DataFrame(dict(gate=False, score=[1.0, 2.0] * len(C), S_ratio=-1.0), index=cand.cand_id)
+    S = select("pilot", C, cand, X, pd.DataFrame())
+    H = human_for_cells(C)
+    for r in S[S.condition == "H"].itertuples():
+        h = H[r.cell]
+        assert r.cand_id == f"H#{h['id']}" and (r.w_p, r.w_a) == (h["w_p"], h["w_a"])
+    assert (S[S.condition == "P1"].w_a.tolist() == [c["w_a"] for c in C])
+
+
 def test_samples_and_cells():
     S = load_samples()
     assert (len(S["pilot"]), len(S["main"]), len(S["tom_swifty"]), len(S["human"])) == (10, 40, 10, 40)
