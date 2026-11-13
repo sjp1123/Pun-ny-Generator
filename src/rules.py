@@ -245,8 +245,10 @@ def git_state() -> dict:
             return subprocess.run(["git", *a], cwd=ROOT, capture_output=True, text=True).stdout.strip()
         except OSError:
             return ""
-    # dirty: 추적 중인 파일이 커밋과 다를 때만 (새 결과 파일 같은 추적 안 된 파일은 세지 않음)
-    return dict(commit=run("rev-parse", "HEAD"), dirty=bool(run("status", "--porcelain", "--untracked-files=no")))
+    # dirty: 추적 중인 파일이 커밋과 다를 때만. 추적 안 된 파일과 results/는 세지 않는다
+    # (결과를 커밋한 뒤 다시 계산하거나 이어서 돌리면 결과 파일 자체가 바뀌므로)
+    return dict(commit=run("rev-parse", "HEAD"),
+                dirty=bool(run("status", "--porcelain", "--untracked-files=no", "--", ".", ":(exclude)results")))
 
 
 class RunDir:
