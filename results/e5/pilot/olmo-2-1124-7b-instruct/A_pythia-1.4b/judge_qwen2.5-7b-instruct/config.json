@@ -12,9 +12,10 @@
     "torch": "2.15.0+cu132"
   },
   "temperature": 0.0,
+  "calls_from_cache": true,
   "seed": 20261112,
   "git": {
-    "commit": "b5184f83acdc337dfef0db1e9c9afe80392b79fa",
+    "commit": "d8e4ca092896edc046699572c0ab08a4fda5742c",
     "dirty": false
   },
   "argv": [

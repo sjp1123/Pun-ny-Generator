@@ -9,11 +9,11 @@
     "n": 20,
     "success": 0.35,
     "works": 0.95,
-    "bt_mean": -1.1534904369894627
+    "bt_mean": -1.1534904369894625
   },
   "H": {
     "n": 20,
-    "success": 0.0,
+    "success": 0.5,
     "works": 1.0,
     "bt_mean": 0.6419387212706005
   },
@@ -21,7 +21,7 @@
     "n": 20,
     "success": 0.05,
     "works": 1.0,
-    "bt_mean": 0.02308537978038099
+    "bt_mean": 0.023085379780380954
   },
   "P2": {
     "n": 20,
@@ -33,15 +33,15 @@
     "n": 20,
     "success": 0.1,
     "works": 0.95,
-    "bt_mean": 0.76676095128077
+    "bt_mean": 0.7667609512807703
   },
   "P4": {
     "n": 15,
     "success": 0.0,
     "works": 1.0,
-    "bt_mean": 0.4683285055242175
+    "bt_mean": 0.46832850552421745
   },
   "_position_bias_first_wins": 0.7666666666666667,
   "_unparsed_pairs": 0.0,
-  "_spearman_A_score_vs_judge_success": 0.11327381183437323
+  "_spearman_A_score_vs_judge_success": 0.3966471055058032
 }
