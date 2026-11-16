@@ -1,0 +1,21 @@
+{
+  "stage": "pilot2",
+  "gen": "olmo-2-0325-32b-instruct-4bit",
+  "model": "pythia-1.4b",
+  "step": "select_v2",
+  "n_cells": 20,
+  "seed": 20261112,
+  "git": {
+    "commit": "d445d4f26803999cdd6a755e9d3ac287c62f4303",
+    "dirty": false
+  },
+  "argv": [
+    "experiments/e5v2_select.py",
+    "--stage",
+    "pilot2",
+    "--gen",
+    "olmo-2-0325-32b-instruct-4bit",
+    "--model",
+    "pythia-1.4b"
+  ]
+}
