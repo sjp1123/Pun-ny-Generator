@@ -1,0 +1,606 @@
+{
+  "decision": "C1~C4를 모두 넘은 모델이 없다. prereg-e5 태그를 달지 않고 실패를 기록한 뒤 설계로 돌아간다.",
+  "chosen": null,
+  "order": [
+    "olmo-2-1124-7b-instruct",
+    "olmo-2-0325-32b-instruct-4bit"
+  ],
+  "criteria": {
+    "C2": 0.5,
+    "C3": 0.5,
+    "C4": 0.2
+  },
+  "models": {
+    "olmo-2-1124-7b-instruct": {
+      "gen": "olmo-2-1124-7b-instruct",
+      "S1": {
+        "oneliner": {
+          "n": 300,
+          "fail": 0.6466666666666666,
+          "reasons": {
+            "wa_position": 0.62,
+            "wa_count": 0.043,
+            "shape": 0.02,
+            "truncated": 0.013
+          }
+        },
+        "riddle": {
+          "n": 300,
+          "fail": 0.4066666666666667,
+          "reasons": {
+            "truncated": 0.31,
+            "wa_position": 0.09,
+            "wa_count": 0.08,
+            "length": 0.01
+          }
+        },
+        "all": {
+          "n": 600,
+          "fail": 0.5266666666666666,
+          "reasons": {
+            "wa_position": 0.355,
+            "truncated": 0.162,
+            "wa_count": 0.062,
+            "shape": 0.01,
+            "length": 0.005
+          }
+        }
+      },
+      "S3_calls": {
+        "oneliner": {
+          "n": 210,
+          "fail": 0.9571428571428572,
+          "reasons": {
+            "shape": 0.714,
+            "edit_width": 0.162,
+            "suffix_changed": 0.09,
+            "wp_count": 0.043,
+            "wa_leak": 0.005
+          }
+        },
+        "riddle": {
+          "n": 327,
+          "fail": 0.8501529051987767,
+          "reasons": {
+            "edit_width": 0.535,
+            "suffix_changed": 0.263,
+            "wp_count": 0.107,
+            "shape": 0.043,
+            "wa_leak": 0.015
+          }
+        },
+        "all": {
+          "n": 537,
+          "fail": 0.8919925512104283,
+          "reasons": {
+            "edit_width": 0.389,
+            "shape": 0.305,
+            "suffix_changed": 0.196,
+            "wp_count": 0.082,
+            "wa_leak": 0.011
+          }
+        }
+      },
+      "S3_attempts": {
+        "n": 284,
+        "fail": 0.795774647887324,
+        "retried": 0.8908450704225352
+      },
+      "final": {
+        "oneliner": {
+          "n": 9,
+          "fail": 0.0,
+          "reasons": {}
+        },
+        "riddle": {
+          "n": 49,
+          "fail": 0.0,
+          "reasons": {}
+        },
+        "all": {
+          "n": 58,
+          "fail": 0.0,
+          "reasons": {}
+        }
+      },
+      "s1_calls_per_cell": {
+        "min": 30,
+        "median": 30.0,
+        "max": 30,
+        "values": [
+          30,
+          30,
+          30,
+          30,
+          30,
+          30,
+          30,
+          30,
+          30,
+          30,
+          30,
+          30,
+          30,
+          30,
+          30,
+          30,
+          30,
+          30,
+          30,
+          30
+        ]
+      },
+      "cells": {
+        "n": 20,
+        "underfilled": 20,
+        "failed": 5,
+        "n_cand": [
+          1,
+          0,
+          8,
+          0,
+          9,
+          0,
+          5,
+          2,
+          9,
+          2,
+          2,
+          1,
+          1,
+          0,
+          3,
+          3,
+          2,
+          0,
+          9,
+          1
+        ]
+      },
+      "gate": {
+        "oneliner": {
+          "n": 9,
+          "s3": 0.4444444444444444,
+          "s2": 0.1111111111111111,
+          "rank1_s3": 1.0,
+          "rank1_s2": 1.0
+        },
+        "riddle": {
+          "n": 49,
+          "s3": 0.30612244897959184,
+          "s2": 0.4489795918367347,
+          "rank1_s3": 0.30612244897959184,
+          "rank1_s2": 0.4489795918367347
+        },
+        "all": {
+          "n": 58,
+          "s3": 0.3275862068965517,
+          "s2": 0.39655172413793105,
+          "rank1_s3": 0.41379310344827586,
+          "rank1_s2": 0.5344827586206896
+        }
+      },
+      "D1": {
+        "n": 58,
+        "mean_diff": -0.007750581717533459,
+        "ci95_cell_boot": [
+          -0.16165000329822332,
+          0.13773783553369134
+        ],
+        "median_diff": 0.0066675207489432,
+        "share_up": 0.6724137931034483
+      },
+      "judge_all_P": {
+        "n": 58,
+        "success": 0.034482758620689655,
+        "echo": 0.08620689655172414
+      },
+      "D2": {
+        "gate_pass": {
+          "n": 19,
+          "success": 0.05263157894736842
+        },
+        "gate_fail": {
+          "n": 39,
+          "success": 0.02564102564102564
+        }
+      },
+      "hint_used": 0.5689655172413793,
+      "topic_link": {
+        "n": 58,
+        "quantiles": {
+          "0.1": 0.12711316496133804,
+          "0.25": 0.17077115178108215,
+          "0.5": 0.3439507633447647,
+          "0.75": 0.4650455340743065,
+          "0.9": 0.5117534399032593
+        }
+      },
+      "top3": [
+        {
+          "cand_id": "e5q007:oneliner#2",
+          "text": "After being deported unexpectedly, she finally sat down with her flee.",
+          "w_p": "flee",
+          "w_a": "family",
+          "score": 11.395664201623765,
+          "gate3": false,
+          "judge": false
+        },
+        {
+          "cand_id": "e5q007:oneliner#1",
+          "text": "After being deported unexpectedly, they gathered around the table, enjoying each other's company as a flee.",
+          "w_p": "flee",
+          "w_a": "family",
+          "score": 10.833197617813932,
+          "gate3": false,
+          "judge": false
+        },
+        {
+          "cand_id": "e5q003:oneliner#0",
+          "text": "After enduring countless misadventures, the key was frustratingly whipping.",
+          "w_p": "whipping",
+          "w_a": "missing",
+          "score": 10.042644756263815,
+          "gate3": false,
+          "judge": false
+        }
+      ],
+      "bottom3": [
+        {
+          "cand_id": "e5q009:riddle#6",
+          "text": "What did the fielder use to catch speedy balls? The bat.",
+          "w_p": "bat",
+          "w_a": "butt",
+          "score": -6.267125595010828,
+          "gate3": false,
+          "judge": false
+        },
+        {
+          "cand_id": "e5q009:riddle#1",
+          "text": "What does the fielder catch with both hands? The bat.",
+          "w_p": "bat",
+          "w_a": "butt",
+          "score": -6.453580667546824,
+          "gate3": false,
+          "judge": false
+        },
+        {
+          "cand_id": "e5q009:riddle#8",
+          "text": "What did the fielder use for support during the match? A bat.",
+          "w_p": "bat",
+          "w_a": "butt",
+          "score": -6.677774338760395,
+          "gate3": false,
+          "judge": false
+        }
+      ],
+      "B0": {
+        "n": 20,
+        "rule_pass": 0.35,
+        "reasons": {
+          "pair_not_in_cmu": 6,
+          "pair_malformed": 3,
+          "pair_too_far": 3,
+          "wp_count": 1
+        },
+        "duplicate_rate": 0.15
+      },
+      "B1": {
+        "n": 20,
+        "rule_pass": 0.5
+      },
+      "criteria": {
+        "C1": {
+          "value": 0,
+          "of": 20,
+          "passed": false
+        },
+        "C2": {
+          "value": 0.5,
+          "passed": true
+        },
+        "C3": {
+          "value": 0.1,
+          "passed": true
+        },
+        "C4": {
+          "value": 0.034482758620689655,
+          "passed": false
+        },
+        "all": false
+      }
+    },
+    "olmo-2-0325-32b-instruct-4bit": {
+      "gen": "olmo-2-0325-32b-instruct-4bit",
+      "S1": {
+        "oneliner": {
+          "n": 167,
+          "fail": 0.23353293413173654,
+          "reasons": {
+            "wa_position": 0.234
+          }
+        },
+        "riddle": {
+          "n": 167,
+          "fail": 0.11377245508982035,
+          "reasons": {
+            "wa_position": 0.078,
+            "wa_count": 0.06,
+            "truncated": 0.012
+          }
+        },
+        "all": {
+          "n": 334,
+          "fail": 0.17365269461077845,
+          "reasons": {
+            "wa_position": 0.156,
+            "wa_count": 0.03,
+            "truncated": 0.006
+          }
+        }
+      },
+      "S3_calls": {
+        "oneliner": {
+          "n": 180,
+          "fail": 0.45555555555555555,
+          "reasons": {
+            "edit_width": 0.383,
+            "suffix_changed": 0.067,
+            "wp_count": 0.056,
+            "wa_leak": 0.011
+          }
+        },
+        "riddle": {
+          "n": 219,
+          "fail": 0.54337899543379,
+          "reasons": {
+            "edit_width": 0.397,
+            "suffix_changed": 0.078,
+            "wp_count": 0.078,
+            "shape": 0.068,
+            "wa_leak": 0.037
+          }
+        },
+        "all": {
+          "n": 399,
+          "fail": 0.5037593984962406,
+          "reasons": {
+            "edit_width": 0.391,
+            "suffix_changed": 0.073,
+            "wp_count": 0.068,
+            "shape": 0.038,
+            "wa_leak": 0.025
+          }
+        }
+      },
+      "S3_attempts": {
+        "n": 276,
+        "fail": 0.2826086956521739,
+        "retried": 0.44565217391304346
+      },
+      "final": {
+        "oneliner": {
+          "n": 98,
+          "fail": 0.0,
+          "reasons": {}
+        },
+        "riddle": {
+          "n": 100,
+          "fail": 0.0,
+          "reasons": {}
+        },
+        "all": {
+          "n": 198,
+          "fail": 0.0,
+          "reasons": {}
+        }
+      },
+      "s1_calls_per_cell": {
+        "min": 10,
+        "median": 15.0,
+        "max": 30,
+        "values": [
+          27,
+          20,
+          11,
+          11,
+          17,
+          12,
+          27,
+          13,
+          13,
+          11,
+          16,
+          25,
+          16,
+          11,
+          15,
+          11,
+          15,
+          23,
+          10,
+          30
+        ]
+      },
+      "cells": {
+        "n": 20,
+        "underfilled": 1,
+        "failed": 0,
+        "n_cand": [
+          10,
+          10,
+          10,
+          10,
+          10,
+          10,
+          10,
+          10,
+          10,
+          10,
+          10,
+          10,
+          10,
+          10,
+          10,
+          10,
+          10,
+          10,
+          10,
+          8
+        ]
+      },
+      "gate": {
+        "oneliner": {
+          "n": 98,
+          "s3": 0.3877551020408163,
+          "s2": 0.2857142857142857,
+          "rank1_s3": 0.5816326530612245,
+          "rank1_s2": 0.7244897959183674
+        },
+        "riddle": {
+          "n": 100,
+          "s3": 0.5,
+          "s2": 0.45,
+          "rank1_s3": 0.55,
+          "rank1_s2": 0.62
+        },
+        "all": {
+          "n": 198,
+          "s3": 0.4444444444444444,
+          "s2": 0.3686868686868687,
+          "rank1_s3": 0.5656565656565656,
+          "rank1_s2": 0.6717171717171717
+        }
+      },
+      "D1": {
+        "n": 198,
+        "mean_diff": 0.03377561778638927,
+        "ci95_cell_boot": [
+          -0.043456612219978145,
+          0.09268519157356286
+        ],
+        "median_diff": 0.003434949284612885,
+        "share_up": 0.7878787878787878
+      },
+      "judge_all_P": {
+        "n": 198,
+        "success": 0.07575757575757576,
+        "echo": 0.12121212121212122
+      },
+      "D2": {
+        "gate_pass": {
+          "n": 88,
+          "success": 0.022727272727272728
+        },
+        "gate_fail": {
+          "n": 110,
+          "success": 0.11818181818181818
+        }
+      },
+      "hint_used": 0.6161616161616161,
+      "topic_link": {
+        "n": 198,
+        "quantiles": {
+          "0.1": 0.11299471706151965,
+          "0.25": 0.17888221517205238,
+          "0.5": 0.39264437556266785,
+          "0.75": 0.5124511122703552,
+          "0.9": 0.6065598130226135
+        }
+      },
+      "top3": [
+        {
+          "cand_id": "e5q003:oneliner#8",
+          "text": "After a thorough search, the important document was still whipping.",
+          "w_p": "whipping",
+          "w_a": "missing",
+          "score": 13.832548596509382,
+          "gate3": false,
+          "judge": false
+        },
+        {
+          "cand_id": "e5q003:riddle#4",
+          "text": "Why isn't the project completed? A piece is whipping.",
+          "w_p": "whipping",
+          "w_a": "missing",
+          "score": 12.38040626545261,
+          "gate3": false,
+          "judge": false
+        },
+        {
+          "cand_id": "e5q007:oneliner#4",
+          "text": "After narrowly escaping danger, she returned home to her flee.",
+          "w_p": "flee",
+          "w_a": "family",
+          "score": 11.85013690200282,
+          "gate3": false,
+          "judge": false
+        }
+      ],
+      "bottom3": [
+        {
+          "cand_id": "e5q009:oneliner#2",
+          "text": "Near the fielder at the bat.",
+          "w_p": "bat",
+          "w_a": "butt",
+          "score": -5.63915207455614,
+          "gate3": false,
+          "judge": false
+        },
+        {
+          "cand_id": "e5q009:riddle#5",
+          "text": "What's the thick end of the shovel called on a baseball field? The bat.",
+          "w_p": "bat",
+          "w_a": "butt",
+          "score": -5.961028523913649,
+          "gate3": false,
+          "judge": false
+        },
+        {
+          "cand_id": "e5q000:oneliner#4",
+          "text": "After slicing the pizza, fragments flew everywhere and a scatter.",
+          "w_p": "scatter",
+          "w_a": "sector",
+          "score": -6.0163017985198906,
+          "gate3": false,
+          "judge": false
+        }
+      ],
+      "B0": {
+        "n": 20,
+        "rule_pass": 0.45,
+        "reasons": {
+          "pair_malformed": 4,
+          "pair_too_far": 3,
+          "pair_same_lemma": 3,
+          "wp_count": 1
+        },
+        "duplicate_rate": 0.0
+      },
+      "B1": {
+        "n": 20,
+        "rule_pass": 0.85
+      },
+      "criteria": {
+        "C1": {
+          "value": 19,
+          "of": 20,
+          "passed": false
+        },
+        "C2": {
+          "value": 0.9,
+          "passed": true
+        },
+        "C3": {
+          "value": 0.05,
+          "passed": true
+        },
+        "C4": {
+          "value": 0.07575757575757576,
+          "passed": false
+        },
+        "all": false
+      }
+    }
+  }
+}

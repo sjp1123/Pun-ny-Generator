@@ -8,7 +8,8 @@ sys.path.insert(0, str(ROOT / "src"))
 sys.path.insert(0, str(ROOT / "experiments"))
 
 import e5  # noqa: E402
-from e5v2 import (EXAMPLE_WORDS, b0_pair_reasons, cells_v2, final_check, load_samples_v2, norm_dup,  # noqa: E402
+from e5v2 import (EXAMPLE_WORDS, b0_pair_reasons, cells_v2, final_check, load_samples_v2, load_samples_v3,  # noqa: E402
+                  norm_dup, s3_body,  # noqa: E402
                   parse_parts, prompt_b1, prompt_pick, render, s1_check, s2_swap, s3_check, swap_in)
 
 
@@ -138,5 +139,36 @@ def test_pilot2_samples():
     assert len(new) == len(set(new)) and not set(new) & used and not set(new) & set(EXAMPLE_WORDS)
     assert all(p["hints"] and p["w_p"] not in p["hints"] for p in V["pilot2"])
     assert set(V["hints_main"]) == {p["pair_id"] for p in S["main"]}
-    assert len(cells_v2("main")) == 80
     json.dumps(C)
+
+
+# 파일럿 3·본 실행 표본(v3): 거리 0·1 반씩, 흔한 뜻 뜻풀이, 파일럿 1·2·예시 단어와 겹치지 않음, 단어 중복 없음
+def test_v3_samples():
+    V = load_samples_v3()
+    sizes = dict(pilot3=10, main=40, tom_swifty=10)
+    allw = []
+    for split, n in sizes.items():
+        ps = V[split]
+        assert len(ps) == n
+        assert sum(p["d_unit"] == 0 for p in ps) == n // 2 and sum(p["d_unit"] == 1 for p in ps) == n // 2
+        assert all(p["gloss_p"] and p["gloss_a"] and p["hints"] and p["w_p"] not in p["hints"] for p in ps)
+        allw += [w for p in ps for w in (p["w_p"], p["w_a"])]
+    assert len(allw) == len(set(allw))
+    old = {w for p in e5.load_samples()["pilot"] for w in (p["w_p"], p["w_a"])}
+    old |= {w for p in load_samples_v2()["pilot2"] for w in (p["w_p"], p["w_a"])} | set(EXAMPLE_WORDS)
+    assert not set(allw) & old
+    assert len(cells_v2("pilot3")) == 20 and len(cells_v2("main")) == 80
+
+
+# 6.5 완화: 짧은 답은 끝 문장부호 없이도 받고, S3의 'After:' 뒤만 읽는다
+def test_relaxed_rules():
+    assert s1_check("Q: What part of a pizza shows a slice?\nA: A sector", "sector", "riddle")["ok"]
+    r = s1_check("Q: Where do you keep the bikes?\nA: Out back on the old rack", "rack", "riddle")
+    assert "truncated" in r["reasons"]
+    assert s3_body("Before: He sat by the bed.\nAfter: He sat by the warm bread.") == "He sat by the warm bread."
+    assert s3_body("He sat by the bread.") == "He sat by the bread."
+    s2 = s2_swap(dict(sentence="After a long day at work, all he wanted was to crawl into bed."), "bed", "bread",
+                 "oneliner")
+    raw = ("Before: After a long day at work, all he wanted was to crawl into bread.\n"
+           "After: After a long day at the bakery, all he wanted was to crawl into bread.")
+    assert s3_check(raw, s2, "bread", "bed", "oneliner")["ok"]

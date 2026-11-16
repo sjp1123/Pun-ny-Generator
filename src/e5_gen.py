@@ -21,8 +21,18 @@ def hf_revision(name: str, model=None) -> str | None:
     rev = getattr(getattr(model, "config", None), "_commit_hash", None)
     if rev:
         return rev
+    from pathlib import Path
+    src = getattr(getattr(model, "config", None), "_name_or_path", "") or ""
+    if Path(src).parent.name == "snapshots":  # 스냅샷 폴더에서 불러왔으면 그 이름이 해시
+        return Path(src).name
     try:
-        from pathlib import Path
+        from huggingface_hub import try_to_load_from_cache
+        p = try_to_load_from_cache(name, "config.json")
+        if isinstance(p, str):
+            return Path(p).parent.name
+    except Exception:
+        pass
+    try:
         from huggingface_hub import snapshot_download
         return Path(snapshot_download(name, local_files_only=True)).name
     except Exception:

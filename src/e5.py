@@ -121,6 +121,22 @@ def gloss(word: str):
     return None
 
 
+def gloss_common(word: str):
+    """가장 흔한 뜻(v3 쌍): word가 표제어 이름 그대로(소문자) 들어 있는 명·동·형 뜻 중 SemCor 빈도(lemma.count)가
+    가장 큰 것. 빈도가 모두 0이면(코퍼스에서 그 뜻으로 쓰인 적 없음) None. 동점은 WordNet 순서.
+
+    반환: (품사, 뜻풀이). `gloss`(첫 뜻)는 sticker → "가시처럼 뾰족한 끝"처럼 드문 뜻을 고르기도 했다.
+    """
+    best, best_n = None, 0
+    for s in wordnet().synsets(word):
+        if s.pos() not in WN_POS:
+            continue
+        n = sum(l.count() for l in s.lemmas() if l.name() == word)
+        if n > best_n:
+            best, best_n = s, n
+    return None if best is None else (WN_POS[best.pos()], best.definition())
+
+
 BLOCK_DOMAINS = {"obscenity.n.01", "obscenity.n.02", "vulgarism.n.01", "ethnic_slur.n.01", "disparagement.n.01"}
 BLOCK_GLOSS = re.compile(r"(obscene|vulgar|offensive|derogatory|disparaging|slur|taboo)", re.I)
 BLOCK_WORDS = {"whore", "slut", "pussy", "twat", "retard", "douche", "douchebag", "jackass", "bitch", "tits",

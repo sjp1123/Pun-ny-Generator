@@ -6,7 +6,7 @@
 - 점수 = log F_→ + S_←, S_← = −log π_←(w_p) (e5_score.py의 S_left와 같은 정의).
 - B1·B0·사람 말장난(H)도 채점한다(위치를 찾은 것만).
 
-사용: python -X utf8 experiments/e5v2_score.py --stage pilot2 --gen olmo-2-1124-7b-instruct --model pythia-1.4b --device cuda
+사용: python -X utf8 experiments/e5v2_score.py --stage pilot3 --gen olmo-2-1124-7b-instruct --model pythia-1.4b --device cuda
 출력: results/e5/<stage>/<gen>/A_<model>/ scores.csv, candidates.jsonl, config.json
 """
 import argparse
@@ -31,7 +31,7 @@ def scoring_frame(cand: pd.DataFrame) -> pd.DataFrame:
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--stage", required=True, choices=["pilot2", "main"])
+    ap.add_argument("--stage", required=True, choices=["pilot2", "pilot3", "main"])
     ap.add_argument("--gen", required=True)
     ap.add_argument("--model", default="pythia-1.4b")
     ap.add_argument("--device", default=None)

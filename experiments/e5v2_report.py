@@ -1,4 +1,4 @@
-"""E5 v2 파일럿 2 보고서와 통과 기준 C1~C4 판정 (docs/E5_V2_DESIGN.md 8절).
+"""E5 v2 파일럿 2·3 보고서와 통과 기준 C1~C4 판정 (docs/E5_V2_DESIGN.md 8절).
 
 모델(생성기 폴더)마다:
   단계별 실패율(모델 × 형식): S1 모양·w_a 위치·횟수·길이·잘림 / S3 끝 보존·수정 폭·w_a 누출·w_p 횟수 / 최종 규칙
@@ -14,7 +14,7 @@
 결정 규칙: --gens 순서(7B, 32B)대로 처음으로 C1~C4를 모두 넘은 모델을 본 실행 생성기로. 없으면 태그를 달지 않는다.
 
 사용: python -X utf8 experiments/e5v2_report.py --gens olmo-2-1124-7b-instruct olmo-2-0325-32b-instruct
-출력: results/e5/pilot2/report.md, report.json
+출력: results/e5/<stage>/report.md, report.json (stage 기본 pilot3)
 """
 import argparse
 import json
@@ -168,7 +168,7 @@ def fmt(x, nd=3):
 
 
 def markdown(stage, model, res: dict, decision: str) -> str:
-    L = [f"# E5 v2 파일럿 2 보고서 (A = {model})", "", f"**결정**: {decision}", "",
+    L = [f"# E5 v2 {stage} 보고서 (A = {model})", "", f"**결정**: {decision}", "",
          "## 통과 기준 (C1~C4)", "", "| 생성기 | C1 채우기 | C2 관문 통과 칸 ≥ 0.5 | C3 전부 통과 칸 < 0.5 | C4 판정기 성공 ≥ 0.20 | 모두 |",
          "|---|---|---|---|---|---|"]
     for g, R in res.items():
@@ -211,7 +211,7 @@ def markdown(stage, model, res: dict, decision: str) -> str:
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--stage", default="pilot2", choices=["pilot2"])
+    ap.add_argument("--stage", default="pilot3", choices=["pilot2", "pilot3"])
     ap.add_argument("--gens", nargs="+", required=True, help="결정 규칙 순서대로 (7B 먼저)")
     ap.add_argument("--model", default="pythia-1.4b")
     ap.add_argument("--judge", default="Qwen/Qwen2.5-7B-Instruct")

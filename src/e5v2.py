@@ -12,11 +12,12 @@ import re
 from difflib import SequenceMatcher
 from functools import lru_cache
 
-from e5 import E5_DIR, MAX_WORDS, clean_text, load_samples
+from e5 import E5_DIR, MAX_WORDS, clean_text
 
 V2_DIR = E5_DIR / "v2"
 PROMPTS = V2_DIR / "prompts"
-SAMPLES_V2 = E5_DIR / "samples_v2.json"
+SAMPLES_V2 = E5_DIR / "samples_v2.json"  # 파일럿 2 (기록)
+SAMPLES_V3 = E5_DIR / "samples_v3.json"  # 파일럿 3·본 실행 (거리 0~1 쌍, PREREG_E5 6.5)
 EXAMPLE_WORDS = ("bagel", "beagle", "bread", "bed")  # 프롬프트 예시 쌍 (표본에서 뺀다)
 FORMATS_V2 = ("riddle", "oneliner")
 
@@ -26,7 +27,8 @@ S1_DECODE = dict(temperature=0.9, top_p=0.95, max_new_tokens=60)
 S3_DECODE = dict(temperature=0.7, top_p=1.0, max_new_tokens=60)  # 사양에 top_p가 없어 v1 기본값(1.0)
 S3_TRIES = 2
 BASE_DECODE = dict(temperature=0.9, top_p=1.0)  # B1·B0 (v1 그대로)
-LIMITS = dict(riddle_q=15, riddle_a=8, oneliner=25, edit_min=1, edit_max=4)
+LIMITS = dict(riddle_q=15, riddle_a=8, oneliner=25, edit_min=1, edit_max=4,
+              riddle_a_bare=3)  # 답이 이 단어 수 이하면 끝 문장부호가 없어도 잘림으로 보지 않는다 (6.5)
 S1_POSITION = dict(riddle=2, oneliner=3)  # w_a가 들어 있어야 하는 끝 단어 수 (riddle은 답 기준)
 
 PROMPT_NAMES = ("s1_riddle", "s1_oneliner", "s3_riddle", "s3_oneliner", "b1_single", "b0_free",
@@ -72,13 +74,21 @@ def load_samples_v2() -> dict:
     return json.loads(SAMPLES_V2.read_text(encoding="utf-8"))
 
 
+def load_samples_v3() -> dict:
+    return json.loads(SAMPLES_V3.read_text(encoding="utf-8"))
+
+
+def samples_file(stage: str):
+    return SAMPLES_V2 if stage == "pilot2" else SAMPLES_V3
+
+
 def cells_v2(stage: str) -> list[dict]:
-    """pilot2 = 새 10쌍 × 2형식, main = 본 실행 40쌍 × 2형식 (Tom Swifty는 파일럿 2 뒤에 정한다)."""
-    V = load_samples_v2()
+    """pilot2 = 파일럿 2 10쌍(samples_v2, 기록), pilot3 = 파일럿 3 10쌍, main = 본 실행 40쌍 (samples_v3) × 2형식.
+    Tom Swifty 형식은 아직 정하지 않았다."""
     if stage == "pilot2":
-        pairs = V["pilot2"]
-    elif stage == "main":
-        pairs = [dict(p, hints=V["hints_main"][p["pair_id"]]) for p in load_samples()["main"]]
+        pairs = load_samples_v2()["pilot2"]
+    elif stage in ("pilot3", "main"):
+        pairs = load_samples_v3()[stage]
     else:
         raise ValueError(stage)
     return [dict(p, cell=f"{p['pair_id']}:{f}", format=f) for p in pairs for f in FORMATS_V2]
@@ -146,7 +156,7 @@ def shape_reasons(parts: dict, fmt: str) -> list[str]:
         q, a = parts["q"], parts["a"]
         if not re.search(r"\?[\"'”’)]*$", q):
             out.append("shape")
-        if not END_RE.search(a):
+        if not END_RE.search(a) and len(words(a)) > LIMITS["riddle_a_bare"]:
             out.append("truncated")
     else:
         s = parts["sentence"]
@@ -155,6 +165,14 @@ def shape_reasons(parts: dict, fmt: str) -> list[str]:
         if not END_RE.search(s):
             out.append("truncated")
     return out
+
+
+def s3_body(raw: str) -> str:
+    """S3 응답에 프롬프트 예시처럼 'After:' 표시가 있으면 마지막 'After:' 뒤만 결과로 읽는다 (6.5).
+    7B가 'Before: … / After: …'를 따라 써서 한 줄형 S3 실패의 71%가 모양 실패였다."""
+    s = _strip(raw)
+    m = list(re.finditer(r"(?im)^After\s*:[ \t]*", s))
+    return s[m[-1].end():] if m else raw
 
 
 def parse_parts(raw: str, fmt: str):
@@ -256,7 +274,7 @@ def edit_words(before: list[str], after: list[str]) -> list[str]:
 
 def s3_check(raw: str, s2: dict, w_p: str, w_a: str, fmt: str, hints=()) -> dict:
     """끝 보존(riddle: 답 전체), 수정 폭 1~4단어, w_p 표제어 정확히 1회, w_a 누출 없음, 모양."""
-    parts = parse_parts(raw, fmt)
+    parts = parse_parts(s3_body(raw), fmt)
     if parts is None:
         return dict(ok=False, reasons=["shape"], parts=None, edited=[], n_edit=None, hint_used=None)
     reasons = shape_reasons(parts, fmt)

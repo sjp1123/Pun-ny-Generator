@@ -11,8 +11,8 @@ P3: 같은 생성기에게 칸의 후보(고정 시드로 순서를 섞음)를 �
 이어서 돌릴 수 있다: 끝난 시도·호출은 기록에서 읽고 다시 부르지 않는다.
 
 사용 (GPU):
-  python -X utf8 experiments/e5v2_generate.py --stage pilot2 --model allenai/OLMo-2-1124-7B-Instruct
-  python -X utf8 experiments/e5v2_generate.py --stage pilot2 --model allenai/OLMo-2-0325-32B-Instruct [--load-4bit]
+  python -X utf8 experiments/e5v2_generate.py --stage pilot3 --model allenai/OLMo-2-1124-7B-Instruct
+  python -X utf8 experiments/e5v2_generate.py --stage pilot3 --model allenai/OLMo-2-0325-32B-Instruct [--load-4bit]
 출력: results/e5/<stage>/<생성기>[-4bit]/ attempts.jsonl, baselines.jsonl, candidates.csv, cells.csv, picks.csv, config.json
 """
 import argparse
@@ -30,8 +30,8 @@ import pandas as pd
 from e5 import SYSTEM, clean_text, find_word, stable_seed, stage_dir
 from e5_gen import Generator, tag_of
 from e5_generate import Log, parse_one, parse_pick
-from e5v2 import (BASE_DECODE, MAX_S1, N_CAND, S1_DECODE, S3_DECODE, S3_TRIES, SAMPLES_V2, b0_pair_reasons,
-                  cells_v2, final_check, lemma_of, norm_dup, prompt_b1, prompt_hashes, prompt_pick, prompt_s1,
+from e5v2 import (BASE_DECODE, MAX_S1, N_CAND, S1_DECODE, S3_DECODE, S3_TRIES, b0_pair_reasons,
+                  cells_v2, final_check, lemma_of, norm_dup, prompt_b1, prompt_hashes, prompt_pick, prompt_s1, samples_file,
                   prompt_s3, prompt_text, s1_check, s2_swap, s3_check, words)
 from rules import dump, git_state
 
@@ -102,7 +102,7 @@ def call_json(gen, log, cid_base, prompt, parse, seed_parts, meta, system=SYSTEM
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--stage", required=True, choices=["pilot2", "main"])
+    ap.add_argument("--stage", required=True, choices=["pilot2", "pilot3", "main"])
     ap.add_argument("--backend", default="hf", choices=["hf", "ollama"])
     ap.add_argument("--model", default="allenai/OLMo-2-1124-7B-Instruct")
     ap.add_argument("--device", default=None)
@@ -120,7 +120,8 @@ def main():
         stage=a.stage, generator=gen.info, n_cells=len(C), limit=a.limit, n_cand=N_CAND, max_s1=a.max_s1,
         s1_decode=S1_DECODE, s3_decode=S3_DECODE, s3_tries=S3_TRIES, baseline_decode=BASE_DECODE,
         json_tries=JSON_TRIES, pick_temperature=0.0, prompts_sha256=prompt_hashes(),
-        samples_v2_sha256=hashlib.sha256(SAMPLES_V2.read_bytes().replace(b"\r\n", b"\n")).hexdigest(),
+        samples_file=samples_file(a.stage).name,
+        samples_sha256=hashlib.sha256(samples_file(a.stage).read_bytes().replace(b"\r\n", b"\n")).hexdigest(),
         git=git_state(), argv=sys.argv))
     att = Log(out / "attempts.jsonl", key="key")
     base = Log(out / "baselines.jsonl")

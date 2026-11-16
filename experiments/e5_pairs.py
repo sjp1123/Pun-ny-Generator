@@ -66,8 +66,10 @@ def semeval_pairs() -> set:
     return {frozenset((lem[a], lem[b])) for a, b in rows}
 
 
-def all_pairs(kv) -> pd.DataFrame:
-    words = eligible_words(kv)
+def all_pairs(kv, d_min: int = 1, d_max: int = 2, words=None) -> pd.DataFrame:
+    """d_min = 0이면 동음이의어(철자가 다른 같은 발음)도 넣는다. 거리 0 쌍에는 글자 포함 거르기(cover/uncover)를 쓰지 않는다
+    (hole/whole, new/knew처럼 형태 관계가 아닌 동음이의어가 걸린다). 표제어가 다르고 코사인 < 0.3인 것은 같다."""
+    words = eligible_words(kv) if words is None else words
     print(f"후보 단어 {len(words)}개 (상위 {TOP_N}개 중)", flush=True)
     tab = PronTable(words, prons)
     lem = lemmas(words)
@@ -75,11 +77,13 @@ def all_pairs(kv) -> pd.DataFrame:
     rows = []
     for i, w in enumerate(words):
         d, dn = tab.distances(prons(w), "unit")
-        for j in np.nonzero((d >= 1) & (d <= 2) & (dn <= NORM_MAX))[0]:
+        for j in np.nonzero((d >= d_min) & (d <= d_max) & (dn <= NORM_MAX))[0]:
             if j <= i:
                 continue
             v = words[j]
-            if lem[w] == lem[v] or frozenset((lem[w], lem[v])) in seen or lem[w] in v or lem[v] in w:
+            if lem[w] == lem[v] or frozenset((lem[w], lem[v])) in seen:
+                continue
+            if d[j] > 0 and (lem[w] in v or lem[v] in w):
                 continue
             cos = float(kv.similarity(w, v))
             if cos >= COS_MAX:

@@ -1,0 +1,1156 @@
+{
+ "seed": "stable_seed(\"e5v3\", \"samples\")",
+ "d_range": [
+  0,
+  1
+ ],
+ "n_pairs": {
+  "all": 10409,
+  "d0": 43,
+  "d1": 10366
+ },
+ "excluded_words": {
+  "pilots": 40,
+  "prompt_examples": [
+   "bagel",
+   "beagle",
+   "bed",
+   "bread"
+  ]
+ },
+ "pilot3": [
+  {
+   "pair_id": "e5r000",
+   "w_p": "rein",
+   "w_a": "rain",
+   "d_unit": 0.0,
+   "d_unit_norm": 0.0,
+   "cos": -0.0436,
+   "pos_p": "noun",
+   "gloss_p": "one of a pair of long straps (usually connected to the bit or the headpiece) used to control a horse",
+   "pos_a": "noun",
+   "gloss_a": "water falling in drops from vapor condensed in the atmosphere",
+   "hints": [
+    "curb",
+    "restrain",
+    "clamp",
+    "quell",
+    "exert"
+   ]
+  },
+  {
+   "pair_id": "e5r001",
+   "w_p": "knight",
+   "w_a": "night",
+   "d_unit": 0.0,
+   "d_unit_norm": 0.0,
+   "cos": 0.0613,
+   "pos_p": "noun",
+   "gloss_p": "originally a person of noble birth trained to arms and chivalry; today in Great Britain a person honored by the sovereign for personal merit",
+   "pos_a": "noun",
+   "gloss_a": "the time after sunset and before sunrise while it is dark outside",
+   "hints": [
+    "nobleman",
+    "prince",
+    "squire",
+    "sword",
+    "gladiator"
+   ]
+  },
+  {
+   "pair_id": "e5r002",
+   "w_p": "nice",
+   "w_a": "niece",
+   "d_unit": 0.0,
+   "d_unit_norm": 0.0,
+   "cos": 0.1444,
+   "pos_p": "adjective",
+   "gloss_p": "pleasant or pleasing or agreeable in nature or appearance; - George Meredith",
+   "pos_a": "noun",
+   "gloss_a": "a daughter of your brother or sister",
+   "hints": [
+    "good",
+    "neat",
+    "fantastic",
+    "wonderful",
+    "terrific"
+   ]
+  },
+  {
+   "pair_id": "e5r003",
+   "w_p": "mist",
+   "w_a": "midst",
+   "d_unit": 0.0,
+   "d_unit_norm": 0.0,
+   "cos": 0.0978,
+   "pos_p": "noun",
+   "gloss_p": "a thin fog with condensation near the ground",
+   "pos_a": "noun",
+   "gloss_a": "the location of something surrounded by other things",
+   "hints": [
+    "fog",
+    "haze",
+    "clouds",
+    "drizzle",
+    "milky"
+   ]
+  },
+  {
+   "pair_id": "e5r004",
+   "w_p": "rap",
+   "w_a": "wrap",
+   "d_unit": 0.0,
+   "d_unit_norm": 0.0,
+   "cos": 0.0844,
+   "pos_p": "verb",
+   "gloss_p": "strike sharply",
+   "pos_a": "verb",
+   "gloss_a": "arrange or fold as a cover or protection",
+   "hints": [
+    "gangsta",
+    "reggae",
+    "rhymes"
+   ]
+  },
+  {
+   "pair_id": "e5r005",
+   "w_p": "lad",
+   "w_a": "lap",
+   "d_unit": 1.0,
+   "d_unit_norm": 0.333,
+   "cos": 0.1242,
+   "pos_p": "noun",
+   "gloss_p": "a boy or man",
+   "pos_a": "noun",
+   "gloss_a": "the upper side of the thighs of a seated person",
+   "hints": [
+    "youngster",
+    "fella",
+    "schoolboy",
+    "chap",
+    "bloke"
+   ]
+  },
+  {
+   "pair_id": "e5r006",
+   "w_p": "mark",
+   "w_a": "arc",
+   "d_unit": 1.0,
+   "d_unit_norm": 0.25,
+   "cos": 0.1986,
+   "pos_p": "verb",
+   "gloss_p": "attach a tag or label to",
+   "pos_a": "noun",
+   "gloss_a": "electrical conduction through a gas in an applied electric field",
+   "hints": [
+    "record",
+    "milestone",
+    "plateau",
+    "surpassing",
+    "commemorate"
+   ]
+  },
+  {
+   "pair_id": "e5r007",
+   "w_p": "shin",
+   "w_a": "din",
+   "d_unit": 1.0,
+   "d_unit_norm": 0.333,
+   "cos": 0.0894,
+   "pos_p": "noun",
+   "gloss_p": "the front part of the human leg between the knee and the ankle",
+   "pos_a": "noun",
+   "gloss_a": "a loud harsh or strident noise",
+   "hints": [
+    "ankle",
+    "knee",
+    "thigh",
+    "groin",
+    "forearm"
+   ]
+  },
+  {
+   "pair_id": "e5r008",
+   "w_p": "hill",
+   "w_a": "hymn",
+   "d_unit": 1.0,
+   "d_unit_norm": 0.333,
+   "cos": 0.1532,
+   "pos_p": "noun",
+   "gloss_p": "a local and well-defined elevation of the land",
+   "pos_a": "noun",
+   "gloss_a": "a song of praise (to God or to a saint or to a nation)",
+   "hints": [
+    "mountain",
+    "slope",
+    "ridge",
+    "butte",
+    "ravine"
+   ]
+  },
+  {
+   "pair_id": "e5r009",
+   "w_p": "steep",
+   "w_a": "sleep",
+   "d_unit": 1.0,
+   "d_unit_norm": 0.25,
+   "cos": 0.0337,
+   "pos_p": "adjective",
+   "gloss_p": "having a sharp inclination",
+   "pos_a": "verb",
+   "gloss_a": "be asleep",
+   "hints": [
+    "hefty",
+    "sharp",
+    "bumpy",
+    "uphill",
+    "climb"
+   ]
+  }
+ ],
+ "main": [
+  {
+   "pair_id": "e5m000",
+   "w_p": "lone",
+   "w_a": "loan",
+   "d_unit": 0.0,
+   "d_unit_norm": 0.0,
+   "cos": 0.0904,
+   "pos_p": "adjective",
+   "gloss_p": "lacking companions or companionship",
+   "pos_a": "noun",
+   "gloss_a": "the temporary provision of money (usually at interest)",
+   "hints": [
+    "sole",
+    "another",
+    "solitary",
+    "fifth",
+    "only"
+   ]
+  },
+  {
+   "pair_id": "e5m001",
+   "w_p": "marshal",
+   "w_a": "martial",
+   "d_unit": 0.0,
+   "d_unit_norm": 0.0,
+   "cos": 0.1254,
+   "pos_p": "noun",
+   "gloss_p": "a law officer having duties similar to those of a sheriff in carrying out the judgments of a court of law",
+   "pos_a": "adjective",
+   "gloss_a": "(of persons) befitting a warrior",
+   "hints": [
+    "lieutenant",
+    "colonel",
+    "commander",
+    "constable",
+    "cop"
+   ]
+  },
+  {
+   "pair_id": "e5m002",
+   "w_p": "troupe",
+   "w_a": "troop",
+   "d_unit": 0.0,
+   "d_unit_norm": 0.0,
+   "cos": 0.1952,
+   "pos_p": "noun",
+   "gloss_p": "organization of performers and associated personnel (especially theatrical)",
+   "pos_a": "noun",
+   "gloss_a": "a group of soldiers",
+   "hints": [
+    "ensemble",
+    "choreographer",
+    "dancers",
+    "revue",
+    "ballet"
+   ]
+  },
+  {
+   "pair_id": "e5m003",
+   "w_p": "hire",
+   "w_a": "higher",
+   "d_unit": 0.0,
+   "d_unit_norm": 0.0,
+   "cos": 0.0568,
+   "pos_p": "verb",
+   "gloss_p": "engage or hire for work",
+   "pos_a": "adjective",
+   "gloss_a": "advanced in complexity or elaboration",
+   "hints": [
+    "employ",
+    "recruit",
+    "appoint",
+    "skilled",
+    "advertise"
+   ]
+  },
+  {
+   "pair_id": "e5m004",
+   "w_p": "descent",
+   "w_a": "dissent",
+   "d_unit": 0.0,
+   "d_unit_norm": 0.0,
+   "cos": 0.034,
+   "pos_p": "noun",
+   "gloss_p": "a movement downward",
+   "pos_a": "noun",
+   "gloss_a": "(law) the difference of one judge's opinion from that of the majority",
+   "hints": [
+    "ascent",
+    "ancestry",
+    "descending",
+    "climb",
+    "assimilation"
+   ]
+  },
+  {
+   "pair_id": "e5m005",
+   "w_p": "way",
+   "w_a": "weigh",
+   "d_unit": 0.0,
+   "d_unit_norm": 0.0,
+   "cos": 0.0191,
+   "pos_p": "noun",
+   "gloss_p": "how something is done or how it happens",
+   "pos_a": "verb",
+   "gloss_a": "have a certain weight",
+   "hints": [
+    "how",
+    "thing",
+    "path",
+    "everything",
+    "going"
+   ]
+  },
+  {
+   "pair_id": "e5m006",
+   "w_p": "undue",
+   "w_a": "undo",
+   "d_unit": 0.0,
+   "d_unit_norm": 0.0,
+   "cos": 0.2266,
+   "pos_p": "adjective",
+   "gloss_p": "not yet payable",
+   "pos_a": "verb",
+   "gloss_a": "cancel, annul, or reverse an action or its effect",
+   "hints": [
+    "unwarranted",
+    "considerable",
+    "excessive",
+    "immense",
+    "whatsoever"
+   ]
+  },
+  {
+   "pair_id": "e5m007",
+   "w_p": "pole",
+   "w_a": "poll",
+   "d_unit": 0.0,
+   "d_unit_norm": 0.0,
+   "cos": 0.0804,
+   "pos_p": "noun",
+   "gloss_p": "a long (usually round) rod of wood or metal or plastic",
+   "pos_a": "noun",
+   "gloss_a": "an inquiry into public opinion conducted by interviewing a random sample of people",
+   "hints": [
+    "lap",
+    "grid"
+   ]
+  },
+  {
+   "pair_id": "e5m008",
+   "w_p": "tied",
+   "w_a": "tide",
+   "d_unit": 0.0,
+   "d_unit_norm": 0.0,
+   "cos": 0.1147,
+   "pos_p": "adjective",
+   "gloss_p": "bound or secured closely",
+   "pos_a": "noun",
+   "gloss_a": "the periodic rise and fall of the sea level under the gravitational pull of the moon",
+   "hints": [
+    "finished",
+    "trailing",
+    "matched",
+    "connected",
+    "linked"
+   ]
+  },
+  {
+   "pair_id": "e5m009",
+   "w_p": "bury",
+   "w_a": "berry",
+   "d_unit": 0.0,
+   "d_unit_norm": 0.0,
+   "cos": 0.0312,
+   "pos_p": "verb",
+   "gloss_p": "cover from sight",
+   "pos_a": "noun",
+   "gloss_a": "any of numerous small and pulpy edible fruits; used as desserts or in making jams and jellies and preserves",
+   "hints": [
+    "dig",
+    "dump",
+    "burial",
+    "cremated",
+    "dispose"
+   ]
+  },
+  {
+   "pair_id": "e5m010",
+   "w_p": "pact",
+   "w_a": "packed",
+   "d_unit": 0.0,
+   "d_unit_norm": 0.0,
+   "cos": -0.003,
+   "pos_p": "noun",
+   "gloss_p": "a written agreement between two states or sovereigns",
+   "pos_a": "adjective",
+   "gloss_a": "filled to capacity",
+   "hints": [
+    "accord",
+    "agreement",
+    "deal",
+    "treaty",
+    "alliance"
+   ]
+  },
+  {
+   "pair_id": "e5m011",
+   "w_p": "sight",
+   "w_a": "site",
+   "d_unit": 0.0,
+   "d_unit_norm": 0.0,
+   "cos": 0.0028,
+   "pos_p": "noun",
+   "gloss_p": "an instance of visual perception",
+   "pos_a": "noun",
+   "gloss_a": "the piece of land on which something is located (or is to be located)",
+   "hints": [
+    "eye",
+    "nowhere",
+    "stares",
+    "spectacle",
+    "gaze"
+   ]
+  },
+  {
+   "pair_id": "e5m012",
+   "w_p": "addition",
+   "w_a": "edition",
+   "d_unit": 0.0,
+   "d_unit_norm": 0.0,
+   "cos": 0.105,
+   "pos_p": "noun",
+   "gloss_p": "a component that is added to something to improve it",
+   "pos_a": "noun",
+   "gloss_a": "the form in which a text (especially a printed book) is published",
+   "hints": [
+    "meantime",
+    "lieu",
+    "complement",
+    "conjunction",
+    "also"
+   ]
+  },
+  {
+   "pair_id": "e5m013",
+   "w_p": "psi",
+   "w_a": "sigh",
+   "d_unit": 0.0,
+   "d_unit_norm": 0.0,
+   "cos": 0.0511,
+   "pos_p": "noun",
+   "gloss_p": "a unit of pressure",
+   "pos_a": "verb",
+   "gloss_a": "heave or utter a sigh; breathe deeply and heavily",
+   "hints": [
+    "horsepower",
+    "torque",
+    "hp",
+    "rpm",
+    "viscosity"
+   ]
+  },
+  {
+   "pair_id": "e5m014",
+   "w_p": "pray",
+   "w_a": "prey",
+   "d_unit": 0.0,
+   "d_unit_norm": 0.0,
+   "cos": 0.1366,
+   "pos_p": "verb",
+   "gloss_p": "address a deity, a prophet, a saint or an object of worship; say a prayer",
+   "pos_a": "noun",
+   "gloss_a": "a person who is the aim of an attack (especially a victim of ridicule or exploitation) by some hostile person or influence",
+   "hints": [
+    "bless",
+    "grieve",
+    "mourn",
+    "repent",
+    "meditate"
+   ]
+  },
+  {
+   "pair_id": "e5m015",
+   "w_p": "haul",
+   "w_a": "hall",
+   "d_unit": 0.0,
+   "d_unit_norm": 0.0,
+   "cos": 0.0133,
+   "pos_p": "verb",
+   "gloss_p": "draw slowly or heavily",
+   "pos_a": "noun",
+   "gloss_a": "an interior passage or corridor onto which rooms open",
+   "hints": [
+    "fleet",
+    "distances",
+    "stash",
+    "term",
+    "unloaded"
+   ]
+  },
+  {
+   "pair_id": "e5m016",
+   "w_p": "tow",
+   "w_a": "toe",
+   "d_unit": 0.0,
+   "d_unit_norm": 0.0,
+   "cos": 0.1685,
+   "pos_p": "noun",
+   "gloss_p": "the act of hauling something (as a vehicle) by means of a hitch or rope",
+   "pos_a": "noun",
+   "gloss_a": "one of the digits of the foot",
+   "hints": [
+    "winch",
+    "escort",
+    "hauling",
+    "hoist",
+    "lug"
+   ]
+  },
+  {
+   "pair_id": "e5m017",
+   "w_p": "aide",
+   "w_a": "aid",
+   "d_unit": 0.0,
+   "d_unit_norm": 0.0,
+   "cos": 0.1326,
+   "pos_p": "noun",
+   "gloss_p": "an officer who acts as military assistant to a more senior officer",
+   "pos_a": "verb",
+   "gloss_a": "give help or assistance; be of service",
+   "hints": [
+    "staffer",
+    "adviser",
+    "lawmaker",
+    "deputy",
+    "lieutenant"
+   ]
+  },
+  {
+   "pair_id": "e5m018",
+   "w_p": "rite",
+   "w_a": "write",
+   "d_unit": 0.0,
+   "d_unit_norm": 0.0,
+   "cos": -0.038,
+   "pos_p": "noun",
+   "gloss_p": "an established ceremony prescribed by a religion",
+   "pos_a": "verb",
+   "gloss_a": "produce a literary work",
+   "hints": [
+    "ritual",
+    "tradition",
+    "pastime",
+    "liturgy",
+    "pilgrimage"
+   ]
+  },
+  {
+   "pair_id": "e5m019",
+   "w_p": "warn",
+   "w_a": "worn",
+   "d_unit": 0.0,
+   "d_unit_norm": 0.0,
+   "cos": 0.0443,
+   "pos_p": "verb",
+   "gloss_p": "notify of danger, potential harm, or risk",
+   "pos_a": "adjective",
+   "gloss_a": "affected by wear; damaged by long use",
+   "hints": [
+    "beware",
+    "advise",
+    "remind",
+    "say",
+    "cautioned"
+   ]
+  },
+  {
+   "pair_id": "e5m020",
+   "w_p": "pat",
+   "w_a": "rat",
+   "d_unit": 1.0,
+   "d_unit_norm": 0.333,
+   "cos": 0.0367,
+   "pos_p": "verb",
+   "gloss_p": "pat or squeeze fondly or playfully, especially under the chin",
+   "pos_a": "noun",
+   "gloss_a": "any of various long-tailed rodents similar to but larger than a mouse",
+   "hints": [
+    "hug",
+    "slap",
+    "rub",
+    "politely",
+    "sit"
+   ]
+  },
+  {
+   "pair_id": "e5m021",
+   "w_p": "crease",
+   "w_a": "creek",
+   "d_unit": 1.0,
+   "d_unit_norm": 0.25,
+   "cos": 0.2286,
+   "pos_p": "verb",
+   "gloss_p": "make wrinkles or creases on a smooth surface; make a pressed, folded or wrinkled line in",
+   "pos_a": "noun",
+   "gloss_a": "a natural stream of water smaller than a river (and often a tributary of a river)",
+   "hints": [
+    "puck",
+    "stumps",
+    "yorker"
+   ]
+  },
+  {
+   "pair_id": "e5m022",
+   "w_p": "breeze",
+   "w_a": "freeze",
+   "d_unit": 1.0,
+   "d_unit_norm": 0.25,
+   "cos": 0.0347,
+   "pos_p": "noun",
+   "gloss_p": "a slight wind (usually refreshing)",
+   "pos_a": "verb",
+   "gloss_a": "stop moving or become immobilized",
+   "hints": [
+    "wind",
+    "windy",
+    "breezy",
+    "gale",
+    "gust"
+   ]
+  },
+  {
+   "pair_id": "e5m023",
+   "w_p": "beak",
+   "w_a": "meek",
+   "d_unit": 1.0,
+   "d_unit_norm": 0.333,
+   "cos": 0.1487,
+   "pos_p": "noun",
+   "gloss_p": "beaklike mouth of animals other than birds (e.g., turtles)",
+   "pos_a": "adjective",
+   "gloss_a": "humble in spirit or manner; suggesting retiring mildness or even cowed submissiveness",
+   "hints": [
+    "snout",
+    "claws",
+    "feathers",
+    "nose",
+    "fangs"
+   ]
+  },
+  {
+   "pair_id": "e5m024",
+   "w_p": "spray",
+   "w_a": "stray",
+   "d_unit": 1.0,
+   "d_unit_norm": 0.25,
+   "cos": 0.1906,
+   "pos_p": "noun",
+   "gloss_p": "a pesticide in suspension or solution; intended for spraying",
+   "pos_a": "verb",
+   "gloss_a": "move about aimlessly or without any destination, often in search of food or employment",
+   "hints": [
+    "squirt",
+    "lotion",
+    "bleach",
+    "aerosol",
+    "rinse"
+   ]
+  },
+  {
+   "pair_id": "e5m025",
+   "w_p": "kit",
+   "w_a": "kick",
+   "d_unit": 1.0,
+   "d_unit_norm": 0.333,
+   "cos": 0.0849,
+   "pos_p": "noun",
+   "gloss_p": "a case for containing a set of articles",
+   "pos_a": "verb",
+   "gloss_a": "drive or propel with the foot",
+   "hints": [
+    "waterproof",
+    "packs",
+    "adapter",
+    "module",
+    "charger"
+   ]
+  },
+  {
+   "pair_id": "e5m026",
+   "w_p": "cent",
+   "w_a": "saint",
+   "d_unit": 1.0,
+   "d_unit_norm": 0.25,
+   "cos": 0.117,
+   "pos_p": "noun",
+   "gloss_p": "a fractional monetary unit of several countries",
+   "pos_a": "noun",
+   "gloss_a": "a person who has died and has been declared a saint by canonization",
+   "hints": [
+    "penny",
+    "tax",
+    "dime",
+    "dollar",
+    "levy"
+   ]
+  },
+  {
+   "pair_id": "e5m027",
+   "w_p": "paid",
+   "w_a": "pad",
+   "d_unit": 1.0,
+   "d_unit_norm": 0.333,
+   "cos": 0.0521,
+   "pos_p": "adjective",
+   "gloss_p": "marked by the reception of pay",
+   "pos_a": "noun",
+   "gloss_a": "a number of sheets of paper fastened together along one edge",
+   "hints": [
+    "reimbursed",
+    "owed",
+    "refunded",
+    "compensated",
+    "payment"
+   ]
+  },
+  {
+   "pair_id": "e5m028",
+   "w_p": "bowl",
+   "w_a": "boat",
+   "d_unit": 1.0,
+   "d_unit_norm": 0.333,
+   "cos": 0.1185,
+   "pos_p": "noun",
+   "gloss_p": "a round vessel that is open at the top; used chiefly for holding food or liquids",
+   "pos_a": "noun",
+   "gloss_a": "a small vessel for travel on water",
+   "hints": [
+    "cup"
+   ]
+  },
+  {
+   "pair_id": "e5m029",
+   "w_p": "dinner",
+   "w_a": "deny",
+   "d_unit": 1.0,
+   "d_unit_norm": 0.25,
+   "cos": 0.0274,
+   "pos_p": "noun",
+   "gloss_p": "the main meal of the day served in the evening or at midday",
+   "pos_a": "verb",
+   "gloss_a": "declare untrue; contradict",
+   "hints": [
+    "brunch",
+    "supper",
+    "luncheon",
+    "banquet",
+    "breakfast"
+   ]
+  },
+  {
+   "pair_id": "e5m030",
+   "w_p": "mum",
+   "w_a": "numb",
+   "d_unit": 1.0,
+   "d_unit_norm": 0.333,
+   "cos": 0.2297,
+   "pos_p": "adjective",
+   "gloss_p": "failing to speak or communicate etc when expected to",
+   "pos_a": "adjective",
+   "gloss_a": "lacking sensation",
+   "hints": [
+    "gran",
+    "mam",
+    "dad",
+    "mother",
+    "mom"
+   ]
+  },
+  {
+   "pair_id": "e5m031",
+   "w_p": "cotton",
+   "w_a": "common",
+   "d_unit": 1.0,
+   "d_unit_norm": 0.2,
+   "cos": 0.0673,
+   "pos_p": "noun",
+   "gloss_p": "soft silky fibers from cotton plants in their raw state",
+   "pos_a": "adjective",
+   "gloss_a": "belonging to or participated in by a community as a whole; public",
+   "hints": [
+    "wheat",
+    "corn",
+    "soybean",
+    "rice",
+    "textile"
+   ]
+  },
+  {
+   "pair_id": "e5m032",
+   "w_p": "incentive",
+   "w_a": "inventive",
+   "d_unit": 1.0,
+   "d_unit_norm": 0.125,
+   "cos": 0.1488,
+   "pos_p": "noun",
+   "gloss_p": "a positive motivational influence",
+   "pos_a": "adjective",
+   "gloss_a": "(used of persons or artifacts) marked by independence and creativity in thought or action; ; - Lewis Mumford",
+   "hints": [
+    "rewards",
+    "bonus",
+    "option",
+    "entice",
+    "rebates"
+   ]
+  },
+  {
+   "pair_id": "e5m033",
+   "w_p": "change",
+   "w_a": "chain",
+   "d_unit": 1.0,
+   "d_unit_norm": 0.25,
+   "cos": 0.0189,
+   "pos_p": "verb",
+   "gloss_p": "cause to change; make different; cause a transformation",
+   "pos_a": "noun",
+   "gloss_a": "a series of things depending on each other as if linked together",
+   "hints": [
+    "alter",
+    "shift",
+    "rethink",
+    "tweak",
+    "adjust"
+   ]
+  },
+  {
+   "pair_id": "e5m034",
+   "w_p": "man",
+   "w_a": "mat",
+   "d_unit": 1.0,
+   "d_unit_norm": 0.333,
+   "cos": 0.0524,
+   "pos_p": "noun",
+   "gloss_p": "an adult person who is male (as opposed to a woman)",
+   "pos_a": "noun",
+   "gloss_a": "a thick flat pad used as a floor covering",
+   "hints": [
+    "teenager",
+    "girl",
+    "robber",
+    "guy",
+    "person"
+   ]
+  },
+  {
+   "pair_id": "e5m035",
+   "w_p": "sink",
+   "w_a": "sick",
+   "d_unit": 1.0,
+   "d_unit_norm": 0.25,
+   "cos": 0.109,
+   "pos_p": "verb",
+   "gloss_p": "fall or descend to a lower place or level",
+   "pos_a": "adjective",
+   "gloss_a": "affected by an impairment of normal physical or mental function",
+   "hints": [
+    "plunge",
+    "drown",
+    "dive",
+    "sag",
+    "drain"
+   ]
+  },
+  {
+   "pair_id": "e5m036",
+   "w_p": "dense",
+   "w_a": "dance",
+   "d_unit": 1.0,
+   "d_unit_norm": 0.25,
+   "cos": 0.012,
+   "pos_p": "adjective",
+   "gloss_p": "permitting little if any light to pass through because of denseness of matter",
+   "pos_a": "verb",
+   "gloss_a": "move in a graceful and rhythmical way",
+   "hints": [
+    "density",
+    "thick",
+    "homogeneous",
+    "sparse",
+    "textured"
+   ]
+  },
+  {
+   "pair_id": "e5m037",
+   "w_p": "kale",
+   "w_a": "tale",
+   "d_unit": 1.0,
+   "d_unit_norm": 0.333,
+   "cos": 0.082,
+   "pos_p": "noun",
+   "gloss_p": "informal terms for money",
+   "pos_a": "noun",
+   "gloss_a": "a message that tells the particulars of an act or occurrence or course of events; presented in writing or drama or cinema or as a radio or television program",
+   "hints": [
+    "broccoli",
+    "cabbage",
+    "basil",
+    "veggies",
+    "parsley"
+   ]
+  },
+  {
+   "pair_id": "e5m038",
+   "w_p": "cruel",
+   "w_a": "crucial",
+   "d_unit": 1.0,
+   "d_unit_norm": 0.167,
+   "cos": 0.1229,
+   "pos_p": "adjective",
+   "gloss_p": "(of persons or their actions) able or disposed to inflict pain or suffering",
+   "pos_a": "adjective",
+   "gloss_a": "of extreme importance; vital to the resolution of a crisis",
+   "hints": [
+    "inhumane",
+    "barbaric",
+    "brutal",
+    "callous",
+    "heartless"
+   ]
+  },
+  {
+   "pair_id": "e5m039",
+   "w_p": "dun",
+   "w_a": "duck",
+   "d_unit": 1.0,
+   "d_unit_norm": 0.333,
+   "cos": 0.2326,
+   "pos_p": "noun",
+   "gloss_p": "horse of a dull brownish grey color",
+   "pos_a": "verb",
+   "gloss_a": "to move (the head or body) quickly downwards or away",
+   "hints": [
+    "ay",
+    "na",
+    "kay",
+    "alam",
+    "yan"
+   ]
+  }
+ ],
+ "tom_swifty": [
+  {
+   "pair_id": "e5t000",
+   "w_p": "stair",
+   "w_a": "stare",
+   "d_unit": 0.0,
+   "d_unit_norm": 0.0,
+   "cos": 0.1481,
+   "pos_p": "noun",
+   "gloss_p": "support consisting of a place to rest the foot while ascending or descending a stairway",
+   "pos_a": "verb",
+   "gloss_a": "look at with fixed eyes",
+   "hints": [
+    "ladders",
+    "railings",
+    "walkway",
+    "ledge",
+    "elevator"
+   ]
+  },
+  {
+   "pair_id": "e5t001",
+   "w_p": "lesson",
+   "w_a": "lessen",
+   "d_unit": 0.0,
+   "d_unit_norm": 0.0,
+   "cos": 0.0866,
+   "pos_p": "noun",
+   "gloss_p": "a unit of instruction",
+   "pos_a": "verb",
+   "gloss_a": "decrease in size, extent, or range",
+   "hints": [
+    "teach",
+    "basics",
+    "learned",
+    "reminder",
+    "instruction"
+   ]
+  },
+  {
+   "pair_id": "e5t002",
+   "w_p": "beach",
+   "w_a": "beech",
+   "d_unit": 0.0,
+   "d_unit_norm": 0.0,
+   "cos": 0.1016,
+   "pos_p": "noun",
+   "gloss_p": "an area of sand sloping down to the water of a sea or lake",
+   "pos_a": "noun",
+   "gloss_a": "any of several large deciduous trees with rounded spreading crowns and smooth grey bark and small sweet edible triangular nuts enclosed in burs; north temperate regions",
+   "hints": [
+    "shoreline",
+    "seaside",
+    "coastline",
+    "pier",
+    "boardwalk"
+   ]
+  },
+  {
+   "pair_id": "e5t003",
+   "w_p": "council",
+   "w_a": "counsel",
+   "d_unit": 0.0,
+   "d_unit_norm": 0.0,
+   "cos": 0.1462,
+   "pos_p": "noun",
+   "gloss_p": "a body serving in an administrative capacity",
+   "pos_a": "noun",
+   "gloss_a": "a lawyer who pleads cases in court",
+   "hints": [
+    "commissioners",
+    "commission",
+    "mayor",
+    "committee",
+    "city"
+   ]
+  },
+  {
+   "pair_id": "e5t004",
+   "w_p": "idle",
+   "w_a": "idol",
+   "d_unit": 0.0,
+   "d_unit_norm": 0.0,
+   "cos": 0.0159,
+   "pos_p": "adjective",
+   "gloss_p": "not in action or at work",
+   "pos_a": "noun",
+   "gloss_a": "a material effigy that is worshipped",
+   "hints": [
+    "dormant",
+    "unused",
+    "empty",
+    "unproductive",
+    "sit"
+   ]
+  },
+  {
+   "pair_id": "e5t005",
+   "w_p": "boot",
+   "w_a": "loot",
+   "d_unit": 1.0,
+   "d_unit_norm": 0.333,
+   "cos": 0.1107,
+   "pos_p": "noun",
+   "gloss_p": "footwear that covers the whole foot and lower leg",
+   "pos_a": "noun",
+   "gloss_a": "goods or money obtained illegally",
+   "hints": [
+    "heel",
+    "shoe",
+    "sock",
+    "laces",
+    "kicking"
+   ]
+  },
+  {
+   "pair_id": "e5t006",
+   "w_p": "ball",
+   "w_a": "wall",
+   "d_unit": 1.0,
+   "d_unit_norm": 0.333,
+   "cos": 0.2142,
+   "pos_p": "noun",
+   "gloss_p": "round object that is hit or thrown or kicked in games",
+   "pos_a": "noun",
+   "gloss_a": "an architectural partition with a height and length greater than its thickness; used to divide or enclose an area or to support another structure",
+   "hints": [
+    "dribble",
+    "puck",
+    "footwork",
+    "defensively",
+    "scrimmage"
+   ]
+  },
+  {
+   "pair_id": "e5t007",
+   "w_p": "heart",
+   "w_a": "cart",
+   "d_unit": 1.0,
+   "d_unit_norm": 0.25,
+   "cos": 0.0692,
+   "pos_p": "noun",
+   "gloss_p": "the locus of feelings and intuitions",
+   "pos_a": "noun",
+   "gloss_a": "a heavy open wagon usually having two wheels and drawn by an animal",
+   "hints": [
+    "cardiac",
+    "coronary",
+    "arteries",
+    "stroke",
+    "kidney"
+   ]
+  },
+  {
+   "pair_id": "e5t008",
+   "w_p": "rear",
+   "w_a": "rich",
+   "d_unit": 1.0,
+   "d_unit_norm": 0.333,
+   "cos": -0.0477,
+   "pos_p": "noun",
+   "gloss_p": "the back of a military formation or procession",
+   "pos_a": "adjective",
+   "gloss_a": "possessing material wealth",
+   "hints": [
+    "aft",
+    "fender",
+    "grille",
+    "radiator",
+    "windshield"
+   ]
+  },
+  {
+   "pair_id": "e5t009",
+   "w_p": "don",
+   "w_a": "darn",
+   "d_unit": 1.0,
+   "d_unit_norm": 0.25,
+   "cos": 0.1148,
+   "pos_p": "verb",
+   "gloss_p": "put clothing on one's body",
+   "pos_a": "verb",
+   "gloss_a": "repair by sewing",
+   "hints": [
+    "wear",
+    "clad",
+    "dressed",
+    "attire",
+    "garb"
+   ]
+  }
+ ]
+}
