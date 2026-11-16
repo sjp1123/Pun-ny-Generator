@@ -1,0 +1,316 @@
+{
+  "decision": "olmo-2-0325-32b-instruct-4bit를 본 실행 생성기로 정한다 (C1~C4 모두 통과).",
+  "chosen": "olmo-2-0325-32b-instruct-4bit",
+  "order": [
+    "olmo-2-0325-32b-instruct-4bit"
+  ],
+  "criteria": {
+    "C2": 0.5,
+    "C3": 0.5,
+    "C4": 0.2
+  },
+  "models": {
+    "olmo-2-0325-32b-instruct-4bit": {
+      "gen": "olmo-2-0325-32b-instruct-4bit",
+      "S1": {
+        "oneliner": {
+          "n": 166,
+          "fail": 0.2469879518072289,
+          "reasons": {
+            "wa_position": 0.241,
+            "wa_count": 0.096,
+            "shape": 0.006,
+            "truncated": 0.006
+          }
+        },
+        "riddle": {
+          "n": 138,
+          "fail": 0.036231884057971016,
+          "reasons": {
+            "wa_count": 0.036,
+            "wa_position": 0.029
+          }
+        },
+        "all": {
+          "n": 304,
+          "fail": 0.1513157894736842,
+          "reasons": {
+            "wa_position": 0.145,
+            "wa_count": 0.069,
+            "shape": 0.003,
+            "truncated": 0.003
+          }
+        }
+      },
+      "S3_calls": {
+        "oneliner": {
+          "n": 173,
+          "fail": 0.4161849710982659,
+          "reasons": {
+            "edit_width": 0.329,
+            "wp_count": 0.11,
+            "suffix_changed": 0.023,
+            "shape": 0.012,
+            "wa_leak": 0.006
+          }
+        },
+        "riddle": {
+          "n": 191,
+          "fail": 0.47643979057591623,
+          "reasons": {
+            "edit_width": 0.351,
+            "wp_count": 0.11,
+            "suffix_changed": 0.099,
+            "wa_leak": 0.042,
+            "shape": 0.021
+          }
+        },
+        "all": {
+          "n": 364,
+          "fail": 0.4478021978021978,
+          "reasons": {
+            "edit_width": 0.341,
+            "wp_count": 0.11,
+            "suffix_changed": 0.063,
+            "wa_leak": 0.025,
+            "shape": 0.016
+          }
+        }
+      },
+      "S3_attempts": {
+        "n": 258,
+        "fail": 0.22093023255813954,
+        "retried": 0.4108527131782946
+      },
+      "final": {
+        "oneliner": {
+          "n": 101,
+          "fail": 0.009900990099009901,
+          "reasons": {
+            "duplicate": 0.01
+          }
+        },
+        "riddle": {
+          "n": 100,
+          "fail": 0.0,
+          "reasons": {}
+        },
+        "all": {
+          "n": 201,
+          "fail": 0.004975124378109453,
+          "reasons": {
+            "duplicate": 0.005
+          }
+        }
+      },
+      "s1_calls_per_cell": {
+        "min": 10,
+        "median": 13.5,
+        "max": 27,
+        "values": [
+          27,
+          13,
+          10,
+          11,
+          17,
+          23,
+          12,
+          26,
+          14,
+          21,
+          10,
+          10,
+          14,
+          14,
+          13,
+          22,
+          10,
+          16,
+          11,
+          10
+        ]
+      },
+      "cells": {
+        "n": 20,
+        "underfilled": 0,
+        "failed": 0,
+        "n_cand": [
+          10,
+          10,
+          10,
+          10,
+          10,
+          10,
+          10,
+          10,
+          10,
+          10,
+          10,
+          10,
+          10,
+          10,
+          10,
+          10,
+          10,
+          10,
+          10,
+          10
+        ]
+      },
+      "gate": {
+        "oneliner": {
+          "n": 100,
+          "s3": 0.43,
+          "s2": 0.31,
+          "rank1_s3": 0.8,
+          "rank1_s2": 0.86
+        },
+        "riddle": {
+          "n": 100,
+          "s3": 0.58,
+          "s2": 0.54,
+          "rank1_s3": 0.73,
+          "rank1_s2": 0.8
+        },
+        "all": {
+          "n": 200,
+          "s3": 0.505,
+          "s2": 0.425,
+          "rank1_s3": 0.765,
+          "rank1_s2": 0.83
+        }
+      },
+      "D1": {
+        "n": 200,
+        "mean_diff": 0.05375879220430996,
+        "ci95_cell_boot": [
+          -0.006067492243757028,
+          0.1217983331206744
+        ],
+        "median_diff": 0.00051804064244105,
+        "share_up": 0.785
+      },
+      "judge_all_P": {
+        "n": 200,
+        "success": 0.26,
+        "echo": 0.05
+      },
+      "D2": {
+        "gate_pass": {
+          "n": 101,
+          "success": 0.22772277227722773
+        },
+        "gate_fail": {
+          "n": 99,
+          "success": 0.29292929292929293
+        }
+      },
+      "hint_used": 0.73,
+      "topic_link": {
+        "n": 198,
+        "quantiles": {
+          "0.1": 0.11581448167562486,
+          "0.25": 0.4018334150314331,
+          "0.5": 0.5067477822303772,
+          "0.75": 0.6287425756454468,
+          "0.9": 0.6707365751266481
+        }
+      },
+      "top3": [
+        {
+          "cand_id": "e5r000:oneliner#6",
+          "text": "After a sweltering summer day, all she yearned for was to hear the gentle patter of rein.",
+          "w_p": "rein",
+          "w_a": "rain",
+          "score": 19.37035542069572,
+          "gate3": false,
+          "judge": true
+        },
+        {
+          "cand_id": "e5r005:oneliner#7",
+          "text": "The young boy happily read the storybook while sitting on his mother's lad.",
+          "w_p": "lad",
+          "w_a": "lap",
+          "score": 14.91023095712622,
+          "gate3": false,
+          "judge": true
+        },
+        {
+          "cand_id": "e5r005:riddle#3",
+          "text": "Where does a child often sit for a story with grandma? On grandma's lad.",
+          "w_p": "lad",
+          "w_a": "lap",
+          "score": 14.359435074379904,
+          "gate3": false,
+          "judge": true
+        }
+      ],
+      "bottom3": [
+        {
+          "cand_id": "e5r006:riddle#5",
+          "text": "What's the spark in the air when it's really close to reaching a milestone? A mark.",
+          "w_p": "mark",
+          "w_a": "arc",
+          "score": -8.486374920566064,
+          "gate3": false,
+          "judge": false
+        },
+        {
+          "cand_id": "e5r003:oneliner#4",
+          "text": "Amidst the haze of the celebration, she found herself mist.",
+          "w_p": "mist",
+          "w_a": "midst",
+          "score": -9.083701355740695,
+          "gate3": false,
+          "judge": false
+        },
+        {
+          "cand_id": "e5r003:riddle#1",
+          "text": "What do you find when searching through clutter under a cloudy sky? A needle mist.",
+          "w_p": "mist",
+          "w_a": "midst",
+          "score": -10.881384432692926,
+          "gate3": false,
+          "judge": false
+        }
+      ],
+      "B0": {
+        "n": 20,
+        "rule_pass": 0.4,
+        "reasons": {
+          "pair_same_lemma": 3,
+          "pair_not_in_cmu": 3,
+          "pair_malformed": 2,
+          "wa_leak": 2,
+          "pair_too_far": 2,
+          "wp_count": 1
+        },
+        "duplicate_rate": 0.0
+      },
+      "B1": {
+        "n": 20,
+        "rule_pass": 0.9
+      },
+      "criteria": {
+        "C1": {
+          "value": 20,
+          "of": 20,
+          "passed": true
+        },
+        "C2": {
+          "value": 0.95,
+          "passed": true
+        },
+        "C3": {
+          "value": 0.05,
+          "passed": true
+        },
+        "C4": {
+          "value": 0.26,
+          "passed": true
+        },
+        "all": true
+      }
+    }
+  }
+}

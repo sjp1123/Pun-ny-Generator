@@ -85,7 +85,7 @@ def score_items(its: list[Item], model: str, lm_name: str, out, device, gamma: f
                           logpi_wa_g=m["global"].logpi_wa, logD_g=m["global"].logD, L_g=m["global"].L,
                           S_left=m["left"].S, logF_left=m["left"].logF, logF_local=m["local"].logF,
                           logD_local=m["local"].logD))
-    X = X.join(lm_baselines(its, c2, lm)[["S_ratio", "sent_lp"]])
+    X = X.join(lm_baselines(its, c2, lm)[["S_ratio", "sent_lp", "unusualness"]])
     X["gate"] = (X.rank_g == 1) & (X.A_g >= thr)
     X["score"] = X.logF_g + X.S_left
     X.index.name = "cand_id"
