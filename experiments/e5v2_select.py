@@ -7,7 +7,7 @@
   후보가 0개인 칸: P1~P4 모두 generation_failed (cand_id 없음)
   B1, B0은 생성한 그대로(규칙 통과 여부 rule_ok를 함께 적음). H는 형식이 같은 칸에 붙인다(자기 쌍 그대로).
 
-사용: python -X utf8 experiments/e5v2_select.py --stage pilot3 --gen olmo-2-1124-7b-instruct --model pythia-1.4b
+사용: python -X utf8 experiments/e5v2_select.py --stage pilot4 --gen olmo-2-0325-32b-instruct-4bit --model pythia-1.4b
 출력: results/e5/<stage>/<gen>/A_<model>/ selections.csv, selections.jsonl, metrics.json, table.md
 """
 import argparse
@@ -70,7 +70,7 @@ def select_v2(stage, C, cand, X, picks) -> pd.DataFrame:
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--stage", required=True, choices=["pilot2", "pilot3", "main"])
+    ap.add_argument("--stage", required=True, choices=["pilot2", "pilot3", "pilot4", "main"])
     ap.add_argument("--gen", required=True)
     ap.add_argument("--model", default="pythia-1.4b")
     a = ap.parse_args()

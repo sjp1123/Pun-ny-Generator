@@ -7,14 +7,14 @@
   D2  관문 통과 vs 실패 후보의 판정기 성공률 (A가 가짜 신호인가)
   topic_link(바뀐 단어와 w_p의 word2vec 코사인 최댓값, word2vec이 있을 때만) 분포, 힌트 단어 사용률
   점수 상위 3개·하위 3개 예시, B0 중복률
-  C1 채우기: 모든 칸에서 S1 30회 안에 후보 10개
+  C1 채우기: 모든 칸에서 S1 상한(MAX_S1) 안에 후보 10개
   C2 관문 통과 존재: 관문 통과 후보가 1개 이상인 칸 ≥ 50%
   C3 고를 여지: 후보가 모두 관문을 통과한 칸 < 50%
   C4 판정기 확인: 규칙 통과 후보 전체의 판정기 성공률 ≥ 0.20
 결정 규칙: --gens 순서(7B, 32B)대로 처음으로 C1~C4를 모두 넘은 모델을 본 실행 생성기로. 없으면 태그를 달지 않는다.
 
 사용: python -X utf8 experiments/e5v2_report.py --gens olmo-2-1124-7b-instruct olmo-2-0325-32b-instruct
-출력: results/e5/<stage>/report.md, report.json (stage 기본 pilot3)
+출력: results/e5/<stage>/report.md, report.json (stage 기본 pilot4)
 """
 import argparse
 import json
@@ -211,7 +211,7 @@ def markdown(stage, model, res: dict, decision: str) -> str:
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--stage", default="pilot3", choices=["pilot2", "pilot3"])
+    ap.add_argument("--stage", default="pilot4", choices=["pilot2", "pilot3", "pilot4"])
     ap.add_argument("--gens", nargs="+", required=True, help="결정 규칙 순서대로 (7B 먼저)")
     ap.add_argument("--model", default="pythia-1.4b")
     ap.add_argument("--judge", default="Qwen/Qwen2.5-7B-Instruct")

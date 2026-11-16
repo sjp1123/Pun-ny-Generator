@@ -66,7 +66,8 @@ E5 생성 파이프라인(설계 [docs/E5_DESIGN.md](docs/E5_DESIGN.md), 사전 
 파일럿 1 뒤에 세 단계 생성 v2(사양 [docs/E5_V2_DESIGN.md](docs/E5_V2_DESIGN.md))로 바꿨다: `src/e5v2.py`,
 `experiments/e5v2_*.py`, 프롬프트 `e5/v2/prompts/`, 파일럿 2 표본 `e5/samples_v2.json`.
 파일럿 2는 C1~C4를 넘은 생성기가 없어 실패했고(`results/e5/pilot2/report.md`), 쌍을 음소 거리 0~1로 다시 뽑아
-(`experiments/e5v3_pairs.py` → `e5/samples_v3.json`) 파일럿 3으로 다시 판정한다(`PREREG_E5.md` 6.4~6.5).
+(`experiments/e5v3_pairs.py` → `e5/samples_v3.json`) 파일럿 3으로 다시 판정했다(`PREREG_E5.md` 6.4~6.5).
+파일럿 3도 C1 한 칸 차이로 실패해, S1 상한을 60회로 올린 파일럿 4를 32B로 돌린다(6.6~6.7).
 GPU 실행 순서도 [docs/GPU_RUN.md](docs/GPU_RUN.md)에 있다.
 
 ## 설계 문서와 다르게 구현한 점 (이유)

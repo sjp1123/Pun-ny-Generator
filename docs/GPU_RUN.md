@@ -48,53 +48,32 @@ python -X utf8 experiments/v1_confirm.py --model pythia-1.4b
 - 캐시 단계는 이어서 만들어지므로, 끊겨도 같은 명령을 다시 실행하면 된다. 정밀도는 fp16 기본값(`--dtype` 바꾸지 않음).
 - 결과: `results/pythia-1.4b/confirm/` (`table.md`가 가설별 판정표). `config.json`의 `git.dirty`가 `false`인지 확인.
 
-## 3. C — E5 파일럿 3 (v2 생성 + v3 쌍)
+## 3. C — E5 파일럿 4 (32B만, S1 상한 60)
 
-파일럿 2(2026-11-16)는 C1~C4를 넘은 생성기가 없어 실패했다(PREREG_E5 6.4). 쌍을 음소 거리 0~1로 다시 뽑고(`e5/samples_v3.json`)
-7B에서 지나치게 엄격했던 규칙 두 곳을 고친 뒤(6.5) 같은 명령을 `--stage pilot3`으로 돌린다. 파일럿 2 결과는 `results/e5/pilot2/`에 그대로 둔다.
+파일럿 2·3은 실패했다(PREREG_E5 6.4, 6.6). 파일럿 3에서 32B는 C2~C4를 넘고 C1에서 한 칸만 모자랐다. 파일럿 4는
+S1 상한을 30 → 60회로 올리고(6.7) 같은 10쌍을 새 시드로 32B만 돌린다. 7B는 돌리지 않는다.
 
 ```bash
 git pull
-pip install bitsandbytes   # 32B를 4비트로 돌릴 때만
 python -X utf8 -m pytest -q tests
+G=olmo-2-0325-32b-instruct-4bit
+python -X utf8 experiments/e5v2_generate.py --stage pilot4 --model allenai/OLMo-2-0325-32B-Instruct --load-4bit
+python -X utf8 experiments/e5v2_score.py  --stage pilot4 --gen $G --model pythia-1.4b --device cuda
+python -X utf8 experiments/e5v2_select.py --stage pilot4 --gen $G --model pythia-1.4b
+python -X utf8 experiments/e5v2_judge.py  --stage pilot4 --gen $G --model pythia-1.4b --backend hf --judge Qwen/Qwen2.5-7B-Instruct
 ```
 
-생성기마다 아래 네 단계를 돌린다(`--gen`은 생성 단계가 만든 폴더 이름). 7B 먼저:
-
-```bash
-G=olmo-2-1124-7b-instruct
-python -X utf8 experiments/e5v2_generate.py --stage pilot3 --model allenai/OLMo-2-1124-7B-Instruct
-python -X utf8 experiments/e5v2_score.py  --stage pilot3 --gen $G --model pythia-1.4b --device cuda
-python -X utf8 experiments/e5v2_select.py --stage pilot3 --gen $G --model pythia-1.4b
-python -X utf8 experiments/e5v2_judge.py  --stage pilot3 --gen $G --model pythia-1.4b --backend hf --judge Qwen/Qwen2.5-7B-Instruct
-```
-
-그다음 32B. 80GB GPU면 `--load-4bit` 없이, 아니면 붙인다(폴더 이름이 `...-4bit`가 된다). 파일럿 2를 돌린 20GB GPU에서는
-bf16이 올라가지 않으므로(가중치 64.5 GB) 파일럿 2와 같게 `--load-4bit`로 돌린다:
-
-```bash
-G=olmo-2-0325-32b-instruct-4bit     # bf16이면 G=olmo-2-0325-32b-instruct
-python -X utf8 experiments/e5v2_generate.py --stage pilot3 --model allenai/OLMo-2-0325-32B-Instruct --load-4bit
-python -X utf8 experiments/e5v2_score.py  --stage pilot3 --gen $G --model pythia-1.4b --device cuda
-python -X utf8 experiments/e5v2_select.py --stage pilot3 --gen $G --model pythia-1.4b
-python -X utf8 experiments/e5v2_judge.py  --stage pilot3 --gen $G --model pythia-1.4b --backend hf --judge Qwen/Qwen2.5-7B-Instruct
-```
-
-| 단계 | 하는 일 | 출력 (`results/e5/pilot3/$G/`) |
+| 단계 | 하는 일 | 출력 (`results/e5/pilot4/$G/`) |
 |---|---|---|
-| `e5v2_generate` | 칸 20개마다 S1 → S2 → S3 → 최종 검사로 후보 10개(S1 최대 30회), B1, B0 20개, P3 고르기 | `attempts.jsonl`, `candidates.csv`, `cells.csv`, `baselines.jsonl`, `picks.csv` |
-| `e5v2_score` | 후보의 ③과 ②, B1·B0·사람 말장난을 Pythia-1.4B로 채점(관문 값은 파일럿 1의 e5_gate) | `A_pythia-1.4b/scores.csv`, `candidates.jsonl` |
+| `e5v2_generate` | 칸 20개마다 S1 → S2 → S3 → 최종 검사로 후보 10개(S1 최대 60회), B1, B0 20개, P3 고르기 | `attempts.jsonl`, `candidates.csv`, `cells.csv`, `baselines.jsonl`, `picks.csv` |
+| `e5v2_score` | 후보의 ③과 ②, B1·B0·사람 말장난을 Pythia-1.4B로 채점 | `A_pythia-1.4b/scores.csv`, `candidates.jsonl` |
 | `e5v2_select` | P1~P4·B0·B1·H 고르기 | `A_pythia-1.4b/selections.csv`, `selections.jsonl` |
-| `e5v2_judge` | (탐색) Qwen 판정: 모든 P 후보의 성공·성립, 칸 안 웃김 비교 | `A_pythia-1.4b/judge_qwen2.5-7b-instruct/` |
+| `e5v2_judge` | (탐색) Qwen 판정 | `A_pythia-1.4b/judge_qwen2.5-7b-instruct/` |
 
-- 생성은 칸당 LLM 호출이 최대 90번(S1 30 + S3 60)이지만 한 번에 60토큰이라 짧다. 끊겨도 같은 명령을 다시 실행하면 끝난 시도부터 이어 간다.
-- 생성기와 판정기는 따로 올라가므로 GPU에는 한 번에 하나만 있다.
-- 각 단계의 `config.json`에 `generator.revision`(또는 `judge.revision`)이 해시로 찍혔는지 확인해 줘. 파일럿 2에서는 `null`이었다.
-  파일럿 2에 쓴 리비전도 알려 주면 기록에 넣는다:
-  `ls ~/.cache/huggingface/hub/models--allenai--OLMo-2-1124-7B-Instruct/snapshots ~/.cache/huggingface/hub/models--allenai--OLMo-2-0325-32B-Instruct/snapshots ~/.cache/huggingface/hub/models--Qwen--Qwen2.5-7B-Instruct/snapshots`
-- 끝나면 `results/e5/pilot3/`를 커밋해서 올려 줘(크기는 수 MB). 보고서와 C1~C4 판정(`e5v2_report.py`)은 word2vec이 있는
-  원래 PC에서 돌린다. GPU에서 미리 보고 싶으면:
-  `python -X utf8 experiments/e5v2_report.py --stage pilot3 --gens olmo-2-1124-7b-instruct $G --no-w2v`
+- 끊겨도 같은 명령을 다시 실행하면 끝난 시도부터 이어 간다. `config.json`의 `max_s1`이 60인지, `generator.revision`이 해시인지 확인해 줘.
+- 끝나면 `results/e5/pilot4/`를 커밋해서 올려 줘. 보고서는 원래 PC에서
+  `python -X utf8 experiments/e5v2_report.py --stage pilot4 --gens olmo-2-0325-32b-instruct-4bit`로 만든다.
+- 파일럿 2·3 결과는 `results/e5/pilot2/`, `results/e5/pilot3/`에 그대로 둔다.
 
 ## 4. (끝난 것) B — E5 파일럿 1
  (A의 캐시가 있으면 바로)

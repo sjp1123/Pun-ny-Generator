@@ -22,7 +22,7 @@ EXAMPLE_WORDS = ("bagel", "beagle", "bread", "bed")  # 프롬프트 예시 쌍 (
 FORMATS_V2 = ("riddle", "oneliner")
 
 N_CAND = 10
-MAX_S1 = 30
+MAX_S1 = 60  # 파일럿 2·3은 30 (PREREG_E5 6.7)
 S1_DECODE = dict(temperature=0.9, top_p=0.95, max_new_tokens=60)
 S3_DECODE = dict(temperature=0.7, top_p=1.0, max_new_tokens=60)  # 사양에 top_p가 없어 v1 기본값(1.0)
 S3_TRIES = 2
@@ -83,12 +83,15 @@ def samples_file(stage: str):
 
 
 def cells_v2(stage: str) -> list[dict]:
-    """pilot2 = 파일럿 2 10쌍(samples_v2, 기록), pilot3 = 파일럿 3 10쌍, main = 본 실행 40쌍 (samples_v3) × 2형식.
+    """pilot2 = 파일럿 2 10쌍(samples_v2, 기록), pilot3·pilot4 = 파일럿 3 10쌍(파일럿 4는 같은 쌍을 새 시드로),
+    main = 본 실행 40쌍 (samples_v3) × 2형식.
     Tom Swifty 형식은 아직 정하지 않았다."""
     if stage == "pilot2":
         pairs = load_samples_v2()["pilot2"]
-    elif stage in ("pilot3", "main"):
-        pairs = load_samples_v3()[stage]
+    elif stage in ("pilot3", "pilot4"):
+        pairs = load_samples_v3()["pilot3"]
+    elif stage == "main":
+        pairs = load_samples_v3()["main"]
     else:
         raise ValueError(stage)
     return [dict(p, cell=f"{p['pair_id']}:{f}", format=f) for p in pairs for f in FORMATS_V2]

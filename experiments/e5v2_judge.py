@@ -7,7 +7,7 @@
       Bradley–Terry(choix ILSR, α = 0.01)에는 승리 = 2:0, 무승부 = 1:1로 넣는다(순서별 결과를 하나씩 넣는 것과 같다).
 판정 호출은 judge.jsonl에 쌓이고, 다 기록돼 있으면 판정 모델을 올리지 않는다.
 
-사용: python -X utf8 experiments/e5v2_judge.py --stage pilot3 --gen olmo-2-1124-7b-instruct --model pythia-1.4b
+사용: python -X utf8 experiments/e5v2_judge.py --stage pilot4 --gen olmo-2-0325-32b-instruct-4bit --model pythia-1.4b
 출력: results/e5/<stage>/<gen>/A_<model>/judge_<판정기>/ judge.jsonl, success.csv, pairs.csv, bt.csv, metrics.json, table.md
 """
 import argparse
@@ -32,7 +32,7 @@ PAIR_CONDS = ["B1", "P1", "P2", "P3", "P4", "H"]
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--stage", required=True, choices=["pilot2", "pilot3", "main"])
+    ap.add_argument("--stage", required=True, choices=["pilot2", "pilot3", "pilot4", "main"])
     ap.add_argument("--gen", required=True)
     ap.add_argument("--model", default="pythia-1.4b")
     ap.add_argument("--backend", default="hf", choices=["hf", "ollama"])

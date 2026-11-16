@@ -1,0 +1,606 @@
+{
+  "decision": "C1~C4를 모두 넘은 모델이 없다. prereg-e5 태그를 달지 않고 실패를 기록한 뒤 설계로 돌아간다.",
+  "chosen": null,
+  "order": [
+    "olmo-2-1124-7b-instruct",
+    "olmo-2-0325-32b-instruct-4bit"
+  ],
+  "criteria": {
+    "C2": 0.5,
+    "C3": 0.5,
+    "C4": 0.2
+  },
+  "models": {
+    "olmo-2-1124-7b-instruct": {
+      "gen": "olmo-2-1124-7b-instruct",
+      "S1": {
+        "oneliner": {
+          "n": 287,
+          "fail": 0.6341463414634146,
+          "reasons": {
+            "wa_position": 0.61,
+            "wa_count": 0.146,
+            "shape": 0.017,
+            "truncated": 0.007
+          }
+        },
+        "riddle": {
+          "n": 263,
+          "fail": 0.10646387832699619,
+          "reasons": {
+            "wa_position": 0.095,
+            "wa_count": 0.057,
+            "truncated": 0.004
+          }
+        },
+        "all": {
+          "n": 550,
+          "fail": 0.38181818181818183,
+          "reasons": {
+            "wa_position": 0.364,
+            "wa_count": 0.104,
+            "shape": 0.009,
+            "truncated": 0.005
+          }
+        }
+      },
+      "S3_calls": {
+        "oneliner": {
+          "n": 187,
+          "fail": 0.8235294117647058,
+          "reasons": {
+            "suffix_changed": 0.422,
+            "edit_width": 0.369,
+            "wp_count": 0.193,
+            "truncated": 0.043,
+            "wa_leak": 0.016,
+            "shape": 0.005
+          }
+        },
+        "riddle": {
+          "n": 434,
+          "fail": 0.8387096774193549,
+          "reasons": {
+            "edit_width": 0.664,
+            "suffix_changed": 0.101,
+            "shape": 0.071,
+            "wp_count": 0.062,
+            "wa_leak": 0.025
+          }
+        },
+        "all": {
+          "n": 621,
+          "fail": 0.8341384863123994,
+          "reasons": {
+            "edit_width": 0.575,
+            "suffix_changed": 0.198,
+            "wp_count": 0.101,
+            "shape": 0.052,
+            "wa_leak": 0.023,
+            "truncated": 0.013
+          }
+        }
+      },
+      "S3_attempts": {
+        "n": 340,
+        "fail": 0.6970588235294117,
+        "retried": 0.8264705882352941
+      },
+      "final": {
+        "oneliner": {
+          "n": 33,
+          "fail": 0.0,
+          "reasons": {}
+        },
+        "riddle": {
+          "n": 70,
+          "fail": 0.0,
+          "reasons": {}
+        },
+        "all": {
+          "n": 103,
+          "fail": 0.0,
+          "reasons": {}
+        }
+      },
+      "s1_calls_per_cell": {
+        "min": 15,
+        "median": 30.0,
+        "max": 30,
+        "values": [
+          30,
+          30,
+          30,
+          30,
+          15,
+          30,
+          30,
+          17,
+          22,
+          30,
+          23,
+          30,
+          30,
+          30,
+          30,
+          30,
+          30,
+          30,
+          23,
+          30
+        ]
+      },
+      "cells": {
+        "n": 20,
+        "underfilled": 14,
+        "failed": 3,
+        "n_cand": [
+          2,
+          5,
+          5,
+          2,
+          10,
+          2,
+          6,
+          10,
+          10,
+          0,
+          10,
+          0,
+          9,
+          0,
+          2,
+          2,
+          6,
+          2,
+          10,
+          10
+        ]
+      },
+      "gate": {
+        "oneliner": {
+          "n": 33,
+          "s3": 0.42424242424242425,
+          "s2": 0.48484848484848486,
+          "rank1_s3": 0.7272727272727273,
+          "rank1_s2": 0.9090909090909091
+        },
+        "riddle": {
+          "n": 70,
+          "s3": 0.2714285714285714,
+          "s2": 0.5,
+          "rank1_s3": 0.37142857142857144,
+          "rank1_s2": 0.6714285714285714
+        },
+        "all": {
+          "n": 103,
+          "s3": 0.32038834951456313,
+          "s2": 0.49514563106796117,
+          "rank1_s3": 0.4854368932038835,
+          "rank1_s2": 0.7475728155339806
+        }
+      },
+      "D1": {
+        "n": 103,
+        "mean_diff": 0.08730630395670254,
+        "ci95_cell_boot": [
+          0.0008848474143348942,
+          0.16430960250477755
+        ],
+        "median_diff": 0.008418534239085902,
+        "share_up": 0.7184466019417476
+      },
+      "judge_all_P": {
+        "n": 103,
+        "success": 0.2815533980582524,
+        "echo": 0.0970873786407767
+      },
+      "D2": {
+        "gate_pass": {
+          "n": 33,
+          "success": 0.18181818181818182
+        },
+        "gate_fail": {
+          "n": 70,
+          "success": 0.32857142857142857
+        }
+      },
+      "hint_used": 0.5242718446601942,
+      "topic_link": {
+        "n": 101,
+        "quantiles": {
+          "0.1": 0.1295958161354065,
+          "0.25": 0.2567385137081146,
+          "0.5": 0.41291260719299316,
+          "0.75": 0.5953681468963623,
+          "0.9": 0.6561347246170044
+        }
+      },
+      "top3": [
+        {
+          "cand_id": "e5r000:oneliner#3",
+          "text": "The weather forecast predicts thunderstorms with heavy rein this evening.",
+          "w_p": "rein",
+          "w_a": "rain",
+          "score": 18.745804786250936,
+          "gate3": false,
+          "judge": true
+        },
+        {
+          "cand_id": "e5r001:oneliner#0",
+          "text": "After dining with a nobleman, they strolled outside to enjoy the cool knight air.",
+          "w_p": "knight",
+          "w_a": "night",
+          "score": 13.17747413935577,
+          "gate3": false,
+          "judge": true
+        },
+        {
+          "cand_id": "e5r009:oneliner#2",
+          "text": "Climbing the treacherous path, wearing pajamas, she soon drifted off to steep.",
+          "w_p": "steep",
+          "w_a": "sleep",
+          "score": 12.691803444964314,
+          "gate3": false,
+          "judge": true
+        }
+      ],
+      "bottom3": [
+        {
+          "cand_id": "e5r006:riddle#2",
+          "text": "What happens when achievements are numerous? A mark.",
+          "w_p": "mark",
+          "w_a": "arc",
+          "score": -6.548060747572553,
+          "gate3": false,
+          "judge": false
+        },
+        {
+          "cand_id": "e5r006:riddle#3",
+          "text": "What occurs when a milestone is achieved? A mark.",
+          "w_p": "mark",
+          "w_a": "arc",
+          "score": -8.758787294825488,
+          "gate3": false,
+          "judge": false
+        },
+        {
+          "cand_id": "e5r003:riddle#3",
+          "text": "What was the dessert's hidden feature? Chocolate mist.",
+          "w_p": "mist",
+          "w_a": "midst",
+          "score": -9.50784638335325,
+          "gate3": false,
+          "judge": false
+        }
+      ],
+      "B0": {
+        "n": 20,
+        "rule_pass": 0.3,
+        "reasons": {
+          "pair_malformed": 7,
+          "pair_not_in_cmu": 5,
+          "pair_too_far": 2
+        },
+        "duplicate_rate": 0.1
+      },
+      "B1": {
+        "n": 20,
+        "rule_pass": 0.7
+      },
+      "criteria": {
+        "C1": {
+          "value": 6,
+          "of": 20,
+          "passed": false
+        },
+        "C2": {
+          "value": 0.55,
+          "passed": true
+        },
+        "C3": {
+          "value": 0.05,
+          "passed": true
+        },
+        "C4": {
+          "value": 0.2815533980582524,
+          "passed": true
+        },
+        "all": false
+      }
+    },
+    "olmo-2-0325-32b-instruct-4bit": {
+      "gen": "olmo-2-0325-32b-instruct-4bit",
+      "S1": {
+        "oneliner": {
+          "n": 162,
+          "fail": 0.2222222222222222,
+          "reasons": {
+            "wa_position": 0.222,
+            "wa_count": 0.049
+          }
+        },
+        "riddle": {
+          "n": 149,
+          "fail": 0.12080536912751678,
+          "reasons": {
+            "wa_position": 0.101,
+            "wa_count": 0.067,
+            "truncated": 0.007
+          }
+        },
+        "all": {
+          "n": 311,
+          "fail": 0.17363344051446947,
+          "reasons": {
+            "wa_position": 0.164,
+            "wa_count": 0.058,
+            "truncated": 0.003
+          }
+        }
+      },
+      "S3_calls": {
+        "oneliner": {
+          "n": 182,
+          "fail": 0.46703296703296704,
+          "reasons": {
+            "edit_width": 0.346,
+            "wp_count": 0.093,
+            "suffix_changed": 0.055,
+            "shape": 0.022
+          }
+        },
+        "riddle": {
+          "n": 184,
+          "fail": 0.45652173913043476,
+          "reasons": {
+            "edit_width": 0.375,
+            "wp_count": 0.065,
+            "suffix_changed": 0.06,
+            "wa_leak": 0.06,
+            "shape": 0.049
+          }
+        },
+        "all": {
+          "n": 366,
+          "fail": 0.46174863387978143,
+          "reasons": {
+            "edit_width": 0.361,
+            "wp_count": 0.079,
+            "suffix_changed": 0.057,
+            "shape": 0.036,
+            "wa_leak": 0.03
+          }
+        }
+      },
+      "S3_attempts": {
+        "n": 257,
+        "fail": 0.23346303501945526,
+        "retried": 0.42412451361867703
+      },
+      "final": {
+        "oneliner": {
+          "n": 97,
+          "fail": 0.0,
+          "reasons": {}
+        },
+        "riddle": {
+          "n": 100,
+          "fail": 0.0,
+          "reasons": {}
+        },
+        "all": {
+          "n": 197,
+          "fail": 0.0,
+          "reasons": {}
+        }
+      },
+      "s1_calls_per_cell": {
+        "min": 10,
+        "median": 14.5,
+        "max": 30,
+        "values": [
+          20,
+          15,
+          11,
+          11,
+          12,
+          22,
+          21,
+          14,
+          15,
+          30,
+          11,
+          10,
+          13,
+          19,
+          16,
+          17,
+          12,
+          13,
+          18,
+          11
+        ]
+      },
+      "cells": {
+        "n": 20,
+        "underfilled": 1,
+        "failed": 0,
+        "n_cand": [
+          10,
+          10,
+          10,
+          10,
+          10,
+          10,
+          10,
+          10,
+          10,
+          7,
+          10,
+          10,
+          10,
+          10,
+          10,
+          10,
+          10,
+          10,
+          10,
+          10
+        ]
+      },
+      "gate": {
+        "oneliner": {
+          "n": 97,
+          "s3": 0.3402061855670103,
+          "s2": 0.17525773195876287,
+          "rank1_s3": 0.7835051546391752,
+          "rank1_s2": 0.8144329896907216
+        },
+        "riddle": {
+          "n": 100,
+          "s3": 0.58,
+          "s2": 0.47,
+          "rank1_s3": 0.68,
+          "rank1_s2": 0.78
+        },
+        "all": {
+          "n": 197,
+          "s3": 0.4619289340101523,
+          "s2": 0.3248730964467005,
+          "rank1_s3": 0.7309644670050761,
+          "rank1_s2": 0.7969543147208121
+        }
+      },
+      "D1": {
+        "n": 197,
+        "mean_diff": 0.04030305994086217,
+        "ci95_cell_boot": [
+          -0.018741314305997743,
+          0.10685295032587275
+        ],
+        "median_diff": 0.0006357914966659001,
+        "share_up": 0.7563451776649747
+      },
+      "judge_all_P": {
+        "n": 197,
+        "success": 0.20304568527918782,
+        "echo": 0.08121827411167512
+      },
+      "D2": {
+        "gate_pass": {
+          "n": 91,
+          "success": 0.23076923076923078
+        },
+        "gate_fail": {
+          "n": 106,
+          "success": 0.1792452830188679
+        }
+      },
+      "hint_used": 0.7208121827411168,
+      "topic_link": {
+        "n": 195,
+        "quantiles": {
+          "0.1": 0.14282728135585784,
+          "0.25": 0.31763245165348053,
+          "0.5": 0.5362533926963806,
+          "0.75": 0.6278131604194641,
+          "0.9": 0.6569241285324097
+        }
+      },
+      "top3": [
+        {
+          "cand_id": "e5r001:oneliner#4",
+          "text": "After a long day as a nobleman, all he wanted was to spend the knight in peace.",
+          "w_p": "knight",
+          "w_a": "night",
+          "score": 14.50891476145176,
+          "gate3": false,
+          "judge": true
+        },
+        {
+          "cand_id": "e5r005:oneliner#2",
+          "text": "The young boy fell asleep while resting on her mother's lad.",
+          "w_p": "lad",
+          "w_a": "lap",
+          "score": 13.580568235606592,
+          "gate3": false,
+          "judge": true
+        },
+        {
+          "cand_id": "e5r005:oneliner#8",
+          "text": "The young boy fell asleep with her book on her lad.",
+          "w_p": "lad",
+          "w_a": "lap",
+          "score": 13.03944229805668,
+          "gate3": false,
+          "judge": false
+        }
+      ],
+      "bottom3": [
+        {
+          "cand_id": "e5r006:riddle#8",
+          "text": "What milestone forms in the sky after a lightning strike? A mark.",
+          "w_p": "mark",
+          "w_a": "arc",
+          "score": -5.890806097874729,
+          "gate3": false,
+          "judge": false
+        },
+        {
+          "cand_id": "e5r003:oneliner#5",
+          "text": "Amidst the fog, they sought mist.",
+          "w_p": "mist",
+          "w_a": "midst",
+          "score": -5.938177258512441,
+          "gate3": false,
+          "judge": false
+        },
+        {
+          "cand_id": "e5r006:oneliner#4",
+          "text": "Reached a milestone and created a mark.",
+          "w_p": "mark",
+          "w_a": "arc",
+          "score": -7.683914272949962,
+          "gate3": false,
+          "judge": false
+        }
+      ],
+      "B0": {
+        "n": 20,
+        "rule_pass": 0.3,
+        "reasons": {
+          "pair_too_far": 6,
+          "pair_same_lemma": 5,
+          "pair_malformed": 2,
+          "pair_not_in_cmu": 1
+        },
+        "duplicate_rate": 0.0
+      },
+      "B1": {
+        "n": 20,
+        "rule_pass": 0.85
+      },
+      "criteria": {
+        "C1": {
+          "value": 19,
+          "of": 20,
+          "passed": false
+        },
+        "C2": {
+          "value": 1.0,
+          "passed": true
+        },
+        "C3": {
+          "value": 0.05,
+          "passed": true
+        },
+        "C4": {
+          "value": 0.20304568527918782,
+          "passed": true
+        },
+        "all": false
+      }
+    }
+  }
+}

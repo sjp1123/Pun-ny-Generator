@@ -1,18 +1,17 @@
 """E5 v2 생성: 세 단계(S1 → S2 → S3) + 최종 규칙 검사로 칸마다 규칙 통과 후보 10개를 채운다 (docs/E5_V2_DESIGN.md 1~5절).
 
-칸마다 시도 k = 0, 1, … (S1 최대 30회):
+칸마다 시도 k = 0, 1, … (S1 최대 MAX_S1회, 파일럿 4부터 60):
   S1  w_a 문장 (LLM, 온도 0.9, top_p 0.95, 60토큰, 시드 = 칸 시드 + k) → S1 검사
   S2  w_a → w_p (코드: 대소문자, 관사 a/an, 보호 구간)
   S3  w_p 주제어 넣기 (LLM, 온도 0.7, 60토큰, 실패하면 시드를 바꿔 한 번 더) → S3 검사
-  최종 규칙 검사 (칸 안 중복 포함) → 통과하면 후보. 10개가 차면 멈춘다. 30회에 못 채우면 underfilled.
+  최종 규칙 검사 (칸 안 중복 포함) → 통과하면 후보. 10개가 차면 멈춘다. 상한까지 못 채우면 underfilled.
 규칙에 걸린 후보에서 고르는 대체 규칙은 없다(통과 0개 칸은 생성 실패).
 기준선: B1 = v1 단일 프롬프트(쌍 + 뜻) 1회, B0 = 쌍 없이 "말장난 하나"(칸 수만큼). 둘 다 v1 디코딩·시스템 프롬프트 그대로.
 P3: 같은 생성기에게 칸의 후보(고정 시드로 순서를 섞음)를 보여 주고 가장 웃긴 것을 고르게 한다(온도 0).
 이어서 돌릴 수 있다: 끝난 시도·호출은 기록에서 읽고 다시 부르지 않는다.
 
 사용 (GPU):
-  python -X utf8 experiments/e5v2_generate.py --stage pilot3 --model allenai/OLMo-2-1124-7B-Instruct
-  python -X utf8 experiments/e5v2_generate.py --stage pilot3 --model allenai/OLMo-2-0325-32B-Instruct [--load-4bit]
+  python -X utf8 experiments/e5v2_generate.py --stage pilot4 --model allenai/OLMo-2-0325-32B-Instruct --load-4bit
 출력: results/e5/<stage>/<생성기>[-4bit]/ attempts.jsonl, baselines.jsonl, candidates.csv, cells.csv, picks.csv, config.json
 """
 import argparse
@@ -102,7 +101,7 @@ def call_json(gen, log, cid_base, prompt, parse, seed_parts, meta, system=SYSTEM
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--stage", required=True, choices=["pilot2", "pilot3", "main"])
+    ap.add_argument("--stage", required=True, choices=["pilot2", "pilot3", "pilot4", "main"])
     ap.add_argument("--backend", default="hf", choices=["hf", "ollama"])
     ap.add_argument("--model", default="allenai/OLMo-2-1124-7B-Instruct")
     ap.add_argument("--device", default=None)

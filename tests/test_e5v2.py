@@ -158,6 +158,7 @@ def test_v3_samples():
     old |= {w for p in load_samples_v2()["pilot2"] for w in (p["w_p"], p["w_a"])} | set(EXAMPLE_WORDS)
     assert not set(allw) & old
     assert len(cells_v2("pilot3")) == 20 and len(cells_v2("main")) == 80
+    assert [c["cell"] for c in cells_v2("pilot4")] == [c["cell"] for c in cells_v2("pilot3")]
 
 
 # 6.5 완화: 짧은 답은 끝 문장부호 없이도 받고, S3의 'After:' 뒤만 읽는다
