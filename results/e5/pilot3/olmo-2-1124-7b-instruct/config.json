@@ -1,0 +1,59 @@
+{
+  "stage": "pilot3",
+  "generator": {
+    "backend": "hf",
+    "model": "allenai/OLMo-2-1124-7B-Instruct",
+    "dtype": "bfloat16",
+    "device": "cuda",
+    "revision": "470b1fba1ae01581f270116362ee4aa1b97f4c84",
+    "quantization": null,
+    "transformers": "5.22.2",
+    "torch": "2.15.0+cu132"
+  },
+  "n_cells": 20,
+  "limit": null,
+  "n_cand": 10,
+  "max_s1": 30,
+  "s1_decode": {
+    "temperature": 0.9,
+    "top_p": 0.95,
+    "max_new_tokens": 60
+  },
+  "s3_decode": {
+    "temperature": 0.7,
+    "top_p": 1.0,
+    "max_new_tokens": 60
+  },
+  "s3_tries": 2,
+  "baseline_decode": {
+    "temperature": 0.9,
+    "top_p": 1.0
+  },
+  "json_tries": 3,
+  "pick_temperature": 0.0,
+  "prompts_sha256": {
+    "s1_riddle": "bd224dac6979fa29a92209c74cc660f631bd63f4332f5d4972a0fb47f94ffbf0",
+    "s1_oneliner": "3f917e2c95e390cd4842874d8f5b02789a2872a034b50e119cc5f7c482f1d04d",
+    "s3_riddle": "964de3201588086f53fafb419408ec356939e10387ab3d03964d9af40bc1832b",
+    "s3_oneliner": "b99296396c6e6e6f13bbac3b85099f2f66d45b1a126f7353386d4208dd78fdc6",
+    "b1_single": "6379893bf9cd1b8e0131fc70519ef34ca24d18d3fd9b4b95fe5a883f8fb7bd58",
+    "b0_free": "4000b94b62732a44cfe3da1906a55ecfde287d5e024f693bf13cefab96fa3eb8",
+    "pick": "4e0aa97c182c72b41170979f22fb8ba11c14a888cec34670a5335d05a0cdc359",
+    "judge_success": "4fb80b6f21d24d51bebd5e573a9d3797321bf8ad2c6115c8455cee272d1c3a3a",
+    "judge_works": "10e2cb6844fdb420796f15dff240123e571d0376cd7af3bf82c8ec2ed907c305",
+    "judge_funny": "870dd9000e523f9058afb2b34ab02b9a1f342274b52f234e48c15b3dfc441bb4"
+  },
+  "samples_file": "samples_v3.json",
+  "samples_sha256": "b6ba5669f2f369463a6bbf8d49dd27cf2861c03a4e80fbc229e081acd4a263e3",
+  "git": {
+    "commit": "04fbbdf41d4afd38de6555d69bbb9f0f7cfa570e",
+    "dirty": false
+  },
+  "argv": [
+    "experiments/e5v2_generate.py",
+    "--stage",
+    "pilot3",
+    "--model",
+    "allenai/OLMo-2-1124-7B-Instruct"
+  ]
+}
