@@ -1,0 +1,5 @@
+A pun uses a word so that it also suggests a different, similar-sounding word, and both meanings fit the sentence. Most sentences that merely contain such a word are not puns.
+Sentence: {text}
+Candidate: the word "{w_p}" might be meant to also suggest "{w_a}".
+First, in one short sentence, say whether the sentence makes sense with "{w_p}" and whether it would also make sense with "{w_a}" in its place.
+Then, on a new line, write "Answer: yes" if this is a successful pun or "Answer: no" if it is not.

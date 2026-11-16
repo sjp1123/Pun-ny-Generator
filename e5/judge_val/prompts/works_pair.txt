@@ -1,0 +1,4 @@
+A pun uses a word so that it also suggests a different, similar-sounding word, and both meanings fit the sentence.
+Sentence: {text}
+Here the word "{w_p}" might be meant to also suggest "{w_a}".
+Is this sentence a successful pun? Answer yes or no.

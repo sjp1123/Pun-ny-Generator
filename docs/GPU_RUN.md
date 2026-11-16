@@ -75,6 +75,24 @@ python -X utf8 experiments/e5v2_judge.py  --stage pilot4 --gen $G --model pythia
   `python -X utf8 experiments/e5v2_report.py --stage pilot4 --gens olmo-2-0325-32b-instruct-4bit`로 만든다.
 - 파일럿 2·3 결과는 `results/e5/pilot2/`, `results/e5/pilot3/`에 그대로 둔다.
 
+## 3b. D — 판정기 검증 (본 실행 전)
+
+파일럿 4는 통과했지만(PREREG_E5 6.8) LLM 판정기가 못 미더워서, 이미 있는 사람 평가 자료로 판정기 후보를 먼저 거른다.
+설계와 합격 기준은 [JUDGE_VALIDATION.md](JUDGE_VALIDATION.md). 자료는 `gpu_bundle.zip`에 이미 들어 있다(`data/pungen/MTurk_aggregate_results/`,
+`data/gppl/data/pl-humor-full/results.tsv`).
+
+```bash
+git pull
+python -X utf8 experiments/judge_validate.py --judge Qwen/Qwen2.5-7B-Instruct
+python -X utf8 experiments/judge_validate.py --judge Qwen/Qwen2.5-14B-Instruct --load-4bit
+python -X utf8 experiments/judge_validate.py --judge microsoft/phi-4 --load-4bit
+python -X utf8 experiments/judge_validate.py --judge allenai/OLMo-2-0325-32B-Instruct --load-4bit
+```
+
+- 판정기 하나당 호출 약 5,900번(대부분 답이 한 단어). 끊겨도 같은 명령을 다시 실행하면 이어 간다.
+- 14B와 phi-4는 새로 내려받는다(각각 약 30GB). 시간이 없으면 첫 줄(7B)과 넷째 줄(이미 받아 둔 32B)만 돌려도 된다.
+- 끝날 때마다 화면에 합격 표가 나온다. 결과는 `results/judge_val/<판정기>/`(문장은 들어 있지 않고 항목 id와 답만 있다). 커밋해서 올려 줘.
+
 ## 4. (끝난 것) B — E5 파일럿 1
  (A의 캐시가 있으면 바로)
 

@@ -5,3 +5,6 @@ cache/
 __pycache__/
 .pytest_cache/
 gpu_bundle.zip
+# 판정기 검증: 풀이 전체(자료 문장이 섞일 수 있음)와 시험 실행 결과는 올리지 않는다
+results/judge_val/*/calls_local.jsonl
+results/judge_val/*-limit*/

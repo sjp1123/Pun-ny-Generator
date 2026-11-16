@@ -1,0 +1,2 @@
+The word "{w_p}" sounds like a different English word.
+Which other word does "{w_p}" sound like? Answer with one word that is different from "{w_p}".

@@ -1,0 +1,3 @@
+Rate how funny this sentence is on a scale from 1 (not funny at all) to 5 (very funny).
+Sentence: {text}
+Answer with a single number from 1 to 5.
