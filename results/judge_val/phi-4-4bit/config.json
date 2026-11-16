@@ -1,0 +1,48 @@
+{
+  "judge": {
+    "backend": "hf",
+    "model": "microsoft/phi-4",
+    "dtype": "bfloat16",
+    "device": "cuda",
+    "revision": "2db69c1c3e91a05d2c64a3185acfbaf36f744e25",
+    "quantization": "bitsandbytes nf4 (4bit)",
+    "transformers": "5.22.2",
+    "torch": "2.15.0+cu132"
+  },
+  "tests": [
+    "V1",
+    "V2",
+    "V3",
+    "V4",
+    "V5"
+  ],
+  "limit": null,
+  "temperature": 0.0,
+  "sample_seed": 20261117,
+  "pass_thresholds": {
+    "v1a_machine_bal_acc": 0.58,
+    "v1a_lower_min": 0.5,
+    "v1b_gold_yes": 0.7,
+    "v2_gold_rho": 0.2,
+    "v2_lower_min": 0.0,
+    "v3_acc": 0.72,
+    "v3_tie_max": 0.3
+  },
+  "n": {
+    "v3": 300,
+    "v4": 300,
+    "v5": 100
+  },
+  "calls_from_cache": false,
+  "seed": 20261112,
+  "git": {
+    "commit": "5e37ede1ab909eb44b870f35ec7cb2c2477c1ec8",
+    "dirty": false
+  },
+  "argv": [
+    "experiments/judge_validate.py",
+    "--judge",
+    "microsoft/phi-4",
+    "--load-4bit"
+  ]
+}

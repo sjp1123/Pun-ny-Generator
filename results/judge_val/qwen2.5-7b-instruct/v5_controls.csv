@@ -1,0 +1,301 @@
+item,ver,works_cur,works_pair,works_cot
+ctl|e5r000:oneliner#0|1,1 w_a 원문,True,False,False
+ctl|e5r000:oneliner#0|2,2 단어만 바꿈,True,True,True
+ctl|e5r000:oneliner#0|3,3 완성,True,True,True
+ctl|e5r000:oneliner#1|1,1 w_a 원문,False,False,False
+ctl|e5r000:oneliner#1|2,2 단어만 바꿈,True,True,False
+ctl|e5r000:oneliner#1|3,3 완성,True,True,True
+ctl|e5r000:oneliner#7|1,1 w_a 원문,True,False,False
+ctl|e5r000:oneliner#7|2,2 단어만 바꿈,True,True,True
+ctl|e5r000:oneliner#7|3,3 완성,True,True,True
+ctl|e5r000:oneliner#8|1,1 w_a 원문,True,False,False
+ctl|e5r000:oneliner#8|2,2 단어만 바꿈,True,True,True
+ctl|e5r000:oneliner#8|3,3 완성,True,True,True
+ctl|e5r000:riddle#1|1,1 w_a 원문,True,False,False
+ctl|e5r000:riddle#1|2,2 단어만 바꿈,True,True,False
+ctl|e5r000:riddle#1|3,3 완성,True,True,True
+ctl|e5r000:riddle#3|1,1 w_a 원문,True,False,False
+ctl|e5r000:riddle#3|2,2 단어만 바꿈,True,True,True
+ctl|e5r000:riddle#3|3,3 완성,True,True,True
+ctl|e5r000:riddle#7|1,1 w_a 원문,True,True,False
+ctl|e5r000:riddle#7|2,2 단어만 바꿈,True,True,True
+ctl|e5r000:riddle#7|3,3 완성,True,True,False
+ctl|e5r000:riddle#9|1,1 w_a 원문,True,False,False
+ctl|e5r000:riddle#9|2,2 단어만 바꿈,True,False,False
+ctl|e5r000:riddle#9|3,3 완성,True,True,True
+ctl|e5r001:oneliner#0|1,1 w_a 원문,True,False,False
+ctl|e5r001:oneliner#0|2,2 단어만 바꿈,True,True,False
+ctl|e5r001:oneliner#0|3,3 완성,True,True,True
+ctl|e5r001:oneliner#1|1,1 w_a 원문,True,False,False
+ctl|e5r001:oneliner#1|2,2 단어만 바꿈,True,True,True
+ctl|e5r001:oneliner#1|3,3 완성,True,True,True
+ctl|e5r001:oneliner#2|1,1 w_a 원문,True,False,False
+ctl|e5r001:oneliner#2|2,2 단어만 바꿈,True,True,True
+ctl|e5r001:oneliner#2|3,3 완성,True,True,True
+ctl|e5r001:oneliner#3|1,1 w_a 원문,False,False,False
+ctl|e5r001:oneliner#3|2,2 단어만 바꿈,True,True,True
+ctl|e5r001:oneliner#3|3,3 완성,True,True,True
+ctl|e5r001:oneliner#4|1,1 w_a 원문,True,False,False
+ctl|e5r001:oneliner#4|2,2 단어만 바꿈,True,True,True
+ctl|e5r001:oneliner#4|3,3 완성,True,True,True
+ctl|e5r001:oneliner#5|1,1 w_a 원문,True,False,False
+ctl|e5r001:oneliner#5|2,2 단어만 바꿈,True,True,True
+ctl|e5r001:oneliner#5|3,3 완성,True,True,True
+ctl|e5r001:oneliner#6|1,1 w_a 원문,True,False,False
+ctl|e5r001:oneliner#6|2,2 단어만 바꿈,True,True,True
+ctl|e5r001:oneliner#6|3,3 완성,True,True,False
+ctl|e5r001:oneliner#9|1,1 w_a 원문,True,False,False
+ctl|e5r001:oneliner#9|2,2 단어만 바꿈,True,True,True
+ctl|e5r001:oneliner#9|3,3 완성,True,True,True
+ctl|e5r001:riddle#3|1,1 w_a 원문,True,False,False
+ctl|e5r001:riddle#3|2,2 단어만 바꿈,True,True,False
+ctl|e5r001:riddle#3|3,3 완성,True,True,False
+ctl|e5r001:riddle#5|1,1 w_a 원문,True,False,False
+ctl|e5r001:riddle#5|2,2 단어만 바꿈,True,True,True
+ctl|e5r001:riddle#5|3,3 완성,True,True,True
+ctl|e5r001:riddle#6|1,1 w_a 원문,True,True,False
+ctl|e5r001:riddle#6|2,2 단어만 바꿈,True,True,False
+ctl|e5r001:riddle#6|3,3 완성,True,True,True
+ctl|e5r001:riddle#9|1,1 w_a 원문,True,False,False
+ctl|e5r001:riddle#9|2,2 단어만 바꿈,True,True,True
+ctl|e5r001:riddle#9|3,3 완성,True,True,True
+ctl|e5r002:oneliner#1|1,1 w_a 원문,True,False,False
+ctl|e5r002:oneliner#1|2,2 단어만 바꿈,True,True,True
+ctl|e5r002:oneliner#1|3,3 완성,True,True,False
+ctl|e5r002:oneliner#2|1,1 w_a 원문,True,False,False
+ctl|e5r002:oneliner#2|2,2 단어만 바꿈,True,True,False
+ctl|e5r002:oneliner#2|3,3 완성,True,True,False
+ctl|e5r002:oneliner#3|1,1 w_a 원문,True,False,False
+ctl|e5r002:oneliner#3|2,2 단어만 바꿈,True,True,True
+ctl|e5r002:oneliner#3|3,3 완성,True,True,True
+ctl|e5r002:oneliner#5|1,1 w_a 원문,True,False,False
+ctl|e5r002:oneliner#5|2,2 단어만 바꿈,True,True,True
+ctl|e5r002:oneliner#5|3,3 완성,True,True,False
+ctl|e5r002:oneliner#7|1,1 w_a 원문,True,False,False
+ctl|e5r002:oneliner#7|2,2 단어만 바꿈,True,True,True
+ctl|e5r002:oneliner#7|3,3 완성,True,True,True
+ctl|e5r002:oneliner#8|1,1 w_a 원문,True,True,False
+ctl|e5r002:oneliner#8|2,2 단어만 바꿈,True,True,True
+ctl|e5r002:oneliner#8|3,3 완성,True,True,False
+ctl|e5r002:riddle#1|1,1 w_a 원문,False,False,False
+ctl|e5r002:riddle#1|2,2 단어만 바꿈,True,True,False
+ctl|e5r002:riddle#1|3,3 완성,True,True,True
+ctl|e5r002:riddle#2|1,1 w_a 원문,True,True,False
+ctl|e5r002:riddle#2|2,2 단어만 바꿈,True,True,True
+ctl|e5r002:riddle#2|3,3 완성,True,True,True
+ctl|e5r002:riddle#3|1,1 w_a 원문,True,True,False
+ctl|e5r002:riddle#3|2,2 단어만 바꿈,True,True,True
+ctl|e5r002:riddle#3|3,3 완성,True,True,True
+ctl|e5r002:riddle#4|1,1 w_a 원문,True,False,False
+ctl|e5r002:riddle#4|2,2 단어만 바꿈,True,True,True
+ctl|e5r002:riddle#4|3,3 완성,True,True,True
+ctl|e5r002:riddle#7|1,1 w_a 원문,True,False,False
+ctl|e5r002:riddle#7|2,2 단어만 바꿈,True,True,True
+ctl|e5r002:riddle#7|3,3 완성,True,True,True
+ctl|e5r003:oneliner#1|1,1 w_a 원문,True,False,False
+ctl|e5r003:oneliner#1|2,2 단어만 바꿈,True,True,True
+ctl|e5r003:oneliner#1|3,3 완성,True,True,False
+ctl|e5r003:oneliner#3|1,1 w_a 원문,True,True,True
+ctl|e5r003:oneliner#3|2,2 단어만 바꿈,True,True,False
+ctl|e5r003:oneliner#3|3,3 완성,True,True,True
+ctl|e5r003:oneliner#8|1,1 w_a 원문,True,True,True
+ctl|e5r003:oneliner#8|2,2 단어만 바꿈,True,True,True
+ctl|e5r003:oneliner#8|3,3 완성,True,True,True
+ctl|e5r003:oneliner#9|1,1 w_a 원문,True,False,False
+ctl|e5r003:oneliner#9|2,2 단어만 바꿈,True,True,True
+ctl|e5r003:oneliner#9|3,3 완성,True,True,True
+ctl|e5r003:riddle#0|1,1 w_a 원문,True,True,True
+ctl|e5r003:riddle#0|2,2 단어만 바꿈,True,True,True
+ctl|e5r003:riddle#0|3,3 완성,True,True,True
+ctl|e5r003:riddle#4|1,1 w_a 원문,True,True,False
+ctl|e5r003:riddle#4|2,2 단어만 바꿈,True,True,True
+ctl|e5r003:riddle#4|3,3 완성,True,True,True
+ctl|e5r003:riddle#5|1,1 w_a 원문,True,True,False
+ctl|e5r003:riddle#5|2,2 단어만 바꿈,True,True,True
+ctl|e5r003:riddle#5|3,3 완성,True,True,False
+ctl|e5r003:riddle#6|1,1 w_a 원문,True,True,False
+ctl|e5r003:riddle#6|2,2 단어만 바꿈,True,True,True
+ctl|e5r003:riddle#6|3,3 완성,True,True,False
+ctl|e5r003:riddle#7|1,1 w_a 원문,True,True,False
+ctl|e5r003:riddle#7|2,2 단어만 바꿈,True,True,True
+ctl|e5r003:riddle#7|3,3 완성,True,True,True
+ctl|e5r003:riddle#9|1,1 w_a 원문,True,True,False
+ctl|e5r003:riddle#9|2,2 단어만 바꿈,True,True,True
+ctl|e5r003:riddle#9|3,3 완성,True,True,False
+ctl|e5r004:oneliner#0|1,1 w_a 원문,False,False,False
+ctl|e5r004:oneliner#0|2,2 단어만 바꿈,True,True,False
+ctl|e5r004:oneliner#0|3,3 완성,True,True,True
+ctl|e5r004:oneliner#2|1,1 w_a 원문,False,False,False
+ctl|e5r004:oneliner#2|2,2 단어만 바꿈,True,True,False
+ctl|e5r004:oneliner#2|3,3 완성,True,True,True
+ctl|e5r004:oneliner#3|1,1 w_a 원문,True,False,False
+ctl|e5r004:oneliner#3|2,2 단어만 바꿈,True,True,True
+ctl|e5r004:oneliner#3|3,3 완성,True,True,True
+ctl|e5r004:oneliner#4|1,1 w_a 원문,True,False,False
+ctl|e5r004:oneliner#4|2,2 단어만 바꿈,True,True,True
+ctl|e5r004:oneliner#4|3,3 완성,True,True,False
+ctl|e5r004:oneliner#5|1,1 w_a 원문,False,False,False
+ctl|e5r004:oneliner#5|2,2 단어만 바꿈,True,True,False
+ctl|e5r004:oneliner#5|3,3 완성,True,True,True
+ctl|e5r004:oneliner#6|1,1 w_a 원문,True,False,False
+ctl|e5r004:oneliner#6|2,2 단어만 바꿈,True,True,True
+ctl|e5r004:oneliner#6|3,3 완성,True,True,True
+ctl|e5r004:oneliner#8|1,1 w_a 원문,True,False,False
+ctl|e5r004:oneliner#8|2,2 단어만 바꿈,True,True,False
+ctl|e5r004:oneliner#8|3,3 완성,True,True,False
+ctl|e5r004:oneliner#9|1,1 w_a 원문,False,False,False
+ctl|e5r004:oneliner#9|2,2 단어만 바꿈,True,True,False
+ctl|e5r004:oneliner#9|3,3 완성,True,True,True
+ctl|e5r004:riddle#0|1,1 w_a 원문,True,False,False
+ctl|e5r004:riddle#0|2,2 단어만 바꿈,True,True,False
+ctl|e5r004:riddle#0|3,3 완성,True,True,True
+ctl|e5r004:riddle#1|1,1 w_a 원문,True,False,False
+ctl|e5r004:riddle#1|2,2 단어만 바꿈,True,True,True
+ctl|e5r004:riddle#1|3,3 완성,True,True,True
+ctl|e5r004:riddle#2|1,1 w_a 원문,True,False,False
+ctl|e5r004:riddle#2|2,2 단어만 바꿈,True,True,True
+ctl|e5r004:riddle#2|3,3 완성,True,True,True
+ctl|e5r004:riddle#3|1,1 w_a 원문,True,False,False
+ctl|e5r004:riddle#3|2,2 단어만 바꿈,True,True,True
+ctl|e5r004:riddle#3|3,3 완성,True,True,True
+ctl|e5r004:riddle#9|1,1 w_a 원문,True,False,False
+ctl|e5r004:riddle#9|2,2 단어만 바꿈,True,True,True
+ctl|e5r004:riddle#9|3,3 완성,True,True,True
+ctl|e5r005:oneliner#2|1,1 w_a 원문,True,False,False
+ctl|e5r005:oneliner#2|2,2 단어만 바꿈,True,True,True
+ctl|e5r005:oneliner#2|3,3 완성,True,True,True
+ctl|e5r005:oneliner#3|1,1 w_a 원문,False,False,False
+ctl|e5r005:oneliner#3|2,2 단어만 바꿈,True,True,True
+ctl|e5r005:oneliner#3|3,3 완성,True,True,True
+ctl|e5r005:oneliner#6|1,1 w_a 원문,True,False,False
+ctl|e5r005:oneliner#6|2,2 단어만 바꿈,True,True,False
+ctl|e5r005:oneliner#6|3,3 완성,True,True,True
+ctl|e5r005:riddle#2|1,1 w_a 원문,True,False,False
+ctl|e5r005:riddle#2|2,2 단어만 바꿈,True,True,True
+ctl|e5r005:riddle#2|3,3 완성,True,True,True
+ctl|e5r005:riddle#6|1,1 w_a 원문,True,False,False
+ctl|e5r005:riddle#6|2,2 단어만 바꿈,True,True,True
+ctl|e5r005:riddle#6|3,3 완성,True,True,True
+ctl|e5r005:riddle#7|1,1 w_a 원문,True,False,False
+ctl|e5r005:riddle#7|2,2 단어만 바꿈,True,True,True
+ctl|e5r005:riddle#7|3,3 완성,True,True,True
+ctl|e5r005:riddle#9|1,1 w_a 원문,True,False,False
+ctl|e5r005:riddle#9|2,2 단어만 바꿈,True,True,True
+ctl|e5r005:riddle#9|3,3 완성,True,True,True
+ctl|e5r006:oneliner#1|1,1 w_a 원문,True,False,False
+ctl|e5r006:oneliner#1|2,2 단어만 바꿈,True,True,True
+ctl|e5r006:oneliner#1|3,3 완성,True,True,True
+ctl|e5r006:oneliner#4|1,1 w_a 원문,True,False,False
+ctl|e5r006:oneliner#4|2,2 단어만 바꿈,True,True,True
+ctl|e5r006:oneliner#4|3,3 완성,True,True,True
+ctl|e5r006:oneliner#6|1,1 w_a 원문,True,False,False
+ctl|e5r006:oneliner#6|2,2 단어만 바꿈,True,True,True
+ctl|e5r006:oneliner#6|3,3 완성,True,True,True
+ctl|e5r006:riddle#0|1,1 w_a 원문,True,False,False
+ctl|e5r006:riddle#0|2,2 단어만 바꿈,True,True,True
+ctl|e5r006:riddle#0|3,3 완성,True,True,True
+ctl|e5r006:riddle#2|1,1 w_a 원문,True,False,False
+ctl|e5r006:riddle#2|2,2 단어만 바꿈,True,False,True
+ctl|e5r006:riddle#2|3,3 완성,True,True,True
+ctl|e5r006:riddle#3|1,1 w_a 원문,True,False,False
+ctl|e5r006:riddle#3|2,2 단어만 바꿈,True,True,True
+ctl|e5r006:riddle#3|3,3 완성,True,True,True
+ctl|e5r006:riddle#7|1,1 w_a 원문,True,False,False
+ctl|e5r006:riddle#7|2,2 단어만 바꿈,True,True,True
+ctl|e5r006:riddle#7|3,3 완성,True,False,False
+ctl|e5r006:riddle#8|1,1 w_a 원문,True,False,False
+ctl|e5r006:riddle#8|2,2 단어만 바꿈,True,True,True
+ctl|e5r006:riddle#8|3,3 완성,True,True,True
+ctl|e5r006:riddle#9|1,1 w_a 원문,True,False,False
+ctl|e5r006:riddle#9|2,2 단어만 바꿈,True,True,True
+ctl|e5r006:riddle#9|3,3 완성,True,True,True
+ctl|e5r007:oneliner#0|1,1 w_a 원문,True,False,False
+ctl|e5r007:oneliner#0|2,2 단어만 바꿈,True,True,True
+ctl|e5r007:oneliner#0|3,3 완성,True,True,True
+ctl|e5r007:oneliner#3|1,1 w_a 원문,True,False,False
+ctl|e5r007:oneliner#3|2,2 단어만 바꿈,True,True,True
+ctl|e5r007:oneliner#3|3,3 완성,True,True,True
+ctl|e5r007:oneliner#4|1,1 w_a 원문,False,False,False
+ctl|e5r007:oneliner#4|2,2 단어만 바꿈,True,True,True
+ctl|e5r007:oneliner#4|3,3 완성,False,True,True
+ctl|e5r007:oneliner#5|1,1 w_a 원문,True,False,False
+ctl|e5r007:oneliner#5|2,2 단어만 바꿈,False,True,True
+ctl|e5r007:oneliner#5|3,3 완성,True,True,True
+ctl|e5r007:oneliner#7|1,1 w_a 원문,True,False,False
+ctl|e5r007:oneliner#7|2,2 단어만 바꿈,True,True,True
+ctl|e5r007:oneliner#7|3,3 완성,True,True,False
+ctl|e5r007:riddle#0|1,1 w_a 원문,True,False,False
+ctl|e5r007:riddle#0|2,2 단어만 바꿈,True,True,True
+ctl|e5r007:riddle#0|3,3 완성,True,True,False
+ctl|e5r007:riddle#4|1,1 w_a 원문,True,False,False
+ctl|e5r007:riddle#4|2,2 단어만 바꿈,True,True,True
+ctl|e5r007:riddle#4|3,3 완성,True,True,True
+ctl|e5r007:riddle#6|1,1 w_a 원문,True,False,False
+ctl|e5r007:riddle#6|2,2 단어만 바꿈,True,True,False
+ctl|e5r007:riddle#6|3,3 완성,True,True,False
+ctl|e5r007:riddle#8|1,1 w_a 원문,True,False,False
+ctl|e5r007:riddle#8|2,2 단어만 바꿈,True,True,True
+ctl|e5r007:riddle#8|3,3 완성,True,True,True
+ctl|e5r008:oneliner#1|1,1 w_a 원문,True,False,False
+ctl|e5r008:oneliner#1|2,2 단어만 바꿈,True,True,False
+ctl|e5r008:oneliner#1|3,3 완성,True,True,True
+ctl|e5r008:oneliner#2|1,1 w_a 원문,True,False,False
+ctl|e5r008:oneliner#2|2,2 단어만 바꿈,True,True,True
+ctl|e5r008:oneliner#2|3,3 완성,True,True,True
+ctl|e5r008:oneliner#3|1,1 w_a 원문,True,False,False
+ctl|e5r008:oneliner#3|2,2 단어만 바꿈,True,True,False
+ctl|e5r008:oneliner#3|3,3 완성,True,True,True
+ctl|e5r008:oneliner#4|1,1 w_a 원문,True,False,False
+ctl|e5r008:oneliner#4|2,2 단어만 바꿈,True,True,True
+ctl|e5r008:oneliner#4|3,3 완성,True,True,True
+ctl|e5r008:oneliner#6|1,1 w_a 원문,True,False,False
+ctl|e5r008:oneliner#6|2,2 단어만 바꿈,True,True,True
+ctl|e5r008:oneliner#6|3,3 완성,True,True,True
+ctl|e5r008:oneliner#7|1,1 w_a 원문,True,False,False
+ctl|e5r008:oneliner#7|2,2 단어만 바꿈,True,True,True
+ctl|e5r008:oneliner#7|3,3 완성,True,True,False
+ctl|e5r008:oneliner#8|1,1 w_a 원문,False,False,False
+ctl|e5r008:oneliner#8|2,2 단어만 바꿈,True,True,True
+ctl|e5r008:oneliner#8|3,3 완성,True,True,True
+ctl|e5r008:riddle#0|1,1 w_a 원문,True,False,False
+ctl|e5r008:riddle#0|2,2 단어만 바꿈,True,True,False
+ctl|e5r008:riddle#0|3,3 완성,True,True,True
+ctl|e5r008:riddle#1|1,1 w_a 원문,True,False,False
+ctl|e5r008:riddle#1|2,2 단어만 바꿈,True,True,False
+ctl|e5r008:riddle#1|3,3 완성,True,True,True
+ctl|e5r008:riddle#4|1,1 w_a 원문,True,False,False
+ctl|e5r008:riddle#4|2,2 단어만 바꿈,True,True,False
+ctl|e5r008:riddle#4|3,3 완성,True,True,False
+ctl|e5r008:riddle#7|1,1 w_a 원문,True,False,False
+ctl|e5r008:riddle#7|2,2 단어만 바꿈,True,True,False
+ctl|e5r008:riddle#7|3,3 완성,True,True,True
+ctl|e5r008:riddle#8|1,1 w_a 원문,True,False,False
+ctl|e5r008:riddle#8|2,2 단어만 바꿈,True,True,False
+ctl|e5r008:riddle#8|3,3 완성,True,True,True
+ctl|e5r008:riddle#9|1,1 w_a 원문,True,False,False
+ctl|e5r008:riddle#9|2,2 단어만 바꿈,True,True,False
+ctl|e5r008:riddle#9|3,3 완성,True,True,False
+ctl|e5r009:oneliner#0|1,1 w_a 원문,True,False,False
+ctl|e5r009:oneliner#0|2,2 단어만 바꿈,True,True,True
+ctl|e5r009:oneliner#0|3,3 완성,True,True,True
+ctl|e5r009:oneliner#3|1,1 w_a 원문,False,False,False
+ctl|e5r009:oneliner#3|2,2 단어만 바꿈,True,True,False
+ctl|e5r009:oneliner#3|3,3 완성,True,True,True
+ctl|e5r009:oneliner#6|1,1 w_a 원문,True,False,False
+ctl|e5r009:oneliner#6|2,2 단어만 바꿈,True,True,True
+ctl|e5r009:oneliner#6|3,3 완성,True,True,True
+ctl|e5r009:oneliner#9|1,1 w_a 원문,True,False,False
+ctl|e5r009:oneliner#9|2,2 단어만 바꿈,True,True,True
+ctl|e5r009:oneliner#9|3,3 완성,True,True,True
+ctl|e5r009:riddle#3|1,1 w_a 원문,True,False,False
+ctl|e5r009:riddle#3|2,2 단어만 바꿈,True,True,True
+ctl|e5r009:riddle#3|3,3 완성,True,True,True
+ctl|e5r009:riddle#5|1,1 w_a 원문,True,False,False
+ctl|e5r009:riddle#5|2,2 단어만 바꿈,True,True,True
+ctl|e5r009:riddle#5|3,3 완성,True,True,True
+ctl|e5r009:riddle#6|1,1 w_a 원문,False,False,False
+ctl|e5r009:riddle#6|2,2 단어만 바꿈,True,True,True
+ctl|e5r009:riddle#6|3,3 완성,True,True,True
+ctl|e5r009:riddle#8|1,1 w_a 원문,True,False,False
+ctl|e5r009:riddle#8|2,2 단어만 바꿈,True,True,False
+ctl|e5r009:riddle#8|3,3 완성,True,True,True
