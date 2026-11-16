@@ -1,0 +1,3 @@
+In this joke, the word "{w_p}" is a pun: it sounds like a different English word.
+Joke: {text}
+Is this a working pun? Answer yes or no.

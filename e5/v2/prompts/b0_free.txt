@@ -1,0 +1,3 @@
+Write one pun.
+
+Return only JSON in this form, with no other text: {"text": "...", "pun_word": "...", "alt_word": "..."}. "pun_word" is the word in the text that carries the pun, and "alt_word" is the different word it sounds like.

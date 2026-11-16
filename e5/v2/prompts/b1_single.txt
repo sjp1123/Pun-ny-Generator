@@ -1,0 +1,8 @@
+Write one pun.
+
+Use the word "{w_p}" ({pos_p}: {g_p}) so that it also makes the reader think of the similar-sounding word "{w_a}" ({pos_a}: {g_a}).
+- The text must contain "{w_p}" (an inflected form is fine).
+- Do not write "{w_a}" or any form of it anywhere in the text. The reader should hear it, not see it.
+- At most 40 words.
+
+Return only JSON in this form, with no other text: {"text": "...", "pun_word": "..."}. "pun_word" is the exact form of "{w_p}" as written in "text".

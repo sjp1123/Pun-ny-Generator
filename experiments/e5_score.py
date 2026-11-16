@@ -42,6 +42,67 @@ def human_rows() -> pd.DataFrame:
     return pd.DataFrame(rows)
 
 
+def score_items(its: list[Item], model: str, lm_name: str, out, device, gamma: float, thr: float):
+    """항목마다 후보표(발음 상위 K + w_a)와 LM 점수(전역·국소·He 국소·왼쪽)를 이어서 만들고 지표를 낸다.
+    반환: (X 지표표, 표제어 열을 붙인 후보표 c2, LM 점수표). 후보표는 out/cand_table.parquet,
+    LM 점수는 cache/lm/<model>/<lm_name>에 쌓는다."""
+    out.mkdir(parents=True, exist_ok=True)
+    ct_path = out / "cand_table.parquet"
+    ct = pd.read_parquet(ct_path) if ct_path.exists() else pd.DataFrame()
+    have = set(ct.key) if len(ct) else set()
+    new = []
+    for it in its:
+        if it.id not in have:
+            t = candidates(it.w_p, K, it.w_a)
+            t.insert(0, "key", it.id)
+            new.append(t)
+    if new:
+        ct = pd.concat([ct] + new, ignore_index=True)
+        ct.to_parquet(ct_path, index=False)
+    by_key = {k: list(g.cand) for k, g in ct.groupby("key", sort=False)}
+    wr = CacheWriter(CACHE / "lm" / model / lm_name)
+    todo = [it for it in its if it.id not in wr.done]
+    if todo:
+        set_threads()
+        sc = LMScorer(model, device)
+        prog = Progress(len(todo), f"{model} {lm_name}")
+        for it in todo:
+            cs = by_key[it.id]
+            rows = [dict(ctx=c, cand=w, logprob=lp, ntok=n) for c, w, lp, n in score_item(sc, it, cs)]
+            prefix, lead = split_at(it)
+            res, _ = sc.continuation(prefix, [lead + match_case(it.surface, w) for w in cs])
+            rows += [dict(ctx="left", cand=w, logprob=lp, ntok=n) for w, (lp, n) in zip(cs, res)]
+            wr.add(it.id, rows)
+            prog.step()
+        wr.flush()
+
+    lm = lm_cache(model, lm_name)
+    c2 = add_lemma_cols(ct[ct.key.isin([it.id for it in its])])
+    c2 = c2[~c2.same_lemma]
+    spec = ("gamma", gamma)
+    m = {ctx: Listener(scored(c2, lm, ctx), "C+wa").metrics(spec) for ctx in ("global", "left", "local")}
+    X = pd.DataFrame(dict(rank_g=m["global"]["rank"], A_g=m["global"].A, logF_g=m["global"].logF,
+                          logpi_wa_g=m["global"].logpi_wa, logD_g=m["global"].logD, L_g=m["global"].L,
+                          S_left=m["left"].S, logF_left=m["left"].logF, logF_local=m["local"].logF,
+                          logD_local=m["local"].logD))
+    X = X.join(lm_baselines(its, c2, lm)[["S_ratio", "sent_lp"]])
+    X["gate"] = (X.rank_g == 1) & (X.A_g >= thr)
+    X["score"] = X.logF_g + X.S_left
+    X.index.name = "cand_id"
+    return X, c2, lm
+
+
+def top_lemmas(c2: pd.DataFrame, lm: pd.DataFrame, ctx: str, gamma: float, k: int = 5) -> dict:
+    """항목마다 청자 사후분포 π_ctx의 표제어 묶음 상위 k개 [(표제어, 확률)]. w_p 묶음도 포함(표시: is_wp)."""
+    L = Listener(scored(c2, lm, ctx), "C+wa")
+    df = pd.DataFrame(dict(key=L.keys, lemma=L.df.lemma.to_numpy(), lp=L.logpi(("gamma", gamma)), wp=L.is_wp))
+    g = df.groupby(["key", "lemma"], sort=False).agg(lp=("lp", lambda x: np.logaddexp.reduce(x.to_numpy())),
+                                                     wp=("wp", "any")).reset_index()
+    g = g.sort_values(["key", "lp"], ascending=[True, False])
+    return {key: [[r.lemma, round(float(np.exp(r.lp)), 5), bool(r.wp)] for r in grp.head(k).itertuples()]
+            for key, grp in g.groupby("key", sort=False)}
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--stage", required=True, choices=["pilot", "main"])
@@ -58,50 +119,7 @@ def main():
     write_config(out, dict(stage=a.stage, gen=a.gen, model=a.model, K=K, gamma=gamma, A_threshold=thr,
                            gate_source=f"results/{a.model}/e5_gate", n_scorable=len(its)))
 
-    # ---- 후보표와 LM 점수 (이어서 만들기)
-    ct_path = out / "cand_table.parquet"
-    ct = pd.read_parquet(ct_path) if ct_path.exists() else pd.DataFrame()
-    have = set(ct.key) if len(ct) else set()
-    new = []
-    for it in its:
-        if it.id not in have:
-            t = candidates(it.w_p, K, it.w_a)
-            t.insert(0, "key", it.id)
-            new.append(t)
-    if new:
-        ct = pd.concat([ct] + new, ignore_index=True)
-        ct.to_parquet(ct_path, index=False)
-    by_key = {k: list(g.cand) for k, g in ct.groupby("key", sort=False)}
-    wr = CacheWriter(CACHE / "lm" / a.model / f"e5_{a.stage}_{a.gen}")
-    todo = [it for it in its if it.id not in wr.done]
-    if todo:
-        set_threads()
-        sc = LMScorer(a.model, a.device)
-        prog = Progress(len(todo), f"{a.model} E5 {a.stage}")
-        for it in todo:
-            cs = by_key[it.id]
-            rows = [dict(ctx=c, cand=w, logprob=lp, ntok=n) for c, w, lp, n in score_item(sc, it, cs)]
-            prefix, lead = split_at(it)
-            res, _ = sc.continuation(prefix, [lead + match_case(it.surface, w) for w in cs])
-            rows += [dict(ctx="left", cand=w, logprob=lp, ntok=n) for w, (lp, n) in zip(cs, res)]
-            wr.add(it.id, rows)
-            prog.step()
-        wr.flush()
-
-    # ---- 지표
-    lm = lm_cache(a.model, f"e5_{a.stage}_{a.gen}")
-    c2 = add_lemma_cols(ct[ct.key.isin([it.id for it in its])])
-    c2 = c2[~c2.same_lemma]
-    spec = ("gamma", gamma)
-    m = {ctx: Listener(scored(c2, lm, ctx), "C+wa").metrics(spec) for ctx in ("global", "left", "local")}
-    X = pd.DataFrame(dict(rank_g=m["global"]["rank"], A_g=m["global"].A, logF_g=m["global"].logF,
-                          logpi_wa_g=m["global"].logpi_wa, logD_g=m["global"].logD, L_g=m["global"].L,
-                          S_left=m["left"].S, logF_left=m["left"].logF, logF_local=m["local"].logF,
-                          logD_local=m["local"].logD))
-    X = X.join(lm_baselines(its, c2, lm)[["S_ratio", "sent_lp"]])
-    X["gate"] = (X.rank_g == 1) & (X.A_g >= thr)
-    X["score"] = X.logF_g + X.S_left
-    X.index.name = "cand_id"
+    X, _, _ = score_items(its, a.model, f"e5_{a.stage}_{a.gen}", out, a.device, gamma, thr)
     X.to_csv(out / "scores.csv")
     src = cand.set_index("cand_id").source.reindex(X.index)
     print(f"채점 {len(X)}개 / 대상 {len(cand)}개.  관문 통과율(출처별):")

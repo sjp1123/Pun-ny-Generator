@@ -1,0 +1,7 @@
+Which of these two jokes is funnier?
+
+A: {a}
+
+B: {b}
+
+Return only JSON: {"funnier": "A" or "B"}

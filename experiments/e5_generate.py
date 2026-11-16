@@ -32,16 +32,16 @@ PICK_TEMPERATURE = 0.0
 
 
 class Log:
-    def __init__(self, path: Path):
-        self.path = path
+    def __init__(self, path: Path, key: str = "call_id"):
+        self.path, self.key = path, key
         self.rec = {}
         if path.exists():
             for line in path.read_text(encoding="utf-8").splitlines():
                 r = json.loads(line)
-                self.rec[r["call_id"]] = r
+                self.rec[r[key]] = r
 
     def add(self, r: dict):
-        self.rec[r["call_id"]] = r
+        self.rec[r[self.key]] = r
         with self.path.open("a", encoding="utf-8") as f:
             f.write(json.dumps(r, ensure_ascii=False) + "\n")
 

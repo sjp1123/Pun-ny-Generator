@@ -1,0 +1,14 @@
+You write short, ordinary riddles. Do not try to be clever.
+
+Write one riddle (a question and a short answer) that uses the word "{w_a}" exactly once, with this meaning: {g_a}.
+Rules:
+- "{w_a}" must be one of the last two words of the answer, in exactly this form (no plural, no other ending).
+- The question should describe a situation where "{w_a}" is the natural, expected answer. A common phrase containing "{w_a}" is ideal.
+- Use simple, everyday words. Keep the question under 15 words and the answer under 8 words.
+- Output only the riddle in this form:
+Q: <question>
+A: <answer>
+
+Example (word "beagle", meaning "a small hound with a smooth coat"):
+Q: What kind of dog did she adopt from the shelter?
+A: A beagle.

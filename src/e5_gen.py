@@ -31,7 +31,7 @@ def hf_revision(name: str, model=None) -> str | None:
 
 class Generator:
     def __init__(self, backend: str, model: str, device: str | None = None, dtype: str = "bfloat16",
-                 host: str = "http://localhost:11434", think: bool | None = None):
+                 host: str = "http://localhost:11434", think: bool | None = None, load_4bit: bool = False):
         self.backend, self.model_name, self.host, self.think = backend, model, host, think
         self.info = dict(backend=backend, model=model)
         if backend == "hf":
@@ -40,8 +40,16 @@ class Generator:
             self.torch = torch
             self.device = device or ("cuda" if torch.cuda.is_available() else "cpu")
             self.tok = AutoTokenizer.from_pretrained(model)
-            self.model = AutoModelForCausalLM.from_pretrained(model, dtype=getattr(torch, dtype)).to(self.device).eval()
+            if load_4bit:  # bitsandbytes NF4, 계산은 dtype(bf16). 32B를 24~48GB GPU에 올릴 때
+                from transformers import BitsAndBytesConfig
+                q = BitsAndBytesConfig(load_in_4bit=True, bnb_4bit_quant_type="nf4",
+                                       bnb_4bit_compute_dtype=getattr(torch, dtype))
+                self.model = AutoModelForCausalLM.from_pretrained(model, quantization_config=q,
+                                                                  device_map={"": self.device}).eval()
+            else:
+                self.model = AutoModelForCausalLM.from_pretrained(model, dtype=getattr(torch, dtype)).to(self.device).eval()
             self.info.update(dtype=dtype, device=self.device, revision=hf_revision(model, self.model),
+                             quantization="bitsandbytes nf4 (4bit)" if load_4bit else None,
                              transformers=__import__("transformers").__version__, torch=torch.__version__)
         elif backend == "ollama":
             import requests
@@ -57,8 +65,10 @@ class Generator:
         else:
             raise ValueError(backend)
 
-    def chat(self, user: str, seed: int, temperature: float, max_new_tokens: int = 1500, system: str = SYSTEM) -> str:
-        msgs = [dict(role="system", content=system), dict(role="user", content=user)]
+    def chat(self, user: str, seed: int, temperature: float, max_new_tokens: int = 1500, system: str | None = SYSTEM,
+             top_p: float = 1.0) -> str:
+        """system=None이면 시스템 메시지 없이 사용자 한 턴만 보낸다(v2 단계 프롬프트)."""
+        msgs = ([dict(role="system", content=system)] if system else []) + [dict(role="user", content=user)]
         if self.backend == "hf":
             torch = self.torch
             enc = self.tok.apply_chat_template(msgs, add_generation_prompt=True, return_tensors="pt", return_dict=True)
@@ -66,13 +76,13 @@ class Generator:
             torch.manual_seed(seed)
             if torch.cuda.is_available():
                 torch.cuda.manual_seed_all(seed)
-            kw = dict(do_sample=True, temperature=temperature, top_p=1.0, top_k=0) if temperature > 0 else dict(do_sample=False)
+            kw = dict(do_sample=True, temperature=temperature, top_p=top_p, top_k=0) if temperature > 0 else dict(do_sample=False)
             with torch.inference_mode():
                 out = self.model.generate(ids, attention_mask=torch.ones_like(ids), max_new_tokens=max_new_tokens,
                                           pad_token_id=self.tok.pad_token_id or self.tok.eos_token_id, **kw)
             return self.tok.decode(out[0, ids.shape[1]:], skip_special_tokens=True)
         body = dict(model=self.model_name, messages=msgs, stream=False,
-                    options=dict(temperature=temperature, seed=seed, num_predict=max_new_tokens, top_p=1.0, top_k=0))
+                    options=dict(temperature=temperature, seed=seed, num_predict=max_new_tokens, top_p=top_p, top_k=0))
         if self.think is not None:
             body["think"] = self.think
         r = self.http.post(f"{self.host}/api/chat", json=body, timeout=1800)

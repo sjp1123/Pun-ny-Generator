@@ -1,0 +1,492 @@
+{
+ "seed": "stable_seed(\"e5v2\", \"pilot2\")",
+ "n_pairs_all": 63758,
+ "excluded_words": {
+  "samples_v1": 120,
+  "prompt_examples": [
+   "bagel",
+   "beagle",
+   "bed",
+   "bread"
+  ]
+ },
+ "hint_rule": {
+  "pool": 20,
+  "n": 5,
+  "cos_wa_max": 0.3,
+  "w2v": "GoogleNews-vectors-negative300 (상위 100만 단어)"
+ },
+ "pilot2": [
+  {
+   "pair_id": "e5q000",
+   "w_p": "scatter",
+   "w_a": "sector",
+   "d_unit": 2.0,
+   "d_unit_norm": 0.4,
+   "cos": 0.0373,
+   "pos_p": "noun",
+   "gloss_p": "a haphazard distribution in all directions",
+   "pos_a": "noun",
+   "gloss_a": "a plane figure bounded by two radii and the included arc of a circle",
+   "hints": [
+    "disperse",
+    "sprinkle",
+    "gather",
+    "drift",
+    "explode"
+   ]
+  },
+  {
+   "pair_id": "e5q001",
+   "w_p": "sticker",
+   "w_a": "speaker",
+   "d_unit": 2.0,
+   "d_unit_norm": 0.4,
+   "cos": 0.0747,
+   "pos_p": "noun",
+   "gloss_p": "a small sharp-pointed tip resembling a spike on a stem or leaf",
+   "pos_a": "noun",
+   "gloss_a": "someone who expresses in language; someone who talks (especially someone who delivers a public speech or someone especially garrulous)",
+   "hints": [
+    "badge",
+    "tags",
+    "lettering",
+    "logo",
+    "insignia"
+   ]
+  },
+  {
+   "pair_id": "e5q002",
+   "w_p": "ram",
+   "w_a": "rack",
+   "d_unit": 1.0,
+   "d_unit_norm": 0.333,
+   "cos": 0.2643,
+   "pos_p": "noun",
+   "gloss_p": "a tool for driving or forcing something by impact",
+   "pos_a": "noun",
+   "gloss_a": "framework for holding objects",
+   "hints": [
+    "push",
+    "shove",
+    "shepherd",
+    "steer",
+    "prod"
+   ]
+  },
+  {
+   "pair_id": "e5q003",
+   "w_p": "whipping",
+   "w_a": "missing",
+   "d_unit": 2.0,
+   "d_unit_norm": 0.4,
+   "cos": 0.0899,
+   "pos_p": "noun",
+   "gloss_p": "beating with a whip or strap or rope as a form of punishment",
+   "pos_a": "adjective",
+   "gloss_a": "not able to be found",
+   "hints": [
+    "beating",
+    "ripping",
+    "smacking",
+    "lashing",
+    "blowing"
+   ]
+  },
+  {
+   "pair_id": "e5q004",
+   "w_p": "ticket",
+   "w_a": "timid",
+   "d_unit": 2.0,
+   "d_unit_norm": 0.4,
+   "cos": 0.0635,
+   "pos_p": "noun",
+   "gloss_p": "a commercial document showing that the holder is entitled to something (as to ride on public transportation or to enter a public entertainment)",
+   "pos_a": "noun",
+   "gloss_a": "people who are fearful and cautious",
+   "hints": [
+    "fares",
+    "seats",
+    "booking",
+    "admission",
+    "merchandise"
+   ]
+  },
+  {
+   "pair_id": "e5q005",
+   "w_p": "yielding",
+   "w_a": "healing",
+   "d_unit": 2.0,
+   "d_unit_norm": 0.333,
+   "cos": 0.0647,
+   "pos_p": "noun",
+   "gloss_p": "a verbal act of admitting defeat",
+   "pos_a": "noun",
+   "gloss_a": "the natural process by which the body repairs itself",
+   "hints": [
+    "surrendering",
+    "scattering",
+    "allowing",
+    "striking",
+    "fanning"
+   ]
+  },
+  {
+   "pair_id": "e5q006",
+   "w_p": "heir",
+   "w_a": "aired",
+   "d_unit": 1.0,
+   "d_unit_norm": 0.333,
+   "cos": -0.0147,
+   "pos_p": "noun",
+   "gloss_p": "a person who is entitled by law or by the terms of a will to inherit the estate of another",
+   "pos_a": "adjective",
+   "gloss_a": "open to or abounding in fresh air",
+   "hints": [
+    "scion",
+    "magnate",
+    "tycoon",
+    "successor",
+    "baron"
+   ]
+  },
+  {
+   "pair_id": "e5q007",
+   "w_p": "flee",
+   "w_a": "family",
+   "d_unit": 2.0,
+   "d_unit_norm": 0.4,
+   "cos": 0.1277,
+   "pos_p": "verb",
+   "gloss_p": "run away quickly",
+   "pos_a": "noun",
+   "gloss_a": "a social unit living together",
+   "hints": [
+    "escape",
+    "evacuate",
+    "leave",
+    "panicked",
+    "deported"
+   ]
+  },
+  {
+   "pair_id": "e5q008",
+   "w_p": "train",
+   "w_a": "traitor",
+   "d_unit": 2.0,
+   "d_unit_norm": 0.4,
+   "cos": -0.0141,
+   "pos_p": "noun",
+   "gloss_p": "public transport provided by a line of railway cars coupled together and drawn by a locomotive",
+   "pos_a": "noun",
+   "gloss_a": "someone who betrays his country by committing treason",
+   "hints": [
+    "locomotive",
+    "railway",
+    "bus",
+    "rail",
+    "tram"
+   ]
+  },
+  {
+   "pair_id": "e5q009",
+   "w_p": "bat",
+   "w_a": "butt",
+   "d_unit": 1.0,
+   "d_unit_norm": 0.333,
+   "cos": 0.2246,
+   "pos_p": "noun",
+   "gloss_p": "nocturnal mouselike mammal with forelimbs modified to form membranous wings and anatomical adaptations for echolocation by which they navigate",
+   "pos_a": "noun",
+   "gloss_a": "thick end of the handle",
+   "hints": [
+    "fielder",
+    "balls",
+    "bowler",
+    "pitch",
+    "hitter"
+   ]
+  }
+ ],
+ "hints_main": {
+  "e5p010": [
+   "robbery",
+   "robbers",
+   "thief",
+   "theft",
+   "bandit"
+  ],
+  "e5p011": [
+   "strolling",
+   "walking",
+   "roam",
+   "wanderer",
+   "crawling"
+  ],
+  "e5p012": [
+   "ocean",
+   "waters",
+   "oceanic",
+   "coastal",
+   "lagoon"
+  ],
+  "e5p013": [
+   "testing",
+   "evaluated",
+   "sampled",
+   "validated",
+   "developed"
+  ],
+  "e5p014": [
+   "plunging",
+   "falling",
+   "jumping",
+   "collapse",
+   "slipping"
+  ],
+  "e5p015": [
+   "gimmick",
+   "daredevil",
+   "skit",
+   "prank",
+   "ploy"
+  ],
+  "e5p016": [
+   "conserve",
+   "preserve",
+   "avert",
+   "earn",
+   "wasted"
+  ],
+  "e5p017": [
+   "scanning",
+   "detector",
+   "imaging",
+   "printer",
+   "doppler"
+  ],
+  "e5p018": [
+   "chest",
+   "forearm",
+   "forehead",
+   "punching",
+   "elbows"
+  ],
+  "e5p019": [
+   "battling",
+   "struggle",
+   "waging",
+   "combat",
+   "fighters"
+  ],
+  "e5p020": [
+   "slowdown",
+   "sluggish",
+   "accelerating",
+   "weakening",
+   "stalling"
+  ],
+  "e5p021": [
+   "derrick",
+   "drilling",
+   "crane",
+   "vessel",
+   "barge"
+  ],
+  "e5p022": [
+   "higher",
+   "reduced",
+   "weaker",
+   "high",
+   "greater"
+  ],
+  "e5p023": [
+   "lash",
+   "chop",
+   "smacking",
+   "summon",
+   "crank"
+  ],
+  "e5p024": [
+   "burning",
+   "blazing",
+   "exploding",
+   "fiery",
+   "molten"
+  ],
+  "e5p025": [
+   "prompt",
+   "provoke",
+   "spark",
+   "induce",
+   "cause"
+  ],
+  "e5p026": [
+   "skating",
+   "gymnast",
+   "skier",
+   "athlete",
+   "swimmer"
+  ],
+  "e5p027": [
+   "rewarded",
+   "worthy",
+   "mattered",
+   "earned",
+   "got"
+  ],
+  "e5p028": [
+   "fable",
+   "story",
+   "parable",
+   "allegory",
+   "narrative"
+  ],
+  "e5p029": [
+   "spot",
+   "finish",
+   "where",
+   "standings",
+   "round"
+  ],
+  "e5p030": [
+   "congressman",
+   "lawmaker",
+   "legislator",
+   "governor",
+   "politician"
+  ],
+  "e5p031": [
+   "erode",
+   "weaken",
+   "syrup",
+   "suck",
+   "slows"
+  ],
+  "e5p032": [
+   "boon",
+   "saver",
+   "pivotal",
+   "savior",
+   "catalyst"
+  ],
+  "e5p033": [
+   "discontent",
+   "opposition",
+   "protests",
+   "revolt",
+   "rebellion"
+  ],
+  "e5p034": [
+   "crown",
+   "championship",
+   "title",
+   "biomass",
+   "champs"
+  ],
+  "e5p035": [
+   "silverware",
+   "quadruple",
+   "premiership",
+   "double"
+  ],
+  "e5p036": [
+   "establishing",
+   "creating",
+   "breaking",
+   "putting",
+   "locking"
+  ],
+  "e5p037": [
+   "wager",
+   "gambling",
+   "gamblers",
+   "odds",
+   "poker"
+  ],
+  "e5p038": [
+   "tasty",
+   "delicious",
+   "reuben",
+   "cheery",
+   "meaty"
+  ],
+  "e5p039": [
+   "pallet",
+   "grower",
+   "shipper",
+   "farmer",
+   "bale"
+  ],
+  "e5p040": [
+   "told",
+   "excerpt",
+   "spoke",
+   "reporters",
+   "statement"
+  ],
+  "e5p041": [
+   "cutting",
+   "trimming",
+   "climbing",
+   "stepping",
+   "expanding"
+  ],
+  "e5p042": [
+   "trio",
+   "two",
+   "couple",
+   "duo",
+   "three"
+  ],
+  "e5p043": [
+   "reliant",
+   "depended",
+   "rely",
+   "dependence",
+   "predicated"
+  ],
+  "e5p044": [
+   "eating",
+   "vegetarian",
+   "dieter",
+   "yogi",
+   "foodie"
+  ],
+  "e5p045": [
+   "whopping",
+   "cumulative",
+   "approximately",
+   "roughly",
+   "combined"
+  ],
+  "e5p046": [
+   "oil",
+   "drilling",
+   "rigs",
+   "coast",
+   "outsourcing"
+  ],
+  "e5p047": [
+   "clad",
+   "wearing",
+   "decked",
+   "attire",
+   "garb"
+  ],
+  "e5p048": [
+   "photograph",
+   "picture",
+   "painting",
+   "paintings",
+   "depiction"
+  ],
+  "e5p049": [
+   "genius",
+   "maestro",
+   "cunning",
+   "renowned",
+   "architect"
+  ]
+ }
+}

@@ -1,0 +1,5 @@
+Here are some puns, numbered.
+
+{items}
+
+Which one is the funniest? Return only JSON: {"choice": <number>}.

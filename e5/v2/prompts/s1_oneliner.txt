@@ -1,0 +1,9 @@
+Write one ordinary sentence that uses the word "{w_a}" exactly once, with this meaning: {g_a}.
+Rules:
+- "{w_a}" must be one of the last three words of the sentence, in exactly this form (no plural, no other ending).
+- The beginning of the sentence should make "{w_a}" the natural, expected word at the end. A common phrase containing "{w_a}" is ideal.
+- One sentence, under 25 words, not a question.
+- Output only the sentence.
+
+Example (word "bed", meaning "a piece of furniture for sleeping"):
+After a long day at work, all he wanted was to crawl into bed.
