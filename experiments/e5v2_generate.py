@@ -101,7 +101,7 @@ def call_json(gen, log, cid_base, prompt, parse, seed_parts, meta, system=SYSTEM
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--stage", required=True, choices=["pilot2", "pilot3", "pilot4", "main"])
+    ap.add_argument("--stage", required=True, choices=["pilot2", "pilot3", "pilot4", "pilot5", "main"])
     ap.add_argument("--backend", default="hf", choices=["hf", "ollama"])
     ap.add_argument("--model", default="allenai/OLMo-2-1124-7B-Instruct")
     ap.add_argument("--device", default=None)

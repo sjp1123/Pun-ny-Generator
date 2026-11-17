@@ -48,10 +48,17 @@ S2_ONE = s2_swap(dict(sentence="After a long day at work, all he wanted was to c
 
 
 def test_s3_check():
-    good = s3_check("After a long day at the bakery, all he wanted was to crawl into bread.", S2_ONE, "bread", "bed",
+    good = s3_check("After a long day at work in the bakery, all he wanted was to crawl into bread.", S2_ONE, "bread", "bed",
                     "oneliner", ["bakery", "loaf"])
     assert good["ok"], good["reasons"]
-    assert good["edited"] == ["the", "bakery"] and good["hint_used"]
+    assert good["edited"] == ["in", "the", "bakery"] and good["hint_used"]
+    # 넣기만 (6.11): 기존 단어를 바꾸거나 지우면 실패. 문두 대문자만 바뀐 것은 괜찮다
+    assert "removed" in s3_check("After a long day at the bakery, all he wanted was to crawl into bread.", S2_ONE, "bread",
+                                 "bed", "oneliner")["reasons"]
+    assert "removed" in s3_check("After a day at the bakery, all he wanted was to crawl into bread.", S2_ONE, "bread",
+                                 "bed", "oneliner")["reasons"]
+    assert s3_check("Fresh from baking, after a long day at work, all he wanted was to crawl into bread.", S2_ONE, "bread",
+                    "bed", "oneliner")["ok"]
     assert "suffix_changed" in s3_check("After a long day at the bakery, all he wanted was a slice of bread.", S2_ONE,
                                         "bread", "bed", "oneliner")["reasons"]
     assert "edit_width" in s3_check("After a long day at work, all he wanted was to crawl into bread.", S2_ONE, "bread",
@@ -61,8 +68,10 @@ def test_s3_check():
     assert "wa_leak" in s3_check("After a long day making beds, all he wanted was to crawl into bread.", S2_ONE,
                                  "bread", "bed", "oneliner")["reasons"]
     s2r = s2_swap(dict(q="What kind of dog did she adopt from the shelter?", a="A beagle."), "beagle", "bagel", "riddle")
-    assert s3_check("Q: What kind of dog did the baker adopt from the shelter?\nA: A bagel.", s2r, "bagel", "beagle",
-                    "riddle")["ok"]
+    assert s3_check("Q: What kind of dog did she adopt from the shelter near the bakery?\nA: A bagel.", s2r, "bagel",
+                    "beagle", "riddle")["ok"]
+    assert "removed" in s3_check("Q: What kind of dog did the baker adopt from the shelter?\nA: A bagel.", s2r, "bagel",
+                                 "beagle", "riddle")["reasons"]
     assert "suffix_changed" in s3_check("Q: What did the baker adopt?\nA: A sesame bagel.", s2r, "bagel", "beagle",
                                         "riddle")["reasons"]
 
@@ -171,7 +180,7 @@ def test_relaxed_rules():
     s2 = s2_swap(dict(sentence="After a long day at work, all he wanted was to crawl into bed."), "bed", "bread",
                  "oneliner")
     raw = ("Before: After a long day at work, all he wanted was to crawl into bread.\n"
-           "After: After a long day at the bakery, all he wanted was to crawl into bread.")
+           "After: After a long day at work in the bakery, all he wanted was to crawl into bread.")
     assert s3_check(raw, s2, "bread", "bed", "oneliner")["ok"]
 
 
@@ -200,3 +209,15 @@ def test_judge2_summarize():
     assert res["all_P"]["works3"]["est"] == 0.5 and res["all_P"]["s3_effect"]["est"] == 0.5
     assert res["all_P"]["works_gate_pass"]["est"] == 1.0 and res["all_P"]["works_gate_fail"]["est"] == 0.0
     assert res["pairs_with_any_works"] == 1 and res["pairs_all_works"] == 0
+
+
+# 파일럿 5: pilot5는 파일럿 3 쌍을 쓰고, 보고서는 judge2로 C4를 바꾸고 S3 확인을 더한다
+def test_pilot5_stage_and_report(tmp_path):
+    import json
+    from e5v2_report import apply_judge2
+    assert [c["cell"] for c in cells_v2("pilot5")] == [c["cell"] for c in cells_v2("pilot3")]
+    (tmp_path / "metrics.json").write_text(json.dumps(dict(all_P=dict(
+        works3=dict(est=0.7, lo=0.5, hi=0.9, n=200), s3_effect=dict(est=-0.01, lo=-0.1, hi=0.1, n=200)))), encoding="utf-8")
+    R = dict(criteria=dict(C1=dict(passed=True), C2=dict(passed=True), C3=dict(passed=True), C4=dict(passed=False)))
+    apply_judge2(R, tmp_path)
+    assert R["criteria"]["C4"]["passed"] and not R["criteria"]["S3"]["passed"] and not R["criteria"]["all"]

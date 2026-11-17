@@ -1,14 +1,14 @@
 Here is a sentence that ends with the word "{w_p}" ({g_p}):
 {sentence}
 
-Edit the beginning of the sentence so that it also connects to "{w_p}" in the sense "{g_p}".
+Add a few words to the beginning of the sentence so that it also connects to "{w_p}" in the sense "{g_p}".
 Rules:
-- Replace or add at most four words. Ideas for related words: {hints}.
+- Add one to four new words. Ideas for related words: {hints}.
+- Do not delete or replace any existing word. Every original word must stay, in the same order.
 - Do not change this ending at all: "{protected_suffix}"
-- Keep everything else as it is.
 - Do not use the word "{w_p}" anywhere else.
 - Output only the edited sentence.
 
 Example (last word "bread", meaning "food made of baked dough"):
 Before: After a long day at work, all he wanted was to crawl into bread.
-After: After a long day at the bakery, all he wanted was to crawl into bread.
+After: After a long day at work in the bakery, all he wanted was to crawl into bread.

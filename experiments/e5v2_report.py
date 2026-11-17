@@ -12,9 +12,11 @@
   C3 고를 여지: 후보가 모두 관문을 통과한 칸 < 50%
   C4 판정기 확인: 규칙 통과 후보 전체의 판정기 성공률 ≥ 0.20
 결정 규칙: --gens 순서(7B, 32B)대로 처음으로 C1~C4를 모두 넘은 모델을 본 실행 생성기로. 없으면 태그를 달지 않는다.
+파일럿 5(--judge2, PREREG_E5 6.11): C4는 phi-4 성립 판정(모든 P 후보 ③의 yes 비율 ≥ 0.20)으로 바꾸고 S3 확인
+(③ − ② 성립 yes 차이 ≥ 0, 점추정)을 더한다. 모두 넘으면 본 실행 S3는 넣기만, 아니면 파일럿 4의 S3(바꾸기 허용)로 돌아간다.
 
 사용: python -X utf8 experiments/e5v2_report.py --gens olmo-2-1124-7b-instruct olmo-2-0325-32b-instruct
-출력: results/e5/<stage>/report.md, report.json (stage 기본 pilot4)
+출력: results/e5/<stage>/report.md, report.json (stage 기본 pilot5)
 """
 import argparse
 import json
@@ -163,6 +165,17 @@ def one_model(stage: str, gen: str, model: str, judge_tag: str, w2v: bool) -> di
     return R
 
 
+def apply_judge2(R: dict, jdir: Path):
+    """파일럿 5: C4를 phi-4 성립 판정(모든 P 후보 ③ yes 비율 ≥ 0.20)으로 바꾸고 S3 확인(③ − ② ≥ 0)을 더한다."""
+    m = json.loads((jdir / "metrics.json").read_text(encoding="utf-8"))["all_P"]
+    C = R["criteria"]
+    C["C4"] = dict(value=m["works3"]["est"], passed=bool(m["works3"]["est"] >= CRIT["C4"]), judge=str(jdir.name))
+    C["S3"] = dict(value=m["s3_effect"]["est"], ci95=[m["s3_effect"]["lo"], m["s3_effect"]["hi"]],
+                   passed=bool(m["s3_effect"]["est"] >= 0))
+    C["all"] = all(v["passed"] for k, v in C.items() if k != "all")
+    R["judge2_all_P"] = m
+
+
 def fmt(x, nd=3):
     return "—" if x is None or (isinstance(x, float) and np.isnan(x)) else (f"{x:.{nd}f}" if isinstance(x, float) else str(x))
 
@@ -176,6 +189,10 @@ def markdown(stage, model, res: dict, decision: str) -> str:
         mark = lambda k: ("통과 " if C[k]["passed"] else "실패 ") + (
             f"{C[k]['value']}/{C[k]['of']}" if k == "C1" else fmt(C[k]["value"]))
         L.append(f"| {g} | {mark('C1')} | {mark('C2')} | {mark('C3')} | {mark('C4')} | {'통과' if C['all'] else '실패'} |")
+        if "S3" in C:
+            L += ["", f"C4는 phi-4 성립 판정({C['C4']['judge']}, 모든 P 후보 ③의 yes 비율). "
+                      f"S3 확인 (③ − ② 성립 yes ≥ 0): {'통과' if C['S3']['passed'] else '실패'} {fmt(C['S3']['value'])} "
+                      f"[{fmt(C['S3']['ci95'][0])}, {fmt(C['S3']['ci95'][1])}]"]
     for g, R in res.items():
         L += ["", f"## {g}", "", f"칸 {R['cells']['n']}개, underfilled {R['cells']['underfilled']}, 생성 실패 {R['cells']['failed']}. "
               f"칸당 S1 호출: 최소 {R['s1_calls_per_cell']['min']}, 중앙값 {R['s1_calls_per_cell']['median']}, "
@@ -211,16 +228,24 @@ def markdown(stage, model, res: dict, decision: str) -> str:
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--stage", default="pilot4", choices=["pilot2", "pilot3", "pilot4"])
+    ap.add_argument("--stage", default="pilot5", choices=["pilot2", "pilot3", "pilot4", "pilot5"])
     ap.add_argument("--gens", nargs="+", required=True, help="결정 규칙 순서대로 (7B 먼저)")
     ap.add_argument("--model", default="pythia-1.4b")
     ap.add_argument("--judge", default="Qwen/Qwen2.5-7B-Instruct")
     ap.add_argument("--no-w2v", action="store_true")
+    ap.add_argument("--judge2", default=None, help="파일럿 5: judge2 폴더 꼬리 (예: phi-4-4bit). C4를 이 판정으로 바꾸고 S3 확인을 더한다")
     a = ap.parse_args()
     res = {g: one_model(a.stage, g, a.model, tag_of(a.judge), not a.no_w2v) for g in a.gens}
+    if a.judge2:
+        for g in a.gens:
+            apply_judge2(res[g], stage_dir(a.stage) / g / f"A_{a.model}" / f"judge2_{a.judge2}")
     chosen = next((g for g in a.gens if res[g]["criteria"]["all"]), None)
-    decision = (f"{chosen}를 본 실행 생성기로 정한다 (C1~C4 모두 통과)." if chosen else
-                "C1~C4를 모두 넘은 모델이 없다. prereg-e5 태그를 달지 않고 실패를 기록한 뒤 설계로 돌아간다.")
+    if a.judge2:
+        decision = (f"C1~C4와 S3 확인을 모두 넘었다. 본 실행은 {chosen}와 넣기만 S3로 한다." if chosen else
+                    "C1~C4와 S3 확인 중 넘지 못한 것이 있다. 본 실행 S3는 파일럿 4의 S3(바꾸기 허용, e5/v2/prompts_pilot4)로 돌아간다.")
+    else:
+        decision = (f"{chosen}를 본 실행 생성기로 정한다 (C1~C4 모두 통과)." if chosen else
+                    "C1~C4를 모두 넘은 모델이 없다. prereg-e5 태그를 달지 않고 실패를 기록한 뒤 설계로 돌아간다.")
     out = stage_dir(a.stage)
     dump(out / "report.json", dict(decision=decision, chosen=chosen, order=a.gens, criteria=CRIT, models=res))
     md = markdown(a.stage, a.model, res, decision)

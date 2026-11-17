@@ -83,12 +83,12 @@ def samples_file(stage: str):
 
 
 def cells_v2(stage: str) -> list[dict]:
-    """pilot2 = 파일럿 2 10쌍(samples_v2, 기록), pilot3·pilot4 = 파일럿 3 10쌍(파일럿 4는 같은 쌍을 새 시드로),
+    """pilot2 = 파일럿 2 10쌍(samples_v2, 기록), pilot3·pilot4·pilot5 = 파일럿 3 10쌍(4·5는 같은 쌍을 새 시드로),
     main = 본 실행 40쌍 (samples_v3) × 2형식.
     Tom Swifty 형식은 아직 정하지 않았다."""
     if stage == "pilot2":
         pairs = load_samples_v2()["pilot2"]
-    elif stage in ("pilot3", "pilot4"):
+    elif stage in ("pilot3", "pilot4", "pilot5"):
         pairs = load_samples_v3()["pilot3"]
     elif stage == "main":
         pairs = load_samples_v3()["main"]
@@ -275,8 +275,16 @@ def edit_words(before: list[str], after: list[str]) -> list[str]:
     return [w for tag, i1, i2, j1, j2 in sm.get_opcodes() if tag in ("replace", "insert") for w in after[j1:j2]]
 
 
+def removed_words(before: list[str], after: list[str]) -> list[str]:
+    """before 쪽에서 지워지거나 바뀐 단어(단어 단위 difflib). 비어 있으면 before가 after의 부분열이다."""
+    sm = SequenceMatcher(None, before, after, autojunk=False)
+    return [w for tag, i1, i2, j1, j2 in sm.get_opcodes() if tag in ("replace", "delete") for w in before[i1:i2]]
+
+
 def s3_check(raw: str, s2: dict, w_p: str, w_a: str, fmt: str, hints=()) -> dict:
-    """끝 보존(riddle: 답 전체), 수정 폭 1~4단어, w_p 표제어 정확히 1회, w_a 누출 없음, 모양."""
+    """끝 보존(riddle: 답 전체), 넣기만(②의 앞부분 단어가 모두 순서대로 남음), 넣은 단어 1~4개,
+    w_p 표제어 정확히 1회, w_a 누출 없음, 모양.
+    넣기만은 파일럿 5부터다(PREREG_E5 6.11): S3가 w_p만 보고 앞부분을 바꾸면 w_a 뜻을 받치던 단어를 지울 수 있다."""
     parts = parse_parts(s3_body(raw), fmt)
     if parts is None:
         return dict(ok=False, reasons=["shape"], parts=None, edited=[], n_edit=None, hint_used=None)
@@ -293,6 +301,8 @@ def s3_check(raw: str, s2: dict, w_p: str, w_a: str, fmt: str, hints=()) -> dict
     if not kept:
         reasons.append("suffix_changed")
     edited = edit_words(head2, head3) if kept else []
+    if kept and removed_words(head2, head3):
+        reasons.append("removed")
     if kept and not (LIMITS["edit_min"] <= len(edited) <= LIMITS["edit_max"]):
         reasons.append("edit_width")
     if wp_count(parts["text"], w_p) != 1:

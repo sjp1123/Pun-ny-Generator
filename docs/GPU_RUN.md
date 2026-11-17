@@ -106,6 +106,23 @@ python -X utf8 experiments/e5v2_judge2.py --stage pilot4 --gen olmo-2-0325-32b-i
 - 호출 약 720번(성립 460 + 웃김 260), 답이 한 단어라 몇 분이면 끝난다.
 - 결과는 `results/e5/pilot4/olmo-2-0325-32b-instruct-4bit/A_pythia-1.4b/judge2_phi-4-4bit/`. 커밋해서 올려 줘.
 
+## 3d. F — 파일럿 5 (S3 넣기만, 32B)
+
+S3가 앞부분 단어를 바꾸며 w_a 단서를 지우는 문제(PREREG_E5 6.10)를 고쳐, S3가 단어를 넣기만 하게 했다(6.11). 같은 10쌍을 새 시드로 돌린다.
+
+```bash
+git pull
+python -X utf8 -m pytest -q tests
+G=olmo-2-0325-32b-instruct-4bit
+python -X utf8 experiments/e5v2_generate.py --stage pilot5 --model allenai/OLMo-2-0325-32B-Instruct --load-4bit
+python -X utf8 experiments/e5v2_score.py  --stage pilot5 --gen $G --model pythia-1.4b --device cuda
+python -X utf8 experiments/e5v2_select.py --stage pilot5 --gen $G --model pythia-1.4b
+python -X utf8 experiments/e5v2_judge2.py --stage pilot5 --gen $G
+```
+
+- 옛 판정(`e5v2_judge.py`, Qwen-7B)은 돌리지 않는다.
+- 끝나면 `results/e5/pilot5/`를 커밋해서 올려 줘. 판정은 원래 PC에서 `python -X utf8 experiments/e5v2_report.py --stage pilot5 --gens $G --judge2 phi-4-4bit`.
+
 ## 4. (끝난 것) B — E5 파일럿 1
  (A의 캐시가 있으면 바로)
 

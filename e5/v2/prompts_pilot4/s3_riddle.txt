@@ -1,0 +1,19 @@
+Here is a riddle whose last word is "{w_p}" ({g_p}):
+Q: {question}
+A: {answer}
+
+Edit the question so that it also connects to "{w_p}" in the sense "{g_p}".
+Rules:
+- Replace or add at most four words in the QUESTION. Ideas for related words: {hints}.
+- Do not change the answer at all.
+- Keep the rest of the question as it is, so the answer still sounds natural.
+- Do not use the word "{w_p}" in the question.
+- Output only the edited riddle in the same Q:/A: form.
+
+Example (last word "bagel", meaning "a ring-shaped bread roll"):
+Before:
+Q: What kind of dog did she adopt from the shelter?
+A: A bagel.
+After:
+Q: What kind of dog did the baker adopt from the shelter?
+A: A bagel.
