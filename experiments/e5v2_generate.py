@@ -4,6 +4,8 @@
   S1  w_a 문장 (LLM, 온도 0.9, top_p 0.95, 60토큰, 시드 = 칸 시드 + k) → S1 검사
   S2  w_a → w_p (코드: 대소문자, 관사 a/an, 보호 구간)
   S3  w_p 주제어 넣기 (LLM, 온도 0.7, 60토큰, 실패하면 시드를 바꿔 한 번 더) → S3 검사
+  S4  (파일럿 6부터, S4_STAGES) 두 단어를 다 아는 LLM이 앞부분을 두 뜻이 함께 서는 농담으로 다듬음 → S4 검사.
+      S1 검사에 품사 검사도 더한다: S1 문장의 w_a 자리 품사를 w_p가 가질 수 있어야 한다(PREREG_E5 6.13)
   최종 규칙 검사 (칸 안 중복 포함) → 통과하면 후보. 10개가 차면 멈춘다. 상한까지 못 채우면 underfilled.
 규칙에 걸린 후보에서 고르는 대체 규칙은 없다(통과 0개 칸은 생성 실패).
 기준선: B1 = v1 단일 프롬프트(쌍 + 뜻) 1회, B0 = 쌍 없이 "말장난 하나"(칸 수만큼). 둘 다 v1 디코딩·시스템 프롬프트 그대로.
@@ -29,9 +31,9 @@ import pandas as pd
 from e5 import SYSTEM, clean_text, find_word, stable_seed, stage_dir
 from e5_gen import Generator, tag_of
 from e5_generate import Log, parse_one, parse_pick
-from e5v2 import (BASE_DECODE, MAX_S1, N_CAND, S1_DECODE, S3_DECODE, S3_TRIES, b0_pair_reasons,
+from e5v2 import (BASE_DECODE, MAX_S1, N_CAND, S1_DECODE, S3_DECODE, S3_TRIES, S4_DECODE, S4_STAGES, S4_TRIES, b0_pair_reasons,
                   cells_v2, final_check, lemma_of, norm_dup, prompt_b1, prompt_hashes, prompt_pick, prompt_s1, samples_file,
-                  prompt_s3, prompt_text, s1_check, s2_swap, s3_check, words)
+                  pos_fits, prompt_s3, prompt_s4, prompt_text, s1_check, s2_swap, s3_check, s4_check, words)
 from rules import dump, git_state
 
 JSON_TRIES = 3
@@ -55,6 +57,9 @@ def run_attempt(gen, stage, c, k, seen) -> dict:
     t0 = time.time()
     raw1 = gen.chat(prompt_s1(c), seed=seed1, system=None, **S1_DECODE)
     ck1 = s1_check(raw1, w_a, fmt)
+    use_s4 = stage in S4_STAGES
+    if ck1["ok"] and use_s4 and c.get("pos_set_p") and not pos_fits(ck1["parts"]["text"], w_a, c["pos_set_p"]):
+        ck1 = dict(ck1, ok=False, reasons=ck1["reasons"] + ["pos_mismatch"])
     rec = dict(cell=c["cell"], pair_id=c["pair_id"], format=fmt, k=k, seed_s1=seed1, s1_raw=raw1,
                s1_ok=ck1["ok"], s1_reasons=ck1["reasons"], s1_text=(ck1["parts"] or {}).get("text"))
     if not ck1["ok"]:
@@ -74,9 +79,26 @@ def run_attempt(gen, stage, c, k, seen) -> dict:
     if not ck3["ok"]:
         return dict(rec, fail_stage="S3", final_ok=False, sec=round(time.time() - t0, 1))
     parts3 = ck3["parts"]
-    reasons = final_check(parts3["text"], w_p, w_a, fmt, parts3, seen)
     rec.update(s3_text=parts3["text"], s3_parts=parts3, edited=ck3["edited"], n_edit=ck3["n_edit"],
-               hint_used=ck3["hint_used"], final_reasons=reasons, final_ok=not reasons,
+               hint_used=ck3["hint_used"], s3_removed=ck3.get("removed"))
+    parts = parts3
+    if use_s4:
+        tries4, ck4 = [], None
+        for t in range(S4_TRIES):
+            seed4 = stable_seed(stage, "S4", c["cell"], k, t)
+            raw4 = gen.chat(prompt_s4(c, s2, parts3), seed=seed4, system=None, **S4_DECODE)
+            ck4 = s4_check(raw4, s2, parts3["text"], w_p, w_a, fmt)
+            tries4.append(dict(t=t, seed=seed4, raw=raw4, ok=ck4["ok"], reasons=ck4["reasons"], unchanged=ck4["unchanged"],
+                               text=(ck4["parts"] or {}).get("text")))
+            if ck4["ok"]:
+                break
+        rec.update(s4_tries=tries4, s4_ok=ck4["ok"], s4_retried=len(tries4) > 1)
+        if not ck4["ok"]:
+            return dict(rec, fail_stage="S4", final_ok=False, sec=round(time.time() - t0, 1))
+        parts = ck4["parts"]
+        rec.update(s4_text=parts["text"], s4_parts=parts, s4_unchanged=ck4["unchanged"])
+    reasons = final_check(parts["text"], w_p, w_a, fmt, parts, seen)
+    rec.update(final_text=parts["text"], final_reasons=reasons, final_ok=not reasons,
                fail_stage="final" if reasons else None, sec=round(time.time() - t0, 1))
     return rec
 
@@ -101,7 +123,7 @@ def call_json(gen, log, cid_base, prompt, parse, seed_parts, meta, system=SYSTEM
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--stage", required=True, choices=["pilot2", "pilot3", "pilot4", "pilot5", "main"])
+    ap.add_argument("--stage", required=True, choices=["pilot2", "pilot3", "pilot4", "pilot5", "pilot6", "main"])
     ap.add_argument("--backend", default="hf", choices=["hf", "ollama"])
     ap.add_argument("--model", default="allenai/OLMo-2-1124-7B-Instruct")
     ap.add_argument("--device", default=None)
@@ -118,6 +140,7 @@ def main():
     dump(out / "config.json", dict(
         stage=a.stage, generator=gen.info, n_cells=len(C), limit=a.limit, n_cand=N_CAND, max_s1=a.max_s1,
         s1_decode=S1_DECODE, s3_decode=S3_DECODE, s3_tries=S3_TRIES, baseline_decode=BASE_DECODE,
+        s4=a.stage in S4_STAGES, s4_decode=S4_DECODE, s4_tries=S4_TRIES, s1_pos_check=a.stage in S4_STAGES,
         json_tries=JSON_TRIES, pick_temperature=0.0, prompts_sha256=prompt_hashes(),
         samples_file=samples_file(a.stage).name,
         samples_sha256=hashlib.sha256(samples_file(a.stage).read_bytes().replace(b"\r\n", b"\n")).hexdigest(),
@@ -135,14 +158,18 @@ def main():
                 rec = dict(run_attempt(gen, a.stage, c, k, seen), key=key)
                 att.add(rec)
             if rec["final_ok"]:
-                seen.add(norm_dup(rec["s3_text"]))
+                seen.add(norm_dup(rec.get("final_text") or rec["s3_text"]))
                 passed.append(rec)
             k += 1
         for n, rec in enumerate(passed):
             text3, s2 = rec["s3_text"], rec["s2"]
-            surf, s, e = pun_span(text3, c["w_p"])
+            text = rec.get("final_text") or text3  # 파일럿 2~5의 기록에는 final_text가 없다(③이 최종)
+            surf, s, e = pun_span(text, c["w_p"])
+            s3s, s3a, s3b = pun_span(text3, c["w_p"])
             cand_rows.append(dict(cand_id=f"{c['cell']}#{n}", source="P", cell=c["cell"], pair_id=c["pair_id"],
-                                  format=c["format"], idx=n, k=rec["k"], text=text3, pun_word=surf, start=s, end=e,
+                                  format=c["format"], idx=n, k=rec["k"], text=text, pun_word=surf, start=s, end=e,
+                                  text3=text3, pun_word3=s3s, start3=s3a, end3=s3b,
+                                  s4_used="s4_text" in rec, s4_unchanged=rec.get("s4_unchanged"),
                                   text2=s2["text"], pun_word2=s2["surface"], start2=s2["start"], end2=s2["end"],
                                   text1=rec["s1_text"], w_p=c["w_p"], w_a=c["w_a"], n_edit=rec["n_edit"],
                                   edited=" ".join(rec["edited"]), hint_used=rec["hint_used"],

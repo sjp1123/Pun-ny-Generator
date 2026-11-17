@@ -1,0 +1,19 @@
+Here is a draft pun riddle. Its answer ends with the word "{w_p}" ({g_p}), which sounds like "{w_a}" ({g_a}).
+Q: {question}
+A: {answer}
+
+Rewrite the question so that the riddle works as a real pun: the answer must make sense with "{w_p}" in its own meaning, and it must also make sense if a listener hears it as "{w_a}". Make it short and natural, like a joke a person would tell.
+Rules:
+- Do not change the answer at all.
+- Never write "{w_a}" or any form of it.
+- Do not use "{w_p}" in the question.
+- Keep the question under 15 words.
+- Output only the riddle in the same Q:/A: form.
+
+Example ("bagel", a ring-shaped bread roll, sounds like "beagle", a small hound):
+Draft:
+Q: What kind of dog did she adopt from the shelter near the bakery?
+A: A bagel.
+Rewritten:
+Q: What kind of dog does a baker take for a walk?
+A: A bagel.

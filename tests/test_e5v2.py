@@ -229,3 +229,65 @@ def test_pilot5_stage_and_report(tmp_path):
     R = dict(criteria=dict(C1=dict(passed=True), C2=dict(passed=True), C3=dict(passed=True), C4=dict(passed=False)))
     apply_judge2(R, tmp_path)
     assert R["criteria"]["C4"]["passed"] and not R["criteria"]["S3"]["passed"] and not R["criteria"]["all"]
+
+
+# 6.13: v4 쌍(대표 발음, 사람 말장난만큼 비슷한 소리, 품사), S1 품사 검사, S4 다듬기, A/B 평가지
+def test_v4_pairs_rules():
+    import numpy as np
+    from e5v2 import load_samples_v4
+    from e5v4_pairs import SUB_MAX, classify, direction
+    assert classify("nice", "niece")[0] is None          # 도시 Nice 발음으로 생기던 가짜 동음
+    assert classify("steep", "sleep")[0] is None and classify("hill", "hymn")[0] is None  # 치환 자질 거리가 큼
+    assert classify("rein", "rain")[0] == "d0" and classify("bidder", "bitter")[0] == "sub"
+    assert classify("mist", "midst")[0] == "indel"
+    rng = np.random.default_rng(0)
+    assert direction("nice", "niece", rng) is None or direction("nice", "niece", rng)[0] != "nice"
+    V = load_samples_v4()
+    sizes = dict(pilot6=10, main=40)
+    allw = []
+    for split, n in sizes.items():
+        ps = V[split]
+        assert len(ps) == n
+        assert all(p["stratum"] in ("d0", "sub", "indel") and p["pos_set_p"] and p["hints"] for p in ps)
+        assert all(p["d_feat"] <= SUB_MAX for p in ps if p["stratum"] == "sub")
+        allw += [w for p in ps for w in (p["w_p"], p["w_a"])]
+    assert len(allw) == len(set(allw))
+    assert len(cells_v2("pilot6")) == 20 and len(cells_v2("main")) == 80
+
+
+def test_s1_pos_check():
+    from e5v2 import pos_fits, slot_pos
+    assert slot_pos("Who is always welcome at a family gathering? My niece.", "niece") == "n"
+    assert not pos_fits("Who is always welcome at a family gathering? My niece.", "niece", "a")  # nice는 형용사뿐
+    assert pos_fits("What do you do to a present? You wrap it.", "wrap", "nv")
+
+
+def test_s4_check():
+    from e5v2 import s4_check
+    s3 = "After a long day at the bakery, all he wanted was to crawl into bread."
+    good = s4_check("After a double shift at the bakery, the exhausted baker just wanted to crawl into bread.", S2_ONE, s3,
+                    "bread", "bed", "oneliner")
+    assert good["ok"] and not good["unchanged"]
+    assert s4_check(s3, S2_ONE, s3, "bread", "bed", "oneliner")["unchanged"]
+    bad = s4_check("After a long day at the bakery, he wanted a bed of bread.", S2_ONE, s3, "bread", "bed", "oneliner")
+    assert "wa_leak" in bad["reasons"] and "suffix_changed" in bad["reasons"]
+    long = s4_check("After an extremely long and very tiring double shift kneading dough at the busy downtown bakery near the "
+                    "old train station, he wanted to crawl into bread.", S2_ONE, s3, "bread", "bed", "oneliner")  # 27단어
+    assert "length" in long["reasons"]
+    s2r = s2_swap(dict(q="What kind of dog did she adopt?", a="A beagle."), "beagle", "bagel", "riddle")
+    r = s4_check("Q: What kind of dog does a baker walk?\nA: A bagel.", s2r, "Q: What kind of dog did she adopt? A bagel.",
+                 "bagel", "beagle", "riddle")
+    assert r["ok"]
+    assert "suffix_changed" in s4_check("Q: What does a baker walk?\nA: A sesame bagel.", s2r, "x", "bagel", "beagle",
+                                        "riddle")["reasons"]
+
+
+def test_s4_sheet_roundtrip(tmp_path):
+    import pandas as pd
+    from e5v2_s4_sheet import score
+    pd.DataFrame({"번호": [1, 2, 3, 4], "쌍": ["a → b"] * 4, "A": ["x"] * 4, "B": ["y"] * 4, "답": ["A", "b", "=", "B"]}).to_csv(
+        tmp_path / "s4_ab_sheet.csv", index=False, encoding="utf-8-sig")
+    pd.DataFrame(dict(no=[1, 2, 3, 4], cand_id=list("wxyz"), s4_side=["A", "A", "B", "B"])).to_csv(tmp_path / "s4_ab_key.csv",
+                                                                                                    index=False)
+    r = score(tmp_path)
+    assert r["decided"] == 3 and r["prefer_s4"] == 2 and r["same"] == 1 and r["keep_s4"]

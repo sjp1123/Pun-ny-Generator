@@ -17,7 +17,8 @@ from e5 import E5_DIR, MAX_WORDS, clean_text
 V2_DIR = E5_DIR / "v2"
 PROMPTS = V2_DIR / "prompts"
 SAMPLES_V2 = E5_DIR / "samples_v2.json"  # 파일럿 2 (기록)
-SAMPLES_V3 = E5_DIR / "samples_v3.json"  # 파일럿 3·본 실행 (거리 0~1 쌍, PREREG_E5 6.5)
+SAMPLES_V3 = E5_DIR / "samples_v3.json"  # 파일럿 3~5 (거리 0~1 쌍, PREREG_E5 6.5)
+SAMPLES_V4 = E5_DIR / "samples_v4.json"  # 파일럿 6·본 실행 (대표 발음·소리·품사 규칙, PREREG_E5 6.13)
 EXAMPLE_WORDS = ("bagel", "beagle", "bread", "bed")  # 프롬프트 예시 쌍 (표본에서 뺀다)
 FORMATS_V2 = ("riddle", "oneliner")
 
@@ -26,12 +27,15 @@ MAX_S1 = 60  # 파일럿 2·3은 30 (PREREG_E5 6.7)
 S1_DECODE = dict(temperature=0.9, top_p=0.95, max_new_tokens=60)
 S3_DECODE = dict(temperature=0.7, top_p=1.0, max_new_tokens=60)  # 사양에 top_p가 없어 v1 기본값(1.0)
 S3_TRIES = 2
+S4_DECODE = dict(temperature=0.7, top_p=1.0, max_new_tokens=80)  # S4 다듬기 (6.13)
+S4_TRIES = 2
+S4_STAGES = ("pilot6", "main")  # S4와 S1 품사 검사를 쓰는 단계 (6.13). 파일럿 6에서 S4를 버리면 main을 뺀다
 BASE_DECODE = dict(temperature=0.9, top_p=1.0)  # B1·B0 (v1 그대로)
 LIMITS = dict(riddle_q=15, riddle_a=8, oneliner=25, edit_min=1, edit_max=4,
               riddle_a_bare=3)  # 답이 이 단어 수 이하면 끝 문장부호가 없어도 잘림으로 보지 않는다 (6.5)
 S1_POSITION = dict(riddle=2, oneliner=3)  # w_a가 들어 있어야 하는 끝 단어 수 (riddle은 답 기준)
 
-PROMPT_NAMES = ("s1_riddle", "s1_oneliner", "s3_riddle", "s3_oneliner", "b1_single", "b0_free",
+PROMPT_NAMES = ("s1_riddle", "s1_oneliner", "s3_riddle", "s3_oneliner", "s4_riddle", "s4_oneliner", "b1_single", "b0_free",
                 "pick", "judge_success", "judge_works", "judge_funny")
 
 
@@ -51,6 +55,14 @@ def render(name: str, **kw) -> str:
 
 def prompt_s1(c: dict) -> str:
     return render(f"s1_{c['format']}", w_a=c["w_a"], g_a=c["gloss_a"])
+
+
+def prompt_s4(c: dict, s2: dict, parts3: dict) -> str:
+    """S4는 두 단어를 다 안다: ③을 두 뜻이 함께 서는 농담으로 다듬는다. 끝(riddle은 답, 한 줄은 보호 구간)은 그대로."""
+    kw = dict(w_p=c["w_p"], g_p=c["gloss_p"], w_a=c["w_a"], g_a=c["gloss_a"])
+    if c["format"] == "riddle":
+        return render("s4_riddle", question=parts3["q"], answer=s2["a"], **kw)
+    return render("s4_oneliner", sentence=parts3["sentence"], protected_suffix=s2["protected_suffix"], **kw)
 
 
 def prompt_s3(c: dict, s2: dict) -> str:
@@ -78,20 +90,23 @@ def load_samples_v3() -> dict:
     return json.loads(SAMPLES_V3.read_text(encoding="utf-8"))
 
 
+def load_samples_v4() -> dict:
+    return json.loads(SAMPLES_V4.read_text(encoding="utf-8"))
+
+
 def samples_file(stage: str):
-    return SAMPLES_V2 if stage == "pilot2" else SAMPLES_V3
+    return SAMPLES_V2 if stage == "pilot2" else SAMPLES_V4 if stage in ("pilot6", "main") else SAMPLES_V3
 
 
 def cells_v2(stage: str) -> list[dict]:
-    """pilot2 = 파일럿 2 10쌍(samples_v2, 기록), pilot3·pilot4·pilot5 = 파일럿 3 10쌍(4·5는 같은 쌍을 새 시드로),
-    main = 본 실행 40쌍 (samples_v3) × 2형식.
-    Tom Swifty 형식은 아직 정하지 않았다."""
+    """pilot2 = 파일럿 2 10쌍(samples_v2, 기록), pilot3·pilot4·pilot5 = 파일럿 3 10쌍(4·5는 같은 쌍을 새 시드로, samples_v3),
+    pilot6 = v4 10쌍, main = v4 본 실행 40쌍 (samples_v4) × 2형식. Tom Swifty 형식은 정하지 않았다."""
     if stage == "pilot2":
         pairs = load_samples_v2()["pilot2"]
     elif stage in ("pilot3", "pilot4", "pilot5"):
         pairs = load_samples_v3()["pilot3"]
-    elif stage == "main":
-        pairs = load_samples_v3()["main"]
+    elif stage in ("pilot6", "main"):
+        pairs = load_samples_v4()[stage]
     else:
         raise ValueError(stage)
     return [dict(p, cell=f"{p['pair_id']}:{f}", format=f) for p in pairs for f in FORMATS_V2]
@@ -317,6 +332,48 @@ def s3_check(raw: str, s2: dict, w_p: str, w_a: str, fmt: str, hints=(), insert_
     hint_used = any(hl[e] in {hl[h.lower()] for h in hints} for e in edited) if edited else False
     return dict(ok=not reasons, reasons=reasons, parts=parts, edited=edited, n_edit=len(edited) if kept else None,
                 hint_used=hint_used, removed=removed)
+
+
+# ---------------------------------------------------------------- S1 품사 검사 (6.13)
+UPOS = {"NOUN": "n", "PROPN": "n", "VERB": "v", "AUX": "v", "ADJ": "a", "ADV": "r"}
+
+
+def slot_pos(text: str, w_a: str):
+    """S1 문장에서 w_a(마지막 출현) 자리의 품사(n/v/a/r). spaCy 태거, 못 찾으면 None."""
+    from baselines import _nlp
+    toks = [t for t in _nlp()(text) if t.text.lower() == w_a.lower()]
+    return UPOS.get(toks[-1].pos_, "other") if toks else None
+
+
+def pos_fits(text: str, w_a: str, pos_set_p: str) -> bool:
+    """w_a 자리의 품사를 w_p가 가질 수 있는가(pos_set_p = w_p의 WordNet 품사 글자들). 품사를 모르면 통과."""
+    sp = slot_pos(text, w_a)
+    return sp is None or sp in pos_set_p
+
+
+# ---------------------------------------------------------------- S4 검사 (6.13)
+def s4_check(raw: str, s2: dict, s3_text: str, w_p: str, w_a: str, fmt: str) -> dict:
+    """끝 보존(riddle: 답 전체, 한 줄: ②의 보호 구간), w_p 표제어 정확히 1회, w_a 누출 없음, 모양, 길이.
+    앞부분은 자유롭게 고쳐 쓸 수 있다(수정 폭 제한 없음). ③과 같으면 unchanged로 표시만 한다."""
+    parts = parse_parts(s3_body(raw), fmt)
+    if parts is None:
+        return dict(ok=False, reasons=["shape"], parts=None, unchanged=None)
+    reasons = shape_reasons(parts, fmt)
+    if fmt == "riddle":
+        kept = norm_space(parts["a"]) == norm_space(s2["a"])
+        if len(words(parts["q"])) > LIMITS["riddle_q"]:
+            reasons.append("length")
+    else:
+        kept = norm_space(parts["sentence"]).endswith(norm_space(s2["protected_suffix"]))
+        if len(words(parts["sentence"])) > LIMITS["oneliner"]:
+            reasons.append("length")
+    if not kept:
+        reasons.append("suffix_changed")
+    if wp_count(parts["text"], w_p) != 1:
+        reasons.append("wp_count")
+    if wa_leak(parts["text"], w_a):
+        reasons.append("wa_leak")
+    return dict(ok=not reasons, reasons=reasons, parts=parts, unchanged=norm_space(parts["text"]) == norm_space(s3_text))
 
 
 # ---------------------------------------------------------------- 최종 규칙 검사

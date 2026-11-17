@@ -47,13 +47,21 @@ def targets(cand: pd.DataFrame, S: pd.DataFrame) -> pd.DataFrame:
         rows.append(dict(cand_id=cid, source=r.source, cell=r.get("cell"), pair_id=r.get("pair_id"), judgeable=judgeable,
                          text=r.text, pun_word=r.pun_word, w_a=r.w_a,
                          text2=r.get("text2") if r.source == "P" else None,
-                         pun_word2=r.get("pun_word2") if r.source == "P" else None))
+                         pun_word2=r.get("pun_word2") if r.source == "P" else None,
+                         # S4를 쓴 단계(파일럿 6~): 최종(④)과 S4 전(③)을 둘 다 판정해 S4의 효과를 본다
+                         text3=r.get("text3") if r.source == "P" and r.get("s4_used") in (True, "True") else None,
+                         pun_word3=r.get("pun_word3") if r.source == "P" and r.get("s4_used") in (True, "True") else None))
     return pd.DataFrame(rows)
 
 
 def judge_items(J: Judge, T: pd.DataFrame) -> pd.DataFrame:
-    works, works2, funny = [], [], []
+    works, works2, funny, works_s3, funny_s3 = [], [], [], [], []
     for r in T.itertuples():
+        has3 = ok_str(getattr(r, "text3", None)) and ok_str(getattr(r, "pun_word3", None))
+        works_s3.append(yes_no(J.ask(f"works_s3|{r.cand_id}", vprompt("works_pair", w_p=r.pun_word3, w_a=r.w_a, text=r.text3)))
+                        if has3 and r.judgeable else None)
+        funny_s3.append(one_to_five(J.ask(f"funny_s3|{r.cand_id}", vprompt("funny_point", text=r.text3), max_new=6))
+                        if has3 else None)
         if not r.judgeable:
             works.append(None), works2.append(None), funny.append(one_to_five(
                 J.ask(f"funny|{r.cand_id}", vprompt("funny_point", text=r.text), max_new=6)) if ok_str(r.text) else None)
@@ -62,8 +70,8 @@ def judge_items(J: Judge, T: pd.DataFrame) -> pd.DataFrame:
         works2.append(yes_no(J.ask(f"works2|{r.cand_id}", vprompt("works_pair", w_p=r.pun_word2, w_a=r.w_a, text=r.text2)))
                       if ok_str(r.text2) and ok_str(r.pun_word2) else None)
         funny.append(one_to_five(J.ask(f"funny|{r.cand_id}", vprompt("funny_point", text=r.text), max_new=6)))
-    return T.assign(works=works, works2=works2, funny=funny)[["cand_id", "source", "cell", "pair_id", "judgeable",
-                                                              "works", "works2", "funny"]]
+    return T.assign(works=works, works2=works2, funny=funny, works_s3=works_s3, funny_s3=funny_s3)[
+        ["cand_id", "source", "cell", "pair_id", "judgeable", "works", "works2", "funny", "works_s3", "funny_s3"]]
 
 
 def cluster_ci(d: pd.DataFrame, col: str, cluster="pair_id") -> dict:
@@ -101,9 +109,9 @@ def summarize(S: pd.DataFrame, I: pd.DataFrame, gate: pd.Series) -> dict:
         res["diffs"][f"{a}-{b}"] = dict(works=cluster_ci(j, "d_works"), funny=cluster_ci(j, "d_funny"))
     P = I[(I.source == "P") & I.judgeable].copy()
     P["gate"] = P.cand_id.map(gate)
-    for c in ("works", "works2", "funny"):
+    for c in [x for x in ("works", "works2", "funny", "works_s3", "funny_s3") if x in P]:
         P[c] = P[c].map(lambda x: np.nan if x is None or pd.isna(x) else float(x)).astype(float)  # True/False → 1.0/0.0
-    P["d_s3"] = P.works - P.works2
+    P["d_s3"] = P.works - P.works2  # S4를 쓴 단계에서는 최종(④) − ②, 즉 S3 + S4
     res["all_P"] = dict(n=len(P), works3=cluster_ci(P, "works"), works2=cluster_ci(P, "works2"), s3_effect=cluster_ci(P, "d_s3"),
                         funny=cluster_ci(P, "funny"),
                         works_gate_pass=cluster_ci(P[P.gate == True], "works"), works_gate_fail=cluster_ci(P[P.gate == False], "works"),  # noqa: E712
@@ -118,7 +126,7 @@ def summarize(S: pd.DataFrame, I: pd.DataFrame, gate: pd.Series) -> dict:
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--stage", required=True, choices=["pilot2", "pilot3", "pilot4", "pilot5", "main"])
+    ap.add_argument("--stage", required=True, choices=["pilot2", "pilot3", "pilot4", "pilot5", "pilot6", "main"])
     ap.add_argument("--gen", required=True)
     ap.add_argument("--model", default="pythia-1.4b")
     ap.add_argument("--backend", default="hf", choices=["hf", "ollama"])

@@ -1,0 +1,14 @@
+Here is a draft pun sentence. It ends with the word "{w_p}" ({g_p}), which sounds like "{w_a}" ({g_a}).
+{sentence}
+
+Rewrite the beginning so that the sentence works as a real pun: the ending must make sense with "{w_p}" in its own meaning, and it must also make sense if a listener hears it as "{w_a}". Make it short and natural, like a joke a person would tell.
+Rules:
+- Do not change this ending at all: "{protected_suffix}"
+- Never write "{w_a}" or any form of it.
+- Do not use "{w_p}" anywhere else.
+- Keep the sentence under 25 words.
+- Output only the rewritten sentence.
+
+Example ("bread", food made of baked dough, sounds like "bed", a piece of furniture to sleep on):
+Draft: After a long day at the bakery, all he wanted was to crawl into bread.
+Rewritten: After a double shift at the bakery, the exhausted baker just wanted to crawl into bread.

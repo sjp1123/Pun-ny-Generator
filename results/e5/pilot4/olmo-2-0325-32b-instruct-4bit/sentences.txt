@@ -1,0 +1,1251 @@
+E5 파일럿 4 생성 문장 (생성기 OLMo-2-0325-32B-Instruct NF4, 2026-11-16)
+출처: results/e5/pilot4/olmo-2-0325-32b-instruct-4bit/
+
+칸 = 쌍 × 형식. P 후보는 세 단계 생성: ① S1 (w_a로 끝나는 문장) → ② S2 (w_a를 w_p로 바꿈) → ③ S3 (앞에 w_p 쪽 단어를 넣거나 바꿈).
+표시: 관문 = 청자 모델(Pythia-1.4B) 관문 통과, A = 두 뜻이 함께 서는 정도, 점수 = log F + S_← (P2가 쓰는 값),
+      성립 = phi-4 판정(쌍을 알려 주고 성공한 말장난인가, ③ / ②), 웃김 = phi-4 1~5점, 고름 = 이 후보를 고른 조건.
+사람 말장난(H)은 SemEval 자료라 넣지 않았다.
+
+====================================================================================================
+[e5r000:riddle] rein → rain  (수수께끼, 음소 거리 0)
+  w_p rein: one of a pair of long straps (usually connected to the bit or the headpiece) used to control a horse
+  w_a rain: water falling in drops from vapor condensed in the atmosphere
+  S3 힌트: curb, restrain, clamp, quell, exert
+
+  #0  관문 X  A 0.000  점수 13.83  성립 O/O  웃김 3
+     ③ What does the weatherman predict is controlling the weather? Sunny days and rein.
+     ② What does the weatherman predict is coming? Sunny days and rein.
+     ① What does the weatherman predict is coming? Sunny days and rain.
+
+  #1  관문 X  A 0.049  점수 1.55  성립 O/O  웃김 3
+     ③ What falls down when the sky is gray, exerting control? Rein.
+     ② What falls down when the sky is gray? Rein.
+     ① What falls down when the sky is gray? Rain.
+
+  #2  관문 O  A 0.001  점수 6.06  성립 O/O  웃김 3
+     ③ What might you grab on your way out to control the weather on a cloudy day? An umbrella. Rein.
+     ② What might you grab on your way out on a cloudy day? An umbrella. Rein.
+     ① What might you grab on your way out on a cloudy day? An umbrella. Rain.
+
+  #3  관문 O  A 0.008  점수 6.20  성립 O/O  웃김 4
+     ③ What do you hear when clouds exert control? A rein.
+     ② What do you hear when clouds let go? A rein.
+     ① What do you hear when clouds let go? A rain.
+
+  #4  관문 O  A 0.001  점수 7.56  성립 O/O  웃김 4  ◀ 고름: P1,P2
+     ③ What do you wish for on a hot, cloudless day to exert control? Some rein.
+     ② What do you wish for on a hot, cloudless day? Some rein.
+     ① What do you wish for on a hot, cloudless day? Some rain.
+
+  #5  관문 X  A 0.000  점수 13.21  성립 O/X  웃김 2
+     ③ What weather is gently exerting on the rooftop? Soft rein.
+     ② What weather is falling on the rooftop? Soft rein.
+     ① What weather is falling on the rooftop? Soft rain.
+
+  #6  관문 O  A 0.000  점수 6.74  성립 O/O  웃김 3
+     ③ What weather is curbing outside right now? Just rein.
+     ② What weather is falling outside right now? Just rein.
+     ① What weather is falling outside right now? Just rain.
+
+  #7  관문 X  A 0.424  점수 0.95  성립 X/O  웃김 4  ◀ 고름: P3,P4
+     ③ What causes a parade to be curbed? A rein.
+     ② What causes a parade to be cancelled? A rein.
+     ① What causes a parade to be cancelled? A rain.
+
+  #8  관문 O  A 0.029  점수 4.81  성립 O/O  웃김 3
+     ③ What comes after the sun on a hot day to exert control? A rein.
+     ② What comes after the sun on a hot day? A rein.
+     ① What comes after the sun on a hot day? A rain.
+
+  #9  관문 X  A 0.000  점수 8.05  성립 X/X  웃김 3
+     ③ When it's coming down in buckets, what does it mean to quell the storm? It's rein.
+     ② When it's coming down in buckets, what does it mean? It's rein.
+     ① When it's coming down in buckets, what does it mean? It's rain.
+
+  [B1 한 번에 쓰기]  규칙 통과  성립 O  웃김 4
+     Get your horses under control before they rein down a parade!
+
+====================================================================================================
+[e5r000:oneliner] rein → rain  (한 줄 문장, 음소 거리 0)
+  w_p rein: one of a pair of long straps (usually connected to the bit or the headpiece) used to control a horse
+  w_a rain: water falling in drops from vapor condensed in the atmosphere
+  S3 힌트: curb, restrain, clamp, quell, exert
+
+  #0  관문 O  A 0.002  점수 6.67  성립 O/O  웃김 4
+     ③ After a long, hot afternoon spent exerting control, all she hoped for was rein.
+     ② After a long, hot afternoon, all she hoped for was rein.
+     ① After a long, hot afternoon, all she hoped for was rain.
+
+  #1  관문 X  A 0.000  점수 9.75  성립 X/X  웃김 2
+     ③ After exerting control, the sky turned dark, signaling the arrival of rein.
+     ② The sky turned dark, signaling the arrival of rein.
+     ① The sky turned dark, signaling the arrival of rain.
+
+  #2  관문 O  A 0.001  점수 8.38  성립 O/O  웃김 3  ◀ 고름: P1,P2
+     ③ Exerting control after a hot summer day, all he wished for was the cool comfort of rein.
+     ② After a hot summer day, all he wished for was the cool comfort of rein.
+     ① After a hot summer day, all he wished for was the cool comfort of rain.
+
+  #3  관문 X  A 0.011  점수 3.03  성립 X/X  웃김 4
+     ③ After a long day of exerting control, all I could think of was rein.
+     ② After a hot summer day, all I could think of was rein.
+     ① After a hot summer day, all I could think of was rain.
+
+  #4  관문 O  A 0.004  점수 7.63  성립 X/X  웃김 4
+     ③ After a long ride, all you want is to hear rein.
+     ② After a hot summer day, all you want is to hear rein.
+     ① After a hot summer day, all you want is to hear rain.
+
+  #5  관문 O  A 0.001  점수 7.38  성립 X/X  웃김 4
+     ③ After a long day of exerting control, all she wished to hear was rein.
+     ② After a hot summer day, all she wished to hear was rein.
+     ① After a hot summer day, all she wished to hear was rain.
+
+  #6  관문 X  A 0.000  점수 19.37  성립 O/O  웃김 3  ◀ 고름: P3
+     ③ After a sweltering summer day, all she yearned for was to hear the gentle patter of rein.
+     ② After a hot summer day, all she wished for was to hear the gentle patter of rein.
+     ① After a hot summer day, all she wished for was to hear the gentle patter of rain.
+
+  #7  관문 X  A 0.000  점수 11.65  성립 O/X  웃김 3
+     ③ After a long day of exerting control, all she wanted was to hear the sound of rein.
+     ② After a long day at work, all she wanted was to hear the sound of rein.
+     ① After a long day at work, all she wanted was to hear the sound of rain.
+
+  #8  관문 X  A 0.000  점수 9.20  성립 O/X  웃김 4  ◀ 고름: P4
+     ③ After a long day exerting control, all I want is to watch rein fall.
+     ② After a hot summer day, all I want is to watch rein fall.
+     ① After a hot summer day, all I want is to watch rain fall.
+
+  #9  관문 X  A 0.000  점수 13.35  성립 O/X  웃김 3
+     ③ After a long day of exerting control, all I wanted was to hear the soothing sound of rein.
+     ② After a long hot day, all I wanted was to hear the soothing sound of rein.
+     ① After a long hot day, all I wanted was to hear the soothing sound of rain.
+
+  [B1 한 번에 쓰기]  규칙 통과  성립 X  웃김 3
+     I tried to hold the rein, but it just didn't keep a steady downpour.
+
+====================================================================================================
+[e5r001:riddle] knight → night  (수수께끼, 음소 거리 0)
+  w_p knight: originally a person of noble birth trained to arms and chivalry; today in Great Britain a person honored by the sovereign for personal merit
+  w_a night: the time after sunset and before sunrise while it is dark outside
+  S3 힌트: nobleman, prince, squire, sword, gladiator
+
+  #0  관문 O  A 0.090  점수 3.45  성립 O/O  웃김 4  ◀ 고름: P4
+     ③ What follows the nobleman's evening activities before bed? Knight.
+     ② What comes after the evening before bed? Knight.
+     ① What comes after the evening before bed? Night.
+
+  #1  관문 O  A 0.030  점수 4.02  성립 O/O  웃김 4
+     ③ What's the time when it's dark and the nobleman sleeps? Knight.
+     ② What's the time when it's dark and quiet? Knight.
+     ① What's the time when it's dark and quiet? Night.
+
+  #2  관문 X  A 0.000  점수 12.17  성립 O/O  웃김 4  ◀ 고름: P1,P3
+     ③ What nobleman do I admire outside after dinner? The stars at knight.
+     ② What do I like to watch outside after dinner? The stars at knight.
+     ① What do I like to watch outside after dinner? The stars at night.
+
+  #3  관문 O  A 0.019  점수 4.79  성립 O/O  웃김 3  ◀ 고름: P2
+     ③ What do we often say is the noblest time? The knight.
+     ② What do we often say is the darkest time? The knight.
+     ① What do we often say is the darkest time? The night.
+
+  #4  관문 O  A 0.587  점수 0.70  성립 O/O  웃김 3
+     ③ What is quiet and dark outside the nobleman's castle? The knight.
+     ② What is quiet and dark outside? The knight.
+     ① What is quiet and dark outside? The night.
+
+  #5  관문 X  A 0.000  점수 6.96  성립 O/O  웃김 3
+     ③ When does the nobleman's day end? At knight.
+     ② When does the day end? At knight.
+     ① When does the day end? At night.
+
+  #6  관문 O  A 0.029  점수 4.19  성립 O/O  웃김 4
+     ③ What time is it when the nobleman sleeps? Knight.
+     ② What time is it when it's dark and quiet? Knight.
+     ① What time is it when it's dark and quiet? Night.
+
+  #7  관문 O  A 0.023  점수 3.79  성립 O/O  웃김 4
+     ③ What time is it when the nobles come out? Knight.
+     ② What time is it when the stars come out? Knight.
+     ① What time is it when the stars come out? Night.
+
+  #8  관문 O  A 0.027  점수 3.17  성립 O/O  웃김 4
+     ③ What time do princes sleep? Knight.
+     ② What time do owls sleep? Knight.
+     ① What time do owls sleep? Night.
+
+  #9  관문 O  A 0.040  점수 3.96  성립 O/O  웃김 4
+     ③ What is the end of a noble's day? Knight.
+     ② What is the day's end? Knight.
+     ① What is the day's end? Night.
+
+  [B1 한 번에 쓰기]  규칙 통과  성립 O  웃김 3
+     After a brief stint as a squire, he became a knight, shining brightly under the moon.
+
+====================================================================================================
+[e5r001:oneliner] knight → night  (한 줄 문장, 음소 거리 0)
+  w_p knight: originally a person of noble birth trained to arms and chivalry; today in Great Britain a person honored by the sovereign for personal merit
+  w_a night: the time after sunset and before sunrise while it is dark outside
+  S3 힌트: nobleman, prince, squire, sword, gladiator
+
+  #0  관문 X  A 0.000  점수 11.52  성립 O/O  웃김 3
+     ③ After a noble quest, all she wanted was to relax on the couch at knight.
+     ② After a long day at work, all she wanted was to relax on the couch at knight.
+     ① After a long day at work, all she wanted was to relax on the couch at night.
+
+  #1  관문 X  A 0.000  점수 8.15  성립 O/O  웃김 3
+     ③ After a long day at the castle, all he wanted was to enjoy the knight.
+     ② After a long day at work, all he wanted was to enjoy the knight.
+     ① After a long day at work, all he wanted was to enjoy the night.
+
+  #2  관문 X  A 0.000  점수 10.17  성립 O/O  웃김 3
+     ③ After a long day of training, all he wanted was to enjoy the knight.
+     ② After a long day at work, all he wanted was to enjoy the knight.
+     ① After a long day at work, all he wanted was to enjoy the night.
+
+  #3  관문 X  A 0.000  점수 8.65  성립 O/O  웃김 3
+     ③ After a day of noble duties, she loved to relax and enjoy the peaceful knight.
+     ② After a busy day, she loved to relax and enjoy the peaceful knight.
+     ① After a busy day, she loved to relax and enjoy the peaceful night.
+
+  #4  관문 X  A 0.000  점수 8.36  성립 O/O  웃김 4
+     ③ After a noble life, all he wanted was to enjoy a quiet knight.
+     ② After a long day at work, all he wanted was to enjoy a quiet knight.
+     ① After a long day at work, all he wanted was to enjoy a quiet night.
+
+  #5  관문 X  A 0.000  점수 8.03  성립 O/O  웃김 3
+     ③ After a noble day of training, all she wanted was to enjoy the knight.
+     ② After a long day at work, all she wanted was to enjoy the knight.
+     ① After a long day at work, all she wanted was to enjoy the night.
+
+  #6  관문 O  A 0.082  점수 1.67  성립 O/O  웃김 3  ◀ 고름: P1
+     ③ After a noble quest, world quiet, knight approached.
+     ② The day was done, the world quiet, knight approached.
+     ① The day was done, the world quiet, night approached.
+
+  #7  관문 X  A 0.000  점수 9.84  성립 O/O  웃김 4
+     ③ After a noble day of chivalry, all she wanted was to enjoy a peaceful knight.
+     ② After a long day at work, all she wanted was to enjoy a peaceful knight.
+     ① After a long day at work, all she wanted was to enjoy a peaceful night.
+
+  #8  관문 X  A 0.138  점수 6.65  성립 O/O  웃김 4  ◀ 고름: P3,P4
+     ③ After a long day of studying, all she wanted was to find a good knight.
+     ② After a long day of studying, all she needed was a good knight.
+     ① After a long day of studying, all she needed was a good night.
+
+  #9  관문 O  A 0.004  점수 6.38  성립 O/O  웃김 3  ◀ 고름: P2
+     ③ After training like a nobleman all week, all I want to do is relax and enjoy the knight.
+     ② After a long week at school, all I want to do is relax and enjoy the knight.
+     ① After a long week at school, all I want to do is relax and enjoy the night.
+
+  [B1 한 번에 쓰기]  규칙 통과  성립 O  웃김 3
+     When the sun set, Sir Sleepalot became the brightest knight.
+
+====================================================================================================
+[e5r002:riddle] nice → niece  (수수께끼, 음소 거리 0)
+  w_p nice: pleasant or pleasing or agreeable in nature or appearance; - George Meredith
+  w_a niece: a daughter of your brother or sister
+  S3 힌트: good, neat, fantastic, wonderful, terrific
+
+  #0  관문 O  A 0.001  점수 5.31  성립 O/X  웃김 3  ◀ 고름: P1
+     ③ Who gets the birthday present, if not the good kids? My nice.
+     ② Who gets the birthday gift, if not the kids? My nice.
+     ① Who gets the birthday gift, if not the kids? My niece.
+
+  #1  관문 O  A 0.024  점수 3.34  성립 X/X  웃김 3
+     ③ Who are the fantastic offspring of your siblings? Your nice.
+     ② Who are the children of your siblings? Your nice.
+     ① Who are the children of your siblings? Your niece.
+
+  #2  관문 O  A 0.001  점수 5.03  성립 O/O  웃김 3
+     ③ Who was at the family gathering? My nice.
+     ② Who was at the family reunion? My nice.
+     ① Who was at the family reunion? My niece.
+
+  #3  관문 O  A 0.001  점수 5.25  성립 O/O  웃김 3
+     ③ Who came to the birthday party with her folks and looked fantastic? My nice.
+     ② Who came to the birthday party with her parents? My nice.
+     ① Who came to the birthday party with her parents? My niece.
+
+  #4  관문 O  A 0.006  점수 4.24  성립 O/X  웃김 3
+     ③ Who is this little girl, your sibling's fantastic child? Your nice.
+     ② Who is this little girl, your sister's child? Your nice.
+     ① Who is this little girl, your sister's child? Your niece.
+
+  #5  관문 O  A 0.001  점수 4.75  성립 O/O  웃김 4
+     ③ Who is always welcome at a family gathering? My nice.
+     ② Who is always welcome at a family reunion? My nice.
+     ① Who is always welcome at a family reunion? My niece.
+
+  #6  관문 O  A 0.003  점수 3.73  성립 O/O  웃김 3  ◀ 고름: P3
+     ③ Who came to visit after a fantastic trip? My nice.
+     ② Who came to visit after a long trip? My nice.
+     ① Who came to visit after a long trip? My niece.
+
+  #7  관문 O  A 0.001  점수 5.47  성립 X/O  웃김 3  ◀ 고름: P2
+     ③ Who is this offspring to my brother? My nice.
+     ② Who is this child to my brother? My nice.
+     ① Who is this child to my brother? My niece.
+
+  #8  관문 O  A 0.001  점수 5.16  성립 X/X  웃김 3  ◀ 고름: P4
+     ③ Who went to the park with her wonderful uncle? His nice.
+     ② Who went to the park with her uncle? His nice.
+     ① Who went to the park with her uncle? His niece.
+
+  #9  관문 X  A 0.526  점수 -1.32  성립 X/X  웃김 3
+     ③ Who attended the lovely baby shower? A nice.
+     ② Who attended the baby shower? A nice.
+     ① Who attended the baby shower? A niece.
+
+  [B1 한 번에 쓰기]  규칙 실패  성립 O  웃김 4
+     My aunt's hugs are so nice, they make you feel like a part of the family without even mentioning a niece.
+
+====================================================================================================
+[e5r002:oneliner] nice → niece  (한 줄 문장, 음소 거리 0)
+  w_p nice: pleasant or pleasing or agreeable in nature or appearance; - George Meredith
+  w_a niece: a daughter of your brother or sister
+  S3 힌트: good, neat, fantastic, wonderful, terrific
+
+  #0  관문 O  A 0.001  점수 4.94  성립 O/O  웃김 3  ◀ 고름: P2
+     ③ What a fantastic surprise, my sister just told me her daughter is visiting, so I will see my nice.
+     ② My sister just told me her daughter is visiting, so I will see my nice.
+     ① My sister just told me her daughter is visiting, so I will see my niece.
+
+  #1  관문 O  A 0.001  점수 4.00  성립 O/O  웃김 3
+     ③ After a wonderful weekend away, she finally got to see her nice.
+     ② After spending the weekend with her family, she finally got to see her nice.
+     ① After spending the weekend with her family, she finally got to see her niece.
+
+  #2  관문 O  A 0.058  점수 3.80  성립 X/X  웃김 2  ◀ 고름: P3,P4
+     ③ What a fantastic meeting at the park, her lovely nice.
+     ② I met my sister at the park with her lovely nice.
+     ① I met my sister at the park with her lovely niece.
+
+  #3  관문 X  A 0.000  점수 7.40  성립 O/O  웃김 3
+     ③ My sister has a fantastic new baby, and I can't wait to meet my nice.
+     ② My sister has a new baby, and I can't wait to meet my nice.
+     ① My sister has a new baby, and I can't wait to meet my niece.
+
+  #4  관문 O  A 0.009  점수 3.74  성립 O/X  웃김 2
+     ③ Their fantastic child is my nice.
+     ② My brother and his wife have a beautiful daughter who is my nice.
+     ① My brother and his wife have a beautiful daughter who is my niece.
+
+  #5  관문 O  A 0.082  점수 0.97  성립 X/X  웃김 3  ◀ 고름: P1
+     ③ She's the fantastic apple of my eye, my nice.
+     ② She's the apple of my eye, my nice.
+     ① She's the apple of my eye, my niece.
+
+  #6  관문 O  A 0.009  점수 4.18  성립 O/O  웃김 3
+     ③ How fantastic to hear that his daughter is coming to visit, my nice.
+     ② My brother just told me that his daughter is coming to visit, my nice.
+     ① My brother just told me that his daughter is coming to visit, my niece.
+
+  #7  관문 X  A 0.000  점수 7.90  성립 O/O  웃김 3
+     ③ My sister just sent a photo of her fantastic daughter, my nice.
+     ② My sister just sent a photo of her daughter, my nice.
+     ① My sister just sent a photo of her daughter, my niece.
+
+  #8  관문 O  A 0.003  점수 2.33  성립 O/O  웃김 3
+     ③ Discussing pleasant experiences, I mentioned my nice.
+     ② Talking about family, I mentioned my nice.
+     ① Talking about family, I mentioned my niece.
+
+  #9  관문 O  A 0.062  점수 0.47  성립 X/O  웃김 2
+     ③ Discussing the party, my sister has a nice.
+     ② Talking about family, my sister has a nice.
+     ① Talking about family, my sister has a niece.
+
+  [B1 한 번에 쓰기]  규칙 통과  성립 O  웃김 3
+     My sister's apple pie is nice and you'll find it equally 'delicious' if you're her sibling's offspring!
+
+====================================================================================================
+[e5r003:riddle] mist → midst  (수수께끼, 음소 거리 0)
+  w_p mist: a thin fog with condensation near the ground
+  w_a midst: the location of something surrounded by other things
+  S3 힌트: fog, haze, clouds, drizzle, milky
+
+  #0  관문 O  A 0.288  점수 1.08  성립 O/O  웃김 3
+     ③ What's in the garden, surrounded by fog? A rose in the mist.
+     ② What's in the garden, surrounded by flowers? A rose in the mist.
+     ① What's in the garden, surrounded by flowers? A rose in the midst.
+
+  #1  관문 X  A 0.000  점수 -10.88  성립 O/O  웃김 3  ◀ 고름: P3
+     ③ What do you find when searching through clutter under a cloudy sky? A needle mist.
+     ② What do you find when searching through clutter? A needle mist.
+     ① What do you find when searching through clutter? A needle midst.
+
+  #2  관문 X  A 0.001  점수 -6.78  성립 O/O  웃김 3
+     ③ What's in the middle of the fog? Dancing mist.
+     ② What's in the middle of the party? Dancing mist.
+     ① What's in the middle of the party? Dancing midst.
+
+  #3  관문 O  A 0.253  점수 4.95  성립 O/O  웃김 4  ◀ 고름: P2
+     ③ What obscures the view at a crowded party? A guest in the mist.
+     ② What is in the middle of a crowded party? A guest in the mist.
+     ① What is in the middle of a crowded party? A guest in the midst.
+
+  #4  관문 X  A 0.011  점수 -5.30  성립 O/O  웃김 2
+     ③ What's enclosed by trees in a fog? A tree in mist.
+     ② What's surrounded by trees in a forest? A tree in mist.
+     ① What's surrounded by trees in a forest? A tree in midst.
+
+  #5  관문 O  A 0.052  점수 -0.22  성립 O/O  웃김 2
+     ③ Where do you find a flower in the garden, surrounded by fog? In the mist.
+     ② Where do you find a flower in the garden? In the mist.
+     ① Where do you find a flower in the garden? In the midst.
+
+  #6  관문 X  A 0.141  점수 -5.23  성립 O/O  웃김 4  ◀ 고름: P1
+     ③ What's in the middle of a foggy place? People mist.
+     ② What's in the middle of a crowded place? People mist.
+     ① What's in the middle of a crowded place? People midst.
+
+  #7  관문 X  A 0.184  점수 -2.59  성립 O/O  웃김 3
+     ③ What's at the center of the garden haze? Flowers mist.
+     ② What's at the center of the garden party? Flowers mist.
+     ① What's at the center of the garden party? Flowers midst.
+
+  #8  관문 X  A 0.205  점수 0.13  성립 X/X  웃김 3  ◀ 고름: P4
+     ③ What is a deer in the haze? A mist trees.
+     ② What is a deer in the forest? A mist trees.
+     ① What is a deer in the forest? A midst trees.
+
+  #9  관문 O  A 0.028  점수 -0.17  성립 X/O  웃김 2
+     ③ Where do plants grow in a foggy field? In the mist.
+     ② Where do plants grow in a field? In the mist.
+     ① Where do plants grow in a field? In the midst.
+
+  [B1 한 번에 쓰기]  규칙 통과  성립 X  웃김 3
+     It's so foggy I can't find my breakfast, I'm in a jamb because I'm lost in this mist.
+
+====================================================================================================
+[e5r003:oneliner] mist → midst  (한 줄 문장, 음소 거리 0)
+  w_p mist: a thin fog with condensation near the ground
+  w_a midst: the location of something surrounded by other things
+  S3 힌트: fog, haze, clouds, drizzle, milky
+
+  #0  관문 O  A 0.677  점수 2.92  성립 X/O  웃김 2
+     ③ Amid the haze, she found a moment of peace in the mist.
+     ② Amid the chaos of the market, she found a moment of peace in the mist.
+     ① Amid the chaos of the market, she found a moment of peace in the midst.
+
+  #1  관문 X  A 0.673  점수 1.69  성립 X/O  웃김 2  ◀ 고름: P1
+     ③ In the haze of the bustling city, she found peace in the mist.
+     ② Amidst the chaos of the bustling city, she found peace in the mist.
+     ① Amidst the chaos of the bustling city, she found peace in the midst.
+
+  #2  관문 O  A 0.584  점수 1.62  성립 X/O  웃김 2
+     ③ Amid the fog, she found peace in the mist.
+     ② Amid the chaos of moving, she found peace in the mist.
+     ① Amid the chaos of moving, she found peace in the midst.
+
+  #3  관문 X  A 0.156  점수 -1.33  성립 O/O  웃김 3
+     ③ Through the haze of the party, she found peace amidst laughter and noise, in mist.
+     ② In the chaos of the party, she found peace amidst laughter and noise, in mist.
+     ① In the chaos of the party, she found peace amidst laughter and noise, in midst.
+
+  #4  관문 X  A 0.200  점수 -9.08  성립 O/O  웃김 3
+     ③ Amidst the haze of the celebration, she found herself mist.
+     ② In the chaos of the celebration, she found herself mist.
+     ① In the chaos of the celebration, she found herself midst.
+
+  #5  관문 O  A 0.575  점수 3.61  성립 X/O  웃김 2  ◀ 고름: P2
+     ③ Amid the fog, he felt comfortable and at ease in the mist.
+     ② Surrounded by his friends, he felt comfortable and at ease in the mist.
+     ① Surrounded by his friends, he felt comfortable and at ease in the midst.
+
+  #6  관문 X  A 0.141  점수 -0.44  성립 X/O  웃김 2
+     ③ Surrounded by a fog, she felt lost in the mist.
+     ② Amidst a crowd of people, she felt lost in the mist.
+     ① Amidst a crowd of people, she felt lost in the midst.
+
+  #7  관문 O  A 0.488  점수 1.77  성립 X/O  웃김 2
+     ③ Surrounded by the haze, she found peace in the mist.
+     ② Amid the chaos of the market, she found peace in the mist.
+     ① Amid the chaos of the market, she found peace in the midst.
+
+  #8  관문 X  A 0.488  점수 3.36  성립 O/O  웃김 3  ◀ 고름: P4
+     ③ Through the fog, he found peace amidst the noise and chatter mist.
+     ② In the chaos of the bustling market, he found peace amidst the noise and chatter mist.
+     ① In the chaos of the bustling market, he found peace amidst the noise and chatter midst.
+
+  #9  관문 O  A 0.496  점수 2.00  성립 X/X  웃김 2  ◀ 고름: P3
+     ③ In the fog, amidst a crowd of strangers, she found a familiar face in the mist.
+     ② Amidst a crowd of strangers, she found a familiar face in the mist.
+     ① Amidst a crowd of strangers, she found a familiar face in the midst.
+
+  [B1 한 번에 쓰기]  규칙 통과  성립 X  웃김 3
+     In this hazy affair, my jokes roll like fog, leaving everyone in a funny mist.
+
+====================================================================================================
+[e5r004:riddle] rap → wrap  (수수께끼, 음소 거리 0)
+  w_p rap: strike sharply
+  w_a wrap: arrange or fold as a cover or protection
+  S3 힌트: gangsta, reggae, rhymes
+
+  #0  관문 X  A 0.673  점수 0.97  성립 O/O  웃김 3
+     ③ What do you do to a gift at a gangsta party? Put a bow on it, rap.
+     ② What do you do to a gift at a party? Put a bow on it, rap.
+     ① What do you do to a gift at a party? Put a bow on it, wrap.
+
+  #1  관문 X  A 0.661  점수 -0.78  성립 O/O  웃김 4
+     ③ What do you do with a present before giving it to a friend using a gangsta style? Rap it.
+     ② What do you do with a present before giving it to a friend? Rap it.
+     ① What do you do with a present before giving it to a friend? Wrap it.
+
+  #2  관문 O  A 0.001  점수 4.90  성립 O/O  웃김 4  ◀ 고름: P2
+     ③ What do you do to a present before giving it? Rap it.
+     ② What do you do to a gift before giving it? Rap it.
+     ① What do you do to a gift before giving it? Wrap it.
+
+  #3  관문 O  A 0.644  점수 -0.28  성립 O/O  웃김 4
+     ③ What do you do to cover a gift like a gangsta? Rap it.
+     ② What do you do to cover a gift? Rap it.
+     ① What do you do to cover a gift? Wrap it.
+
+  #4  관문 X  A 0.477  점수 -0.42  성립 O/O  웃김 3  ◀ 고름: P1
+     ③ What do you do to a sandwich before eating, like a gangsta might? Rap it.
+     ② What do you do to a sandwich before eating? Rap it.
+     ① What do you do to a sandwich before eating? Wrap it.
+
+  #5  관문 X  A 0.689  점수 -0.66  성립 O/O  웃김 4
+     ③ What do gangsta artists use to cover a birthday gift? A rap.
+     ② What do you use to cover a birthday gift? A rap.
+     ① What do you use to cover a birthday gift? A wrap.
+
+  #6  관문 X  A 0.000  점수 13.42  성립 O/O  웃김 3  ◀ 고름: P3
+     ③ What do you use to cover your sandwich with a gangsta style? Plastic rap.
+     ② What do you use to cover your sandwich for lunch? Plastic rap.
+     ① What do you use to cover your sandwich for lunch? Plastic wrap.
+
+  #7  관문 O  A 0.048  점수 3.42  성립 O/O  웃김 4  ◀ 고름: P4
+     ③ What's the first thing you do with a gift from a gangsta? Open and rap it.
+     ② What's the first thing you do with a gift? Open and rap it.
+     ① What's the first thing you do with a gift? Open and wrap it.
+
+  #8  관문 X  A 0.602  점수 -2.25  성립 O/O  웃김 3
+     ③ What do you do with a gift before you give it, like a gangsta? Rap it.
+     ② What do you do with a gift before you give it? Rap it.
+     ① What do you do with a gift before you give it? Wrap it.
+
+  #9  관문 O  A 0.474  점수 -0.49  성립 O/O  웃김 4
+     ③ What do you do to a gift before giving, like a gangsta? Rap it.
+     ② What do you do to a gift before giving? Rap it.
+     ① What do you do to a gift before giving? Wrap it.
+
+  [B1 한 번에 쓰기]  규칙 통과  성립 O  웃김 3
+     To keep the gift from shaking, try to rap it with paper instead of hitting it; security in silence.
+
+====================================================================================================
+[e5r004:oneliner] rap → wrap  (한 줄 문장, 음소 거리 0)
+  w_p rap: strike sharply
+  w_a wrap: arrange or fold as a cover or protection
+  S3 힌트: gangsta, reggae, rhymes
+
+  #0  관문 O  A 0.119  점수 3.07  성립 O/O  웃김 3
+     ③ Before selecting the gift, the gangsta decided to rap it.
+     ② After carefully selecting the gift, she decided to rap it.
+     ① After carefully selecting the gift, she decided to wrap it.
+
+  #1  관문 X  A 0.205  점수 5.25  성립 O/O  웃김 4  ◀ 고름: P3
+     ③ After seeing the gangsta's quick response, the paramedics quickly covered her to keep her warm and safe, ready to rap.
+     ② After the accident, the paramedics quickly covered her to keep her warm and safe, ready to rap.
+     ① After the accident, the paramedics quickly covered her to keep her warm and safe, ready to wrap.
+
+  #2  관문 O  A 0.061  점수 3.70  성립 O/O  웃김 3
+     ③ Before carefully choosing the gift, the gangsta decided to rap it.
+     ② After carefully selecting the gift, she decided to rap it.
+     ① After carefully selecting the gift, she decided to wrap it.
+
+  #3  관문 O  A 0.020  점수 7.97  성립 O/O  웃김 4  ◀ 고름: P1
+     ③ After freestyling the gift, she needed just a final touch to rap.
+     ② After preparing the gift, she needed just a final touch to rap.
+     ① After preparing the gift, she needed just a final touch to wrap.
+
+  #4  관문 O  A 0.001  점수 10.05  성립 O/O  웃김 4  ◀ 고름: P2
+     ③ Before buying the gift, she needed to find something nice to rap.
+     ② After purchasing the gift, she needed to find something nice to rap.
+     ① After purchasing the gift, she needed to find something nice to wrap.
+
+  #5  관문 O  A 0.010  점수 5.53  성립 O/O  웃김 3
+     ③ Gangsta style, she carefully placed the gift inside the box before she decided to rap it.
+     ② She carefully placed the gift inside the box before she decided to rap it.
+     ① She carefully placed the gift inside the box before she decided to wrap it.
+
+  #6  관문 O  A 0.390  점수 4.12  성립 O/O  웃김 3  ◀ 고름: P4
+     ③ After composing her latest rhymes, she neatly arranged the paper to rap.
+     ② After finishing her gift, she neatly arranged the paper to rap.
+     ① After finishing her gift, she neatly arranged the paper to wrap.
+
+  #7  관문 X  A 0.024  점수 2.67  성립 O/O  웃김 3
+     ③ Before leaving the store, I was gangsta-focused and sure to rap the present.
+     ② Before leaving the store, I made sure to rap the present.
+     ① Before leaving the store, I made sure to wrap the present.
+
+  #8  관문 O  A 0.035  점수 3.84  성립 O/O  웃김 4
+     ③ Gangsta style, she carefully placed the gift on the table before she decided to rap it.
+     ② She carefully placed the gift on the table before she decided to rap it.
+     ① She carefully placed the gift on the table before she decided to wrap it.
+
+  #9  관문 X  A 0.000  점수 6.80  성립 O/O  웃김 3
+     ③ Before choosing the perfect gift, this gangsta made sure to rap it neatly.
+     ② After carefully selecting the perfect gift, she made sure to rap it neatly.
+     ① After carefully selecting the perfect gift, she made sure to wrap it neatly.
+
+  [B1 한 번에 쓰기]  규칙 통과  성립 O  웃김 3
+     This gift beats all others, just watch me rap it up!
+
+====================================================================================================
+[e5r005:riddle] lad → lap  (수수께끼, 음소 거리 1)
+  w_p lad: a boy or man
+  w_a lap: the upper side of the thighs of a seated person
+  S3 힌트: youngster, fella, schoolboy, chap, bloke
+
+  #0  관문 O  A 0.001  점수 6.22  성립 X/X  웃김 3
+     ③ Where does the youngster sit to hear a story? On lad.
+     ② Where does the child sit to hear a story? On lad.
+     ① Where does the child sit to hear a story? On lap.
+
+  #1  관문 X  A 0.000  점수 12.09  성립 O/O  웃김 4
+     ③ Where can a youngster sit to read a book? On mom's lad.
+     ② Where can a child sit to read a book? On mom's lad.
+     ① Where can a child sit to read a book? On mom's lap.
+
+  #2  관문 X  A 0.000  점수 9.41  성립 O/O  웃김 2
+     ③ Where did the child sit to read the book to her schoolboy? On her lad.
+     ② Where did the child sit to read the book? On her lad.
+     ① Where did the child sit to read the book? On her lap.
+
+  #3  관문 X  A 0.000  점수 14.36  성립 O/O  웃김 3
+     ③ Where does a child often sit for a story with grandma? On grandma's lad.
+     ② Where does a child often sit for a story? On grandma's lad.
+     ① Where does a child often sit for a story? On grandma's lap.
+
+  #4  관문 X  A 0.247  점수 1.61  성립 O/X  웃김 2  ◀ 고름: P4
+     ③ What place can you read a book on a schoolboy's desk? On a lad.
+     ② What place can you read a book on? On a lad.
+     ① What place can you read a book on? On a lap.
+
+  #5  관문 O  A 0.001  점수 6.20  성립 O/X  웃김 3
+     ③ Where can a youngster sit to listen to a story? On a lad.
+     ② Where can a child sit to listen to a story? On a lad.
+     ① Where can a child sit to listen to a story? On a lap.
+
+  #6  관문 X  A 0.000  점수 6.97  성립 O/O  웃김 3
+     ③ Where can I sit the youngster to tell a story? On my lad.
+     ② Where can I sit the baby to tell a story? On my lad.
+     ① Where can I sit the baby to tell a story? On my lap.
+
+  #7  관문 X  A 0.000  점수 8.91  성립 O/X  웃김 3  ◀ 고름: P1,P3
+     ③ What is a youngster's favorite place to sit? Mom's lad.
+     ② What is a baby's favorite place to sit? Mom's lad.
+     ① What is a baby's favorite place to sit? Mom's lap.
+
+  #8  관문 X  A 0.000  점수 10.51  성립 O/O  웃김 3
+     ③ Where might a youngster sit and enjoy a story from grandma? On grandma's lad.
+     ② Where might a child sit and enjoy a story? On grandma's lad.
+     ① Where might a child sit and enjoy a story? On grandma's lap.
+
+  #9  관문 O  A 0.001  점수 7.02  성립 O/X  웃김 3  ◀ 고름: P2
+     ③ Where does a youngster often sit? On a lad.
+     ② Where does a child often sit? On a lad.
+     ① Where does a child often sit? On a lap.
+
+  [B1 한 번에 쓰기]  규칙 통과  성립 X  웃김 3
+     This lad is getting tired of sitting on the couch; he needs to meet a new cheeky audience!
+
+====================================================================================================
+[e5r005:oneliner] lad → lap  (한 줄 문장, 음소 거리 1)
+  w_p lad: a boy or man
+  w_a lap: the upper side of the thighs of a seated person
+  S3 힌트: youngster, fella, schoolboy, chap, bloke
+
+  #0  관문 O  A 0.001  점수 5.09  성립 O/O  웃김 3
+     ③ The youngsters gathered around their grandmother's lad.
+     ② The children gathered around their grandmother's lad.
+     ① The children gathered around their grandmother's lap.
+
+  #1  관문 O  A 0.001  점수 6.83  성립 O/O  웃김 3  ◀ 고름: P2,P4
+     ③ For her young fella, she gently placed the book on her lad.
+     ② She gently placed the book on her lad.
+     ① She gently placed the book on her lap.
+
+  #2  관문 O  A 0.005  점수 5.37  성립 X/X  웃김 3  ◀ 고름: P3
+     ③ The young fella spilled his drink, unfortunately onto my lad.
+     ② The child spilled her drink, unfortunately onto my lad.
+     ① The child spilled her drink, unfortunately onto my lap.
+
+  #3  관문 X  A 0.000  점수 9.41  성립 O/X  웃김 2
+     ③ Before finishing the storybook, she placed it on her lad.
+     ② After she finished reading the storybook, she closed it and placed it on her lad.
+     ① After she finished reading the storybook, she closed it and placed it on her lap.
+
+  #4  관문 X  A 0.000  점수 9.96  성립 O/X  웃김 3
+     ③ Seeing the youngster, the cat jumped onto her lad.
+     ② The cat jumped onto her lad.
+     ① The cat jumped onto her lap.
+
+  #5  관문 O  A 0.001  점수 4.69  성립 O/O  웃김 3
+     ③ After serving the tea to the youngster, she placed the cup on her lad.
+     ② After pouring the tea, she placed the cup on her lad.
+     ① After pouring the tea, she placed the cup on her lap.
+
+  #6  관문 X  A 0.000  점수 8.04  성립 O/O  웃김 3
+     ③ For her dear fella, she gently placed the book on her lad.
+     ② She gently placed the book on her lad.
+     ① She gently placed the book on her lap.
+
+  #7  관문 X  A 0.000  점수 14.91  성립 O/O  웃김 3
+     ③ The young boy happily read the storybook while sitting on his mother's lad.
+     ② The child happily read the storybook while sitting on his mother's lad.
+     ① The child happily read the storybook while sitting on his mother's lap.
+
+  #8  관문 X  A 0.000  점수 7.02  성립 X/X  웃김 3  ◀ 고름: P1
+     ③ Surrounding the fella, the children gathered to listen to a story on her lad.
+     ② The children gathered to listen to a story on her lad.
+     ① The children gathered to listen to a story on her lap.
+
+  #9  관문 X  A 0.000  점수 12.13  성립 O/O  웃김 3
+     ③ The schoolboy fell asleep while sitting on her mother's lad.
+     ② The baby fell asleep while sitting on her mother's lad.
+     ① The baby fell asleep while sitting on her mother's lap.
+
+  [B1 한 번에 쓰기]  규칙 통과  성립 X  웃김 3
+     He's a fit lad, always sitting for a chat. Even the seat feels honored.
+
+====================================================================================================
+[e5r006:riddle] mark → arc  (수수께끼, 음소 거리 1)
+  w_p mark: attach a tag or label to
+  w_a arc: electrical conduction through a gas in an applied electric field
+  S3 힌트: record, milestone, plateau, surpassing, commemorate
+
+  #0  관문 X  A 0.004  점수 -6.07  성립 X/O  웃김 4  ◀ 고름: P1
+     ③ What happens when electricity jumps in the air and makes a record? A mark.
+     ② What happens when electricity jumps in the air? A mark.
+     ① What happens when electricity jumps in the air? An arc.
+
+  #1  관문 X  A 0.042  점수 -3.72  성립 X/X  웃김 3
+     ③ What makes the lamp glow without a bulb, leaving a lasting record? A mark.
+     ② What makes the lamp glow without a bulb? A mark.
+     ① What makes the lamp glow without a bulb? An arc.
+
+  #2  관문 X  A 0.437  점수 0.08  성립 X/X  웃김 3
+     ③ What records when electricity jumps in the air? A spark mark.
+     ② What forms when electricity jumps in the air? A spark mark.
+     ① What forms when electricity jumps in the air? A spark arc.
+
+  #3  관문 X  A 0.693  점수 1.05  성립 O/O  웃김 4  ◀ 고름: P3,P4
+     ③ What makes electricity commemorate in a storm? Lightning mark.
+     ② What makes electricity jump in a storm? Lightning mark.
+     ① What makes electricity jump in a storm? Lightning arc.
+
+  #4  관문 X  A 0.047  점수 -3.45  성립 X/O  웃김 3
+     ③ What jumps between wires and records every crossing? A mark.
+     ② What jumps between wires? A mark.
+     ① What jumps between wires? An arc.
+
+  #5  관문 X  A 0.002  점수 -8.49  성립 X/X  웃김 3
+     ③ What's the spark in the air when it's really close to reaching a milestone? A mark.
+     ② What's the spark in the air when it's really close? A mark.
+     ① What's the spark in the air when it's really close? An arc.
+
+  #6  관문 O  A 0.612  점수 1.92  성립 X/X  웃김 3
+     ③ What lights up when electricity jumps and records the achievement? A spark mark.
+     ② What lights up when electricity jumps? A spark mark.
+     ① What lights up when electricity jumps? A spark arc.
+
+  #7  관문 X  A 0.052  점수 -1.78  성립 X/X  웃김 3
+     ③ What can start in a storm and end with a milestone? A spark mark.
+     ② What can start in a storm and end with a flash? A spark mark.
+     ① What can start in a storm and end with a flash? A spark arc.
+
+  #8  관문 O  A 0.005  점수 7.78  성립 O/O  웃김 2  ◀ 고름: P2
+     ③ What do I witness when the power line is hit by lightning? An electric mark.
+     ② What do I see when the power line is hit by lightning? An electric mark.
+     ① What do I see when the power line is hit by lightning? An electric arc.
+
+  #9  관문 X  A 0.008  점수 -6.55  성립 O/O  웃김 3
+     ③ What shines between the posts when the switch is flipped, to commemorate? A mark.
+     ② What glows between the posts when the switch is flipped? A mark.
+     ① What glows between the posts when the switch is flipped? An arc.
+
+  [B1 한 번에 쓰기]  규칙 통과  성립 X  웃김 3
+     Let's mark this as comedy's shining moment: a bright spot on a page.
+
+====================================================================================================
+[e5r006:oneliner] mark → arc  (한 줄 문장, 음소 거리 1)
+  w_p mark: attach a tag or label to
+  w_a arc: electrical conduction through a gas in an applied electric field
+  S3 힌트: record, milestone, plateau, surpassing, commemorate
+
+  #0  관문 X  A 0.024  점수 -4.94  성립 X/O  웃김 2
+     ③ As a milestone, the electrical current managed to jump as a mark.
+     ② Despite the malfunction, the electrical current managed to jump as a mark.
+     ① Despite the malfunction, the electrical current managed to jump as an arc.
+
+  #1  관문 X  A 0.596  점수 -1.73  성립 X/X  웃김 2
+     ③ After labeling the equipment, the high voltage caused a mark.
+     ② After flipping the switch, the high voltage caused a mark.
+     ① After flipping the switch, the high voltage caused an arc.
+
+  #2  관문 X  A 0.387  점수 5.42  성립 X/X  웃김 2
+     ③ Commemorating this milestone, the experiment demonstrated electrical conduction through gas in an applied electric field mark.
+     ② The experiment demonstrated electrical conduction through gas in an applied electric field mark.
+     ① The experiment demonstrated electrical conduction through gas in an applied electric field arc.
+
+  #3  관문 X  A 0.332  점수 -3.02  성립 X/X  웃김 2
+     ③ After labeling the experiment's success, we saw electrical conduction through the gas, creating a mark.
+     ② After flipping the switch, we saw electrical conduction through the gas, creating a mark.
+     ① After flipping the switch, we saw electrical conduction through the gas, creating an arc.
+
+  #4  관문 X  A 0.381  점수 -3.47  성립 X/X  웃김 2  ◀ 고름: P1,P3
+     ③ After recording the milestone, he watched in amazement as the electricity leaped across the gap, creating a mark.
+     ② He watched in amazement as the electricity leaped across the gap, creating a mark.
+     ① He watched in amazement as the electricity leaped across the gap, creating an arc.
+
+  #5  관문 X  A 0.675  점수 1.05  성립 X/X  웃김 2
+     ③ To commemorate the incident, the electricians could see the dangerous mark.
+     ② After the power surge, the electricians could see the dangerous mark.
+     ① After the power surge, the electricians could see the dangerous arc.
+
+  #6  관문 O  A 0.007  점수 5.09  성립 X/X  웃김 2  ◀ 고름: P2,P4
+     ③ Before the lines were hit by lightning, an electrical mark formed.
+     ② After the power lines were hit by lightning, an electrical mark formed.
+     ① After the power lines were hit by lightning, an electrical arc formed.
+
+  #7  관문 X  A 0.472  점수 -1.23  성립 X/O  웃김 2
+     ③ Upon recording the milestone, they watched the mark.
+     ② After the electric field was applied, sparks flew as they watched the mark.
+     ① After the electric field was applied, sparks flew as they watched the arc.
+
+  #8  관문 X  A 0.005  점수 -5.67  성립 X/X  웃김 1
+     ③ After recording his findings, the scientist observed a mark.
+     ② After experimenting with electrical conduction, the scientist observed a mark.
+     ① After experimenting with electrical conduction, the scientist observed an arc.
+
+  #9  관문 O  A 0.157  점수 4.04  성립 X/X  웃김 2
+     ③ Before recording the event, they saw electrical mark.
+     ② After tripping the circuit breaker, they saw electrical mark.
+     ① After tripping the circuit breaker, they saw electrical arc.
+
+  [B1 한 번에 쓰기]  규칙 통과  성립 X  웃김 3
+     Tagging these lines is marking a light bulb moment!
+
+====================================================================================================
+[e5r007:riddle] shin → din  (수수께끼, 음소 거리 1)
+  w_p shin: the front part of the human leg between the knee and the ankle
+  w_a din: a loud harsh or strident noise
+  S3 힌트: ankle, knee, thigh, groin, forearm
+
+  #0  관문 O  A 0.389  점수 2.78  성립 O/O  웃김 4  ◀ 고름: P4
+     ③ What sounds when someone kicks a ball at the fair? A shin.
+     ② What sounds when people eat at the fair? A shin.
+     ① What sounds when people eat at the fair? A din.
+
+  #1  관문 O  A 0.367  점수 3.10  성립 O/X  웃김 4
+     ③ What is the loud noise at a party called when near the leg? A shin.
+     ② What is the loud noise at a party called? A shin.
+     ① What is the loud noise at a party called? A din.
+
+  #2  관문 O  A 0.019  점수 6.05  성립 O/O  웃김 3  ◀ 고름: P2,P3
+     ③ Why can't we discuss here in the dining room? Too much shin.
+     ② Why can't we talk in the cafeteria? Too much shin.
+     ① Why can't we talk in the cafeteria? Too much din.
+
+  #3  관문 X  A 0.006  점수 6.85  성립 X/O  웃김 4
+     ③ What did the family feel at dinner? A family shin.
+     ② What did the family hear at dinner? A family shin.
+     ① What did the family hear at dinner? A family din.
+
+  #4  관문 X  A 0.088  점수 3.88  성립 O/O  웃김 4
+     ③ What sounds fill a cafeteria during lunch at a medical conference? A shin.
+     ② What sounds fill a cafeteria during lunch? A shin.
+     ① What sounds fill a cafeteria during lunch? A din.
+
+  #5  관문 O  A 0.065  점수 4.60  성립 O/O  웃김 4
+     ③ What noise does a busy cafeteria make near the lower limb? A shin.
+     ② What noise does a busy cafeteria make? A shin.
+     ① What noise does a busy cafeteria make? A din.
+
+  #6  관문 X  A 0.254  점수 -2.60  성립 X/X  웃김 3
+     ③ Why did he visit his doctor early? A shin.
+     ② Why did he come home early? A shin.
+     ① Why did he come home early? A din.
+
+  #7  관문 O  A 0.006  점수 5.68  성립 O/O  웃김 4  ◀ 고름: P1
+     ③ What sound do we hear at the parade from those marching? A shin.
+     ② What sound do we hear at the parade? A shin.
+     ① What sound do we hear at the parade? A din.
+
+  #8  관문 O  A 0.002  점수 4.68  성립 O/O  웃김 4
+     ③ What does a crowded cafeteria create for many customers? A shin.
+     ② What does a busy cafeteria create? A shin.
+     ① What does a busy cafeteria create? A din.
+
+  #9  관문 X  A 0.621  점수 -1.56  성립 X/X  웃김 4
+     ③ What guards the classroom during tests? A shin.
+     ② What surrounds the classroom during tests? A shin.
+     ① What surrounds the classroom during tests? A din.
+
+  [B1 한 번에 쓰기]  규칙 통과  성립 O  웃김 3
+     My shin noise is the worst part of my talent show act. It's bone chilling!
+
+====================================================================================================
+[e5r007:oneliner] shin → din  (한 줄 문장, 음소 거리 1)
+  w_p shin: the front part of the human leg between the knee and the ankle
+  w_a din: a loud harsh or strident noise
+  S3 힌트: ankle, knee, thigh, groin, forearm
+
+  #0  관문 O  A 0.001  점수 5.68  성립 O/X  웃김 3
+     ③ From the knee down, the constant noise created quite a shin.
+     ② In the busy city streets, the constant noise created quite a shin.
+     ① In the busy city streets, the constant noise created quite a din.
+
+  #1  관문 O  A 0.000  점수 5.34  성립 X/X  웃김 3
+     ③ After bumping their knee, the busy market was packed with people and created a shin.
+     ② The busy market was packed with people and created a shin.
+     ① The busy market was packed with people and created a din.
+
+  #2  관문 X  A 0.000  점수 7.46  성립 X/X  웃김 2
+     ③ Before a long queue, the crowded train station was noisy and unbearable, filled with a shin.
+     ② The crowded train station was noisy and unbearable, filled with a shin.
+     ① The crowded train station was noisy and unbearable, filled with a din.
+
+  #3  관문 O  A 0.001  점수 6.19  성립 O/O  웃김 3  ◀ 고름: P2
+     ③ After bumping my knee, all we could hear was a loud shin.
+     ② After the chaotic parade passed, all we could hear was a loud shin.
+     ① After the chaotic parade passed, all we could hear was a loud din.
+
+  #4  관문 O  A 0.001  점수 5.25  성립 X/X  웃김 1
+     ③ While navigating the crowded city center, the noise was overwhelming, creating a shin.
+     ② In the bustling city center, the noise was overwhelming, creating a shin.
+     ① In the bustling city center, the noise was overwhelming, creating a din.
+
+  #5  관문 X  A 0.000  점수 6.83  성립 X/X  웃김 2
+     ③ After bumping his knee, the crowded city street was full of noise, creating a shin.
+     ② The crowded city street was full of noise, creating a shin.
+     ① The crowded city street was full of noise, creating a din.
+
+  #6  관문 X  A 0.674  점수 -1.20  성립 X/X  웃김 3  ◀ 고름: P4
+     ③ From the knee down, a constant shin.
+     ② The loud noise in the crowded city was a constant shin.
+     ① The loud noise in the crowded city was a constant din.
+
+  #7  관문 X  A 0.000  점수 5.70  성립 X/X  웃김 2  ◀ 고름: P1
+     ③ During the soccer game, the chaos, the shin was unbearable.
+     ② After the noisy chaos, the shin was unbearable.
+     ① After the noisy chaos, the din was unbearable.
+
+  #8  관문 X  A 0.000  점수 7.79  성립 O/X  웃김 3
+     ③ From the knee down, in the bustling city, the cacophony of traffic created a shin.
+     ② In the bustling city, the cacophony of traffic created a shin.
+     ① In the bustling city, the cacophony of traffic created a din.
+
+  #9  관문 X  A 0.000  점수 6.61  성립 O/X  웃김 4  ◀ 고름: P3
+     ③ From the knee down, the loud noise in the restaurant was unbearable; it was nothing but shin.
+     ② The loud noise in the restaurant was unbearable; it was nothing but shin.
+     ① The loud noise in the restaurant was unbearable; it was nothing but din.
+
+  [B1 한 번에 쓰기]  규칙 실패  성립 O  웃김 3
+     Q: What's a shinbone's favorite kind of music? A: Loud ranTUNEes!
+
+====================================================================================================
+[e5r008:riddle] hill → hymn  (수수께끼, 음소 거리 1)
+  w_p hill: a local and well-defined elevation of the land
+  w_a hymn: a song of praise (to God or to a saint or to a nation)
+  S3 힌트: mountain, slope, ridge, butte, ravine
+
+  #0  관문 O  A 0.114  점수 1.20  성립 O/O  웃김 2  ◀ 고름: P4
+     ③ What is often sung in a mountain sanctuary? A hill.
+     ② What is often sung in church? A hill.
+     ① What is often sung in church? A hymn.
+
+  #1  관문 O  A 0.497  점수 -0.07  성립 O/O  웃김 2
+     ③ What song is played on a mountain? A hill.
+     ② What song is sung in church? A hill.
+     ① What song is sung in church? A hymn.
+
+  #2  관문 O  A 0.499  점수 1.11  성립 O/O  웃김 3
+     ③ What's sung in church, often on a mountain? A hill.
+     ② What's sung in church on Sundays? A hill.
+     ① What's sung in church on Sundays? A hymn.
+
+  #3  관문 O  A 0.536  점수 1.12  성립 O/O  웃김 3
+     ③ What song do they sing on the mountain? A hill.
+     ② What song do they sing in church? A hill.
+     ① What song do they sing in church? A hymn.
+
+  #4  관문 O  A 0.574  점수 0.05  성립 O/O  웃김 2
+     ③ What song is sung on a mountain? A hill.
+     ② What song is sung in church? A hill.
+     ① What song is sung in church? A hymn.
+
+  #5  관문 O  A 0.299  점수 1.55  성립 O/O  웃김 3
+     ③ What is sung in church atop a mountain? A hill.
+     ② What is sung in church? A hill.
+     ① What is sung in church? A hymn.
+
+  #6  관문 O  A 0.435  점수 1.12  성립 O/O  웃김 3
+     ③ What song do churchgoers sing together atop a mountain? A hill.
+     ② What song do churchgoers sing together? A hill.
+     ① What song do churchgoers sing together? A hymn.
+
+  #7  관문 O  A 0.399  점수 1.91  성립 O/O  웃김 4  ◀ 고름: P2,P3
+     ③ What do we sing at church to praise the mountains? A hill.
+     ② What do we sing at church? A hill.
+     ① What do we sing at church? A hymn.
+
+  #8  관문 O  A 0.682  점수 0.33  성립 O/O  웃김 2  ◀ 고름: P1
+     ③ What song might we sing on a mountain? A hill.
+     ② What song might we sing at church? A hill.
+     ① What song might we sing at church? A hymn.
+
+  #9  관문 O  A 0.126  점수 -0.21  성립 O/O  웃김 3
+     ③ What is played in church on Sundays involving a steep slope? A hill.
+     ② What is played in church on Sundays? A hill.
+     ① What is played in church on Sundays? A hymn.
+
+  [B1 한 번에 쓰기]  규칙 통과  성립 O  웃김 4
+     On this holy hill, everyone was singing high notes and praising like it's a sacred mount-ain.
+
+====================================================================================================
+[e5r008:oneliner] hill → hymn  (한 줄 문장, 음소 거리 1)
+  w_p hill: a local and well-defined elevation of the land
+  w_a hymn: a song of praise (to God or to a saint or to a nation)
+  S3 힌트: mountain, slope, ridge, butte, ravine
+
+  #0  관문 X  A 0.005  점수 -4.61  성립 X/O  웃김 3
+     ③ After the service ended, the congregation hiked to their favorite hill.
+     ② After the service ended, the congregation sang their favorite hill.
+     ① After the service ended, the congregation sang their favorite hymn.
+
+  #1  관문 O  A 0.000  점수 6.65  성립 O/X  웃김 2
+     ③ Standing atop the ridge, the church choir sang a beautiful melody, a hill.
+     ② The church choir sang a beautiful melody, a hill.
+     ① The church choir sang a beautiful melody, a hymn.
+
+  #2  관문 O  A 0.509  점수 0.41  성립 O/O  웃김 2  ◀ 고름: P4
+     ③ Along the winding ravine, she sang a song of praise as the final hill.
+     ② In church, she sang a song of praise as the final hill.
+     ① In church, she sang a song of praise as the final hymn.
+
+  #3  관문 O  A 0.150  점수 3.52  성립 O/O  웃김 4  ◀ 고름: P3
+     ③ Beside the steep slope, the choir sang a beautiful song of praise; the hill was moving.
+     ② In church, the choir sang a beautiful song of praise; the hill was moving.
+     ① In church, the choir sang a beautiful song of praise; the hymn was moving.
+
+  #4  관문 X  A 0.000  점수 7.52  성립 O/O  웃김 3
+     ③ After ascending the steep slope, the congregation sang their favorite hill.
+     ② After a heartfelt prayer, the congregation sang their favorite hill.
+     ① After a heartfelt prayer, the congregation sang their favorite hymn.
+
+  #5  관문 O  A 0.001  점수 6.91  성립 O/O  웃김 2
+     ③ On the slope, they sang a beautiful song of praise, a hill.
+     ② In church, they sang a beautiful song of praise, a hill.
+     ① In church, they sang a beautiful song of praise, a hymn.
+
+  #6  관문 X  A 0.002  점수 5.24  성립 O/X  웃김 3  ◀ 고름: P1
+     ③ From the steep slope, the choir's performance was beautiful, and their final selection was a hill.
+     ② The choir's performance was beautiful, and their final selection was a hill.
+     ① The choir's performance was beautiful, and their final selection was a hymn.
+
+  #7  관문 O  A 0.000  점수 8.15  성립 O/X  웃김 3  ◀ 고름: P2
+     ③ On the steep slope, the choir sang a beautiful song in church; it was their favorite hill.
+     ② The choir sang a beautiful song in church; it was their favorite hill.
+     ① The choir sang a beautiful song in church; it was their favorite hymn.
+
+  #8  관문 O  A 0.030  점수 5.24  성립 O/O  웃김 3
+     ③ Beside the slope, they sang their favorite song of praise, the hill.
+     ② In the church service, they sang their favorite song of praise, the hill.
+     ① In the church service, they sang their favorite song of praise, the hymn.
+
+  #9  관문 O  A 0.001  점수 4.48  성립 O/O  웃김 3
+     ③ After hiking the steep slope, everyone sang a beautiful hill.
+     ② After the service, everyone sang a beautiful hill.
+     ① After the service, everyone sang a beautiful hymn.
+
+  [B1 한 번에 쓰기]  규칙 통과  성립 O  웃김 4
+     They say that laughter is the sound of the soul, so we sang a joyful tune atop the hill—joy's anthill.
+
+====================================================================================================
+[e5r009:riddle] steep → sleep  (수수께끼, 음소 거리 1)
+  w_p steep: having a sharp inclination
+  w_a sleep: be asleep
+  S3 힌트: hefty, sharp, bumpy, uphill, climb
+
+  #0  관문 O  A 0.008  점수 7.02  성립 O/O  웃김 4  ◀ 고름: P2,P3
+     ③ What's a common reason to miss the morning meal? To steep.
+     ② What's a common reason to miss breakfast? To steep.
+     ① What's a common reason to miss breakfast? To sleep.
+
+  #1  관문 O  A 0.002  점수 7.00  성립 O/O  웃김 4
+     ③ What do you do when the hefty bedtime story is over? You steep.
+     ② What do you do when the bedtime story is over? You steep.
+     ① What do you do when the bedtime story is over? You sleep.
+
+  #2  관문 X  A 0.000  점수 12.08  성립 O/O  웃김 3
+     ③ What do we naturally do when it's bedtime, resembling an uphill journey? Go to steep.
+     ② What do we naturally do when it's bedtime? Go to steep.
+     ① What do we naturally do when it's bedtime? Go to sleep.
+
+  #3  관문 X  A 0.000  점수 9.50  성립 O/O  웃김 3  ◀ 고름: P4
+     ③ Where do you put the baby for the night on a mountain? In bed to steep.
+     ② Where do you put the baby for the night? In bed to steep.
+     ① Where do you put the baby for the night? In bed to sleep.
+
+  #4  관문 X  A 0.000  점수 8.17  성립 O/O  웃김 4
+     ③ Why does a cat lie in a sunny spot all day? To steep.
+     ② Why does a cat lie in a sunbeam all day? To steep.
+     ① Why does a cat lie in a sunbeam all day? To sleep.
+
+  #5  관문 O  A 0.002  점수 6.07  성립 O/O  웃김 4
+     ③ What does a tired cat do all day on a hill? Steep.
+     ② What does a tired cat do all day? Steep.
+     ① What does a tired cat do all day? Sleep.
+
+  #6  관문 O  A 0.028  점수 3.68  성립 O/O  웃김 4
+     ③ What do you do when it's bedtime on an uphill climb? Close your eyes and steep.
+     ② What do you do when it's bedtime? Close your eyes and steep.
+     ① What do you do when it's bedtime? Close your eyes and sleep.
+
+  #7  관문 O  A 0.144  점수 3.74  성립 O/O  웃김 3
+     ③ What do you do when it's late and you're tired after an uphill climb? Go steep.
+     ② What do you do when it's late and you're tired? Go steep.
+     ① What do you do when it's late and you're tired? Go sleep.
+
+  #8  관문 O  A 0.017  점수 5.06  성립 O/O  웃김 3
+     ③ What do you do when it's dark and you're tired, climbing uphill? Steep.
+     ② What do you do when it's dark and you're tired? Steep.
+     ① What do you do when it's dark and you're tired? Sleep.
+
+  #9  관문 O  A 0.068  점수 4.58  성립 O/O  웃김 3  ◀ 고름: P1
+     ③ What do you do when you're tired at night, trying to climb uphill? Go steep.
+     ② What do you do when you're tired at night? Go steep.
+     ① What do you do when you're tired at night? Go sleep.
+
+  [B1 한 번에 쓰기]  규칙 통과  성립 O  웃김 3
+     This hill's so STEEP, you could fall and have a NAPtastic dream!
+
+====================================================================================================
+[e5r009:oneliner] steep → sleep  (한 줄 문장, 음소 거리 1)
+  w_p steep: having a sharp inclination
+  w_a sleep: be asleep
+  S3 힌트: hefty, sharp, bumpy, uphill, climb
+
+  #0  관문 X  A 0.000  점수 10.64  성립 O/O  웃김 4  ◀ 고름: P2,P3
+     ③ After a bumpy night awake, all she wanted was to finally steep.
+     ② After a long night awake, all she wanted was to finally steep.
+     ① After a long night awake, all she wanted was to finally sleep.
+
+  #1  관문 X  A 0.000  점수 9.61  성립 O/O  웃김 3
+     ③ After a long uphill day at work, all she wanted was to rest and steep.
+     ② After a long day at work, all she wanted was to rest and steep.
+     ① After a long day at work, all she wanted was to rest and sleep.
+
+  #2  관문 X  A 0.000  점수 8.75  성립 O/O  웃김 3
+     ③ After a challenging climb, all she needed was to lie down and steep.
+     ② After a long night out, all she needed was to lie down and steep.
+     ① After a long night out, all she needed was to lie down and sleep.
+
+  #3  관문 X  A 0.000  점수 9.67  성립 O/O  웃김 4
+     ③ After an uphill day at work, all she wanted was to rest and steep.
+     ② After a long day at work, all she wanted was to rest and steep.
+     ① After a long day at work, all she wanted was to rest and sleep.
+
+  #4  관문 X  A 0.000  점수 9.16  성립 O/O  웃김 3  ◀ 고름: P1
+     ③ After a long uphill day at school, all she wanted was to close her eyes and steep.
+     ② After a long day at school, all she wanted was to close her eyes and steep.
+     ① After a long day at school, all she wanted was to close her eyes and sleep.
+
+  #5  관문 X  A 0.000  점수 9.12  성립 O/O  웃김 3
+     ③ After a long day on the bumpy road, all she wanted was to close her eyes and steep.
+     ② After a long day at work, all she wanted was to close her eyes and steep.
+     ① After a long day at work, all she wanted was to close her eyes and sleep.
+
+  #6  관문 X  A 0.000  점수 8.24  성립 O/O  웃김 4
+     ③ After a long night out on the bumpy streets, all she wanted was to get home and steep.
+     ② After a long night out, all she wanted was to get home and steep.
+     ① After a long night out, all she wanted was to get home and sleep.
+
+  #7  관문 X  A 0.000  점수 8.72  성립 O/O  웃김 4
+     ③ After a long day of the uphill climb at work, all she wanted was to finally steep.
+     ② After a long day at work, all she wanted was to finally steep.
+     ① After a long day at work, all she wanted was to finally sleep.
+
+  #8  관문 X  A 0.000  점수 7.90  성립 O/O  웃김 4  ◀ 고름: P4
+     ③ After a long day on the hefty uphill, all she wanted was to rest and steep.
+     ② After a long day at work, all she wanted was to rest and steep.
+     ① After a long day at work, all she wanted was to rest and sleep.
+
+  #9  관문 X  A 0.000  점수 10.22  성립 O/O  웃김 3
+     ③ After a long day of a bumpy commute, all she wanted was to lay down and steep.
+     ② After a long day at work, all she wanted was to lay down and steep.
+     ① After a long day at work, all she wanted was to lay down and sleep.
+
+  [B1 한 번에 쓰기]  규칙 통과  성립 O  웃김 4
+     This hill is so steep, it'll make your eyes close tighter than a clamshell!
+
+====================================================================================================
+[B0] 쌍 없이 "말장난 하나 써 줘" (짝 단어는 모델이 스스로 적은 것)
+
+  B0#000  stellar → stellar  규칙 실패  성립 -  웃김 4
+     I'm ready to dance with the stars but no one's watching. Guess my moves are just 'stellar'.
+
+  B0#001  disco → discus  규칙 통과  성립 X  웃김 3
+     I went to a seafood disco last week... and pulled a mussel.
+
+  B0#002  moist-urous → murderous  규칙 실패  성립 O  웃김 3
+     When it rains, I like to go out and be a little moist-urous. After all, why lightning up the mood only when the weather is good?
+
+  B0#003  barred → bored  규칙 통과  성립 O  웃김 4
+     I tried to organize a play about park rangers, but I couldn't stage the play because all the actors were barred from entry!
+
+  B0#004  sea → see  규칙 실패  성립 O  웃김 3
+     I went to a sea food diet. I saw food and ate it.
+
+  B0#005  pupils → pupils  규칙 실패  성립 -  웃김 4
+     Why was the teacher cross-eyed? Because she couldn't control her pupils! It was quite a sight to see!
+
+  B0#006  hit → head  규칙 통과  성립 X  웃김 4
+     I wondered why the baseball kept getting bigger. Then it hit me.
+
+  B0#007  wrap → rap  규칙 통과  성립 O  웃김 3
+     Did you hear about the guy who invented a new kind of cloak? It was a real wrap-around!
+
+  B0#008  dough → dough  규칙 실패  성립 -  웃김 4
+     My friend's bakery finally closed down. I guess he couldn't raise the dough any longer. Business was half-baked at best.
+
+  B0#009  shotsy → cocky  규칙 실패  성립 O  웃김 4
+     I got a vaccine and now I'm feeling shotsy all the time, but it's not contagious,
+
+  B0#010  sole → soul  규칙 통과  성립 O  웃김 4
+     I went to a seafood disco last week. The band was terrible, but the calamari was great! Not a sole left without dancing.
+
+  B0#011  loanly → lonely  규칙 실패  성립 O  웃김 4
+     I used to be a banker, but I lost interest very quickly. It was a loanly job.
+
+  B0#012  tax → tacks  규칙 통과  성립 X  웃김 4
+     My doctor always gets down to brass tax- it's his favorite element on the periodic table.
+
+  B0#013  minute → mint  규칙 통과  성립 X  웃김 4
+     I was going to tell you a joke about time travel, but you all didn't seem to like it. Maybe you'll get it in a minute.
+
+  B0#014  whether → weather  규칙 실패  성립 O  웃김 3
+     Meteorologists are terrible at planning, they always miss the 'weather' they can go.
+
+  B0#015  diet → dietician  규칙 실패  성립 X  웃김 3
+     I went on a diet and couldn't fit into my clothes. It was a real wardrobe malfunction.
+
+  B0#016  building → be  규칙 실패  성립 X  웃김 4
+     I told my friend I was going to make a joke about construction, but they said I should 'building' up to something better.
+
+  B0#017  panda → panic  규칙 통과  성립 O  웃김 4
+     I went to the zoo the other day and there was only one animal. It was a shambles, complete panda-monium!
+
+  B0#018  reruniverse → universe  규칙 실패  성립 O  웃김 4
+     Did you hear about the show that keeps reshuffling its cast? They say it's a 'reruniverse'!
+
+  B0#019  paint-fully → painfully  규칙 실패  성립 O  웃김 4
+     I've tried to embrace my inner artist but it seems like my skills are paint-fully inadequate.
+

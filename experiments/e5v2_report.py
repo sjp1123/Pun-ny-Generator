@@ -94,7 +94,15 @@ def one_model(stage: str, gen: str, model: str, judge_tag: str, w2v: bool) -> di
     R["S3_attempts"] = dict(n=len(s1ok), fail=float((~s1ok.s3_ok.astype(bool)).mean()) if len(s1ok) else None,
                             retried=float(s1ok.s3_retried.astype(bool).mean()) if len(s1ok) else None)
     s3ok = A[A["s3_ok"].eq(True)] if "s3_ok" in A else A.iloc[:0]
-    R["final"] = rate_table(s3ok.assign(r=s3ok.final_reasons), "r") if len(s3ok) else {}
+    if "s4_tries" in A and len(s3ok):  # 파일럿 6~: S4 다듬기
+        c4 = [dict(format=r.format, r=t["reasons"]) for r in s3ok.itertuples() if isinstance(r.s4_tries, list) for t in r.s4_tries]
+        R["S4_calls"] = rate_table(pd.DataFrame(c4, columns=["format", "r"]), "r")
+        s4ok = s3ok[s3ok["s4_ok"].eq(True)]
+        R["S4_attempts"] = dict(n=len(s3ok), fail=float((~s3ok.s4_ok.eq(True)).mean()),
+                                retried=float(s3ok.s4_retried.eq(True).mean()),
+                                unchanged=float(s4ok.s4_unchanged.eq(True).mean()) if len(s4ok) else None)
+    reached = s3ok[s3ok.final_reasons.notna()] if "final_reasons" in s3ok else s3ok.iloc[:0]
+    R["final"] = rate_table(reached.assign(r=reached.final_reasons), "r") if len(reached) else {}
     R["s1_calls_per_cell"] = dict(min=int(cells.n_s1_calls.min()), median=float(cells.n_s1_calls.median()),
                                   max=int(cells.n_s1_calls.max()), values=cells.n_s1_calls.tolist())
     R["cells"] = dict(n=len(cells), underfilled=int(cells.underfilled.sum()), failed=int(cells.generation_failed.sum()),
@@ -198,10 +206,10 @@ def markdown(stage, model, res: dict, decision: str) -> str:
               f"칸당 S1 호출: 최소 {R['s1_calls_per_cell']['min']}, 중앙값 {R['s1_calls_per_cell']['median']}, "
               f"최대 {R['s1_calls_per_cell']['max']}. 칸별 후보 수 {R['cells']['n_cand']}", "",
               "| 단계 | 형식 | n | 실패율 | 사유별 비율 |", "|---|---|---|---|---|"]
-        for stg in ("S1", "S3_calls", "final"):
+        for stg in ("S1", "S3_calls", "S4_calls", "final"):
             for f, v in R.get(stg, {}).items():
                 L.append(f"| {stg} | {f} | {v['n']} | {fmt(v['fail'])} | {v['reasons']} |")
-        L += ["", f"S3 시도 단위: {R['S3_attempts']}"]
+        L += ["", f"S3 시도 단위: {R['S3_attempts']}"] + ([f"S4 시도 단위: {R['S4_attempts']}"] if "S4_attempts" in R else [])
         if "gate" in R:
             L += ["", "| 형식 | n | 관문 ③ | 관문 ② | w_a 1위 ③ | w_a 1위 ② |", "|---|---|---|---|---|---|"]
             for f, v in R["gate"].items():
@@ -228,7 +236,7 @@ def markdown(stage, model, res: dict, decision: str) -> str:
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--stage", default="pilot5", choices=["pilot2", "pilot3", "pilot4", "pilot5"])
+    ap.add_argument("--stage", default="pilot6", choices=["pilot2", "pilot3", "pilot4", "pilot5", "pilot6"])
     ap.add_argument("--gens", nargs="+", required=True, help="결정 규칙 순서대로 (7B 먼저)")
     ap.add_argument("--model", default="pythia-1.4b")
     ap.add_argument("--judge", default="Qwen/Qwen2.5-7B-Instruct")

@@ -123,6 +123,26 @@ python -X utf8 experiments/e5v2_judge2.py --stage pilot5 --gen $G
 - 옛 판정(`e5v2_judge.py`, Qwen-7B)은 돌리지 않는다.
 - 끝나면 `results/e5/pilot5/`를 커밋해서 올려 줘. 판정은 원래 PC에서 `python -X utf8 experiments/e5v2_report.py --stage pilot5 --gens $G --judge2 phi-4-4bit`.
 
+## 3e. G — 파일럿 6 (v4 쌍, S1 품사 검사, S4 다듬기, 32B)
+
+쌍을 다시 골랐고(대표 발음, 사람 말장난만큼 비슷한 소리, 품사) S3 뒤에 두 단어를 다 아는 S4 다듬기를 넣었다(PREREG_E5 6.13).
+S1 품사 검사에 spaCy `en_core_web_sm`을 쓴다(1절에서 이미 설치).
+
+```bash
+git pull
+python -X utf8 -m pytest -q tests
+G=olmo-2-0325-32b-instruct-4bit
+python -X utf8 experiments/e5v2_generate.py --stage pilot6 --model allenai/OLMo-2-0325-32B-Instruct --load-4bit
+python -X utf8 experiments/e5v2_score.py  --stage pilot6 --gen $G --model pythia-1.4b --device cuda
+python -X utf8 experiments/e5v2_select.py --stage pilot6 --gen $G --model pythia-1.4b
+python -X utf8 experiments/e5v2_judge2.py --stage pilot6 --gen $G
+```
+
+- 생성은 S4 호출이 더해져 파일럿 4보다 오래 걸린다.
+- 판정기는 ④·③·② 세 문장을 본다(호출 약 1,100번).
+- 끝나면 `results/e5/pilot6/`를 커밋해서 올려 줘. S4 A/B 평가지는 원래 PC에서 만들어 연구자가 채운다:
+  `python -X utf8 experiments/e5v2_s4_sheet.py make --stage pilot6 --gen $G`
+
 ## 4. (끝난 것) B — E5 파일럿 1
  (A의 캐시가 있으면 바로)
 
