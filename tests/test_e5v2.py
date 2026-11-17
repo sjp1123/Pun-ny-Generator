@@ -173,3 +173,30 @@ def test_relaxed_rules():
     raw = ("Before: After a long day at work, all he wanted was to crawl into bread.\n"
            "After: After a long day at the bakery, all he wanted was to crawl into bread.")
     assert s3_check(raw, s2, "bread", "bed", "oneliner")["ok"]
+
+
+# 판정 2판: 조건별 성립·웃김, 판정 못 한 B0은 성립 아님, ②③ 차이와 관문별 값
+def test_judge2_summarize():
+    import pandas as pd
+    from e5v2_judge2 import summarize, targets
+    cand = pd.DataFrame([
+        dict(cand_id="c#0", source="P", cell="x:riddle", pair_id="x", text="Q? A bagel.", pun_word="bagel", w_a="beagle",
+             text2="Q? A bagel.", pun_word2="bagel"),
+        dict(cand_id="c#1", source="P", cell="x:riddle", pair_id="x", text="Q2? A bagel.", pun_word="bagel", w_a="beagle",
+             text2="Q2? A bagel.", pun_word2="bagel"),
+        dict(cand_id="B0#0", source="B0", cell=None, pair_id=None, text="A pun.", pun_word="stellar", w_a="stellar",
+             text2=None, pun_word2=None),
+    ]).set_index("cand_id")
+    S = pd.DataFrame([dict(condition="P1", cell="x:riddle", pair_id="x", cand_id="c#0"),
+                      dict(condition="P2", cell="x:riddle", pair_id="x", cand_id="c#1"),
+                      dict(condition="B0", cell="x:riddle", pair_id="x", cand_id="B0#0")])
+    T = targets(cand, S)
+    assert list(T.judgeable) == [True, True, False]  # 쌍의 두 단어가 같은 B0은 판정하지 않는다
+    items = T[["cand_id", "source", "cell", "pair_id", "judgeable"]].assign(works=[False, True, None], works2=[False, False, None],
+                                                                            funny=[2, 4, 3])
+    res, M, bp = summarize(S, items, pd.Series({"c#0": False, "c#1": True}))
+    assert res["by_condition"]["B0"]["works"] == 0.0 and res["by_condition"]["P2"]["works"] == 1.0
+    assert res["diffs"]["P2-P1"]["works"]["est"] == 1.0 and res["diffs"]["P2-P1"]["funny"]["est"] == 2.0
+    assert res["all_P"]["works3"]["est"] == 0.5 and res["all_P"]["s3_effect"]["est"] == 0.5
+    assert res["all_P"]["works_gate_pass"]["est"] == 1.0 and res["all_P"]["works_gate_fail"]["est"] == 0.0
+    assert res["pairs_with_any_works"] == 1 and res["pairs_all_works"] == 0

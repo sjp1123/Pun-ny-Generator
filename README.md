@@ -69,7 +69,8 @@ E5 생성 파이프라인(설계 [docs/E5_DESIGN.md](docs/E5_DESIGN.md), 사전 
 (`experiments/e5v3_pairs.py` → `e5/samples_v3.json`) 파일럿 3으로 다시 판정했다(`PREREG_E5.md` 6.4~6.5).
 파일럿 3도 C1 한 칸 차이로 실패해, S1 상한을 60회로 올린 파일럿 4를 32B로 돌렸고 C1~C4를 모두 넘었다(6.6~6.8).
 본 실행 생성기는 OLMo-2-0325-32B-Instruct NF4 4비트. 지표와 LLM 판정의 탐색 비교는 `experiments/e5v2_metrics.py`.
-본 실행 전에 LLM 판정기를 사람 평가 자료로 검증한다: [docs/JUDGE_VALIDATION.md](docs/JUDGE_VALIDATION.md), `experiments/judge_validate.py`.
+LLM 판정기를 사람 평가 자료로 검증했다: [docs/JUDGE_VALIDATION.md](docs/JUDGE_VALIDATION.md), `experiments/judge_validate.py`.
+쓰던 판정기(Qwen2.5-7B)는 세 질문 모두 실패해, 검증을 통과한 phi-4와 질문으로 바꿨다: `experiments/e5v2_judge2.py` (`PREREG_E5.md` 6.9).
 GPU 실행 순서도 [docs/GPU_RUN.md](docs/GPU_RUN.md)에 있다.
 
 ## 설계 문서와 다르게 구현한 점 (이유)

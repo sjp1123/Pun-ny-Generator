@@ -93,6 +93,19 @@ python -X utf8 experiments/judge_validate.py --judge allenai/OLMo-2-0325-32B-Ins
 - 14B와 phi-4는 새로 내려받는다(각각 약 30GB). 시간이 없으면 첫 줄(7B)과 넷째 줄(이미 받아 둔 32B)만 돌려도 된다.
 - 끝날 때마다 화면에 합격 표가 나온다. 결과는 `results/judge_val/<판정기>/`(문장은 들어 있지 않고 항목 id와 답만 있다). 커밋해서 올려 줘.
 
+## 3c. E — 파일럿 4 다시 판정 (검증한 판정기)
+
+판정기 검증 결과([JUDGE_VALIDATION.md](JUDGE_VALIDATION.md) "결과")에 따라 LLM 판정을 phi-4(성립은 쌍을 알려 줌, 웃김은 1~5점)로 바꿨다
+(PREREG_E5 6.9). 생성·채점·고르기는 다시 하지 않고 판정만 새로 한다. phi-4는 검증 때 받아 둔 것을 쓴다.
+
+```bash
+git pull
+python -X utf8 experiments/e5v2_judge2.py --stage pilot4 --gen olmo-2-0325-32b-instruct-4bit
+```
+
+- 호출 약 720번(성립 460 + 웃김 260), 답이 한 단어라 몇 분이면 끝난다.
+- 결과는 `results/e5/pilot4/olmo-2-0325-32b-instruct-4bit/A_pythia-1.4b/judge2_phi-4-4bit/`. 커밋해서 올려 줘.
+
 ## 4. (끝난 것) B — E5 파일럿 1
  (A의 캐시가 있으면 바로)
 
