@@ -4,7 +4,7 @@
   S1  w_a 문장 (LLM, 온도 0.9, top_p 0.95, 60토큰, 시드 = 칸 시드 + k) → S1 검사
   S2  w_a → w_p (코드: 대소문자, 관사 a/an, 보호 구간)
   S3  w_p 주제어 넣기 (LLM, 온도 0.7, 60토큰, 실패하면 시드를 바꿔 한 번 더) → S3 검사
-  S4  (파일럿 6부터, S4_STAGES) 두 단어를 다 아는 LLM이 앞부분을 두 뜻이 함께 서는 농담으로 다듬음 → S4 검사.
+  S4  (파일럿 6만, S4_STAGES — 본 실행에서는 뺐다, PREREG_E5 6.14) 두 단어를 다 아는 LLM이 앞부분을 두 뜻이 함께 서는 농담으로 다듬음 → S4 검사.
       S1 검사에 품사 검사도 더한다: S1 문장의 w_a 자리 품사를 w_p가 가질 수 있어야 한다(PREREG_E5 6.13)
   최종 규칙 검사 (칸 안 중복 포함) → 통과하면 후보. 10개가 차면 멈춘다. 상한까지 못 채우면 underfilled.
 규칙에 걸린 후보에서 고르는 대체 규칙은 없다(통과 0개 칸은 생성 실패).
@@ -31,7 +31,7 @@ import pandas as pd
 from e5 import SYSTEM, clean_text, find_word, stable_seed, stage_dir
 from e5_gen import Generator, tag_of
 from e5_generate import Log, parse_one, parse_pick
-from e5v2 import (BASE_DECODE, MAX_S1, N_CAND, S1_DECODE, S3_DECODE, S3_TRIES, S4_DECODE, S4_STAGES, S4_TRIES, b0_pair_reasons,
+from e5v2 import (BASE_DECODE, MAX_S1, N_CAND, S1_DECODE, S3_DECODE, S3_TRIES, POS_CHECK_STAGES, S4_DECODE, S4_STAGES, S4_TRIES, b0_pair_reasons,
                   cells_v2, final_check, lemma_of, norm_dup, prompt_b1, prompt_hashes, prompt_pick, prompt_s1, samples_file,
                   pos_fits, prompt_s3, prompt_s4, prompt_text, s1_check, s2_swap, s3_check, s4_check, words)
 from rules import dump, git_state
@@ -58,7 +58,7 @@ def run_attempt(gen, stage, c, k, seen) -> dict:
     raw1 = gen.chat(prompt_s1(c), seed=seed1, system=None, **S1_DECODE)
     ck1 = s1_check(raw1, w_a, fmt)
     use_s4 = stage in S4_STAGES
-    if ck1["ok"] and use_s4 and c.get("pos_set_p") and not pos_fits(ck1["parts"]["text"], w_a, c["pos_set_p"]):
+    if ck1["ok"] and stage in POS_CHECK_STAGES and c.get("pos_set_p") and not pos_fits(ck1["parts"]["text"], w_a, c["pos_set_p"]):
         ck1 = dict(ck1, ok=False, reasons=ck1["reasons"] + ["pos_mismatch"])
     rec = dict(cell=c["cell"], pair_id=c["pair_id"], format=fmt, k=k, seed_s1=seed1, s1_raw=raw1,
                s1_ok=ck1["ok"], s1_reasons=ck1["reasons"], s1_text=(ck1["parts"] or {}).get("text"))
@@ -140,7 +140,7 @@ def main():
     dump(out / "config.json", dict(
         stage=a.stage, generator=gen.info, n_cells=len(C), limit=a.limit, n_cand=N_CAND, max_s1=a.max_s1,
         s1_decode=S1_DECODE, s3_decode=S3_DECODE, s3_tries=S3_TRIES, baseline_decode=BASE_DECODE,
-        s4=a.stage in S4_STAGES, s4_decode=S4_DECODE, s4_tries=S4_TRIES, s1_pos_check=a.stage in S4_STAGES,
+        s4=a.stage in S4_STAGES, s4_decode=S4_DECODE, s4_tries=S4_TRIES, s1_pos_check=a.stage in POS_CHECK_STAGES,
         json_tries=JSON_TRIES, pick_temperature=0.0, prompts_sha256=prompt_hashes(),
         samples_file=samples_file(a.stage).name,
         samples_sha256=hashlib.sha256(samples_file(a.stage).read_bytes().replace(b"\r\n", b"\n")).hexdigest(),

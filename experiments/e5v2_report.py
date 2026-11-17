@@ -248,9 +248,12 @@ def main():
         for g in a.gens:
             apply_judge2(res[g], stage_dir(a.stage) / g / f"A_{a.model}" / f"judge2_{a.judge2}")
     chosen = next((g for g in a.gens if res[g]["criteria"]["all"]), None)
-    if a.judge2:
+    if a.judge2 and a.stage == "pilot5":  # 6.11의 규칙
         decision = (f"C1~C4와 S3 확인을 모두 넘었다. 본 실행은 {chosen}와 넣기만 S3로 한다." if chosen else
                     "C1~C4와 S3 확인 중 넘지 못한 것이 있다. 본 실행 S3는 파일럿 4의 S3(바꾸기 허용, e5/v2/prompts)로 돌아간다.")
+    elif a.judge2:  # 6.13의 규칙 (파일럿 6~). S4를 쓸지는 연구자의 A/B(e5v2_s4_sheet.py)로 따로 정한다
+        decision = ("C1~C4와 S3 확인(최종 − ②)을 모두 넘었다. S4는 A/B 평가로 정한다." if chosen else
+                    "C1~C4와 S3 확인(최종 − ②) 중 넘지 못한 것이 있다. 6.13대로 태그를 달지 않고 기록한다(자동 대체 규칙 없음).")
     else:
         decision = (f"{chosen}를 본 실행 생성기로 정한다 (C1~C4 모두 통과)." if chosen else
                     "C1~C4를 모두 넘은 모델이 없다. prereg-e5 태그를 달지 않고 실패를 기록한 뒤 설계로 돌아간다.")

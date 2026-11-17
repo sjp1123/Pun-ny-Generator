@@ -1,0 +1,388 @@
+{
+  "decision": "C1~C4와 S3 확인(최종 − ②) 중 넘지 못한 것이 있다. 6.13대로 태그를 달지 않고 기록한다(자동 대체 규칙 없음).",
+  "chosen": null,
+  "order": [
+    "olmo-2-0325-32b-instruct-4bit"
+  ],
+  "criteria": {
+    "C2": 0.5,
+    "C3": 0.5,
+    "C4": 0.2
+  },
+  "models": {
+    "olmo-2-0325-32b-instruct-4bit": {
+      "gen": "olmo-2-0325-32b-instruct-4bit",
+      "S1": {
+        "oneliner": {
+          "n": 232,
+          "fail": 0.3620689655172414,
+          "reasons": {
+            "wa_position": 0.289,
+            "wa_count": 0.078,
+            "pos_mismatch": 0.017,
+            "shape": 0.009,
+            "truncated": 0.009
+          }
+        },
+        "riddle": {
+          "n": 211,
+          "fail": 0.16587677725118483,
+          "reasons": {
+            "wa_position": 0.114,
+            "wa_count": 0.071,
+            "pos_mismatch": 0.043
+          }
+        },
+        "all": {
+          "n": 443,
+          "fail": 0.2686230248306998,
+          "reasons": {
+            "wa_position": 0.205,
+            "wa_count": 0.074,
+            "pos_mismatch": 0.029,
+            "shape": 0.005,
+            "truncated": 0.005
+          }
+        }
+      },
+      "S3_calls": {
+        "oneliner": {
+          "n": 205,
+          "fail": 0.45365853658536587,
+          "reasons": {
+            "edit_width": 0.366,
+            "suffix_changed": 0.068,
+            "wp_count": 0.059,
+            "wa_leak": 0.005
+          }
+        },
+        "riddle": {
+          "n": 274,
+          "fail": 0.6313868613138686,
+          "reasons": {
+            "edit_width": 0.405,
+            "wp_count": 0.215,
+            "suffix_changed": 0.201,
+            "wa_leak": 0.182,
+            "shape": 0.007
+          }
+        },
+        "all": {
+          "n": 479,
+          "fail": 0.5553235908141962,
+          "reasons": {
+            "edit_width": 0.388,
+            "wp_count": 0.148,
+            "suffix_changed": 0.144,
+            "wa_leak": 0.106,
+            "shape": 0.004
+          }
+        }
+      },
+      "S3_attempts": {
+        "n": 324,
+        "fail": 0.3425925925925926,
+        "retried": 0.4783950617283951
+      },
+      "S4_calls": {
+        "oneliner": {
+          "n": 133,
+          "fail": 0.24812030075187969,
+          "reasons": {
+            "suffix_changed": 0.226,
+            "shape": 0.03,
+            "wp_count": 0.015,
+            "wa_leak": 0.008
+          }
+        },
+        "riddle": {
+          "n": 106,
+          "fail": 0.05660377358490566,
+          "reasons": {
+            "suffix_changed": 0.057
+          }
+        },
+        "all": {
+          "n": 239,
+          "fail": 0.16317991631799164,
+          "reasons": {
+            "suffix_changed": 0.151,
+            "shape": 0.017,
+            "wp_count": 0.008,
+            "wa_leak": 0.004
+          }
+        }
+      },
+      "S4_attempts": {
+        "n": 213,
+        "fail": 0.06103286384976526,
+        "retried": 0.12206572769953052,
+        "unchanged": 0.0
+      },
+      "final": {
+        "oneliner": {
+          "n": 100,
+          "fail": 0.0,
+          "reasons": {}
+        },
+        "riddle": {
+          "n": 100,
+          "fail": 0.0,
+          "reasons": {}
+        },
+        "all": {
+          "n": 200,
+          "fail": 0.0,
+          "reasons": {}
+        }
+      },
+      "s1_calls_per_cell": {
+        "min": 12,
+        "median": 19.5,
+        "max": 56,
+        "values": [
+          32,
+          12,
+          14,
+          16,
+          20,
+          13,
+          34,
+          28,
+          22,
+          19,
+          26,
+          56,
+          14,
+          15,
+          13,
+          13,
+          23,
+          25,
+          13,
+          35
+        ]
+      },
+      "cells": {
+        "n": 20,
+        "underfilled": 0,
+        "failed": 0,
+        "n_cand": [
+          10,
+          10,
+          10,
+          10,
+          10,
+          10,
+          10,
+          10,
+          10,
+          10,
+          10,
+          10,
+          10,
+          10,
+          10,
+          10,
+          10,
+          10,
+          10,
+          10
+        ]
+      },
+      "gate": {
+        "oneliner": {
+          "n": 100,
+          "s3": 0.53,
+          "s2": 0.5,
+          "rank1_s3": 0.63,
+          "rank1_s2": 0.86
+        },
+        "riddle": {
+          "n": 100,
+          "s3": 0.59,
+          "s2": 0.51,
+          "rank1_s3": 0.66,
+          "rank1_s2": 0.76
+        },
+        "all": {
+          "n": 200,
+          "s3": 0.56,
+          "s2": 0.505,
+          "rank1_s3": 0.645,
+          "rank1_s2": 0.81
+        }
+      },
+      "D1": {
+        "n": 200,
+        "mean_diff": 0.10103182033024267,
+        "ci95_cell_boot": [
+          0.07567696763883437,
+          0.1258706764406636
+        ],
+        "median_diff": 0.0133269467633052,
+        "share_up": 0.8
+      },
+      "hint_used": 0.66,
+      "topic_link": {
+        "n": 200,
+        "quantiles": {
+          "0.1": 0.1798245206475258,
+          "0.25": 0.3080756366252899,
+          "0.5": 0.42908911406993866,
+          "0.75": 0.5522120594978333,
+          "0.9": 0.6746124029159546
+        }
+      },
+      "top3": [
+        {
+          "cand_id": "e5s005:oneliner#7",
+          "text": "When I finished crafting the perfume, the email automatically scent.",
+          "w_p": "scent",
+          "w_a": "send",
+          "score": 13.985953019181764,
+          "gate3": false
+        },
+        {
+          "cand_id": "e5s002:oneliner#8",
+          "text": "After a long drive, I finally found the room I needed down the haul.",
+          "w_p": "haul",
+          "w_a": "hall",
+          "score": 12.624442596190889,
+          "gate3": false
+        },
+        {
+          "cand_id": "e5s005:riddle#2",
+          "text": "Where do letters go to be sweet? To the post office to scent.",
+          "w_p": "scent",
+          "w_a": "send",
+          "score": 11.66965291740431,
+          "gate3": false
+        }
+      ],
+      "bottom3": [
+        {
+          "cand_id": "e5s004:oneliner#5",
+          "text": "After slashing expenses, he ended up smooth from saving.",
+          "w_p": "saving",
+          "w_a": "shaving",
+          "score": -2.384058102149294,
+          "gate3": false
+        },
+        {
+          "cand_id": "e5s007:oneliner#9",
+          "text": "After a tense auction, they were thrilled to see a bidding.",
+          "w_p": "bidding",
+          "w_a": "building",
+          "score": -2.946538133506713,
+          "gate3": false
+        },
+        {
+          "cand_id": "e5s009:oneliner#7",
+          "text": "Before leaving, she realized her dress was dirty, so she soap.",
+          "w_p": "soap",
+          "w_a": "sew",
+          "score": -6.540637337099206,
+          "gate3": false
+        }
+      ],
+      "B0": {
+        "n": 20,
+        "rule_pass": 0.45,
+        "reasons": {
+          "pair_too_far": 5,
+          "pair_same_lemma": 2,
+          "pair_malformed": 2,
+          "wa_leak": 1,
+          "pair_not_in_cmu": 1
+        },
+        "duplicate_rate": 0.0
+      },
+      "B1": {
+        "n": 20,
+        "rule_pass": 0.8
+      },
+      "criteria": {
+        "C1": {
+          "value": 20,
+          "of": 20,
+          "passed": true
+        },
+        "C2": {
+          "value": 1.0,
+          "passed": true
+        },
+        "C3": {
+          "value": 0.0,
+          "passed": true
+        },
+        "C4": {
+          "value": 0.535,
+          "passed": true,
+          "judge": "judge2_phi-4-4bit"
+        },
+        "all": false,
+        "S3": {
+          "value": -0.02,
+          "ci95": [
+            -0.08,
+            0.035
+          ],
+          "passed": false
+        }
+      },
+      "judge2_all_P": {
+        "n": 200,
+        "works3": {
+          "est": 0.535,
+          "lo": 0.335,
+          "hi": 0.74,
+          "n": 200
+        },
+        "works2": {
+          "est": 0.555,
+          "lo": 0.345,
+          "hi": 0.765,
+          "n": 200
+        },
+        "s3_effect": {
+          "est": -0.02,
+          "lo": -0.08,
+          "hi": 0.035,
+          "n": 200
+        },
+        "funny": {
+          "est": 3.095,
+          "lo": 2.905,
+          "hi": 3.315,
+          "n": 200
+        },
+        "works_gate_pass": {
+          "est": 0.6071428571428571,
+          "lo": 0.3819957196361691,
+          "hi": 0.8,
+          "n": 112
+        },
+        "works_gate_fail": {
+          "est": 0.4431818181818182,
+          "lo": 0.2547049888071634,
+          "hi": 0.6875660211267602,
+          "n": 88
+        },
+        "funny_gate_pass": {
+          "est": 3.107142857142857,
+          "lo": 2.8841926417986716,
+          "hi": 3.3461538461538463,
+          "n": 112
+        },
+        "funny_gate_fail": {
+          "est": 3.0795454545454546,
+          "lo": 2.8987341772151898,
+          "hi": 3.328951532311792,
+          "n": 88
+        },
+        "unparsed": 0.0
+      }
+    }
+  }
+}

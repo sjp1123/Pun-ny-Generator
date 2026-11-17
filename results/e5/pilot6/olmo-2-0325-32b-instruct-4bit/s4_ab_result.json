@@ -1,0 +1,9 @@
+{
+  "n": 40,
+  "same": 0,
+  "decided": 40,
+  "prefer_s4": 14,
+  "prefer_s3": 26,
+  "share_s4": 0.35,
+  "keep_s4": false
+}

@@ -29,7 +29,8 @@ S3_DECODE = dict(temperature=0.7, top_p=1.0, max_new_tokens=60)  # 사양에 top
 S3_TRIES = 2
 S4_DECODE = dict(temperature=0.7, top_p=1.0, max_new_tokens=80)  # S4 다듬기 (6.13)
 S4_TRIES = 2
-S4_STAGES = ("pilot6", "main")  # S4와 S1 품사 검사를 쓰는 단계 (6.13). 파일럿 6에서 S4를 버리면 main을 뺀다
+S4_STAGES = ("pilot6",)  # S4 다듬기를 쓰는 단계. 파일럿 6의 연구자 A/B에서 ④가 14/40이라 본 실행에서 뺐다 (6.14)
+POS_CHECK_STAGES = ("pilot6", "main")  # S1 품사 검사를 쓰는 단계 (6.13)
 BASE_DECODE = dict(temperature=0.9, top_p=1.0)  # B1·B0 (v1 그대로)
 LIMITS = dict(riddle_q=15, riddle_a=8, oneliner=25, edit_min=1, edit_max=4,
               riddle_a_bare=3)  # 답이 이 단어 수 이하면 끝 문장부호가 없어도 잘림으로 보지 않는다 (6.5)
