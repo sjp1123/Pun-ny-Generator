@@ -1,0 +1,35 @@
+{
+  "stage": "pilot4",
+  "gen": "olmo-2-0325-32b-instruct-4bit",
+  "model": "pythia-1.4b",
+  "judge": {
+    "backend": "hf",
+    "model": "microsoft/phi-4",
+    "dtype": "bfloat16",
+    "device": "cuda",
+    "revision": "2db69c1c3e91a05d2c64a3185acfbaf36f744e25",
+    "quantization": "bitsandbytes nf4 (4bit)",
+    "transformers": "5.22.2",
+    "torch": "2.15.0+cu132"
+  },
+  "temperature": 0.0,
+  "limit": null,
+  "prompts_sha256": {
+    "works_pair": "77f605141c9ab2776749666df8e1907a31227fe92bf799942ecde2a6b1383e4d",
+    "funny_point": "e6bd033768bca0d04af08ad1498e2b410ad9f171b1bee09b288f0f29354a5abb"
+  },
+  "validation": "docs/JUDGE_VALIDATION.md (results/judge_val/phi-4-4bit)",
+  "calls_from_cache": false,
+  "seed": 20261112,
+  "git": {
+    "commit": "e34c888b02a4713f7e91b1ec6a733cc308a8ffb6",
+    "dirty": false
+  },
+  "argv": [
+    "experiments/e5v2_judge2.py",
+    "--stage",
+    "pilot4",
+    "--gen",
+    "olmo-2-0325-32b-instruct-4bit"
+  ]
+}
