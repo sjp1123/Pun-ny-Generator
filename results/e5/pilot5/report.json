@@ -1,0 +1,359 @@
+{
+  "decision": "C1~C4와 S3 확인 중 넘지 못한 것이 있다. 본 실행 S3는 파일럿 4의 S3(바꾸기 허용, e5/v2/prompts)로 돌아간다.",
+  "chosen": null,
+  "order": [
+    "olmo-2-0325-32b-instruct-4bit"
+  ],
+  "criteria": {
+    "C2": 0.5,
+    "C3": 0.5,
+    "C4": 0.2
+  },
+  "models": {
+    "olmo-2-0325-32b-instruct-4bit": {
+      "gen": "olmo-2-0325-32b-instruct-4bit",
+      "S1": {
+        "oneliner": {
+          "n": 346,
+          "fail": 0.20809248554913296,
+          "reasons": {
+            "wa_position": 0.205,
+            "wa_count": 0.052,
+            "shape": 0.003
+          }
+        },
+        "riddle": {
+          "n": 147,
+          "fail": 0.08843537414965986,
+          "reasons": {
+            "wa_position": 0.082,
+            "wa_count": 0.054,
+            "truncated": 0.007
+          }
+        },
+        "all": {
+          "n": 493,
+          "fail": 0.1724137931034483,
+          "reasons": {
+            "wa_position": 0.168,
+            "wa_count": 0.053,
+            "truncated": 0.002,
+            "shape": 0.002
+          }
+        }
+      },
+      "S3_calls": {
+        "oneliner": {
+          "n": 498,
+          "fail": 0.8333333333333334,
+          "reasons": {
+            "removed": 0.618,
+            "edit_width": 0.556,
+            "wp_count": 0.048,
+            "suffix_changed": 0.026,
+            "wa_leak": 0.016,
+            "shape": 0.004
+          }
+        },
+        "riddle": {
+          "n": 190,
+          "fail": 0.4631578947368421,
+          "reasons": {
+            "edit_width": 0.305,
+            "removed": 0.189,
+            "wa_leak": 0.058,
+            "wp_count": 0.053,
+            "suffix_changed": 0.016,
+            "shape": 0.005
+          }
+        },
+        "all": {
+          "n": 688,
+          "fail": 0.7311046511627907,
+          "reasons": {
+            "removed": 0.5,
+            "edit_width": 0.487,
+            "wp_count": 0.049,
+            "wa_leak": 0.028,
+            "suffix_changed": 0.023,
+            "shape": 0.004
+          }
+        }
+      },
+      "S3_attempts": {
+        "n": 408,
+        "fail": 0.5465686274509803,
+        "retried": 0.6862745098039216
+      },
+      "final": {
+        "oneliner": {
+          "n": 83,
+          "fail": 0.0,
+          "reasons": {}
+        },
+        "riddle": {
+          "n": 102,
+          "fail": 0.0196078431372549,
+          "reasons": {
+            "duplicate": 0.02
+          }
+        },
+        "all": {
+          "n": 185,
+          "fail": 0.010810810810810811,
+          "reasons": {
+            "duplicate": 0.011
+          }
+        }
+      },
+      "s1_calls_per_cell": {
+        "min": 10,
+        "median": 17.0,
+        "max": 60,
+        "values": [
+          18,
+          60,
+          11,
+          20,
+          10,
+          52,
+          14,
+          31,
+          22,
+          60,
+          22,
+          60,
+          13,
+          12,
+          11,
+          19,
+          13,
+          16,
+          13,
+          16
+        ]
+      },
+      "cells": {
+        "n": 20,
+        "underfilled": 3,
+        "failed": 0,
+        "n_cand": [
+          10,
+          5,
+          10,
+          10,
+          10,
+          10,
+          10,
+          10,
+          10,
+          3,
+          10,
+          5,
+          10,
+          10,
+          10,
+          10,
+          10,
+          10,
+          10,
+          10
+        ]
+      },
+      "gate": {
+        "oneliner": {
+          "n": 83,
+          "s3": 0.39759036144578314,
+          "s2": 0.21686746987951808,
+          "rank1_s3": 0.8554216867469879,
+          "rank1_s2": 0.8313253012048193
+        },
+        "riddle": {
+          "n": 100,
+          "s3": 0.64,
+          "s2": 0.52,
+          "rank1_s3": 0.78,
+          "rank1_s2": 0.79
+        },
+        "all": {
+          "n": 183,
+          "s3": 0.5300546448087432,
+          "s2": 0.3825136612021858,
+          "rank1_s3": 0.8142076502732241,
+          "rank1_s2": 0.8087431693989071
+        }
+      },
+      "D1": {
+        "n": 183,
+        "mean_diff": 0.023035694675422724,
+        "ci95_cell_boot": [
+          -0.03331901642278192,
+          0.07663244744178095
+        ],
+        "median_diff": 0.000571002263966,
+        "share_up": 0.7814207650273224
+      },
+      "hint_used": 0.8142076502732241,
+      "topic_link": {
+        "n": 178,
+        "quantiles": {
+          "0.1": 0.35376386642456054,
+          "0.25": 0.4553948640823364,
+          "0.5": 0.5937854051589966,
+          "0.75": 0.6434536576271057,
+          "0.9": 0.6689988851547243
+        }
+      },
+      "top3": [
+        {
+          "cand_id": "e5r001:oneliner#8",
+          "text": "In the nobleman's castle, during the day she worked, but at knight she relaxed.",
+          "w_p": "knight",
+          "w_a": "night",
+          "score": 16.092112501070215,
+          "gate3": false
+        },
+        {
+          "cand_id": "e5r005:oneliner#4",
+          "text": "At the schoolyard, the kids played on the grass, laughing as they each took turns sitting on someone's lad.",
+          "w_p": "lad",
+          "w_a": "lap",
+          "score": 12.821916069242954,
+          "gate3": false
+        },
+        {
+          "cand_id": "e5r005:oneliner#2",
+          "text": "The young fella's baby giggled as she sat on her mother's lad.",
+          "w_p": "lad",
+          "w_a": "lap",
+          "score": 12.35964140039498,
+          "gate3": false
+        }
+      ],
+      "bottom3": [
+        {
+          "cand_id": "e5r006:riddle#7",
+          "text": "What happens when you plug in a frayed cord and record the event? A mark.",
+          "w_p": "mark",
+          "w_a": "arc",
+          "score": -5.053774172635162,
+          "gate3": false
+        },
+        {
+          "cand_id": "e5r006:riddle#3",
+          "text": "What milestone happens when the switch closes? A mark sparks.",
+          "w_p": "mark",
+          "w_a": "arc",
+          "score": -6.979091165335617,
+          "gate3": false
+        },
+        {
+          "cand_id": "e5r006:riddle#2",
+          "text": "What spark makes a bridge in the air commemorating? A mark.",
+          "w_p": "mark",
+          "w_a": "arc",
+          "score": -8.308334489519353,
+          "gate3": false
+        }
+      ],
+      "B0": {
+        "n": 20,
+        "rule_pass": 0.3,
+        "reasons": {
+          "pair_too_far": 7,
+          "pair_not_in_cmu": 3,
+          "truncated": 1,
+          "pair_malformed": 1,
+          "wp_count": 1,
+          "wa_leak": 1
+        },
+        "duplicate_rate": 0.0
+      },
+      "B1": {
+        "n": 20,
+        "rule_pass": 0.85
+      },
+      "criteria": {
+        "C1": {
+          "value": 17,
+          "of": 20,
+          "passed": false
+        },
+        "C2": {
+          "value": 0.95,
+          "passed": true
+        },
+        "C3": {
+          "value": 0.05,
+          "passed": true
+        },
+        "C4": {
+          "value": 0.7704918032786885,
+          "passed": true,
+          "judge": "judge2_phi-4-4bit"
+        },
+        "all": false,
+        "S3": {
+          "value": 0.0546448087431694,
+          "ci95": [
+            -0.025916962094355057,
+            0.14606741573033707
+          ],
+          "passed": true
+        }
+      },
+      "judge2_all_P": {
+        "n": 183,
+        "works3": {
+          "est": 0.7704918032786885,
+          "lo": 0.6,
+          "hi": 0.9190867716430802,
+          "n": 183
+        },
+        "works2": {
+          "est": 0.7158469945355191,
+          "lo": 0.5384308510638298,
+          "hi": 0.8784744713278718,
+          "n": 183
+        },
+        "s3_effect": {
+          "est": 0.0546448087431694,
+          "lo": -0.025916962094355057,
+          "hi": 0.14606741573033707,
+          "n": 183
+        },
+        "funny": {
+          "est": 2.9836065573770494,
+          "lo": 2.7178947368421054,
+          "hi": 3.245642515379357,
+          "n": 183
+        },
+        "works_gate_pass": {
+          "est": 0.8144329896907216,
+          "lo": 0.6632626208378087,
+          "hi": 0.945054945054945,
+          "n": 97
+        },
+        "works_gate_fail": {
+          "est": 0.7209302325581395,
+          "lo": 0.5151440144014401,
+          "hi": 0.9104643449419567,
+          "n": 86
+        },
+        "funny_gate_pass": {
+          "est": 3.0309278350515463,
+          "lo": 2.7283475783475786,
+          "hi": 3.325308209582516,
+          "n": 97
+        },
+        "funny_gate_fail": {
+          "est": 2.9302325581395348,
+          "lo": 2.674691790417484,
+          "hi": 3.1875,
+          "n": 86
+        },
+        "unparsed": 0.0
+      }
+    }
+  }
+}

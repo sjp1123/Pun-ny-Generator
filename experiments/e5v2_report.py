@@ -242,7 +242,7 @@ def main():
     chosen = next((g for g in a.gens if res[g]["criteria"]["all"]), None)
     if a.judge2:
         decision = (f"C1~C4와 S3 확인을 모두 넘었다. 본 실행은 {chosen}와 넣기만 S3로 한다." if chosen else
-                    "C1~C4와 S3 확인 중 넘지 못한 것이 있다. 본 실행 S3는 파일럿 4의 S3(바꾸기 허용, e5/v2/prompts_pilot4)로 돌아간다.")
+                    "C1~C4와 S3 확인 중 넘지 못한 것이 있다. 본 실행 S3는 파일럿 4의 S3(바꾸기 허용, e5/v2/prompts)로 돌아간다.")
     else:
         decision = (f"{chosen}를 본 실행 생성기로 정한다 (C1~C4 모두 통과)." if chosen else
                     "C1~C4를 모두 넘은 모델이 없다. prereg-e5 태그를 달지 않고 실패를 기록한 뒤 설계로 돌아간다.")

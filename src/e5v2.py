@@ -281,13 +281,16 @@ def removed_words(before: list[str], after: list[str]) -> list[str]:
     return [w for tag, i1, i2, j1, j2 in sm.get_opcodes() if tag in ("replace", "delete") for w in before[i1:i2]]
 
 
-def s3_check(raw: str, s2: dict, w_p: str, w_a: str, fmt: str, hints=()) -> dict:
-    """끝 보존(riddle: 답 전체), 넣기만(②의 앞부분 단어가 모두 순서대로 남음), 넣은 단어 1~4개,
-    w_p 표제어 정확히 1회, w_a 누출 없음, 모양.
-    넣기만은 파일럿 5부터다(PREREG_E5 6.11): S3가 w_p만 보고 앞부분을 바꾸면 w_a 뜻을 받치던 단어를 지울 수 있다."""
+S3_INSERT_ONLY = False  # 파일럿 5만 True였다(PREREG_E5 6.11). C1 실패로 본 실행은 파일럿 4의 S3(바꾸기 허용)를 쓴다(6.12)
+
+
+def s3_check(raw: str, s2: dict, w_p: str, w_a: str, fmt: str, hints=(), insert_only: bool = S3_INSERT_ONLY) -> dict:
+    """끝 보존(riddle: 답 전체), 수정 폭 1~4단어, w_p 표제어 정확히 1회, w_a 누출 없음, 모양.
+    insert_only면 ②의 앞부분 단어가 ③에 순서대로 모두 남아야 한다(아니면 `removed`, 파일럿 5).
+    지우거나 바꾼 단어는 진단용으로 `removed`에 늘 돌려준다(S3가 w_a 단서를 지우는지 본 실행에서 본다)."""
     parts = parse_parts(s3_body(raw), fmt)
     if parts is None:
-        return dict(ok=False, reasons=["shape"], parts=None, edited=[], n_edit=None, hint_used=None)
+        return dict(ok=False, reasons=["shape"], parts=None, edited=[], n_edit=None, hint_used=None, removed=None)
     reasons = shape_reasons(parts, fmt)
     lw = lambda s: [t.lower() for t in words(s)]
     if fmt == "riddle":
@@ -301,7 +304,8 @@ def s3_check(raw: str, s2: dict, w_p: str, w_a: str, fmt: str, hints=()) -> dict
     if not kept:
         reasons.append("suffix_changed")
     edited = edit_words(head2, head3) if kept else []
-    if kept and removed_words(head2, head3):
+    removed = removed_words(head2, head3) if kept else None
+    if insert_only and removed:
         reasons.append("removed")
     if kept and not (LIMITS["edit_min"] <= len(edited) <= LIMITS["edit_max"]):
         reasons.append("edit_width")
@@ -312,7 +316,7 @@ def s3_check(raw: str, s2: dict, w_p: str, w_a: str, fmt: str, hints=()) -> dict
     hl = lemma_of(list(hints) + edited)
     hint_used = any(hl[e] in {hl[h.lower()] for h in hints} for e in edited) if edited else False
     return dict(ok=not reasons, reasons=reasons, parts=parts, edited=edited, n_edit=len(edited) if kept else None,
-                hint_used=hint_used)
+                hint_used=hint_used, removed=removed)
 
 
 # ---------------------------------------------------------------- 최종 규칙 검사

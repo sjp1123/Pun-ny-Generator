@@ -52,13 +52,19 @@ def test_s3_check():
                     "oneliner", ["bakery", "loaf"])
     assert good["ok"], good["reasons"]
     assert good["edited"] == ["in", "the", "bakery"] and good["hint_used"]
-    # 넣기만 (6.11): 기존 단어를 바꾸거나 지우면 실패. 문두 대문자만 바뀐 것은 괜찮다
+    # 기본(본 실행, 파일럿 4와 같음): 바꾸기 허용. 지우거나 바꾼 단어는 진단용으로 돌려준다
+    rep = s3_check("After a long day at the bakery, all he wanted was to crawl into bread.", S2_ONE, "bread", "bed",
+                   "oneliner", ["bakery", "loaf"])
+    assert rep["ok"] and rep["edited"] == ["the", "bakery"] and rep["removed"] == ["work"]
+    assert good["removed"] == []
+    # 넣기만 (파일럿 5, 6.11): 기존 단어를 바꾸거나 지우면 실패. 문두 대문자만 바뀐 것은 괜찮다
+    io = dict(insert_only=True)
     assert "removed" in s3_check("After a long day at the bakery, all he wanted was to crawl into bread.", S2_ONE, "bread",
-                                 "bed", "oneliner")["reasons"]
+                                 "bed", "oneliner", **io)["reasons"]
     assert "removed" in s3_check("After a day at the bakery, all he wanted was to crawl into bread.", S2_ONE, "bread",
-                                 "bed", "oneliner")["reasons"]
+                                 "bed", "oneliner", **io)["reasons"]
     assert s3_check("Fresh from baking, after a long day at work, all he wanted was to crawl into bread.", S2_ONE, "bread",
-                    "bed", "oneliner")["ok"]
+                    "bed", "oneliner", **io)["ok"]
     assert "suffix_changed" in s3_check("After a long day at the bakery, all he wanted was a slice of bread.", S2_ONE,
                                         "bread", "bed", "oneliner")["reasons"]
     assert "edit_width" in s3_check("After a long day at work, all he wanted was to crawl into bread.", S2_ONE, "bread",
@@ -70,8 +76,10 @@ def test_s3_check():
     s2r = s2_swap(dict(q="What kind of dog did she adopt from the shelter?", a="A beagle."), "beagle", "bagel", "riddle")
     assert s3_check("Q: What kind of dog did she adopt from the shelter near the bakery?\nA: A bagel.", s2r, "bagel",
                     "beagle", "riddle")["ok"]
+    assert s3_check("Q: What kind of dog did the baker adopt from the shelter?\nA: A bagel.", s2r, "bagel", "beagle",
+                    "riddle")["ok"]
     assert "removed" in s3_check("Q: What kind of dog did the baker adopt from the shelter?\nA: A bagel.", s2r, "bagel",
-                                 "beagle", "riddle")["reasons"]
+                                 "beagle", "riddle", **io)["reasons"]
     assert "suffix_changed" in s3_check("Q: What did the baker adopt?\nA: A sesame bagel.", s2r, "bagel", "beagle",
                                         "riddle")["reasons"]
 
