@@ -143,6 +143,24 @@ python -X utf8 experiments/e5v2_judge2.py --stage pilot6 --gen $G
 - 끝나면 `results/e5/pilot6/`를 커밋해서 올려 줘. S4 A/B 평가지는 원래 PC에서 만들어 연구자가 채운다:
   `python -X utf8 experiments/e5v2_s4_sheet.py make --stage pilot6 --gen $G`
 
+## 3f. H — 파일럿 7 (마지막 파일럿, 본 실행 구성 그대로)
+
+파일럿 6의 연구자 A/B에서 S4가 져서 본 실행에서 뺐다(PREREG_E5 6.14). 본 실행 구성(v4 쌍, S1 품사 검사, S3, S4 없음)을 같은 10쌍·새 시드로
+한 번 더 돌린다. 이것이 마지막 파일럿이다(6.15).
+
+```bash
+git pull
+python -X utf8 -m pytest -q tests
+G=olmo-2-0325-32b-instruct-4bit
+python -X utf8 experiments/e5v2_generate.py --stage pilot7 --model allenai/OLMo-2-0325-32B-Instruct --load-4bit
+python -X utf8 experiments/e5v2_score.py  --stage pilot7 --gen $G --model pythia-1.4b --device cuda
+python -X utf8 experiments/e5v2_select.py --stage pilot7 --gen $G --model pythia-1.4b
+python -X utf8 experiments/e5v2_judge2.py --stage pilot7 --gen $G
+```
+
+- `config.json`의 `s4`가 false, `s1_pos_check`가 true인지 확인해 줘.
+- 끝나면 `results/e5/pilot7/`를 커밋해서 올려 줘.
+
 ## 4. (끝난 것) B — E5 파일럿 1
  (A의 캐시가 있으면 바로)
 

@@ -126,7 +126,7 @@ def summarize(S: pd.DataFrame, I: pd.DataFrame, gate: pd.Series) -> dict:
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--stage", required=True, choices=["pilot2", "pilot3", "pilot4", "pilot5", "pilot6", "main"])
+    ap.add_argument("--stage", required=True, choices=["pilot2", "pilot3", "pilot4", "pilot5", "pilot6", "pilot7", "main"])
     ap.add_argument("--gen", required=True)
     ap.add_argument("--model", default="pythia-1.4b")
     ap.add_argument("--backend", default="hf", choices=["hf", "ollama"])

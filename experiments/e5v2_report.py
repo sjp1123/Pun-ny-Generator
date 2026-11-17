@@ -236,7 +236,7 @@ def markdown(stage, model, res: dict, decision: str) -> str:
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--stage", default="pilot6", choices=["pilot2", "pilot3", "pilot4", "pilot5", "pilot6"])
+    ap.add_argument("--stage", default="pilot7", choices=["pilot2", "pilot3", "pilot4", "pilot5", "pilot6", "pilot7"])
     ap.add_argument("--gens", nargs="+", required=True, help="결정 규칙 순서대로 (7B 먼저)")
     ap.add_argument("--model", default="pythia-1.4b")
     ap.add_argument("--judge", default="Qwen/Qwen2.5-7B-Instruct")
@@ -251,7 +251,11 @@ def main():
     if a.judge2 and a.stage == "pilot5":  # 6.11의 규칙
         decision = (f"C1~C4와 S3 확인을 모두 넘었다. 본 실행은 {chosen}와 넣기만 S3로 한다." if chosen else
                     "C1~C4와 S3 확인 중 넘지 못한 것이 있다. 본 실행 S3는 파일럿 4의 S3(바꾸기 허용, e5/v2/prompts)로 돌아간다.")
-    elif a.judge2:  # 6.13의 규칙 (파일럿 6~). S4를 쓸지는 연구자의 A/B(e5v2_s4_sheet.py)로 따로 정한다
+    elif a.judge2 and a.stage == "pilot7":  # 6.15의 규칙 (마지막 파일럿)
+        decision = ("C1~C4와 S3 확인(③ − ②)을 모두 넘었다. 본 실행 구성(v4 쌍, S1 품사 검사, S3, S4 없음)을 확정하고 태그 준비로 간다."
+                    if chosen else
+                    "C1~C4와 S3 확인(③ − ②) 중 넘지 못한 것이 있다. 6.15대로 E5 생성 설계를 여기서 멈추고 태그를 달지 않는다.")
+    elif a.judge2:  # 6.13의 규칙 (파일럿 6). S4를 쓸지는 연구자의 A/B(e5v2_s4_sheet.py)로 따로 정한다
         decision = ("C1~C4와 S3 확인(최종 − ②)을 모두 넘었다. S4는 A/B 평가로 정한다." if chosen else
                     "C1~C4와 S3 확인(최종 − ②) 중 넘지 못한 것이 있다. 6.13대로 태그를 달지 않고 기록한다(자동 대체 규칙 없음).")
     else:

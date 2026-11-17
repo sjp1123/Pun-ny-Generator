@@ -30,7 +30,7 @@ S3_TRIES = 2
 S4_DECODE = dict(temperature=0.7, top_p=1.0, max_new_tokens=80)  # S4 다듬기 (6.13)
 S4_TRIES = 2
 S4_STAGES = ("pilot6",)  # S4 다듬기를 쓰는 단계. 파일럿 6의 연구자 A/B에서 ④가 14/40이라 본 실행에서 뺐다 (6.14)
-POS_CHECK_STAGES = ("pilot6", "main")  # S1 품사 검사를 쓰는 단계 (6.13)
+POS_CHECK_STAGES = ("pilot6", "pilot7", "main")  # S1 품사 검사를 쓰는 단계 (6.13)
 BASE_DECODE = dict(temperature=0.9, top_p=1.0)  # B1·B0 (v1 그대로)
 LIMITS = dict(riddle_q=15, riddle_a=8, oneliner=25, edit_min=1, edit_max=4,
               riddle_a_bare=3)  # 답이 이 단어 수 이하면 끝 문장부호가 없어도 잘림으로 보지 않는다 (6.5)
@@ -96,18 +96,20 @@ def load_samples_v4() -> dict:
 
 
 def samples_file(stage: str):
-    return SAMPLES_V2 if stage == "pilot2" else SAMPLES_V4 if stage in ("pilot6", "main") else SAMPLES_V3
+    return SAMPLES_V2 if stage == "pilot2" else SAMPLES_V4 if stage in ("pilot6", "pilot7", "main") else SAMPLES_V3
 
 
 def cells_v2(stage: str) -> list[dict]:
     """pilot2 = 파일럿 2 10쌍(samples_v2, 기록), pilot3·pilot4·pilot5 = 파일럿 3 10쌍(4·5는 같은 쌍을 새 시드로, samples_v3),
-    pilot6 = v4 10쌍, main = v4 본 실행 40쌍 (samples_v4) × 2형식. Tom Swifty 형식은 정하지 않았다."""
+    pilot6·pilot7 = v4 10쌍(7은 같은 쌍을 새 시드로), main = v4 본 실행 40쌍 (samples_v4) × 2형식. Tom Swifty 형식은 정하지 않았다."""
     if stage == "pilot2":
         pairs = load_samples_v2()["pilot2"]
     elif stage in ("pilot3", "pilot4", "pilot5"):
         pairs = load_samples_v3()["pilot3"]
-    elif stage in ("pilot6", "main"):
-        pairs = load_samples_v4()[stage]
+    elif stage in ("pilot6", "pilot7"):  # 파일럿 7은 파일럿 6의 쌍을 새 시드로 (6.15)
+        pairs = load_samples_v4()["pilot6"]
+    elif stage == "main":
+        pairs = load_samples_v4()["main"]
     else:
         raise ValueError(stage)
     return [dict(p, cell=f"{p['pair_id']}:{f}", format=f) for p in pairs for f in FORMATS_V2]

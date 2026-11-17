@@ -291,3 +291,12 @@ def test_s4_sheet_roundtrip(tmp_path):
                                                                                                     index=False)
     r = score(tmp_path)
     assert r["decided"] == 3 and r["prefer_s4"] == 2 and r["same"] == 1 and r["keep_s4"]
+
+
+# 6.15: 파일럿 7은 파일럿 6의 쌍을 쓰고 S4 없이, S1 품사 검사는 켠다. 본 실행도 같다
+def test_pilot7_stage():
+    from e5v2 import POS_CHECK_STAGES, S4_STAGES, samples_file
+    assert [c["cell"] for c in cells_v2("pilot7")] == [c["cell"] for c in cells_v2("pilot6")]
+    assert "pilot7" not in S4_STAGES and "main" not in S4_STAGES
+    assert {"pilot7", "main"} <= set(POS_CHECK_STAGES)
+    assert samples_file("pilot7").name == samples_file("main").name == "samples_v4.json"
