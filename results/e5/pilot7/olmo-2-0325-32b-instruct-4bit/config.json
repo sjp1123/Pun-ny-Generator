@@ -1,0 +1,70 @@
+{
+  "stage": "pilot7",
+  "generator": {
+    "backend": "hf",
+    "model": "allenai/OLMo-2-0325-32B-Instruct",
+    "dtype": "bfloat16",
+    "device": "cuda",
+    "revision": "b96024342a77a69aa0dda815c3454a671f477463",
+    "quantization": "bitsandbytes nf4 (4bit)",
+    "transformers": "5.22.2",
+    "torch": "2.15.0+cu132"
+  },
+  "n_cells": 20,
+  "limit": null,
+  "n_cand": 10,
+  "max_s1": 60,
+  "s1_decode": {
+    "temperature": 0.9,
+    "top_p": 0.95,
+    "max_new_tokens": 60
+  },
+  "s3_decode": {
+    "temperature": 0.7,
+    "top_p": 1.0,
+    "max_new_tokens": 60
+  },
+  "s3_tries": 2,
+  "baseline_decode": {
+    "temperature": 0.9,
+    "top_p": 1.0
+  },
+  "s4": false,
+  "s4_decode": {
+    "temperature": 0.7,
+    "top_p": 1.0,
+    "max_new_tokens": 80
+  },
+  "s4_tries": 2,
+  "s1_pos_check": true,
+  "json_tries": 3,
+  "pick_temperature": 0.0,
+  "prompts_sha256": {
+    "s1_riddle": "bd224dac6979fa29a92209c74cc660f631bd63f4332f5d4972a0fb47f94ffbf0",
+    "s1_oneliner": "3f917e2c95e390cd4842874d8f5b02789a2872a034b50e119cc5f7c482f1d04d",
+    "s3_riddle": "964de3201588086f53fafb419408ec356939e10387ab3d03964d9af40bc1832b",
+    "s3_oneliner": "b99296396c6e6e6f13bbac3b85099f2f66d45b1a126f7353386d4208dd78fdc6",
+    "s4_riddle": "1868c4ae3b4c619aef65ce70785146c67a2aceec09a7db523d025ca7f64bd3ce",
+    "s4_oneliner": "62920935b4273eb9bd4315b06d7b7fbc48984fa2ff5979698a753151d7d2d795",
+    "b1_single": "6379893bf9cd1b8e0131fc70519ef34ca24d18d3fd9b4b95fe5a883f8fb7bd58",
+    "b0_free": "4000b94b62732a44cfe3da1906a55ecfde287d5e024f693bf13cefab96fa3eb8",
+    "pick": "4e0aa97c182c72b41170979f22fb8ba11c14a888cec34670a5335d05a0cdc359",
+    "judge_success": "4fb80b6f21d24d51bebd5e573a9d3797321bf8ad2c6115c8455cee272d1c3a3a",
+    "judge_works": "10e2cb6844fdb420796f15dff240123e571d0376cd7af3bf82c8ec2ed907c305",
+    "judge_funny": "870dd9000e523f9058afb2b34ab02b9a1f342274b52f234e48c15b3dfc441bb4"
+  },
+  "samples_file": "samples_v4.json",
+  "samples_sha256": "735a54469729ebb7801993b4af702c4fa160523b6d7dfc3d13187f73ff875cfa",
+  "git": {
+    "commit": "a009ea3d4e38dd9720cc8291afbd20b115a87045",
+    "dirty": false
+  },
+  "argv": [
+    "experiments/e5v2_generate.py",
+    "--stage",
+    "pilot7",
+    "--model",
+    "allenai/OLMo-2-0325-32B-Instruct",
+    "--load-4bit"
+  ]
+}
