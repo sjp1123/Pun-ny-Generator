@@ -1,0 +1,349 @@
+{
+  "decision": "C1~C4와 S3 확인(③ − ②)을 모두 넘었다. 본 실행 구성(v4 쌍, S1 품사 검사, S3, S4 없음)을 확정하고 태그 준비로 간다.",
+  "chosen": "olmo-2-0325-32b-instruct-4bit",
+  "order": [
+    "olmo-2-0325-32b-instruct-4bit"
+  ],
+  "criteria": {
+    "C2": 0.5,
+    "C3": 0.5,
+    "C4": 0.2
+  },
+  "models": {
+    "olmo-2-0325-32b-instruct-4bit": {
+      "gen": "olmo-2-0325-32b-instruct-4bit",
+      "S1": {
+        "oneliner": {
+          "n": 207,
+          "fail": 0.3188405797101449,
+          "reasons": {
+            "wa_position": 0.295,
+            "wa_count": 0.048,
+            "pos_mismatch": 0.005
+          }
+        },
+        "riddle": {
+          "n": 198,
+          "fail": 0.20707070707070707,
+          "reasons": {
+            "wa_position": 0.126,
+            "wa_count": 0.106,
+            "pos_mismatch": 0.04
+          }
+        },
+        "all": {
+          "n": 405,
+          "fail": 0.2641975308641975,
+          "reasons": {
+            "wa_position": 0.212,
+            "wa_count": 0.077,
+            "pos_mismatch": 0.022
+          }
+        }
+      },
+      "S3_calls": {
+        "oneliner": {
+          "n": 201,
+          "fail": 0.5024875621890548,
+          "reasons": {
+            "edit_width": 0.448,
+            "suffix_changed": 0.04,
+            "wp_count": 0.03,
+            "wa_leak": 0.01
+          }
+        },
+        "riddle": {
+          "n": 245,
+          "fail": 0.5918367346938775,
+          "reasons": {
+            "edit_width": 0.441,
+            "wp_count": 0.131,
+            "suffix_changed": 0.127,
+            "wa_leak": 0.11,
+            "shape": 0.024
+          }
+        },
+        "all": {
+          "n": 446,
+          "fail": 0.5515695067264574,
+          "reasons": {
+            "edit_width": 0.444,
+            "suffix_changed": 0.087,
+            "wp_count": 0.085,
+            "wa_leak": 0.065,
+            "shape": 0.013
+          }
+        }
+      },
+      "S3_attempts": {
+        "n": 298,
+        "fail": 0.3288590604026846,
+        "retried": 0.4966442953020134
+      },
+      "final": {
+        "oneliner": {
+          "n": 100,
+          "fail": 0.0,
+          "reasons": {}
+        },
+        "riddle": {
+          "n": 100,
+          "fail": 0.0,
+          "reasons": {}
+        },
+        "all": {
+          "n": 200,
+          "fail": 0.0,
+          "reasons": {}
+        }
+      },
+      "s1_calls_per_cell": {
+        "min": 10,
+        "median": 17.0,
+        "max": 57,
+        "values": [
+          17,
+          10,
+          13,
+          15,
+          34,
+          17,
+          17,
+          26,
+          21,
+          16,
+          24,
+          57,
+          14,
+          12,
+          16,
+          13,
+          29,
+          24,
+          13,
+          17
+        ]
+      },
+      "cells": {
+        "n": 20,
+        "underfilled": 0,
+        "failed": 0,
+        "n_cand": [
+          10,
+          10,
+          10,
+          10,
+          10,
+          10,
+          10,
+          10,
+          10,
+          10,
+          10,
+          10,
+          10,
+          10,
+          10,
+          10,
+          10,
+          10,
+          10,
+          10
+        ]
+      },
+      "gate": {
+        "oneliner": {
+          "n": 100,
+          "s3": 0.56,
+          "s2": 0.49,
+          "rank1_s3": 0.63,
+          "rank1_s2": 0.8
+        },
+        "riddle": {
+          "n": 100,
+          "s3": 0.57,
+          "s2": 0.46,
+          "rank1_s3": 0.64,
+          "rank1_s2": 0.67
+        },
+        "all": {
+          "n": 200,
+          "s3": 0.565,
+          "s2": 0.475,
+          "rank1_s3": 0.635,
+          "rank1_s2": 0.735
+        }
+      },
+      "D1": {
+        "n": 200,
+        "mean_diff": 0.11753063919931468,
+        "ci95_cell_boot": [
+          0.08143587851531,
+          0.15474835308959078
+        ],
+        "median_diff": 0.0158953121874209,
+        "share_up": 0.87
+      },
+      "hint_used": 0.66,
+      "topic_link": {
+        "n": 200,
+        "quantiles": {
+          "0.1": 0.13363650739192962,
+          "0.25": 0.2538336515426636,
+          "0.5": 0.4175456464290619,
+          "0.75": 0.5522120594978333,
+          "0.9": 0.6865871548652649
+        }
+      },
+      "top3": [
+        {
+          "cand_id": "e5s000:riddle#4",
+          "text": "What do we do in church to avoid predators on Sunday? Sing and prey.",
+          "w_p": "prey",
+          "w_a": "pray",
+          "score": 12.252244648844382,
+          "gate3": false
+        },
+        {
+          "cand_id": "e5s005:riddle#5",
+          "text": "What's the final action after composing a note? Mail it. Scent.",
+          "w_p": "scent",
+          "w_a": "send",
+          "score": 10.714093708468818,
+          "gate3": true
+        },
+        {
+          "cand_id": "e5s005:oneliner#0",
+          "text": "After considering various options, they finally decided to scent the package.",
+          "w_p": "scent",
+          "w_a": "send",
+          "score": 10.504412892017756,
+          "gate3": true
+        }
+      ],
+      "bottom3": [
+        {
+          "cand_id": "e5s009:riddle#1",
+          "text": "What do you add to water to clean a shirt? Mend soap.",
+          "w_p": "soap",
+          "w_a": "sew",
+          "score": -4.40468390289617,
+          "gate3": false
+        },
+        {
+          "cand_id": "e5s009:riddle#9",
+          "text": "What cleanses a dirty shirt? A soap.",
+          "w_p": "soap",
+          "w_a": "sew",
+          "score": -6.066921533955882,
+          "gate3": false
+        },
+        {
+          "cand_id": "e5s004:oneliner#5",
+          "text": "After realizing he was wasting money, he needed saving.",
+          "w_p": "saving",
+          "w_a": "shaving",
+          "score": -7.897172152525727,
+          "gate3": false
+        }
+      ],
+      "B0": {
+        "n": 20,
+        "rule_pass": 0.45,
+        "reasons": {
+          "pair_malformed": 3,
+          "pair_not_in_cmu": 3,
+          "pair_too_far": 3,
+          "pair_same_lemma": 2,
+          "wp_count": 1
+        },
+        "duplicate_rate": 0.0
+      },
+      "B1": {
+        "n": 20,
+        "rule_pass": 0.8
+      },
+      "criteria": {
+        "C1": {
+          "value": 20,
+          "of": 20,
+          "passed": true
+        },
+        "C2": {
+          "value": 1.0,
+          "passed": true
+        },
+        "C3": {
+          "value": 0.1,
+          "passed": true
+        },
+        "C4": {
+          "value": 0.54,
+          "passed": true,
+          "judge": "judge2_phi-4-4bit"
+        },
+        "all": true,
+        "S3": {
+          "value": 0.035,
+          "ci95": [
+            -0.03,
+            0.1
+          ],
+          "passed": true
+        }
+      },
+      "judge2_all_P": {
+        "n": 200,
+        "works3": {
+          "est": 0.54,
+          "lo": 0.345,
+          "hi": 0.73,
+          "n": 200
+        },
+        "works2": {
+          "est": 0.505,
+          "lo": 0.31,
+          "hi": 0.71,
+          "n": 200
+        },
+        "s3_effect": {
+          "est": 0.035,
+          "lo": -0.03,
+          "hi": 0.1,
+          "n": 200
+        },
+        "funny": {
+          "est": 3.06,
+          "lo": 2.865,
+          "hi": 3.27,
+          "n": 200
+        },
+        "works_gate_pass": {
+          "est": 0.6283185840707964,
+          "lo": 0.4056312274750901,
+          "hi": 0.8285778635778636,
+          "n": 113
+        },
+        "works_gate_fail": {
+          "est": 0.42528735632183906,
+          "lo": 0.25,
+          "hi": 0.6341528979805927,
+          "n": 87
+        },
+        "funny_gate_pass": {
+          "est": 3.0442477876106193,
+          "lo": 2.799915254237288,
+          "hi": 3.2752293577981653,
+          "n": 113
+        },
+        "funny_gate_fail": {
+          "est": 3.0804597701149423,
+          "lo": 2.8918548685671976,
+          "hi": 3.2747650375939847,
+          "n": 87
+        },
+        "unparsed": 0.0
+      }
+    }
+  }
+}
