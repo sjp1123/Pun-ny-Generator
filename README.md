@@ -71,6 +71,8 @@ E5 생성 파이프라인(설계 [docs/E5_DESIGN.md](docs/E5_DESIGN.md), 사전 
 본 실행 생성기는 OLMo-2-0325-32B-Instruct NF4 4비트. 지표와 LLM 판정의 탐색 비교는 `experiments/e5v2_metrics.py`.
 LLM 판정기를 사람 평가 자료로 검증했다: [docs/JUDGE_VALIDATION.md](docs/JUDGE_VALIDATION.md), `experiments/judge_validate.py`.
 쓰던 판정기(Qwen2.5-7B)는 세 질문 모두 실패해, 검증을 통과한 phi-4와 질문으로 바꿨다: `experiments/e5v2_judge2.py` (`PREREG_E5.md` 6.9).
+파일럿 7까지 돌려 본 실행 구성을 확정했다(v4 쌍, S1 품사 검사, S3, S4 없음; `PREREG_E5.md` 6.16). 사람 평가는 연구자 1명이 블라인드로 한다
+(`PREREG_E5.md` 3절, 평가지 `experiments/e5v2_human.py`).
 GPU 실행 순서도 [docs/GPU_RUN.md](docs/GPU_RUN.md)에 있다.
 
 ## 설계 문서와 다르게 구현한 점 (이유)

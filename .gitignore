@@ -9,3 +9,6 @@ gpu_bundle.zip
 results/judge_val/*/calls_local.jsonl
 results/judge_val/*-limit*/
 results/e5/*/*/A_*/judge2_*-limit*/
+# 사람 평가 보정지: He et al. 자료 문장이 들어 있어 올리지 않는다 (채점 결과 calib_answers.csv는 id와 답만이라 올린다)
+results/e5/human_calib/calib_sheet.csv
+results/e5/human_calib/calib_key.csv

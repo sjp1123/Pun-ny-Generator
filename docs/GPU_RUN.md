@@ -161,6 +161,28 @@ python -X utf8 experiments/e5v2_judge2.py --stage pilot7 --gen $G
 - `config.json`의 `s4`가 false, `s1_pos_check`가 true인지 확인해 줘.
 - 끝나면 `results/e5/pilot7/`를 커밋해서 올려 줘.
 
+## 3g. I — E5 본 실행 (태그 `prereg-e5` 뒤)
+
+사전 등록 `PREREG_E5.md`에 태그 `prereg-e5`를 달았다. 본 실행은 **태그가 가리키는 커밋 그대로** 돌린다
+(config의 `git.commit`이 태그와 같고 `dirty`가 false여야 한다, 4절). 구성은 6.16에서 확정한 것: v4 본 실행 40쌍 × 2형식 = 80칸,
+OLMo-2 32B NF4, S1 상한 60과 품사 검사, S3(바꾸기 허용), S4 없음, 청자 Pythia-1.4B, LLM 판정 phi-4(탐색).
+
+```bash
+git fetch --tags
+git checkout prereg-e5
+python -X utf8 -m pytest -q tests
+G=olmo-2-0325-32b-instruct-4bit
+python -X utf8 experiments/e5v2_generate.py --stage main --model allenai/OLMo-2-0325-32B-Instruct --load-4bit
+python -X utf8 experiments/e5v2_score.py  --stage main --gen $G --model pythia-1.4b --device cuda
+python -X utf8 experiments/e5v2_select.py --stage main --gen $G --model pythia-1.4b
+python -X utf8 experiments/e5v2_judge2.py --stage main --gen $G
+```
+
+- 칸이 파일럿의 4배(80칸)라 생성이 파일럿보다 몇 배 오래 걸린다. 끊겨도 같은 명령을 다시 실행하면 이어 간다.
+- `config.json`에서 `git.commit`이 태그 커밋인지, `dirty`가 false인지, `s4`가 false, `s1_pos_check`가 true인지 확인해 줘.
+- 끝나면 결과를 커밋해서 올리기 전에 `git checkout master`로 돌아간다(태그 위에서 커밋하지 않는다). 결과 폴더는 `results/e5/main/`.
+- **연구자(평가자)는 이 결과 파일을 열지 않는다**(PREREG_E5 3.1). 평가지는 원래 PC에서 `experiments/e5v2_human.py make`로 만든다.
+
 ## 4. (끝난 것) B — E5 파일럿 1
  (A의 캐시가 있으면 바로)
 

@@ -300,3 +300,17 @@ def test_pilot7_stage():
     assert "pilot7" not in S4_STAGES and "main" not in S4_STAGES
     assert {"pilot7", "main"} <= set(POS_CHECK_STAGES)
     assert samples_file("pilot7").name == samples_file("main").name == "samples_v4.json"
+
+
+# 3절 사람 평가: 답 읽기, 칸 안 순위 정규화, κ
+def test_human_helpers():
+    import numpy as np
+    import pandas as pd
+    from e5v2_human import kappa, mark, norm_rank, yn
+    assert [yn(x) for x in ["Y", "n", "예", "아니오", "O", "x", "1", "0"]] == [1, 0, 1, 0, 1, 0, 1, 0]
+    assert np.isnan(yn("")) and np.isnan(yn("maybe"))
+    d = pd.DataFrame({"블록": [1, 1, 1, 2, 2, 3], "웃김 순위": [1, 2, 3, 1, 1, 1]})
+    r = norm_rank(d)
+    assert list(r[:3]) == [1.0, 0.5, 0.0] and list(r[3:5]) == [0.5, 0.5] and np.isnan(r[5])  # 동점, 한 문장 블록
+    assert kappa([1, 0, 1, 0], [1, 0, 1, 0]) == 1.0
+    assert mark("A bagel.", 2, 7) == "A [[bagel]]."
