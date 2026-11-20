@@ -1,0 +1,47 @@
+{
+  "B0": {
+    "n": 80,
+    "n_selected": 80,
+    "rule_pass": 0.3625,
+    "gate_pass": 0.1375
+  },
+  "B1": {
+    "n": 80,
+    "n_selected": 80,
+    "rule_pass": 0.85,
+    "gate_pass": 0.1875
+  },
+  "H": {
+    "n": 80,
+    "n_selected": 80,
+    "rule_pass": 1.0,
+    "gate_pass": 0.5
+  },
+  "P1": {
+    "n": 80,
+    "n_selected": 80,
+    "rule_pass": 1.0,
+    "gate_pass": 0.5625
+  },
+  "P2": {
+    "n": 80,
+    "n_selected": 80,
+    "rule_pass": 1.0,
+    "gate_pass": 0.9375
+  },
+  "P3": {
+    "n": 80,
+    "n_selected": 80,
+    "rule_pass": 1.0,
+    "gate_pass": 0.5125
+  },
+  "P4": {
+    "n": 80,
+    "n_selected": 76,
+    "rule_pass": 1.0,
+    "gate_pass": 0.6842105263157895
+  },
+  "generation_failed_cells": 0,
+  "P2_gate_fail": 0.0625,
+  "P4_undefined": 4
+}
