@@ -1,0 +1,35 @@
+{
+  "received": "2026-11-21",
+  "note": "연구자 블라인드 평가(PREREG_E5 3절) 답을 받은 기록. 원본 빈 평가지와 번호·쌍·문장이 모두 같고 빈 답이 없다. 답을 받을 때까지 본 실행 자동 결과(phi-4 판정, 분석 표, 오염 조회)는 연구자에게 보이지 않았다. 재검사(3.3)는 본 평가가 끝나고 하루 이상 지난 2026-11-22 이후에 한다.",
+  "rated": {
+    "cells_sheet.csv": {
+      "sha256": "e9cdfb58f1302e8d3faa13621ab714881165d3651cd4cab8429c54895556bc4b",
+      "rows": 428,
+      "last_saved_by_rater": "2026-11-21T00:07:21"
+    },
+    "b0_sheet.csv": {
+      "sha256": "c0d80f6851ef7ab6e4b6b981f35f20ddb7fc6ea6dce3d6a44694db56443d70b3",
+      "rows": 80,
+      "last_saved_by_rater": "2026-11-21T01:37:33"
+    },
+    "calib_sheet.csv": {
+      "sha256": "3a9bc96b0d7a66db1352389e38f590d589e5230e7bac35de86d8d38785fb1dab",
+      "rows": 60,
+      "last_saved_by_rater": "2026-11-20T23:58:05"
+    }
+  },
+  "answers": {
+    "answers_cells.csv": {
+      "rows": 428,
+      "sha256": "2e90ecfa892da0f6950c225e8a6f962cdf654baed48f5df1b00a899f0f8b7372"
+    },
+    "answers_b0.csv": {
+      "rows": 80,
+      "sha256": "6fb09e42ab8090422687da5698385ea0b58b32b328ea6a0cc966ff5a65980c22"
+    },
+    "answers_calib.csv": {
+      "rows": 60,
+      "sha256": "181ce2e09bb3d33048a57666bcfa0d45451b89b4c8930548dc76e911f418ee41"
+    }
+  }
+}
