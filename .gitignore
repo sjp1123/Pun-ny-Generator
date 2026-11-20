@@ -12,3 +12,6 @@ results/e5/*/*/A_*/judge2_*-limit*/
 # 사람 평가 보정지: He et al. 자료 문장이 들어 있어 올리지 않는다 (채점 결과 calib_answers.csv는 id와 답만이라 올린다)
 results/e5/human_calib/calib_sheet.csv
 results/e5/human_calib/calib_key.csv
+# 한국어 K2: 연구자가 모은 말장난(웹에서 가져온 것이 섞일 수 있음)은 로컬에만
+ko/k2/local/
+ko/k1/local/
