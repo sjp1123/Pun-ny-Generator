@@ -1,0 +1,21 @@
+{
+  "stage": "main",
+  "gen": "olmo-2-0325-32b-instruct-4bit",
+  "model": "pythia-1.4b",
+  "judge_tag": "phi-4-4bit",
+  "novelty": "C:\\Users\\shiju\\OneDrive\\Desktop\\Coding\\Small_AI_Projects\\pun_ish\\pun-recoverability\\results\\e5\\main\\olmo-2-0325-32b-instruct-4bit\\A_pythia-1.4b\\novelty_olmo.csv",
+  "boot": 5000,
+  "prereg": "PREREG_E5 7.2",
+  "b0_rule": "3.2",
+  "kao": true,
+  "seed": 20261112,
+  "git": {
+    "commit": "e5bdf24e4782c9cfeb82a0a031297f63d4eebe61",
+    "dirty": false
+  },
+  "argv": [
+    "experiments/e5v2_main_report.py",
+    "--stage",
+    "main"
+  ]
+}
