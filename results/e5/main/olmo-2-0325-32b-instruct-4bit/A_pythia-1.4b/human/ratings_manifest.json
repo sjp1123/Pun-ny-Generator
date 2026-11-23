@@ -16,6 +16,12 @@
       "sha256": "3a9bc96b0d7a66db1352389e38f590d589e5230e7bac35de86d8d38785fb1dab",
       "rows": 60,
       "last_saved_by_rater": "2026-11-20T23:58:05"
+    },
+    "retest_sheet.csv": {
+      "sha256": "8702e261331e7a7fd1e19b5d57290d2457e6c4dfa04f8795c4e08b167e5a49c6",
+      "rows": 40,
+      "last_saved_by_rater": "2026-11-23T21:04:43",
+      "received": "2026-11-23"
     }
   },
   "answers": {
@@ -30,6 +36,11 @@
     "answers_calib.csv": {
       "rows": 60,
       "sha256": "181ce2e09bb3d33048a57666bcfa0d45451b89b4c8930548dc76e911f418ee41"
+    },
+    "answers_retest.csv": {
+      "rows": 40,
+      "sha256": "fe201dada62bb0e9014bfc53553f9f7d6abaf76c4d74d9e4939bee793cc6e437"
     }
-  }
+  },
+  "note_retest": "재검사(3.3) 답은 2026-11-23에 받았다. 본 평가 마지막 저장(2026-11-21 01:37)에서 하루 넘게 지난 뒤이고, 결과 표는 받을 때까지 연구자에게 보이지 않았다."
 }
