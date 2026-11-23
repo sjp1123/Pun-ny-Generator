@@ -17,11 +17,16 @@
   Kao ambiguity·distinctiveness, distinct-2, template rate, overlap rate, phi-4 웃김(1~5)
   H(사람 말장난)는 40개가 각 2칸에 붙으므로 조건별 값은 고유 문장 40개로 센다. P4는 S_ratio가 정의되지 않은 칸을 뺀다.
 
+B0 쌍 규칙 (7.2, --b0-rule)
+  3.2     (기본, 7.2 정정) 3.2절과 사람 채점(e5v2_human.make의 pair_ok)과 같다. b0_pair_reasons에 걸린 B0
+          (후보표 rule_ok가 거짓이고 reasons가 pair로 시작)은 성립 0, Kao 지표에서도 뺀다. 출력 analysis_7.2/
+  judge2  7.1대로 실행한 규칙. e5v2_judge2.py가 판정하지 않은 B0(쌍이 비었거나 두 단어가 같음)만 0. 출력 analysis_7.1/
+
 화면에는 결과 숫자를 출력하지 않는다(연구자가 블라인드 평가를 할지 정하기 전에 결과를 보지 않도록). 결과는 파일로만 남긴다.
 
 사용: python -X utf8 experiments/e5v2_main_report.py --stage main --gen olmo-2-0325-32b-instruct-4bit
       (시험) --stage pilot7 --novelty <임의 표시 파일>
-출력: results/e5/<stage>/<gen>/A_<model>/analysis_7.1/ config.json, metrics.json, table.md, rows.csv, kao.csv
+출력: results/e5/<stage>/<gen>/A_<model>/analysis_7.2/ (또는 analysis_7.1/) config.json, metrics.json, table.md, rows.csv, kao.csv
 """
 import argparse
 import sys
@@ -41,7 +46,13 @@ B_BOOT = 5000
 CONDS = ["B0", "B1", "P1", "P2", "P3", "P4", "H"]
 ITEM_RESAMPLE = {"B0", "H"}  # 짝이 없는 조건은 항목 재표집, 나머지는 쌍 묶음
 PAIRED = [("P2", "P3"), ("P1", "B1"), ("P2", "B1"), ("P4", "P1")]
+PREREG = {"3.2": "7.2", "judge2": "7.1"}
 assert SEED == 20261112
+
+
+def b0_pair_ok(r) -> bool:
+    """3.2절의 B0 쌍 유효성. e5v2_human.make의 pair_ok와 같은 식(생성 때 b0_pair_reasons를 reasons에 적었다)."""
+    return bool(r.rule_ok) or not str(r.reasons).startswith("pair")
 
 
 def to01(x) -> float:
@@ -169,9 +180,11 @@ def f(r: dict, nd=3, sign=False) -> str:
 
 
 def markdown(a, R: dict) -> str:
-    L = [f"# E5 본 실행 분석 (PREREG_E5 7.1) — {a.stage}, {a.gen}", "",
+    rule = (f"B0 쌍 규칙 3.2(7.2 정정): b0_pair_reasons에 걸린 B0 {R['counts']['b0_pair_invalid']}개는 성립 0, Kao에서 뺌."
+            if a.b0_rule == "3.2" else "B0 쌍 규칙 judge2(7.1대로 실행): e5v2_judge2.py가 판정하지 않은 B0만 0.")
+    L = [f"# E5 본 실행 분석 (PREREG_E5 {PREREG[a.b0_rule]}) — {a.stage}, {a.gen}", "",
          "성립 = 고른 문장에 phi-4가 works_pair yes. 판정하지 못한 문장은 0. [ ]는 95% 재표집 구간"
-         f"(B = {B_BOOT}, 시드 {SEED}). P 조건과 B1은 쌍 묶음, B0과 H는 항목 재표집.", "",
+         f"(B = {B_BOOT}, 시드 {SEED}). P 조건과 B1은 쌍 묶음, B0과 H는 항목 재표집.", "", rule, "",
          "## 가설 판정", "", "| 가설 | 비교 | 추정 [95%] | n | 판정 |", "|---|---|---|---|---|"]
     h = R["hypotheses"]
     L.append(f"| H5a 쌍 제공 | 성립(P1) − 성립(B0) | {f(h['H5a'], sign=True)} | P1 {h['H5a'].get('n_P1', 0)}, "
@@ -225,11 +238,12 @@ def main():
     ap.add_argument("--index", default="olmo")
     ap.add_argument("--novelty", default=None, help="오염 표시 파일 (기본: A_<model>/novelty_<색인>.csv)")
     ap.add_argument("--no-kao", action="store_true", help="시험용: word2vec을 불러오지 않는다")
+    ap.add_argument("--b0-rule", choices=list(PREREG), default="3.2", help="B0 쌍 규칙 (7.2). judge2는 7.1대로 실행한 규칙")
     a = ap.parse_args()
 
     gdir = stage_dir(a.stage) / a.gen
     adir = gdir / f"A_{a.model}"
-    out = adir / "analysis_7.1"
+    out = adir / f"analysis_{PREREG[a.b0_rule]}"
     S = pd.read_csv(adir / "selections.csv")
     I = pd.read_csv(adir / f"judge2_{a.judge_tag}" / "items.csv").drop_duplicates("cand_id").set_index("cand_id")
     cand = pd.concat([pd.read_csv(gdir / "candidates.csv"), human_rows()], ignore_index=True)
@@ -242,6 +256,11 @@ def main():
     M["works"] = M.works.fillna(0.0)
     M["funny"] = [float(I.funny.get(c)) if pd.notna(c) and pd.notna(I.funny.get(c)) else np.nan for c in M.cand_id]
     M.loc[(M.condition == "P4") & M.cand_id.isna(), "works"] = np.nan  # 정의 안 됨: 0이 아니라 빠짐
+    # B0 쌍 유효성 (7.2): 3.2 규칙이면 b0_pair_reasons에 걸린 B0은 성립 0, Kao에서도 뺀다
+    b0_ok = {cid: b0_pair_ok(r) for cid, r in cand[cand.source == "B0"].iterrows()}
+    M["pair_invalid"] = (M.condition == "B0") & M.cand_id.map(lambda c: not b0_ok.get(c, True))
+    if a.b0_rule == "3.2":
+        M.loc[M.pair_invalid, "works"] = 0.0
 
     # 오염 표시
     npath = Path(a.novelty) if a.novelty else adir / f"novelty_{a.index}.csv"
@@ -255,7 +274,8 @@ def main():
         N = None
 
     # Kao
-    ids = list(dict.fromkeys(M.cand_id.dropna()))
+    kao_rows = M[~M.pair_invalid] if a.b0_rule == "3.2" else M
+    ids = list(dict.fromkeys(kao_rows.cand_id.dropna()))
     K = pd.DataFrame(columns=["ambiguity", "distinctiveness"]) if a.no_kao else kao_table(cand, ids, f"{a.stage}_{a.gen}")
     M["kao_ambiguity"] = M.cand_id.map(K["ambiguity"]) if len(K) else np.nan
     M["kao_distinctiveness"] = M.cand_id.map(K["distinctiveness"]) if len(K) else np.nan
@@ -291,10 +311,11 @@ def main():
                       for fm in sorted(M["format"].dropna().unique())}
     R["counts"] = dict(cells=int(M.cell.nunique()), pairs=int(M.pair_id.nunique()),
                        unjudged={c: int((~M[(M.condition == c)].judged).sum()) for c in CONDS},
-                       p4_undefined=int(((M.condition == "P4") & M.cand_id.isna()).sum()))
+                       p4_undefined=int(((M.condition == "P4") & M.cand_id.isna()).sum()),
+                       b0_pair_invalid=int(M.pair_invalid.sum()), b0_rule=a.b0_rule)
 
     write_config(out, dict(stage=a.stage, gen=a.gen, model=a.model, judge_tag=a.judge_tag, novelty=str(npath) if N is not None else None,
-                           boot=B_BOOT, prereg="PREREG_E5 7.1", kao=not a.no_kao))
+                           boot=B_BOOT, prereg=f"PREREG_E5 {PREREG[a.b0_rule]}", b0_rule=a.b0_rule, kao=not a.no_kao))
     M.drop(columns=["text"]).to_csv(out / "rows.csv", index=False)
     if len(K):
         K.to_csv(out / "kao.csv")
