@@ -1,0 +1,29 @@
+rule-passing P candidates 791 in 80 cells; phi-4 yes 0.611
+pool size per cell: median 10, min 6, max 10
+expected random pick (mean of cell rates) 0.612
+best possible pick (cell has >=1 yes)     0.925
+cells all-yes 0.250, all-no 0.075, mixed 0.675
+gate pass/fail phi-4 yes: {False: {'size': 354, 'mean': 0.5112994350282486}, True: {'size': 437, 'mean': 0.6910755148741419}}
+within-cell gate effect (cells with both): +0.089 over 65 cells
+gate pass share per cell: mean 0.548, cells with 0 pass 5, cells all pass 10
+within-cell AUC for phi-4 works (0.5 = no signal):
+  score        0.646  (cells 54)
+  A_g          0.383  (cells 54)
+  S_ratio      0.533  (cells 54)
+  sent_lp      0.469  (cells 54)
+  unusualness  0.503  (cells 54)
+  logF_g       0.657  (cells 54)
+  S_left       0.613  (cells 54)
+  len          0.548  (cells 54)
+  score among gate-passing only 0.566 (cells 38)
+phi-4 funny 1-5 overall dist {1.0: 5, 2.0: 164, 3.0: 411, 4.0: 211}; within-cell sd mean 0.56
+  score AUC for funny>=4 within cell 0.538 (cells 58)
+human: rated P sentences 268; within-cell score AUC for human (c) 0.544 (mixed cells 42)
+human (c) gate pass 0.751 (n 177), gate fail 0.538 (n 91)
+human: cells where every rated P sentence works 0.400, mixed 0.525
+P2 picks with gate_fail (no candidate passed) 5/80
+human failure types on rated P sentences (n 268): w_p reading fails 0.160, w_a reading fails 0.056, both readings ok but not a pun 0.127
+  S_left  pooled AUC for (a) w_p reading ok 0.345, for (b) w_a reading ok 0.644
+  A_g     pooled AUC for (a) w_p reading ok 0.567, for (b) w_a reading ok 0.263
+  logF_g  pooled AUC for (a) w_p reading ok 0.527, for (b) w_a reading ok 0.838
+  score   pooled AUC for (a) w_p reading ok 0.383, for (b) w_a reading ok 0.782
