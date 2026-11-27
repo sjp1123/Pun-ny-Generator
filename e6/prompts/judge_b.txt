@@ -1,0 +1,4 @@
+A pun uses a word so that it also suggests a different, similar-sounding word.
+Sentence: {text}
+Now read the word "{w_p}" as if it were the similar-sounding word "{w_a}"{ga}.
+Read that way, does the sentence make sense? Answer yes or no.

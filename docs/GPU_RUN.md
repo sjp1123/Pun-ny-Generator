@@ -2,8 +2,8 @@
 
 - **A. 확인 검정 (prereg-v1)**: 끝 (2026-11-13, `results/pythia-1.4b/confirm/`).
 - **B. E5 파일럿 1 (v1 단일 프롬프트)**: 끝 (2026-11-13, `results/e5/pilot/`). 생성기가 말장난을 못 만들어 v2로 고쳤다.
-- **C. E5 파일럿 2 (v2 세 단계 생성)**: **지금 돌릴 것.** 사양 `docs/E5_V2_DESIGN.md`, 사전 등록 `PREREG_E5.md` 6절.
-  7B와 32B를 둘 다 돌려 통과 기준 C1~C4로 본 실행 생성기를 정한다.
+- **C. E5 파일럿 2 (v2 세 단계 생성)**: 끝. 이후 파일럿 3~7과 본 실행까지 끝났다(`PREREG_E5.md` 7절).
+- **D. E6 채점기 판정**: **지금 돌릴 것.** 설계 `docs/E6_DESIGN.md` 2절. 아래 맨 끝 절.
 
 ## 0. 준비물
 
@@ -210,3 +210,18 @@ python -X utf8 experiments/e5_novelty.py --stage pilot --gen $G --model pythia-1
   고치고 `PREREG_E5.md`를 채워 태그 `prereg-e5`를 단다.
 - 본 실행은 태그 뒤에 `--stage main`으로 같은 명령을 돌리고, 사람 평가지는
   `python -X utf8 experiments/e5_human.py export --stage main --gen $G --model pythia-1.4b`로 만든다.
+
+## D — E6 채점기 판정 (저장소 최상위에서)
+
+E5 문장 991개(규칙 통과 P 후보 791, B1 80, H 40, B0 80)에 네 문항(a, b, c0, c1)을 묻는다. 판정기 두 개를 따로 돌린다.
+두 모델 모두 판정기 검증 때 받아 둔 것이라 새로 내려받을 것은 없다. 문장마다 짧은 답 하나라 판정기당 수십 분 걸린다.
+
+```bash
+git pull
+python -X utf8 experiments/e6_scorer.py judge --judge microsoft/phi-4
+python -X utf8 experiments/e6_scorer.py judge --judge Qwen/Qwen2.5-14B-Instruct
+```
+
+- 출력: `results/e6/scorer/judge_phi-4-4bit/`, `results/e6/scorer/judge_qwen2.5-14b-instruct-4bit/` (`answers.csv`, `calls.jsonl`, `config.json`).
+  중간에 끊겨도 다시 실행하면 `calls.jsonl`에 있는 답은 다시 묻지 않는다.
+- 두 폴더를 커밋해서 올린다. `dev`와 `confirm`은 원래 PC에서 돌린다(연구자 라벨을 쓴다).

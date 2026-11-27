@@ -1,0 +1,5 @@
+A pun uses a word so that it also suggests a different, similar-sounding word, and both meanings fit the sentence.
+Sentence: {text}
+Here the word "{w_p}"{gp} might be meant to also suggest "{w_a}"{ga}.
+A successful pun makes both meanings come to mind together, and the double meaning is the point of the sentence.
+Is this sentence a successful pun? Answer yes or no.
